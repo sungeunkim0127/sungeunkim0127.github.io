@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sung Eun Kim, MD | Translational Medicine AI Researcher</title>
+    <meta name="description" content="Orthopedic surgeon and AI researcher bridging clinical expertise with artificial intelligence to transform healthcare.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔬</text></svg>">
+    
+    <style>
+        :root {
+            --color-primary: #1a2f4a;
+            --color-secondary: #2d4a6f;
+            --color-accent: #3d8b8b;
+            --color-accent-light: #5fb3b3;
+            --color-gold: #c9a227;
+            --color-gold-light: #e8d5a3;
+            --color-text: #2c3e50;
+            --color-text-light: #5a6c7d;
+            --color-bg: #fdfcfa;
+            --color-bg-warm: #f9f6f1;
+            --color-bg-card: #ffffff;
+            --color-border: #e8e4dd;
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+            --shadow-soft: 0 4px 20px rgba(26, 47, 74, 0.08);
+            --shadow-medium: 0 8px 30px rgba(26, 47, 74, 0.12);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--color-text);
+            background: var(--color-bg);
+            line-height: 1.7;
+            font-weight: 400;
+            overflow-x: hidden;
+        }
+
+        /* Decorative Background */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.4;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(61, 139, 139, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(201, 162, 39, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(45, 74, 111, 0.04) 0%, transparent 40%);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-accent), var(--color-gold));
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--color-gold);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(253, 252, 250, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--color-border);
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            box-shadow: var(--shadow-soft);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-text);
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--color-primary);
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-warm) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(ellipse, rgba(61, 139, 139, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image-frame {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            aspect-ratio: 3/4;
+            background: linear-gradient(135deg, var(--color-bg-warm) 0%, #e8e4dd 100%);
+        }
+
+        .hero-image-frame::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 12px;
+            pointer-events: none;
+        }
+
+        .hero-image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-image-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-light);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-image-placeholder svg {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .hero-decoration {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border: 2px solid var(--color-gold-light);
+            border-radius: 8px;
+            top: -20px;
+            right: -20px;
+            z-index: -1;
+        }
+
+        .hero-text h1 {
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-tagline {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            color: var(--color-accent);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.1s both;
+        }
+
+        .hero-affiliations {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .affiliation {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--color-text-light);
+        }
+
+        .affiliation-icon {
+            width: 8px;
+            height: 8px;
+            background: var(--color-gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--color-text);
+            max-width: 540px;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .hero-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.75rem;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-secondary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-primary);
+            border: 1.5px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--color-bg-warm);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+        }
+
+        .about-text .lead {
+            font-size: 1.25rem;
+            color: var(--color-primary);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .highlight-card {
+            background: var(--color-bg-card);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--color-accent);
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+        }
+
+        .highlight-card:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .highlight-card h4 {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-card p {
+            margin: 0;
+            color: var(--color-text);
+            font-size: 1.05rem;
+        }
+
+        /* Research Areas */
+        .research {
+            background: var(--color-bg);
+        }
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .research-card {
+            background: var(--color-bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-accent), var(--color-gold));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+
+        .research-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .research-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .research-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--color-accent-light), var(--color-accent));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .research-icon svg {
+            width: 26px;
+            height: 26px;
+            color: white;
+        }
+
+        .research-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .research-card p {
+            color: var(--color-text-light);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Featured Publications */
+        .publications {
+            background: var(--color-bg-warm);
+        }
+
+        .pub-featured {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .pub-card {
+            background: var(--color-bg-card);
+            padding: 1.75rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .pub-card:hover {
+            box-shadow: var(--shadow-medium);
+        }
+
+        .pub-venue {
+            background: var(--color-primary);
+            color: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+
+        .pub-venue.review {
+            background: var(--color-accent);
+        }
+
+        .pub-venue.accepted {
+            background: var(--color-gold);
+            color: var(--color-primary);
+        }
+
+        .pub-content h4 {
+            font-family: var(--font-sans);
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .pub-authors {
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+            margin: 0;
+        }
+
+        .pub-authors strong {
+            color: var(--color-primary);
+        }
+
+        .pub-badge {
+            font-size: 0.8rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            background: var(--color-bg-warm);
+            color: var(--color-text-light);
+            white-space: nowrap;
+        }
+
+        .pub-badge.first-author {
+            background: rgba(201, 162, 39, 0.15);
+            color: var(--color-gold);
+        }
+
+        /* Publication List */
+        .pub-list {
+            margin-top: 2rem;
+        }
+
+        .pub-list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .pub-list-header h3 {
+            font-size: 1.3rem;
+        }
+
+        .pub-count {
+            background: var(--color-accent);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .pub-list-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pub-list-item {
+            padding: 1.25rem 1.5rem;
+            background: var(--color-bg-card);
+            border-radius: 8px;
+            border-left: 3px solid transparent;
+            transition: var(--transition);
+        }
+
+        .pub-list-item:hover {
+            border-left-color: var(--color-accent);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .pub-list-item h4 {
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+            color: var(--color-primary);
+        }
+
+        .pub-list-item .pub-meta {
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+        }
+
+        .show-more-btn {
+            margin-top: 1.5rem;
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            border: 1.5px dashed var(--color-border);
+            border-radius: 8px;
+            color: var(--color-text-light);
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .show-more-btn:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        /* Timeline */
+        .experience {
+            background: var(--color-bg);
+        }
+
+        .timeline {
+            position: relative;
+            margin-top: 3rem;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--color-accent), var(--color-gold));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2rem;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            background: var(--color-bg);
+            border: 3px solid var(--color-accent);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item.highlight .timeline-dot {
+            background: var(--color-gold);
+            border-color: var(--color-gold);
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--color-accent);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-title {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--color-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-org {
+            font-size: 0.95rem;
+            color: var(--color-text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: var(--color-text);
+        }
+
+        /* News Section */
+        .news {
+            background: var(--color-bg-warm);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .news-item {
+            background: var(--color-bg-card);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .news-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .news-date {
+            flex-shrink: 0;
+            text-align: center;
+            padding: 0.5rem;
+            background: var(--color-bg-warm);
+            border-radius: 8px;
+            min-width: 60px;
+        }
+
+        .news-date .month {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        .news-date .year {
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+        }
+
+        .news-content h4 {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: var(--color-primary);
+        }
+
+        .news-content p {
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+            margin: 0;
+        }
+
+        /* Awards */
+        .awards {
+            background: var(--color-bg);
+        }
+
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .award-card {
+            background: var(--color-bg-card);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .award-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .award-icon svg {
+            width: 20px;
+            height: 20px;
+            color: var(--color-primary);
+        }
+
+        .award-content h4 {
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--color-primary);
+        }
+
+        .award-content p {
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            margin: 0;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--color-primary);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: white;
+        }
+
+        .contact h2::after {
+            background: linear-gradient(90deg, var(--color-gold), var(--color-accent-light));
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .contact-intro {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: white;
+            opacity: 0.9;
+            transition: var(--transition);
+        }
+
+        .contact-method:hover {
+            opacity: 1;
+            color: var(--color-gold-light);
+        }
+
+        .contact-method svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .contact-cta {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-light {
+            background: white;
+            color: var(--color-primary);
+        }
+
+        .btn-light:hover {
+            background: var(--color-gold-light);
+            color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-light {
+            background: transparent;
+            color: white;
+            border: 1.5px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-outline-light:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #0f1a2a;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        footer a:hover {
+            color: var(--color-gold-light);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-image {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .hero-affiliations {
+                align-items: center;
+            }
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-links {
+                justify-content: center;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .research-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pub-card {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .pub-venue {
+                justify-self: start;
+            }
+
+            .news-grid,
+            .awards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--color-bg);
+                flex-direction: column;
+                padding: 1rem 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+
+            .container {
+                padding: 0 1.25rem;
+            }
+
+            .contact-methods {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-content">
+            <a href="#" class="nav-logo">Sung Eun Kim</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#news">News</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-image" style="max-width: 70%;">
+                    <div class="hero-image-frame">
+                        <img src="Screenshot_20230919_095635_Gallery.jpg" alt="Sung Eun Kim">
+                    </div>
+                    <div class="hero-decoration"></div>
+                </div>
+                <div class="hero-text">
+                    <h1>Sung Eun Kim, MD</h1>
+                    <p class="hero-tagline">Orthopedic Surgeon · AI Researcher · Translational Medicine</p>
+                    <div class="hero-affiliations">
+                        <div class="affiliation">
+                            <span class="affiliation-icon"></span>
+                            <span>Postdoctoral Research Fellow, Harvard Medical School</span>
+                        </div>
+                        <div class="affiliation">
+                            <span class="affiliation-icon"></span>
+                            <span>Research Professor, Seoul National University Hospital</span>
+                        </div>
+                    </div>
+                    <p class="hero-description">
+                        Bridging 7+ years of clinical orthopedic surgery with cutting-edge AI research 
+                        to develop intelligent systems that enhance diagnostic accuracy and 
+                        transform patient outcomes.
+                    </p>
+                    <div class="hero-links">
+                        <a href="mailto:sungeun_kim2@hms.harvard.edu" class="btn btn-primary">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                            Get in Touch
+                        </a>
+                        <a href="https://www.linkedin.com/in/sungeunkim0127" target="_blank" class="btn btn-secondary">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About Me</h2>
+                    <p class="lead">
+                        I'm a physician-scientist who believes the future of medicine lies at the 
+                        intersection of clinical expertise and artificial intelligence.
+                    </p>
+                    <p>
+                        After completing my orthopedic surgery training at Seoul National University Hospital 
+                        and becoming board-certified, I recognized that the diagnostic patterns I developed 
+                        in the operating room could be translated into AI systems that augment physician capabilities.
+                    </p>
+                    <p>
+                        Now, as a postdoctoral fellow at Harvard Medical School working with 
+                        <a href="https://rajpurkarlab.hms.harvard.edu/" target="_blank">Dr. Pranav Rajpurkar</a>, 
+                        I develop and validate AI models for medical imaging interpretation, clinical decision support, 
+                        and healthcare workflow optimization—always grounded in real-world clinical needs.
+                    </p>
+                    <p>
+                        My unique perspective as both a surgeon and AI researcher allows me to build 
+                        systems that are not just technically sophisticated, but clinically meaningful.
+                    </p>
+                </div>
+                <div class="about-highlights">
+                    <div class="highlight-card">
+                        <h4>Clinical Foundation</h4>
+                        <p>7+ years of orthopedic surgery experience including 1,000+ knee surgeries, providing deep insight into clinical workflows and diagnostic challenges</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Research Impact</h4>
+                        <p>45+ peer-reviewed publications spanning clinical outcomes research and AI applications in medical imaging</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>Global Collaboration</h4>
+                        <p>International research network spanning Harvard, Seoul National University, and collaborators across Asia, Europe, and North America</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section class="research" id="research">
+        <div class="container">
+            <h2>Research Focus</h2>
+            <p style="max-width: 700px; color: var(--color-text-light); font-size: 1.1rem;">
+                My research aims to bridge the gap between AI innovation and clinical implementation, 
+                developing systems that work in the complexity of real healthcare environments.
+            </p>
+            <div class="research-grid">
+                <div class="research-card fade-in">
+                    <div class="research-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                    </div>
+                    <h3>Medical Vision AI</h3>
+                    <p>Developing multimodal AI systems for medical image interpretation, including knee MRI analysis with 3D spatial reasoning and radiology report generation with hallucination detection.</p>
+                </div>
+                <div class="research-card fade-in">
+                    <div class="research-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                        </svg>
+                    </div>
+                    <h3>Clinical Decision Support</h3>
+                    <p>Building predictive models for surgical outcomes and patient-reported measures, enabling personalized treatment planning and evidence-based clinical decisions.</p>
+                </div>
+                <div class="research-card fade-in">
+                    <div class="research-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <path d="M8 21h8m-4-4v4"/>
+                        </svg>
+                    </div>
+                    <h3>Healthcare AI Evaluation</h3>
+                    <p>Creating simulation frameworks like the Clinical Environment Simulator (CES) to assess AI performance under realistic hospital conditions beyond static benchmarks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section class="publications" id="publications">
+        <div class="container">
+            <h2>Publications</h2>
+            
+            <!-- Featured Publications -->
+            <div class="pub-featured">
+                <div class="pub-card fade-in">
+                    <span class="pub-venue review">Under Review</span>
+                    <div class="pub-content">
+                        <h4>A Clinical Environment Simulator Framework for Healthcare AI Performance Assessment</h4>
+                        <p class="pub-authors"><strong>Kim SE*</strong>, Luo L*, Zhang X, et al. <em>Nature Medicine</em></p>
+                    </div>
+                    <span class="pub-badge first-author">First Author</span>
+                </div>
+                
+                <div class="pub-card fade-in">
+                    <span class="pub-venue">PSB 2026</span>
+                    <div class="pub-content">
+                        <h4>3DReasonKnee: Advancing Grounded Reasoning in Medical Vision Language Models</h4>
+                        <p class="pub-authors">Sambara S*, <strong>Kim SE*</strong>, Zhang X, et al. <em>Pacific Symposium on Biocomputing</em></p>
+                    </div>
+                    <span class="pub-badge first-author">First Author</span>
+                </div>
+
+                <div class="pub-card fade-in">
+                    <span class="pub-venue accepted">Accepted</span>
+                    <div class="pub-content">
+                        <h4>Preoperative low cognitive function and somatic psychological symptoms are associated with increased risk of postoperative delirium following TKA</h4>
+                        <p class="pub-authors">Lee JY, Park JE, <strong>Kim SE</strong>, et al. <em>J Bone Joint Surg Am</em></p>
+                    </div>
+                    <span class="pub-badge">JBJS</span>
+                </div>
+
+                <div class="pub-card fade-in">
+                    <span class="pub-venue">CVPR 2025</span>
+                    <div class="pub-content">
+                        <h4>FactCheXcker: Mitigating Measurement Hallucinations in Chest X-ray Report Generation Models</h4>
+                        <p class="pub-authors">Heiman A, Zhang X, Chen E, <strong>Kim SE</strong>, Rajpurkar P.</p>
+                    </div>
+                    <span class="pub-badge">Computer Vision</span>
+                </div>
+
+                <div class="pub-card fade-in">
+                    <span class="pub-venue">JBJS</span>
+                    <div class="pub-content">
+                        <h4>Coronal plane alignment of the knee (CPAK) type shifts towards constitutional varus with increasing KL grade</h4>
+                        <p class="pub-authors"><strong>Kim SE</strong>, MacDessi S, Song D, et al. <em>J Bone Joint Surg Am</em> 2024</p>
+                    </div>
+                    <span class="pub-badge first-author">First Author</span>
+                </div>
+            </div>
+
+            <!-- Publication List -->
+            <div class="pub-list">
+                <div class="pub-list-header">
+                    <h3>Selected Publications</h3>
+                    <span class="pub-count">45+ Total</span>
+                </div>
+                <div class="pub-list-items" id="pubList">
+                    <div class="pub-list-item">
+                        <h4>ReXTrust: A Model for Fine-Grained Hallucination Detection in AI-Generated Radiology Reports</h4>
+                        <p class="pub-meta">Hardy R, <strong>Kim SE</strong>, Ro DH, Rajpurkar P. arXiv 2024</p>
+                    </div>
+                    <div class="pub-list-item">
+                        <h4>Deep learning for automated hip fracture detection and classification: achieving superior accuracy</h4>
+                        <p class="pub-meta">Zheng Z, Ryu B, <strong>Kim SE</strong>, et al. Bone Joint J 2025</p>
+                    </div>
+                    <div class="pub-list-item">
+                        <h4>Automated Posterior Tibial Slope Measurement Using Lateral Knee Radiographs</h4>
+                        <p class="pub-meta">Ryu B, Nam JW, Ro DH, et al. (<strong>Kim SE</strong> corresponding). Orthop J Sports Med 2025</p>
+                    </div>
+                    <div class="pub-list-item">
+                        <h4>The use of medial joint opening rather than mechanical axis deviation to determine clinical outcomes after HTO</h4>
+                        <p class="pub-meta"><strong>Kim SE</strong>, Kwak J, Ro DH, Lee MC, Han HS. Bone Joint J 2024</p>
+                    </div>
+                    <div class="pub-list-item">
+                        <h4>Performance of ChatGPT on Solving Orthopedic Board-Style Questions</h4>
+                        <p class="pub-meta"><strong>Kim SE</strong>, Lee JH, Choi BS, et al. Clin Orthop Surg 2024</p>
+                    </div>
+                </div>
+                <button class="show-more-btn" onclick="togglePublications()">
+                    <span id="showMoreText">Show More Publications</span>
+                </button>
+                <div class="pub-list-items" id="morePubs" style="display: none; margin-top: 1rem;">
+                    <div class="pub-list-item">
+                        <h4>Functional alignment with robotic-arm assisted TKA demonstrated better patient-reported outcomes than mechanical alignment</h4>
+                        <p class="pub-meta">Choi BS, <strong>Kim SE</strong>, et al. KSSTA 2023</p>
+                    </div>
+                    <div class="pub-list-item">
+                        <h4>Estimation of patient-reported outcome measures based on features of knee joint muscle co-activation</h4>
+                        <p class="pub-meta">Hussain I*, <strong>Kim SE*</strong>, et al. Scientific Reports 2024</p>
+                    </div>
+                    <div class="pub-list-item">
+                        <h4>Anatomic Patellar Design Has No Clinical Superiority Over Dome Patellar Design in TKA: A RCT</h4>
+                        <p class="pub-meta"><strong>Kim SE</strong>, Jung H, Ro DH, et al. J Arthroplasty 2023</p>
+                    </div>
+                    <div class="pub-list-item">
+                        <h4>Robotic-assisted unicompartmental knee arthroplasty: historical perspectives and current innovations</h4>
+                        <p class="pub-meta"><strong>Kim SE</strong>, Han HS. Biomed Eng Lett 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="container">
+            <h2>Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item highlight">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">Oct 2024 – Present</span>
+                    <h4 class="timeline-title">Postdoctoral Research Fellow</h4>
+                    <p class="timeline-org">Harvard Medical School, Department of Biomedical Informatics</p>
+                    <p class="timeline-desc">PI: Pranav Rajpurkar. Developing AI systems for medical imaging and clinical decision support.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">2024 – Present</span>
+                    <h4 class="timeline-title">Research Professor</h4>
+                    <p class="timeline-org">Seoul National University Hospital, Biomedical Research Institute</p>
+                    <p class="timeline-desc">National Strategic Technology Research Institute. Leading AI research in orthopedic applications.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">Mar 2022 – Jul 2024</span>
+                    <h4 class="timeline-title">Clinical & Research Fellow (Knee Surgery)</h4>
+                    <p class="timeline-org">Seoul National University Hospital</p>
+                    <p class="timeline-desc">Specialized training in knee arthroplasty, sports medicine, and robotic surgery under Profs. Han and Ro.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">Mar 2018 – Feb 2022</span>
+                    <h4 class="timeline-title">Orthopedic Surgery Resident</h4>
+                    <p class="timeline-org">Seoul National University Hospital</p>
+                    <p class="timeline-desc">Comprehensive orthopedic training. Received Best Resident Award (2020).</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">Apr 2014 – Apr 2017</span>
+                    <h4 class="timeline-title">Epidemic Intelligence Service Officer</h4>
+                    <p class="timeline-org">Korea Disease Control and Prevention Agency</p>
+                    <p class="timeline-desc">Public health service during MERS crisis. Received Highest Commendation from Minister of Health.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <span class="timeline-date">Feb 2014</span>
+                    <h4 class="timeline-title">Doctor of Medicine (M.D.)</h4>
+                    <p class="timeline-org">Seoul National University College of Medicine</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news" id="news">
+        <div class="container">
+            <h2>News & Updates</h2>
+            <div class="news-grid">
+                <div class="news-item fade-in">
+                    <div class="news-date">
+                        <div class="month">Dec</div>
+                        <div class="year">2024</div>
+                    </div>
+                    <div class="news-content">
+                        <h4>Paper under review at Nature Medicine</h4>
+                        <p>Clinical Environment Simulator framework submitted for healthcare AI evaluation.</p>
+                    </div>
+                </div>
+                <div class="news-item fade-in">
+                    <div class="news-date">
+                        <div class="month">Oct</div>
+                        <div class="year">2024</div>
+                    </div>
+                    <div class="news-content">
+                        <h4>Started Harvard Medical School Postdoc</h4>
+                        <p>Joined the Rajpurkar Lab to advance AI in medical imaging and clinical decision support.</p>
+                    </div>
+                </div>
+                <div class="news-item fade-in">
+                    <div class="news-date">
+                        <div class="month">May</div>
+                        <div class="year">2025</div>
+                    </div>
+                    <div class="news-content">
+                        <h4>Citation Award from KSRR</h4>
+                        <p>Recognized for publishing two highly cited articles in Knee Surgery & Related Research.</p>
+                    </div>
+                </div>
+                <div class="news-item fade-in">
+                    <div class="news-date">
+                        <div class="month">May</div>
+                        <div class="year">2024</div>
+                    </div>
+                    <div class="news-content">
+                        <h4>Best Paper Award - KSRR</h4>
+                        <p>Awarded for deep learning research on alignment measurement across imaging protocols.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section class="awards" id="awards">
+        <div class="container">
+            <h2>Awards & Recognition</h2>
+            <div class="awards-grid">
+                <div class="award-card fade-in">
+                    <div class="award-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="8" r="6"/>
+                            <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
+                        </svg>
+                    </div>
+                    <div class="award-content">
+                        <h4>Harvard-SNU Trainee Position</h4>
+                        <p>Selected for collaborative research program in AI development for knee MRI (2024)</p>
+                    </div>
+                </div>
+                <div class="award-card fade-in">
+                    <div class="award-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/>
+                        </svg>
+                    </div>
+                    <div class="award-content">
+                        <h4>Best Paper Award - KSRR</h4>
+                        <p>Deep learning model for alignment measurement across imaging protocols (2024)</p>
+                    </div>
+                </div>
+                <div class="award-card fade-in">
+                    <div class="award-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
+                        </svg>
+                    </div>
+                    <div class="award-content">
+                        <h4>Best Oral Presentation</h4>
+                        <p>Korean Society of Computer-Assisted Orthopaedic Surgery (2023)</p>
+                    </div>
+                </div>
+                <div class="award-card fade-in">
+                    <div class="award-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </div>
+                    <div class="award-content">
+                        <h4>Highest Commendation</h4>
+                        <p>Minister of Health and Welfare for MERS crisis response (2017)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Let's Collaborate</h2>
+            <p class="contact-intro">
+                I'm always excited to connect with researchers, clinicians, and organizations 
+                interested in advancing healthcare through AI. Whether you have a research idea, 
+                collaboration opportunity, or just want to chat about the future of medicine—let's talk.
+            </p>
+            <div class="contact-methods">
+                <a href="mailto:sungeun_kim2@hms.harvard.edu" class="contact-method">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    sungeun_kim2@hms.harvard.edu
+                </a>
+            </div>
+            <div class="contact-cta">
+                <a href="mailto:sungeun_kim2@hms.harvard.edu" class="btn btn-light">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    Send Email
+                </a>
+                <a href="https://www.linkedin.com/in/sungeunkim0127" target="_blank" class="btn btn-outline-light">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    Connect on LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Sung Eun Kim. Built with care for collaboration.</p>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile navigation toggle
+        function toggleNav() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Close mobile nav on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Show more publications toggle
+        function togglePublications() {
+            const morePubs = document.getElementById('morePubs');
+            const showMoreText = document.getElementById('showMoreText');
+            if (morePubs.style.display === 'none') {
+                morePubs.style.display = 'flex';
+                showMoreText.textContent = 'Show Fewer Publications';
+            } else {
+                morePubs.style.display = 'none';
+                showMoreText.textContent = 'Show More Publications';
+            }
+        }
+
+        // Fade in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(el => observer.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
