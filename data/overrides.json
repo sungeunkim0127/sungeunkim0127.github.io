@@ -1,0 +1,17 @@
+{
+  "author_highlight_name": "Kim SE",
+  "show_more_cutoff_year": 2025,
+  "pub_count_display": "40+ Publications",
+  "publication_overrides": {
+    "ces-framework-nature-medicine-2026": {
+      "authors": "Luo L*, Kim SE*, Zhang X, Kernbach JM, Kenia R, Acosta JN, ..., Topol E, Rajpurkar P",
+      "venue": "Nature Medicine"
+    },
+    "knee-alignment-middle-eastern-2025": {
+      "authors": "Park J, et al., Kim SE (corresponding)"
+    },
+    "automated-pts-lateral-knee-2025": {
+      "authors": "Ryu B, Nam JW, Ro DH, et al. (Kim SE corresponding)"
+    }
+  }
+}

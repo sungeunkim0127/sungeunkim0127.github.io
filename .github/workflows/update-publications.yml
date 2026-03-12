@@ -1,0 +1,58 @@
+name: Update Publications
+
+on:
+  schedule:
+    # Weekly on Monday at 8:00 UTC
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-publications:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Scrape Google Scholar
+        id: scrape
+        continue-on-error: true
+        run: python scripts/scrape_scholar.py
+        env:
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+
+      - name: Generate HTML
+        if: steps.scrape.outcome == 'success'
+        run: python scripts/generate_html.py
+
+      - name: Validate index.html
+        if: steps.scrape.outcome == 'success'
+        run: |
+          python -c "
+          html = open('index.html').read()
+          assert '<!-- AUTO-GENERATED-PUBS-START -->' in html, 'Start marker missing'
+          assert '<!-- AUTO-GENERATED-PUBS-END -->' in html, 'End marker missing'
+          assert '</html>' in html, 'Closing html tag missing'
+          print('Validation passed')
+          "
+
+      - name: Commit and push changes
+        if: steps.scrape.outcome == 'success'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/publications.json index.html
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "chore: update publications from Google Scholar"
+          git push

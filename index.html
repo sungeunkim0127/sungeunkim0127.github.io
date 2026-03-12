@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sung Eun Kim, MD | Translational Medicine AI Researcher</title>
-    <meta name="description" content="Sung Eun Kim, MD — Postdoctoral Research Fellow at Harvard Medical School and Associate Research Professor at Seoul National University Hospital. 45+ publications including Nature Medicine. Bridging orthopedic surgery with AI.">
+    <meta name="description" content="Sung Eun Kim, MD — Postdoctoral Research Fellow at Harvard Medical School and Associate Research Professor at Seoul National University Hospital. 40+ publications including Nature Medicine. Bridging orthopedic surgery with AI.">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Sung Eun Kim, MD | Translational Medicine AI Researcher">
-    <meta property="og:description" content="Postdoctoral Research Fellow at Harvard Medical School. 45+ publications including Nature Medicine. Bridging orthopedic surgery with cutting-edge AI research.">
+    <meta property="og:description" content="Postdoctoral Research Fellow at Harvard Medical School. 40+ publications including Nature Medicine. Bridging orthopedic surgery with cutting-edge AI research.">
     <meta property="og:type" content="profile">
     <meta property="og:url" content="https://sungeunkim0127.github.io/">
-    <meta property="og:image" content="https://sungeunkim0127.github.io/Screenshot_20230919_095635_Gallery.jpg">
+    <meta property="og:image" content="https://sungeunkim0127.github.io/sung-eun-kim-headshot.jpg">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Sung Eun Kim, MD | Harvard Medical School">
-    <meta name="twitter:description" content="Orthopedic surgeon and AI researcher. 45+ publications including Nature Medicine.">
+    <meta name="twitter:description" content="Orthopedic surgeon and AI researcher. 40+ publications including Nature Medicine.">
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -307,14 +307,14 @@
 
         .hero-content {
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 4rem;
+            grid-template-columns: 0.75fr 1.6fr;
+            gap: 3rem;
             align-items: center;
         }
 
         .hero-image {
             position: relative;
-            max-width: 70%;
+            max-width: 100%;
         }
 
         .hero-image-frame {
@@ -812,15 +812,17 @@
             border-radius: 8px;
             border-left: 3px solid transparent;
             transition: var(--transition);
+            cursor: pointer;
         }
 
         .pub-list-item:hover {
             border-left-color: var(--color-accent);
             box-shadow: var(--shadow-soft);
+            transform: translateX(4px);
         }
 
         .pub-list-item.first-author-item {
-            border-left-color: var(--color-gold);
+            border-left-color: transparent;
         }
 
         .pub-list-item h4 {
@@ -829,6 +831,16 @@
             font-weight: 500;
             margin-bottom: 0.4rem;
             color: var(--color-primary);
+        }
+
+        .pub-list-item h4 a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .pub-list-item:hover h4 a {
+            color: var(--color-accent);
         }
 
         .pub-list-item .pub-meta {
@@ -927,66 +939,111 @@
             color: var(--color-text);
         }
 
-        /* News Section */
-        .news {
+        /* Milestones Timeline */
+        .milestones {
             background: var(--color-bg-warm);
         }
 
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
+        .milestone-timeline {
+            position: relative;
+            margin-top: 2.5rem;
+            padding: 1rem 0;
         }
 
-        .news-item {
+        .milestone-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--color-accent), var(--color-gold));
+            transform: translateX(-50%);
+        }
+
+        .milestone-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .milestone-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .milestone-item:nth-child(odd) {
+            flex-direction: row;
+            padding-right: calc(50% + 30px);
+        }
+
+        .milestone-item:nth-child(even) {
+            flex-direction: row-reverse;
+            padding-left: calc(50% + 30px);
+        }
+
+        .milestone-icon {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .milestone-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: #fff;
+        }
+
+        .milestone-icon.publication { background: var(--color-accent); }
+        .milestone-icon.award { background: var(--color-gold); }
+        .milestone-icon.career { background: var(--color-secondary); }
+
+        .milestone-content {
             background: var(--color-bg-card);
-            padding: 1.5rem;
+            padding: 1.25rem 1.5rem;
             border-radius: 10px;
             box-shadow: var(--shadow-soft);
+            width: 100%;
             transition: var(--transition);
-            display: flex;
-            gap: 1rem;
         }
 
-        .news-item:hover {
-            transform: translateY(-3px);
+        .milestone-content:hover {
             box-shadow: var(--shadow-medium);
         }
 
-        .news-date {
-            flex-shrink: 0;
-            text-align: center;
-            padding: 0.5rem;
-            background: var(--color-bg-warm);
-            border-radius: 8px;
-            min-width: 60px;
-        }
-
-        .news-date .month {
+        .milestone-date {
+            display: inline-block;
             font-size: 0.75rem;
-            text-transform: uppercase;
-            color: var(--color-accent);
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-accent);
+            margin-bottom: 0.4rem;
         }
 
-        .news-date .year {
-            font-size: 0.85rem;
-            color: var(--color-text-light);
-        }
-
-        .news-content h4 {
+        .milestone-content h4 {
             font-family: var(--font-sans);
             font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.3rem;
             color: var(--color-primary);
         }
 
-        .news-content p {
-            font-size: 0.9rem;
+        .milestone-content p {
+            font-size: 0.88rem;
             color: var(--color-text-light);
             margin: 0;
+            line-height: 1.5;
         }
 
         /* Awards */
@@ -1330,6 +1387,217 @@
             color: var(--color-gold-light);
         }
 
+        /* Dark Mode */
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --color-primary: #c8d6e5;
+                --color-secondary: #a0b4c8;
+                --color-accent: #5fb3b3;
+                --color-accent-light: #7ecaca;
+                --color-gold: #d4ad2e;
+                --color-gold-light: #b8911f;
+                --color-text: #dde4ec;
+                --color-text-light: #9baab8;
+                --color-bg: #0f1a2a;
+                --color-bg-warm: #141f30;
+                --color-bg-card: #1a2940;
+                --color-border: #2a3a50;
+                --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.3);
+                --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        [data-theme="dark"] {
+            --color-primary: #c8d6e5;
+            --color-secondary: #a0b4c8;
+            --color-accent: #5fb3b3;
+            --color-accent-light: #7ecaca;
+            --color-gold: #d4ad2e;
+            --color-gold-light: #b8911f;
+            --color-text: #dde4ec;
+            --color-text-light: #9baab8;
+            --color-bg: #0f1a2a;
+            --color-bg-warm: #141f30;
+            --color-bg-card: #1a2940;
+            --color-border: #2a3a50;
+            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme="dark"] nav,
+        :root:not([data-theme="light"]) nav {
+            background: rgba(15, 26, 42, 0.95);
+        }
+
+        [data-theme="dark"] .hero,
+        :root:not([data-theme="light"]) .hero {
+            background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-warm) 100%);
+        }
+
+        [data-theme="dark"] .pub-card-highlight,
+        :root:not([data-theme="light"]) .pub-card-highlight {
+            background: linear-gradient(135deg, #1a2940 0%, #1f2f45 100%);
+        }
+
+        [data-theme="dark"] footer,
+        :root:not([data-theme="light"]) footer {
+            background: #080f1a;
+        }
+
+        [data-theme="dark"] .contact,
+        :root:not([data-theme="light"]) .contact {
+            background: #1a2940;
+        }
+
+        /* Dark mode only applies inside the media query scope */
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) nav {
+                background: rgba(15, 26, 42, 0.95);
+            }
+        }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            background: none;
+            border: 1.5px solid var(--color-border);
+            border-radius: 8px;
+            padding: 0.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            transition: var(--transition);
+            color: var(--color-text);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .theme-toggle svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .theme-toggle .icon-moon { display: block; }
+        .theme-toggle .icon-sun { display: none; }
+
+        [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+        [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
+            :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: block; }
+        }
+
+        /* Presentations Section */
+        .presentations {
+            background: var(--color-bg-warm);
+        }
+
+        .presentations-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin-top: 2rem;
+        }
+
+        .presentation-item {
+            padding: 1.25rem 1.5rem;
+            background: var(--color-bg-card);
+            border-radius: 8px;
+            border-left: 3px solid var(--color-accent);
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+        }
+
+        .presentation-item:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
+        }
+
+        .presentation-item h4 {
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+            color: var(--color-primary);
+        }
+
+        .presentation-item .pres-meta {
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            margin: 0;
+        }
+
+        .presentation-item .pres-venue {
+            font-weight: 600;
+            color: var(--color-accent);
+        }
+
+        /* Collapsible Sections */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .section-header h2 {
+            margin: 0;
+        }
+
+        .collapse-toggle {
+            background: none;
+            border: 1px solid var(--color-border);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--color-text-light);
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+
+        .collapse-toggle:hover {
+            background: var(--color-accent);
+            color: white;
+            border-color: var(--color-accent);
+        }
+
+        .collapse-toggle svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .collapse-toggle[aria-expanded="false"] svg {
+            transform: rotate(-90deg);
+        }
+
+        .collapsible-content {
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0 !important;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .collapsible-content.expanded {
+            opacity: 1;
+        }
+
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -1340,6 +1608,52 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        /* Hero name gradient */
+        .hero-text h1 {
+            background: linear-gradient(135deg, var(--color-accent), var(--color-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Scroll progress indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-accent), var(--color-gold));
+            z-index: 10001;
+            transition: width 0.05s linear;
+        }
+
+        /* Staggered fade-in animations */
+        .milestone-timeline .fade-in:nth-child(1) { transition-delay: 0s; }
+        .milestone-timeline .fade-in:nth-child(2) { transition-delay: 0.08s; }
+        .milestone-timeline .fade-in:nth-child(3) { transition-delay: 0.16s; }
+        .milestone-timeline .fade-in:nth-child(4) { transition-delay: 0.24s; }
+        .milestone-timeline .fade-in:nth-child(5) { transition-delay: 0.32s; }
+        .milestone-timeline .fade-in:nth-child(6) { transition-delay: 0.4s; }
+        .milestone-timeline .fade-in:nth-child(7) { transition-delay: 0.48s; }
+        .milestone-timeline .fade-in:nth-child(8) { transition-delay: 0.56s; }
+        .milestone-timeline .fade-in:nth-child(9) { transition-delay: 0.64s; }
+        .milestone-timeline .fade-in:nth-child(10) { transition-delay: 0.72s; }
+        .milestone-timeline .fade-in:nth-child(11) { transition-delay: 0.8s; }
+        .milestone-timeline .fade-in:nth-child(12) { transition-delay: 0.88s; }
+        .milestone-timeline .fade-in:nth-child(13) { transition-delay: 0.96s; }
+        .milestone-timeline .fade-in:nth-child(14) { transition-delay: 1.04s; }
+
+        .awards-grid .fade-in:nth-child(1) { transition-delay: 0s; }
+        .awards-grid .fade-in:nth-child(2) { transition-delay: 0.1s; }
+        .awards-grid .fade-in:nth-child(3) { transition-delay: 0.2s; }
+        .awards-grid .fade-in:nth-child(4) { transition-delay: 0.3s; }
+
+        /* Card hover refinements */
+        .award-card:hover .award-icon {
+            background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
         }
 
         .fade-in {
@@ -1400,7 +1714,22 @@
                 right: 8px;
             }
 
-            .news-grid,
+            /* Milestones single-column on mobile */
+            .milestone-timeline::before {
+                left: 20px;
+            }
+
+            .milestone-item:nth-child(odd),
+            .milestone-item:nth-child(even) {
+                flex-direction: row;
+                padding-left: 60px;
+                padding-right: 0;
+            }
+
+            .milestone-icon {
+                left: 20px;
+            }
+
             .awards-grid {
                 grid-template-columns: 1fr;
             }
@@ -1415,6 +1744,10 @@
 
             .service-layout {
                 flex-direction: column;
+            }
+
+            .presentations-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1471,24 +1804,36 @@
 </head>
 <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
-    <div class="bg-pattern"></div>
+    <div class="bg-pattern" aria-hidden="true"></div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
 
     <!-- Navigation -->
     <nav id="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-content">
             <a href="#" class="nav-logo">Sung Eun Kim</a>
-            <ul class="nav-links" id="navLinks" role="menubar">
-                <li role="none"><a href="#about" role="menuitem">About</a></li>
-                <li role="none"><a href="#research" role="menuitem">Research</a></li>
-                <li role="none"><a href="#publications" role="menuitem">Publications</a></li>
-                <li role="none"><a href="#experience" role="menuitem">Experience</a></li>
-                <li role="none"><a href="#news" role="menuitem">News</a></li>
-                <li role="none"><a href="#awards" role="menuitem">Awards</a></li>
-                <li role="none"><a href="#service" role="menuitem">Service</a></li>
-                <li role="none"><a href="#personal" role="menuitem">Personal</a></li>
-                <li role="none"><a href="#cv" role="menuitem">CV</a></li>
-                <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#milestones">Milestones</a></li>
+                <li><a href="#awards">Awards</a></li>
+                <li><a href="#talks">Talks</a></li>
+                <li><a href="#service">Service</a></li>
+                <li><a href="#personal">Personal</a></li>
+                <li><a href="#cv">CV</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                </svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                </svg>
+            </button>
             <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation menu">
                 <span></span>
                 <span></span>
@@ -1505,13 +1850,13 @@
             <div class="hero-content">
                 <div class="hero-image">
                     <div class="hero-image-frame">
-                        <img src="Screenshot_20230919_095635_Gallery.jpg" alt="Portrait of Dr. Sung Eun Kim, orthopedic surgeon and AI researcher at Harvard Medical School">
+                        <img src="sung-eun-kim-headshot.jpg" alt="Portrait of Dr. Sung Eun Kim, orthopedic surgeon and AI researcher at Harvard Medical School">
                     </div>
                     <div class="hero-decoration"></div>
                 </div>
                 <div class="hero-text">
                     <h1 id="hero-heading">Sung Eun Kim, MD</h1>
-                    <p class="hero-tagline">Orthopedic Surgeon · AI Researcher · Translational Medicine</p>
+                    <p class="hero-tagline">From the operating room to the algorithm — building AI that understands medicine</p>
                     <div class="hero-affiliations">
                         <div class="affiliation">
                             <span class="affiliation-icon"></span>
@@ -1523,26 +1868,26 @@
                         </div>
                     </div>
                     <p class="hero-description">
-                        Bridging 7+ years of clinical orthopedic surgery with cutting-edge AI research
-                        to develop intelligent systems that enhance diagnostic accuracy and
-                        transform patient outcomes.
+                        Surgeon-scientist with experience in 1,000+ knee surgeries and 40+ publications including
+                        Nature Medicine. I build AI systems grounded in the clinical reality
+                        of a decade in medicine.
                     </p>
                     <div class="hero-links">
                         <a href="mailto:sungeun_kim2@hms.harvard.edu" class="btn btn-primary">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                                 <polyline points="22,6 12,13 2,6"/>
                             </svg>
                             Get in Touch
                         </a>
-                        <a href="https://www.linkedin.com/in/sung-eun-kim-19267a2a4/" target="_blank" class="btn btn-secondary">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
+                        <a href="https://www.linkedin.com/in/sung-eun-kim-19267a2a4/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                             </svg>
                             LinkedIn
                         </a>
-                        <a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" class="btn btn-scholar">
-                            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                        <a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" rel="noopener noreferrer" class="btn btn-scholar">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
                                 <path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-24L0 9.5l4.838 3.94A8 8 0 0112 9a8 8 0 017.162 4.44L24 9.5z"/>
                             </svg>
                             Google Scholar
@@ -1560,22 +1905,24 @@
                 <div class="about-text">
                     <h2 id="about-heading">About Me</h2>
                     <p class="lead">
-                        I'm a physician-scientist who believes the future of medicine lies at the
-                        intersection of clinical expertise and artificial intelligence.
+                        After seven years and over a thousand knee surgeries, I realized: the patterns I was
+                        seeing in the operating room could be taught to machines — if someone who understood
+                        both sides built the bridge.
                     </p>
                     <p>
-                        After completing my orthopedic surgery training at Seoul National University Hospital
-                        and becoming board-certified, I recognized that the diagnostic patterns I developed
-                        in the operating room could be translated into AI systems that augment physician capabilities.
+                        My path started in the trenches of public health — as an Epidemic Intelligence Service
+                        Officer during South Korea's MERS crisis, earning the Highest Commendation from the
+                        Minister of Health. That experience crystallized my belief that healthcare needs
+                        smarter systems, not just harder-working doctors.
                     </p>
                     <p>
                         Now, as a postdoctoral fellow at Harvard Medical School working with
-                        <a href="https://www.rajpurkarlab.hms.harvard.edu/" target="_blank">Dr. Pranav Rajpurkar</a>,
-                        I develop and validate AI models for medical imaging interpretation, clinical decision support, healthcare workflow optimization, and robotic/physical AI systems—always grounded in real-world clinical needs.
+                        <a href="https://www.rajpurkarlab.hms.harvard.edu/" target="_blank" rel="noopener noreferrer">Dr. Pranav Rajpurkar</a>,
+                        I develop and validate AI models for medical imaging interpretation, clinical decision support, healthcare workflow optimization, and robotic/physical AI systems — always grounded in real-world clinical needs.
                     </p>
                     <p>
-                        My unique perspective as both a surgeon and AI researcher allows me to build
-                        systems that are not just technically sophisticated, but clinically meaningful.
+                        I don't just build AI that works on benchmarks. I build AI that works in hospitals —
+                        because I've been the doctor waiting for better tools.
                     </p>
                 </div>
                 <div class="about-highlights">
@@ -1585,7 +1932,7 @@
                     </div>
                     <div class="highlight-card">
                         <h4>Research Impact</h4>
-                        <p>45+ peer-reviewed publications spanning clinical outcomes research and AI applications in medical imaging, including Nature Medicine</p>
+                        <p>40+ peer-reviewed publications spanning clinical outcomes research and AI applications in medical imaging, including Nature Medicine</p>
                     </div>
                     <div class="highlight-card">
                         <h4>Global Collaboration</h4>
@@ -1671,48 +2018,57 @@
             <div class="pub-featured">
                 <!-- Nature Medicine - Flagship -->
                 <div class="pub-card pub-card-highlight fade-in">
-                    <span class="pub-venue accepted">NAT MED</span>
+                    <span class="pub-venue">NAT MED</span>
                     <div class="pub-content">
-                        <h4>A Clinical Environment Simulator Framework for Healthcare AI Performance Assessment</h4>
-                        <p class="pub-authors">Luo L*, <strong>Kim SE*</strong>, Zhang X, Kernbach JM, Kenia R, Acosta JN, ..., Topol E, Rajpurkar P. <em>Nature Medicine</em> (Accepted, 2026)</p>
+                        <h4><a href="https://doi.org/10.1038/s41591-026-04252-6" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; border-bottom: 1px solid var(--color-accent-light);">A clinical environment simulator for dynamic AI evaluation</a></h4>
+                        <p class="pub-authors">Luo L*, <strong>Kim SE*</strong>, Zhang X, Kernbach JM, Kenia R, Acosta JN, ..., Topol E, Rajpurkar P. <em>Nature Medicine</em> (2026)</p>
                     </div>
                     <span class="pub-badge first-author">Co-First Author</span>
                 </div>
 
                 <div class="pub-card fade-in">
-                    <span class="pub-venue">JBJS 2025</span>
+                    <span class="pub-venue">JBJS 2024</span>
                     <div class="pub-content">
-                        <h4>Preoperative low cognitive function and somatic psychological symptoms are associated with increased risk of postoperative delirium following TKA</h4>
-                        <p class="pub-authors">Lee JY, Park JE, <strong>Kim SE</strong>, et al. <em>J Bone Joint Surg Am</em> 2025</p>
+                        <h4><a href="https://doi.org/10.2106/JBJS.24.00316" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; border-bottom: 1px solid var(--color-accent-light);">Coronal plane alignment of the knee (CPAK) type shifts towards constitutional varus with increasing KL grade: a deep learning radiographic analysis of 17,365 knees</a></h4>
+                        <p class="pub-authors"><strong>Kim SE</strong>, MacDessi S, Song D, Kim JI, Choi BS, Han HS, Ro DH. <em>J Bone Joint Surg Am</em> 2024</p>
                     </div>
-                    <span class="pub-badge">JBJS</span>
-                </div>
-
-                <div class="pub-card fade-in">
-                    <span class="pub-venue">PSB 2026</span>
-                    <div class="pub-content">
-                        <h4>3DReasonKnee: Advancing Grounded Reasoning in Medical Vision Language Models</h4>
-                        <p class="pub-authors">Sambara S*, <strong>Kim SE*</strong>, Zhang X, et al. <em>Pacific Symposium on Biocomputing</em> 31:99-113 (2026)</p>
-                    </div>
-                    <span class="pub-badge first-author">Co-First Author</span>
+                    <span class="pub-badge first-author">First Author</span>
                 </div>
 
                 <div class="pub-card fade-in">
                     <span class="pub-venue">CVPR 2025</span>
                     <div class="pub-content">
-                        <h4>FactCheXcker: Mitigating Measurement Hallucinations in Chest X-ray Report Generation Models</h4>
+                        <h4><a href="https://doi.org/10.48550/arXiv.2411.18672" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; border-bottom: 1px solid var(--color-accent-light);">FactCheXcker: Mitigating Measurement Hallucinations in Chest X-ray Report Generation Models</a></h4>
                         <p class="pub-authors">Heiman A, Zhang X, Chen E, <strong>Kim SE</strong>, Rajpurkar P. <em>CVPR 2025</em></p>
                     </div>
                     <span class="pub-badge">Computer Vision</span>
                 </div>
 
                 <div class="pub-card fade-in">
-                    <span class="pub-venue">JBJS 2024</span>
+                    <span class="pub-venue">BJJ 2024</span>
                     <div class="pub-content">
-                        <h4>Coronal plane alignment of the knee (CPAK) type shifts towards constitutional varus with increasing KL grade</h4>
-                        <p class="pub-authors"><strong>Kim SE</strong>, MacDessi S, Song D, et al. <em>J Bone Joint Surg Am</em> 2024</p>
+                        <h4><a href="https://doi.org/10.1302/0301-620X.106B3.BJJ-2023-0337.R3" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; border-bottom: 1px solid var(--color-accent-light);">The use of medial joint opening rather than mechanical axis deviation to determine the clinical outcomes after high tibial osteotomy</a></h4>
+                        <p class="pub-authors"><strong>Kim SE</strong>, Kwak J, Ro DH, Lee MC, Han HS. <em>Bone Joint J</em> 2024;106-B(3):240-248</p>
                     </div>
                     <span class="pub-badge first-author">First Author</span>
+                </div>
+
+                <div class="pub-card fade-in">
+                    <span class="pub-venue">KSSTA 2024</span>
+                    <div class="pub-content">
+                        <h4><a href="https://doi.org/10.1002/ksa.12166" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; border-bottom: 1px solid var(--color-accent-light);">Shallow trochlear groove and narrow medial trochlear width at the proximal trochlea in patients with trochlear dysplasia</a></h4>
+                        <p class="pub-authors">Lee JY*, <strong>Kim SE*</strong>, et al. <em>KSSTA</em> 2024;32(6):1434-1445</p>
+                    </div>
+                    <span class="pub-badge first-author">Co-First Author</span>
+                </div>
+
+                <div class="pub-card fade-in">
+                    <span class="pub-venue">KSSTA 2023</span>
+                    <div class="pub-content">
+                        <h4><a href="https://doi.org/10.1007/s00167-022-07227-5" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; border-bottom: 1px solid var(--color-accent-light);">Functional alignment with robotic-arm assisted total knee arthroplasty demonstrated better patient-reported outcomes than mechanical alignment with manual TKA</a></h4>
+                        <p class="pub-authors">Choi BS, <strong>Kim SE</strong>, Yang M, Ro DH, Han HS. <em>KSSTA</em> 2023;31(3):1072-1080</p>
+                    </div>
+                    <span class="pub-badge">Robotic Surgery</span>
                 </div>
             </div>
 
@@ -1721,92 +2077,94 @@
                 <div class="pub-list-header">
                     <h3>All Publications</h3>
                     <a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" class="pub-count" style="text-decoration: none;">
-                        45+ Publications
+                        40+ Publications
                     </a>
                 </div>
 
-                <!-- 2026 -->
+                <!-- AUTO-GENERATED-PUBS-START -->
                 <div class="pub-year-group" id="pubs-2026">
-                    <div class="pub-year-label">2026 <span class="year-count">3 papers</span></div>
+                    <div class="pub-year-label">2026 <span class="year-count">5 papers</span></div>
                     <div class="pub-list-items">
                         <div class="pub-list-item first-author-item">
-                            <h4>A Clinical Environment Simulator Framework for Healthcare AI Performance Assessment</h4>
-                            <p class="pub-meta">Luo L*, <strong>Kim SE*</strong>, Zhang X, et al. <em>Nature Medicine</em> (Accepted)</p>
+                            <h4><a href="https://psb.stanford.edu/psb-online/proceedings/psb26/sambara.pdf" target="_blank" rel="noopener">3DReasonKnee: Advancing Grounded Reasoning in Medical Vision Language Models</a></h4>
+                            <p class="pub-meta">Sambara S*, <strong>Kim SE</strong>*, Zhang X, et al. <em>Pacific Symposium on Biocomputing 31:99-113</em></p>
                         </div>
                         <div class="pub-list-item first-author-item">
-                            <h4>3DReasonKnee: Advancing Grounded Reasoning in Medical Vision Language Models</h4>
-                            <p class="pub-meta">Sambara S*, <strong>Kim SE*</strong>, Zhang X, et al. <em>Pacific Symposium on Biocomputing</em> 31:99-113</p>
+                            <h4><a href="https://doi.org/10.1038/s41591-026-04252-6" target="_blank" rel="noopener">A clinical environment simulator for dynamic AI evaluation</a></h4>
+                            <p class="pub-meta">Luo L*, <strong>Kim SE</strong>*, Zhang X, Kernbach JM, Kenia R, Acosta JN, ..., Topol E, Rajpurkar P. <em>Nature Medicine</em></p>
                         </div>
                         <div class="pub-list-item">
-                            <h4>Effects of axial malrotation on posterior tibial slope measurement</h4>
-                            <p class="pub-meta">Park J, Persson A, Martin RK, et al. <em>Knee Surg Relat Res</em> 2026;38:3</p>
+                            <h4><a href="https://arxiv.org/abs/2603.04421" target="_blank" rel="noopener">Do Mixed-Vendor Multi-Agent LLMs Improve Clinical Diagnosis?</a></h4>
+                            <p class="pub-meta">Yuan GC, Zhang X, <strong>Kim SE</strong>, Rajpurkar P. <em>HeaLing Workshop at EACL 2026</em></p>
+                        </div>
+                        <div class="pub-list-item">
+                            <h4><a href="https://doi.org/10.1186/s43019-026-00303-x" target="_blank" rel="noopener">Effects of axial malrotation on posterior tibial slope measurement</a></h4>
+                            <p class="pub-meta">Park J, Persson A, Martin RK, et al. <em>Knee Surg Relat Res 2026;38:3</em></p>
+                        </div>
+                        <div class="pub-list-item">
+                            <h4>The Doctor Will Agree With You Now: Sycophancy of Large Language Models in Multi-Turn Medical Conversations</h4>
+                            <p class="pub-meta">Kim TM, Luo L, <strong>Kim SE</strong>, Manrai AK, Topol E, Rajpurkar P. <em>HeaLing Workshop at EACL 2026</em></p>
                         </div>
                     </div>
                 </div>
-
-                <!-- 2025 -->
                 <div class="pub-year-group" id="pubs-2025">
-                    <div class="pub-year-label">2025 <span class="year-count">15 papers</span></div>
+                    <div class="pub-year-label">2025 <span class="year-count">14 papers</span></div>
                     <div class="pub-list-items">
                         <div class="pub-list-item">
-                            <h4>Preoperative low cognitive function and somatic psychological symptoms are associated with increased risk of postoperative delirium following TKA</h4>
-                            <p class="pub-meta">Lee JY, Park JE, <strong>Kim SE</strong>, et al. <em>J Bone Joint Surg Am</em> 2025</p>
+                            <h4><a href="https://doi.org/10.1186/s13018-025-06206-z" target="_blank" rel="noopener">A development of machine learning models to preoperatively predict insufficient clinical improvement after total knee arthroplasty</a></h4>
+                            <p class="pub-meta">Gimm G, Jeon B, <strong>Kim SE</strong>, et al.. <em>J Orthop Surg Res 2025;20(1):778</em></p>
+                        </div>
+                        <div class="pub-list-item">
+                            <h4><a href="https://doi.org/10.1177/23259671251331067" target="_blank" rel="noopener">Automated Posterior Tibial Slope Measurement Using Lateral Knee Radiographs</a></h4>
+                            <p class="pub-meta">Ryu B, Nam JW, Ro DH, et al. (<strong>Kim SE</strong> corresponding). <em>Orthop J Sports Med 2025;13(4)</em></p>
+                        </div>
+                        <div class="pub-list-item">
+                            <h4><a href="https://doi.org/10.1302/0301-620X.107B2.BJJ-2024-0791.R1" target="_blank" rel="noopener">Deep learning for automated hip fracture detection and classification: achieving superior accuracy</a></h4>
+                            <p class="pub-meta">Zheng Z, Ryu B, <strong>Kim SE</strong>, et al. <em>Bone Joint J 2025;107-B(2):213-220</em></p>
+                        </div>
+                        <div class="pub-list-item">
+                            <h4><a href="https://doi.org/10.1186/s43019-025-00261-w" target="_blank" rel="noopener">Do knee alignment patterns differ between Middle Eastern and East Asian populations? A propensity-matched analysis using artificial intelligence</a></h4>
+                            <p class="pub-meta">Park J, et al., <strong>Kim SE</strong> (corresponding). <em>Knee Surg Relat Res 2025;37(1):11</em></p>
+                        </div>
+                        <div class="pub-list-item">
+                            <h4><a href="https://doi.org/10.1177/23259671251333607" target="_blank" rel="noopener">External validation of a novel landmark-based deep learning automated tibial slope measurement algorithm applied on short radiographs from ACL injured patients</a></h4>
+                            <p class="pub-meta">Martin RK, Haaland S, Persson A, <strong>Kim SE</strong>, et al.. <em>Orthop J Sports Med 2025;13(5)</em></p>
+                        </div>
+                        <div class="pub-list-item">
+                            <h4><a href="https://doi.org/10.48550/arXiv.2411.18672" target="_blank" rel="noopener">FactCheXcker: Mitigating Measurement Hallucinations in Chest X-ray Report Generation Models</a></h4>
+                            <p class="pub-meta">Heiman A, Zhang X, Chen E, <strong>Kim SE</strong>, Rajpurkar P. <em>CVPR 2025</em></p>
+                        </div>
+                        <div class="pub-list-item">
+                            <h4><a href="https://doi.org/10.1002/jor.26018" target="_blank" rel="noopener">Machine learning-based prediction of contralateral knee osteoarthritis development using the Osteoarthritis Initiative and the Multicenter Osteoarthritis Study dataset</a></h4>
+                            <p class="pub-meta">Kim JS, Choi BS, <strong>Kim SE</strong>, et al. <em>J Orthop Res 2025;43(3):576-585</em></p>
                         </div>
                         <div class="pub-list-item first-author-item">
-                            <h4>Posterior tibial slope as a risk factor for anterior cruciate ligament tears</h4>
-                            <p class="pub-meta">Kwak D*, <strong>Kim SE*</strong>, Park J, et al. <em>Arthrosc Orthop Sports Med</em> 2025;12:64-69</p>
+                            <h4><a href="https://doi.org/10.14517/aosm25006" target="_blank" rel="noopener">Posterior tibial slope as a risk factor for anterior cruciate ligament tears</a></h4>
+                            <p class="pub-meta">Kwak D*, <strong>Kim SE</strong>*, Park J, et al. <em>Arthrosc Orthop Sports Med 2025;12:64-69</em></p>
                         </div>
                         <div class="pub-list-item">
-                            <h4>RadGame: An AI-Powered Platform for Radiology Education</h4>
-                            <p class="pub-meta">Baharoon M, Raissi S, Jun JS, ..., <strong>Kim SE</strong>, et al. <em>Machine Learning for Health (ML4H)</em> 2025</p>
+                            <h4><a href="https://doi.org/10.2106/JBJS.25.00392" target="_blank" rel="noopener">Preoperative low cognitive function and somatic psychological symptoms are associated with an increased risk of postoperative delirium following total knee arthroplasty: a prospective cohort study</a></h4>
+                            <p class="pub-meta">Lee JY, Park JE, <strong>Kim SE</strong>, et al. <em>J Bone Joint Surg Am 2025</em></p>
                         </div>
                         <div class="pub-list-item">
-                            <h4>ReXGroundingCT: Grounded Radiology Report Generation for CT Scans</h4>
-                            <p class="pub-meta">Baharoon M, Luo L, et al., <strong>Kim SE</strong>, et al. Under consideration at <em>NEJM AI</em></p>
+                            <h4><a href="https://doi.org/10.48550/arXiv.2509.13270" target="_blank" rel="noopener">RadGame: An AI-Powered Platform for Radiology Education</a></h4>
+                            <p class="pub-meta">Baharoon M, Raissi S, Jun JS, et al.. <em>Machine Learning for Health (ML4H) 2025</em></p>
                         </div>
                         <div class="pub-list-item">
-                            <h4>VOICE: Voice AI Agent for Prehospital Stroke Assessment</h4>
-                            <p class="pub-meta">Acosta J, Adams SJ, et al., <strong>Kim SE</strong>, et al. <em>IEEE AIxMHC</em> 2025</p>
+                            <h4><a href="https://doi.org/10.48550/arXiv.2412.15264" target="_blank" rel="noopener">ReXTrust: A Model for Fine-Grained Hallucination Detection in AI-Generated Radiology Reports</a></h4>
+                            <p class="pub-meta">Hardy R, <strong>Kim SE</strong>, Ro DH, Rajpurkar P. <em>Proceedings of the AAAI Bridge Program on AI for Medicine and Healthcare, PMLR 281:173-182, 2025</em></p>
                         </div>
                         <div class="pub-list-item">
-                            <h4>Text-prompted medical image segmentation models</h4>
-                            <p class="pub-meta">Baharoon M, Luo L, et al., <strong>Kim SE</strong>, et al. <em>MLHC</em> 2025</p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>ReXTrust: A Model for Fine-Grained Hallucination Detection in AI-Generated Radiology Reports</h4>
-                            <p class="pub-meta">Hardy R, <strong>Kim SE</strong>, Ro DH, Rajpurkar P. arXiv:2412.15264</p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>FactCheXcker: Mitigating Measurement Hallucinations in Chest X-ray Report Generation Models</h4>
-                            <p class="pub-meta">Heiman A, Zhang X, Chen E, <strong>Kim SE</strong>, Rajpurkar P. <em>CVPR</em> 2025</p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Machine learning models to predict insufficient improvement after total knee arthroplasty</h4>
-                            <p class="pub-meta">Gimm G, et al., <strong>Kim SE</strong>, et al. <em>J Orthop Surg Res</em> 2025;20(1):778</p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Knee alignment patterns in Middle Eastern vs East Asian populations</h4>
-                            <p class="pub-meta">Park J, et al., <strong>Kim SE</strong> (corresponding). <em>Knee Surg Relat Res</em> 2025;37(1):11</p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Automated Posterior Tibial Slope Measurement Using Lateral Knee Radiographs</h4>
-                            <p class="pub-meta">Ryu B, Nam JW, Ro DH, et al. (<strong>Kim SE</strong> corresponding). <em>Orthop J Sports Med</em> 2025;13(4)</p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>External validation of automated tibial slope measurement using deep learning</h4>
-                            <p class="pub-meta">Martin RK, et al., <strong>Kim SE</strong>, et al. <em>Orthop J Sports Med</em> 2025;13(5)</p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Deep learning for automated hip fracture detection and classification: achieving superior accuracy</h4>
-                            <p class="pub-meta">Zheng Z, Ryu B, <strong>Kim SE</strong>, et al. <em>Bone Joint J</em> 2025;107-B(2):213-220</p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>ML-based prediction of contralateral knee osteoarthritis progression</h4>
-                            <p class="pub-meta">Kim JS, Choi BS, <strong>Kim SE</strong>, et al. <em>J Orthop Res</em> 2025;43(3):576-585</p>
+                            <h4><a href="https://proceedings.mlr.press/v298/baharoon25a.html" target="_blank" rel="noopener">State-of-the-art text-prompted medical segmentation models struggle to ground chest CT findings</a></h4>
+                            <p class="pub-meta">Baharoon M, Luo L, Moritz M, et al.. <em>MLHC 2025</em></p>
                         </div>
                         <div class="pub-list-item first-author-item">
-                            <h4>Superior Forgotten Joint Scores with CR mobile bearings compared to PS fixed bearings in TKA</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Shin HS, Han HS. <em>The Knee</em> 2025;53:118-125</p>
+                            <h4><a href="https://doi.org/10.1016/j.knee.2024.11.003" target="_blank" rel="noopener">Superior Forgotten Joint Scores with Cruciate-Retaining Mobile bearings Versus Posterior-Stabilized Mobile and Fixed bearings in a contemporary Total Knee System</a></h4>
+                            <p class="pub-meta"><strong>Kim SE</strong>, Shin HS, Han HS. <em>The Knee 2025;53:118-125</em></p>
+                        </div>
+                        <div class="pub-list-item">
+                            <h4><a href="https://arxiv.org/abs/2507.22898" target="_blank" rel="noopener">Voice-guided Orchestrated Intelligence for Clinical Evaluation (VOICE): A Voice AI Agent System for Prehospital Stroke Assessment</a></h4>
+                            <p class="pub-meta">Acosta JN, Adams SJ, Kernbach JM, et al.. <em>IEEE AIxMHC 2025</em></p>
                         </div>
                     </div>
                 </div>
@@ -1814,111 +2172,124 @@
                 <!-- Earlier years - hidden by default -->
                 <div id="earlierPubs" style="display: none;">
 
-                <!-- 2024 -->
                 <div class="pub-year-group" id="pubs-2024">
                     <div class="pub-year-label">2024 <span class="year-count">14 papers</span></div>
                     <div class="pub-list-items">
                         <div class="pub-list-item">
-                            <h4>DL-based automatic 2D digital templating for total knee arthroplasty</h4>
-                            <p class="pub-meta">Park J, <strong>Kim SE</strong>, et al. <em>Knee Surg Relat Res</em> 2024;36(1):38</p>
+                            <h4><a href="https://doi.org/10.1186/s43019-024-00240-7" target="_blank" rel="noopener">A deep learning based automatic two-dimensional digital templating model for total knee arthroplasty</a></h4>
+                            <p class="pub-meta">Park J, <strong>Kim SE</strong>, et al. <em>Knee Surg Relat Res 2024;36(1):38</em></p>
                         </div>
                         <div class="pub-list-item first-author-item">
-                            <h4>Primary TKA for neglected patellar dislocation</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, et al. <em>Medicina</em> 2024;60(9):1492</p>
+                            <h4><a href="https://doi.org/10.1186/s43019-024-00238-1" target="_blank" rel="noopener">Can individual functional improvements be predicted in osteoarthritic patients after total knee arthroplasty?</a></h4>
+                            <p class="pub-meta"><strong>Kim SE</strong>, Ro DH, Lee MC, Han HS. <em>Knee Surg Relat Res 2024;36(1):31</em></p>
+                        </div>
+                        <div class="pub-list-item first-author-item">
+                            <h4><a href="https://doi.org/10.2106/JBJS.24.00316" target="_blank" rel="noopener">Coronal plane alignment of the knee (CPAK) type shifts towards constitutional varus with increasing Kellgren and Lawrence grade: a deep learning radiographic analysis of 17,365 knees</a></h4>
+                            <p class="pub-meta"><strong>Kim SE</strong>, MacDessi S, Song D, Kim JI, Choi BS, Han HS, Ro DH. <em>J Bone Joint Surg Am 2024</em></p>
                         </div>
                         <div class="pub-list-item">
-                            <h4>Dedifferentiated Liposarcoma of the Extremities</h4>
-                            <p class="pub-meta">Park JH, <strong>Kim SE</strong>, et al. <em>BMC Cancer</em> 2024;24(1):1259</p>
+                            <h4><a href="https://doi.org/10.1186/s12885-024-13021-y" target="_blank" rel="noopener">Dedifferentiated Liposarcoma of the Extremities: A Korean Multi-Center Study of 107 Cases</a></h4>
+                            <p class="pub-meta">Park JH, <strong>Kim SE</strong>, et al. <em>BMC Cancer 2024;24(1):1259</em></p>
                         </div>
                         <div class="pub-list-item first-author-item">
-                            <h4>Predicting functional improvements after total knee arthroplasty</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Ro DH, et al. <em>Knee Surg Relat Res</em> 2024;36(1):31</p>
+                            <h4><a href="https://doi.org/10.1186/s43019-023-00209-y" target="_blank" rel="noopener">Enhanced deep learning model enables accurate alignment measurement across diverse institutional imaging protocols</a></h4>
+                            <p class="pub-meta"><strong>Kim SE</strong>, Nam JW, Kim JI, Kim JK, Ro DH. <em>Knee Surg Relat Res 2024;36(1):4</em></p>
                         </div>
                         <div class="pub-list-item first-author-item">
-                            <h4>Coronal plane alignment of the knee (CPAK) type shifts towards constitutional varus with increasing KL grade</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, MacDessi S, et al. <em>J Bone Joint Surg Am</em> 2024</p>
+                            <h4><a href="https://doi.org/10.1038/s41598-024-63266-7" target="_blank" rel="noopener">Estimation of patient-reported outcome measures based on features of knee joint muscle co-activation</a></h4>
+                            <p class="pub-meta">Hussain I*, <strong>Kim SE</strong>*, et al. <em>Scientific Reports 2024;14(1):12428</em></p>
                         </div>
                         <div class="pub-list-item first-author-item">
-                            <h4>Estimation of patient-reported outcome measures based on features of knee joint muscle co-activation</h4>
-                            <p class="pub-meta">Hussain I*, <strong>Kim SE*</strong>, et al. <em>Scientific Reports</em> 2024;14(1):12428</p>
+                            <h4><a href="https://doi.org/10.4055/cios23166" target="_blank" rel="noopener">Fixed bearing and higher postoperative knee flexion angle as predictors of satisfaction in Asian patients undergoing posterior stabilized total knee arthroplasty</a></h4>
+                            <p class="pub-meta"><strong>Kim SE</strong>, Choi BS, Ro DH, Lee MC, Han HS. <em>Clin Orthop Surg 2024;16:e19</em></p>
                         </div>
                         <div class="pub-list-item first-author-item">
-                            <h4>Shallow trochlear groove as a cause of patellofemoral instability in trochlear dysplasia</h4>
-                            <p class="pub-meta">Lee JY*, <strong>Kim SE*</strong>, et al. <em>KSSTA</em> 2024;32(6):1434-1445</p>
+                            <h4><a href="https://doi.org/10.1007/s00256-024-04619-1" target="_blank" rel="noopener">Minimal impact of beam projection angle deviations in skyline (Laurin) view and the efficacy of the anterior border of proximal tibia as a guiding landmark</a></h4>
+                            <p class="pub-meta"><strong>Kim SE</strong>, Hwang S, Lee JH, Gimm G, Han HS, Choi BS, Ro DH. <em>Skeletal Radiology 2024;53(7):1399-1406</em></p>
                         </div>
                         <div class="pub-list-item first-author-item">
-                            <h4>Fixed bearing and higher flexion angle as predictors of satisfaction after TKA</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, et al. <em>Clin Orthop Surg</em> 2024;16:e19</p>
+                            <h4><a href="https://doi.org/10.4055/cios23179" target="_blank" rel="noopener">Performance of ChatGPT on Solving Orthopedic Board-Style Questions</a></h4>
+                            <p class="pub-meta"><strong>Kim SE</strong>, Lee JH, Choi BS, et al. <em>Clin Orthop Surg 2024;16:e13</em></p>
                         </div>
                         <div class="pub-list-item first-author-item">
-                            <h4>Minimal impact of beam projection angle deviations on skyline view radiographs</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, et al. <em>Skeletal Radiology</em> 2024;53(7):1399-1406</p>
+                            <h4><a href="https://doi.org/10.1186/s43019-023-00204-3" target="_blank" rel="noopener">Preserving coronal knee alignment of the knee (CPAK) in unicompartmental knee arthroplasty correlates with superior patient-reported outcomes</a></h4>
+                            <p class="pub-meta"><strong>Kim SE</strong>, Yun KR, Lee JM, Lee MC, Han HS. <em>Knee Surg Relat Res 2024;36(1):1</em></p>
                         </div>
                         <div class="pub-list-item first-author-item">
-                            <h4>Robotic arm-assisted total knee arthroplasty in a patient with osteopetrosis</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Han HS. <em>Orthop Rev (Pavia)</em> 2024;16:94238</p>
+                            <h4><a href="https://doi.org/10.3390/medicina60091492" target="_blank" rel="noopener">Primary total knee arthroplasty for treating knees with neglected patellar dislocation</a></h4>
+                            <p class="pub-meta"><strong>Kim SE</strong>, Kim SH, Lee JI, Han HS, Lee MC, Ro DH. <em>Medicina 2024;60(9):1492</em></p>
                         </div>
                         <div class="pub-list-item first-author-item">
-                            <h4>Enhanced deep learning model for alignment measurement across imaging protocols</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, et al. <em>Knee Surg Relat Res</em> 2024;36(1):4</p>
+                            <h4><a href="https://doi.org/10.52965/001c.94238" target="_blank" rel="noopener">Robotic arm-assisted total knee arthroplasty in a patient with osteopetrosis</a></h4>
+                            <p class="pub-meta"><strong>Kim SE</strong>, Han HS. <em>Orthop Rev (Pavia) 2024;16:94238</em></p>
                         </div>
                         <div class="pub-list-item first-author-item">
-                            <h4>The use of medial joint opening rather than mechanical axis deviation to determine clinical outcomes after HTO</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Kwak J, Ro DH, Lee MC, Han HS. <em>Bone Joint J</em> 2024;106-B(3):240-248</p>
+                            <h4><a href="https://doi.org/10.1002/ksa.12166" target="_blank" rel="noopener">Shallow trochlear groove and narrow medial trochlear width at the proximal trochlea in patients with trochlear dysplasia: A three-dimensional computed tomography analysis</a></h4>
+                            <p class="pub-meta">Lee JY*, <strong>Kim SE</strong>*, et al. <em>KSSTA 2024;32(6):1434-1445</em></p>
                         </div>
                         <div class="pub-list-item first-author-item">
-                            <h4>Performance of ChatGPT on Solving Orthopedic Board-Style Questions</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Lee JH, Choi BS, et al. <em>Clin Orthop Surg</em> 2024;16:e13</p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
-                            <h4>Preserving coronal plane alignment of the knee in unicompartmental knee arthroplasty</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, et al. <em>Knee Surg Relat Res</em> 2024;36(1):1</p>
+                            <h4><a href="https://doi.org/10.1302/0301-620X.106B3.BJJ-2023-0337.R3" target="_blank" rel="noopener">The use of medial joint opening rather than mechanical axis deviation to determine the clinical outcomes after high tibial osteotomy</a></h4>
+                            <p class="pub-meta"><strong>Kim SE</strong>, Kwak J, Ro DH, Lee MC, Han HS. <em>Bone Joint J 2024;106-B(3):240-248</em></p>
                         </div>
                     </div>
                 </div>
 
-                <!-- 2023 -->
                 <div class="pub-year-group" id="pubs-2023">
                     <div class="pub-year-label">2023 <span class="year-count">6 papers</span></div>
                     <div class="pub-list-items">
                         <div class="pub-list-item first-author-item">
-                            <h4>Accurate method for measuring knee joint space width on radiographs</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, et al. <em>The Knee</em> 2023;45:85-91</p>
+                            <h4><a href="https://doi.org/10.1016/j.knee.2023.09.006" target="_blank" rel="noopener">An accurate method for measuring knee joint space width despite variations in beam projection angles</a></h4>
+                            <p class="pub-meta"><strong>Kim SE</strong>, Kim K, Lee MC, Han HS, Choi BS, Ro DH. <em>The Knee 2023;45:85-91</em></p>
+                        </div>
+                        <div class="pub-list-item first-author-item">
+                            <h4><a href="https://doi.org/10.1016/j.arth.2023.03.056" target="_blank" rel="noopener">Anatomic Patellar Design Has No Clinical Superiority Over Dome Patellar Design in Total Knee Arthroplasty: A Randomized Clinical Trial</a></h4>
+                            <p class="pub-meta"><strong>Kim SE</strong>, Jung H, Ro DH, et al. <em>J Arthroplasty 2023;38(9):1742-1747</em></p>
+                        </div>
+                        <div class="pub-list-item first-author-item">
+                            <h4><a href="https://doi.org/10.3390/medicina59122105" target="_blank" rel="noopener">Early- to Mid-Term Review of a Prospective, Multi-Center, International, Outcomes Study of an Anatomically Designed Implant with Posterior-Stabilized Bearing in Total Knee Arthroplasty</a></h4>
+                            <p class="pub-meta"><strong>Kim SE</strong>, Ro DH, Lee MC, Cholewa JM. <em>Medicina 2023;59(12):2105</em></p>
                         </div>
                         <div class="pub-list-item">
-                            <h4>Functional alignment with robotic-arm assisted TKA demonstrated better patient-reported outcomes than mechanical alignment</h4>
-                            <p class="pub-meta">Choi BS, <strong>Kim SE</strong>, et al. <em>KSSTA</em> 2023;31(3):1072-1080</p>
+                            <h4><a href="https://doi.org/10.1007/s00167-022-07227-5" target="_blank" rel="noopener">Functional alignment with robotic-arm assisted total knee arthroplasty demonstrated better patient-reported outcomes than mechanical alignment with manual total knee arthroplasty</a></h4>
+                            <p class="pub-meta">Choi BS, <strong>Kim SE</strong>, Yang M, Ro DH, Han HS. <em>KSSTA 2023;31(3):1072-1080</em></p>
                         </div>
                         <div class="pub-list-item first-author-item">
-                            <h4>Robotic-assisted unicompartmental knee arthroplasty: historical perspectives and current innovations</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Han HS. <em>Biomed Eng Lett</em> 2023;13(4):543-552</p>
+                            <h4><a href="https://doi.org/10.3390/medicina59122104" target="_blank" rel="noopener">Risk Factors and Clinical Outcomes of Osteotomy Plane Violation by D-Hole Screws in Medial Open Wedge High Tibial Osteotomy: A Simulation and Comparative Study</a></h4>
+                            <p class="pub-meta"><strong>Kim SE</strong>, Lee MH, Cho CH, Lee JI, Han HS, Lee MC, Ro DH. <em>Medicina 2023;59(12):2104</em></p>
                         </div>
                         <div class="pub-list-item first-author-item">
-                            <h4>Multi-center outcomes study of Persona Knee System in total knee arthroplasty</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, et al. <em>Medicina</em> 2023;59(12):2105</p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
-                            <h4>Risk factors for osteotomy plane violation in high tibial osteotomy</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, et al. <em>Medicina</em> 2023;59(12):2104</p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
-                            <h4>Anatomic Patellar Design Has No Clinical Superiority Over Dome Patellar Design in TKA: A Randomized Controlled Trial</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Jung H, Ro DH, et al. <em>J Arthroplasty</em> 2023;38(9):1742-1747</p>
+                            <h4><a href="https://doi.org/10.1007/s13534-023-00323-6" target="_blank" rel="noopener">Robotic-assisted unicompartmental knee arthroplasty: historical perspectives and current innovations</a></h4>
+                            <p class="pub-meta"><strong>Kim SE</strong>, Han HS. <em>Biomed Eng Lett 2023;13(4):543-552</em></p>
                         </div>
                     </div>
                 </div>
 
-                <!-- 2022 & Earlier -->
                 <div class="pub-year-group" id="pubs-2022">
-                    <div class="pub-year-label">2022 & Earlier <span class="year-count">2 papers</span></div>
+                    <div class="pub-year-label">2022 <span class="year-count">1 paper</span></div>
                     <div class="pub-list-items">
                         <div class="pub-list-item first-author-item">
-                            <h4>Single shot adductor canal block versus continuous adductor canal block in total knee arthroplasty</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, et al. <em>J Exp Orthop</em> 2022;9(1):84</p>
+                            <h4><a href="https://doi.org/10.1186/s40634-022-00523-6" target="_blank" rel="noopener">Single shot adductor canal block combined with intravenous patient-controlled analgesia can be effective as continuous adductor canal block in reducing opioid consumption and breakthrough pain after total knee arthroplasty</a></h4>
+                            <p class="pub-meta"><strong>Kim SE</strong>, Han HS, Lee MC, Ro DH. <em>J Exp Orthop 2022;9(1):84</em></p>
                         </div>
+                    </div>
+                </div>
+
+                <div class="pub-year-group" id="pubs-2020">
+                    <div class="pub-year-label">2020 <span class="year-count">1 paper</span></div>
+                    <div class="pub-list-items">
                         <div class="pub-list-item">
-                            <h4>Recent advances in PET image interpretation</h4>
-                            <p class="pub-meta">Rahim MK, <strong>Kim SE</strong>, et al. <em>Nucl Med Mol Imaging</em> 2014;48(1):1-15</p>
+                            <h4><a href="https://doi.org/10.1186/s12891-020-03579-6" target="_blank" rel="noopener">Elastic pneumatic tourniquet cuff can reduce postoperative thigh pain after total knee arthroplasty: a prospective randomized trial</a></h4>
+                            <p class="pub-meta">Park JY, <strong>Kim SE</strong>, Lee MC, Han HS. <em>BMC Musculoskelet Disord 2020;21(1):565</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pub-year-group" id="pubs-2014">
+                    <div class="pub-year-label">2014 & Earlier <span class="year-count">1 paper</span></div>
+                    <div class="pub-list-items">
+                        <div class="pub-list-item">
+                            <h4><a href="https://doi.org/10.1007/s13139-013-0260-2" target="_blank" rel="noopener">Recent Trends in PET Image Interpretations Using Volumetric and Texture-based Quantification Methods in Nuclear Oncology</a></h4>
+                            <p class="pub-meta">Rahim MK, <strong>Kim SE</strong>, et al. <em>Nucl Med Mol Imaging 2014;48(1):1-15</em></p>
                         </div>
                     </div>
                 </div>
@@ -1928,6 +2299,7 @@
                 <button class="show-more-btn" id="showMoreBtn" aria-expanded="false" aria-controls="earlierPubs" onclick="togglePublications()">
                     <span id="showMoreText">Show 2024 & Earlier Publications</span>
                 </button>
+                <!-- AUTO-GENERATED-PUBS-END -->
             </div>
         </div>
     </section>
@@ -1939,14 +2311,14 @@
             <div class="timeline">
                 <div class="timeline-item highlight">
                     <div class="timeline-dot"></div>
-                    <span class="timeline-date">Oct 2024 – Present</span>
+                    <span class="timeline-date">Sep 2024 – Present</span>
                     <h4 class="timeline-title">Postdoctoral Research Fellow</h4>
                     <p class="timeline-org">Harvard Medical School, Department of Biomedical Informatics</p>
                     <p class="timeline-desc">PI: Pranav Rajpurkar. Developing AI systems for medical applications.</p>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
-                    <span class="timeline-date">2024 – Present</span>
+                    <span class="timeline-date">Sep 2024 – Present</span>
                     <h4 class="timeline-title">Associate Research Professor</h4>
                     <p class="timeline-org">Seoul National University Hospital, Biomedical Research Institute</p>
                     <p class="timeline-desc">National Strategic Technology Research Institute. Leading AI research across orthopedics and diverse medical fields.</p>
@@ -1954,7 +2326,7 @@
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <span class="timeline-date">Mar 2023 – Present</span>
-                    <h4 class="timeline-title">Ph.D. Candidate in Medicine</h4>
+                    <h4 class="timeline-title">Ph.D. Candidate in Orthopedic Surgery</h4>
                     <p class="timeline-org">Seoul National University Graduate School of Medicine</p>
                     <p class="timeline-desc">AI applications in orthopedic surgery research.</p>
                 </div>
@@ -1968,7 +2340,7 @@
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <span class="timeline-date">Feb 2023</span>
-                    <h4 class="timeline-title">M.S. in Medicine</h4>
+                    <h4 class="timeline-title">M.S. in Orthopedic Surgery</h4>
                     <p class="timeline-org">Seoul National University Graduate School of Medicine</p>
                 </div>
                 <div class="timeline-item">
@@ -2001,71 +2373,166 @@
         </div>
     </section>
 
-    <!-- News Section -->
-    <section class="news" id="news" aria-labelledby="news-heading">
+    <!-- Milestones Section -->
+    <section class="milestones" id="milestones" aria-labelledby="milestones-heading">
         <div class="container">
-            <h2 id="news-heading">News & Updates</h2>
-            <div class="news-grid">
-                <div class="news-item fade-in">
-                    <div class="news-date">
-                        <div class="month">2026</div>
-                        <div class="year"></div>
+            <h2 id="milestones-heading">Milestones</h2>
+            <div class="milestone-timeline">
+
+                <div class="milestone-item fade-in">
+                    <div class="milestone-icon publication">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
                     </div>
-                    <div class="news-content">
-                        <h4>Paper Accepted at Nature Medicine</h4>
-                        <p>Our CES framework paper for evaluating healthcare AI in realistic clinical settings was accepted at Nature Medicine. Co-first author with Luo L.</p>
-                    </div>
-                </div>
-                <div class="news-item fade-in">
-                    <div class="news-date">
-                        <div class="month">Jan</div>
-                        <div class="year">2026</div>
-                    </div>
-                    <div class="news-content">
-                        <h4>3DReasonKnee Published at PSB 2026</h4>
-                        <p>3DReasonKnee, our work on 3D spatial reasoning for knee MRI interpretation by VLMs, published at Pacific Symposium on Biocomputing.</p>
+                    <div class="milestone-content">
+                        <span class="milestone-date">Feb 2026</span>
+                        <h4>Published in Nature Medicine</h4>
+                        <p>CES framework for dynamic AI evaluation in clinical environments. Co-first author with Luo L.</p>
                     </div>
                 </div>
-                <div class="news-item fade-in">
-                    <div class="news-date">
-                        <div class="month">Jun</div>
-                        <div class="year">2025</div>
+
+                <div class="milestone-item fade-in">
+                    <div class="milestone-icon publication">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
                     </div>
-                    <div class="news-content">
+                    <div class="milestone-content">
+                        <span class="milestone-date">Jan 2026</span>
+                        <h4>3DReasonKnee at PSB 2026</h4>
+                        <p>3D spatial reasoning for knee MRI interpretation by vision-language models. Co-first author.</p>
+                    </div>
+                </div>
+
+                <div class="milestone-item fade-in">
+                    <div class="milestone-icon publication">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
+                    </div>
+                    <div class="milestone-content">
+                        <span class="milestone-date">Jun 2025</span>
                         <h4>FactCheXcker at CVPR 2025</h4>
-                        <p>FactCheXcker, our hallucination detection tool for chest X-ray report generation, accepted at CVPR 2025.</p>
+                        <p>Hallucination detection for chest X-ray report generation models.</p>
                     </div>
                 </div>
-                <div class="news-item fade-in">
-                    <div class="news-date">
-                        <div class="month">May</div>
-                        <div class="year">2025</div>
+
+                <div class="milestone-item fade-in">
+                    <div class="milestone-icon award">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/></svg>
                     </div>
-                    <div class="news-content">
-                        <h4>Citation Award from KSRR</h4>
-                        <p>Received Citation Award from the Korean Society of Knee Surgery and Related Research for two highly cited articles in 2024.</p>
+                    <div class="milestone-content">
+                        <span class="milestone-date">May 2025</span>
+                        <h4>KSRR Citation Award</h4>
+                        <p>Two highly cited articles in knee surgery imaging recognized by Korean Society of Knee Surgery and Related Research.</p>
                     </div>
                 </div>
-                <div class="news-item fade-in">
-                    <div class="news-date">
-                        <div class="month">Oct</div>
-                        <div class="year">2024</div>
+
+                <div class="milestone-item fade-in">
+                    <div class="milestone-icon career">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                     </div>
-                    <div class="news-content">
+                    <div class="milestone-content">
+                        <span class="milestone-date">Mar 2025</span>
+                        <h4>AAOS Presentation</h4>
+                        <p>Automated posterior tibial slope measurement using deep learning, presented at the American Academy of Orthopaedic Surgeons.</p>
+                    </div>
+                </div>
+
+                <div class="milestone-item fade-in">
+                    <div class="milestone-icon publication">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
+                    </div>
+                    <div class="milestone-content">
+                        <span class="milestone-date">Dec 2024</span>
+                        <h4>CPAK Paper in JBJS</h4>
+                        <p>Deep learning radiographic analysis of 17,365 knees published in J Bone Joint Surg Am. First author.</p>
+                    </div>
+                </div>
+
+                <div class="milestone-item fade-in">
+                    <div class="milestone-icon career">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <div class="milestone-content">
+                        <span class="milestone-date">Sep 2024</span>
                         <h4>Joined Harvard Medical School</h4>
-                        <p>Started as a Postdoctoral Research Fellow at Harvard Medical School, Department of Biomedical Informatics, working with Dr. Pranav Rajpurkar.</p>
+                        <p>Postdoctoral Research Fellow with Dr. Pranav Rajpurkar, Dept of Biomedical Informatics.</p>
                     </div>
                 </div>
-                <div class="news-item fade-in">
-                    <div class="news-date">
-                        <div class="month">2025</div>
-                        <div class="year"></div>
+
+                <div class="milestone-item fade-in">
+                    <div class="milestone-icon award">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/></svg>
                     </div>
-                    <div class="news-content">
-                        <h4>ReXGroundingCT Under Review at NEJM AI</h4>
-                        <p>ReXGroundingCT, our grounded radiology report generation framework for CT scans, is under consideration at NEJM AI.</p>
+                    <div class="milestone-content">
+                        <span class="milestone-date">May 2024</span>
+                        <h4>Best Paper Award, KSRR</h4>
+                        <p>Enhanced deep learning alignment measurement across diverse institutional imaging protocols.</p>
                     </div>
                 </div>
+
+                <div class="milestone-item fade-in">
+                    <div class="milestone-icon career">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <div class="milestone-content">
+                        <span class="milestone-date">May 2024</span>
+                        <h4>4 Presentations at ESSKA, Milan</h4>
+                        <p>CPAK classification, HTO outcomes, PTS measurement, and UKA outcomes at the European Society of Sports Traumatology.</p>
+                    </div>
+                </div>
+
+                <div class="milestone-item fade-in">
+                    <div class="milestone-icon award">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/></svg>
+                    </div>
+                    <div class="milestone-content">
+                        <span class="milestone-date">Oct 2023</span>
+                        <h4>Best Oral Presentation, Korean CAOS</h4>
+                        <p>CPAK classification presented at the 18th Korean Computer Assisted Orthopedic Surgery Congress.</p>
+                    </div>
+                </div>
+
+                <div class="milestone-item fade-in">
+                    <div class="milestone-icon career">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <div class="milestone-content">
+                        <span class="milestone-date">Mar 2022</span>
+                        <h4>Board-Certified Orthopedic Surgeon</h4>
+                        <p>Seoul National University Hospital, after 4-year residency.</p>
+                    </div>
+                </div>
+
+                <div class="milestone-item fade-in">
+                    <div class="milestone-icon award">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/></svg>
+                    </div>
+                    <div class="milestone-content">
+                        <span class="milestone-date">Dec 2020</span>
+                        <h4>Best Resident Award</h4>
+                        <p>SNUH Department of Orthopedic Surgery.</p>
+                    </div>
+                </div>
+
+                <div class="milestone-item fade-in">
+                    <div class="milestone-icon award">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/></svg>
+                    </div>
+                    <div class="milestone-content">
+                        <span class="milestone-date">Apr 2017</span>
+                        <h4>Minister of Health Commendation</h4>
+                        <p>For MERS crisis response as Epidemic Intelligence Service Officer.</p>
+                    </div>
+                </div>
+
+                <div class="milestone-item fade-in">
+                    <div class="milestone-icon career">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <div class="milestone-content">
+                        <span class="milestone-date">Feb 2014</span>
+                        <h4>Doctor of Medicine, SNU</h4>
+                        <p>Seoul National University College of Medicine.</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -2073,7 +2540,13 @@
     <!-- Awards Section -->
     <section class="awards" id="awards" aria-labelledby="awards-heading">
         <div class="container">
-            <h2 id="awards-heading">Awards & Recognition</h2>
+            <div class="section-header" onclick="toggleSection('awards-content', this)">
+                <h2 id="awards-heading">Awards & Recognition</h2>
+                <button class="collapse-toggle" aria-expanded="false" aria-controls="awards-content" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+            </div>
+            <div id="awards-content" class="collapsible-content collapsed">
             <div class="awards-grid">
                 <div class="award-card fade-in">
                     <div class="award-icon">
@@ -2159,13 +2632,133 @@
                     </div>
                 </div>
             </div>
+            </div><!-- end awards-content -->
+        </div>
+    </section>
+
+    <!-- Talks & Presentations Section -->
+    <section class="presentations" id="talks" aria-labelledby="talks-heading">
+        <div class="container">
+            <div class="section-header" onclick="toggleSection('talks-content', this)">
+                <h2 id="talks-heading">Talks & Presentations</h2>
+                <button class="collapse-toggle" aria-expanded="false" aria-controls="talks-content" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+            </div>
+            <div id="talks-content" class="collapsible-content collapsed">
+            <div class="presentations-grid">
+
+                <div class="presentation-item">
+                    <h4>Assessment of Large Multimodal Reasoning Model Performance and Chain-of-Thought Quality in Chest Radiograph Interpretation</h4>
+                    <p class="presentation-meta">Luo L, Zhang X, <strong>Kim SE</strong>, et al.</p>
+                    <p class="presentation-venue">RSNA Cutting Edge 2025</p>
+                </div>
+
+                <div class="presentation-item">
+                    <h4>Automated Posterior Tibial Slope Measurement Using Lateral Knee Radiographs: A Novel Landmark-Based Approach Using Deep Learning</h4>
+                    <p class="presentation-meta">Ryu B, Ro DH, Martin RK, Inderhaug E, Persson A, Choi BS, Haaland S, <strong>Kim SE</strong></p>
+                    <p class="presentation-venue">AAOS Annual Meeting &mdash; March 2025, United States</p>
+                </div>
+
+                <div class="presentation-item">
+                    <h4>Medial Joint Opening Rather Than Mechanical Axis Deviation Determined Clinical Outcomes After High Tibial Osteotomy</h4>
+                    <p class="presentation-meta"><strong>Kim SE</strong>, Ro DH, Lee MC, Han HS</p>
+                    <p class="presentation-venue">ESSKA 21st Congress &mdash; May 2024, Milan, Italy</p>
+                </div>
+
+                <div class="presentation-item">
+                    <h4>CPAK Classification According to Kellgren and Lawrence Grade</h4>
+                    <p class="presentation-meta"><strong>Kim SE</strong>, MacDessi S, Song D, Kim JI, Choi BS, Han HS, Ro DH</p>
+                    <p class="presentation-venue">ESSKA 21st Congress &mdash; May 2024, Milan, Italy</p>
+                </div>
+
+                <div class="presentation-item">
+                    <h4>Automated Posterior Tibial Slope Measurement Using Deep Learning in Lateral Knee Radiographs</h4>
+                    <p class="presentation-meta"><strong>Kim SE</strong>, Ro DH, Lee MC, Han HS</p>
+                    <p class="presentation-venue">ESSKA 21st Congress &mdash; May 2024, Milan, Italy</p>
+                </div>
+
+                <div class="presentation-item">
+                    <h4>Does CPAK Change in UKA Correlate with Patient-Reported Outcome Measures?</h4>
+                    <p class="presentation-meta"><strong>Kim SE</strong>, Ro DH, Lee MC, Han HS</p>
+                    <p class="presentation-venue">ESSKA 21st Congress &mdash; May 2024, Milan, Italy</p>
+                </div>
+
+                <div class="presentation-item">
+                    <h4>CPAK Classification According to Kellgren and Lawrence Grade</h4>
+                    <p class="presentation-meta"><strong>Kim SE</strong>, MacDessi S, Song D, Kim JI, Choi BS, Han HS, Ro DH</p>
+                    <p class="presentation-venue">Korean Society of CAOS &mdash; October 2023, Korea</p>
+                </div>
+
+                <div class="presentation-item">
+                    <h4>Medial Joint Opening Rather Than Mechanical Axis Deviation Determined Outcomes After HTO</h4>
+                    <p class="presentation-meta"><strong>Kim SE</strong>, Kwak J, Ro DH, Lee MC, Han HS</p>
+                    <p class="presentation-venue">Korean Orthopaedic Association 67th Congress &mdash; October 2023, Korea</p>
+                </div>
+
+                <div class="presentation-item">
+                    <h4>Anatomic vs Dome Patellar Design in TKA: A Randomized Clinical Trial</h4>
+                    <p class="presentation-meta"><strong>Kim SE</strong>, Jung H, Ro DH, Lee MC, Han HS</p>
+                    <p class="presentation-venue">Korean Orthopaedic Association 67th Congress &mdash; October 2023, Korea</p>
+                </div>
+
+                <div class="presentation-item">
+                    <h4>Prospective Multi-center Outcomes Study of Persona Knee System in TKA: Mid-term Outcomes</h4>
+                    <p class="presentation-meta"><strong>Kim SE</strong>, Lee MC, Ro DH, et al.</p>
+                    <p class="presentation-venue">Korean Orthopaedic Association 66th Congress &mdash; October 2022, Korea</p>
+                </div>
+
+                <div class="presentation-item">
+                    <h4>Low Muscle Mass Is an Independent Risk Factor for Postoperative Blood Transfusion in TKA</h4>
+                    <p class="presentation-meta"><strong>Kim SE</strong>, Hwang DH, Han HS, Lee MC, Ro DH</p>
+                    <p class="presentation-venue">Korean Knee Society 40th Congress &mdash; May 2022, Korea</p>
+                </div>
+
+                <div class="presentation-item">
+                    <h4>Muscle Activation and Sagittal Knee Biomechanics in Patellofemoral Pain Syndrome</h4>
+                    <p class="presentation-meta"><strong>Kim SE</strong>, Kwon SB, Jeon S, Kim M, Ro DH, Lee MC, Han HS</p>
+                    <p class="presentation-venue">Korean Orthopaedic Association 65th Congress &mdash; October 2021, Korea</p>
+                </div>
+
+                <div class="presentation-item">
+                    <h4>Pain Control After TKA: IV PCA vs Continuous vs Single Adductor Canal Block</h4>
+                    <p class="presentation-meta"><strong>Kim SE</strong>, Han HS, Lee MC, Ro DH</p>
+                    <p class="presentation-venue">Korean Orthopaedic Association 64th Congress &mdash; October 2020, Korea</p>
+                </div>
+
+                <div class="presentation-item">
+                    <h4>Quantitative Evaluation of Gait Features After TKA: Comparison with Age and Sex-Matched Controls</h4>
+                    <p class="presentation-meta"><strong>Kim SE</strong>, Ro DH, Kang T, Han DH, Lee DY, Han HS, Lee MC</p>
+                    <p class="presentation-venue">Korean Orthopaedic Association 63rd Congress &mdash; October 2019, Korea</p>
+                </div>
+
+                <div class="presentation-item">
+                    <h4>The Doctor Will Agree With You Now: Sycophancy of LLMs in Multi-Turn Medical Conversations</h4>
+                    <p class="presentation-meta">Kim TM, Luo L, <strong>Kim SE</strong>, Manrai AK, Topol E, Rajpurkar P</p>
+                    <p class="presentation-venue">EACL 2026 &mdash; HeaLing Workshop</p>
+                </div>
+
+                <div class="presentation-item">
+                    <h4>Do Mixed-Vendor Multi-Agent LLMs Improve Clinical Diagnosis?</h4>
+                    <p class="presentation-meta">Yuan GC, Zhang X, <strong>Kim SE</strong>, Rajpurkar P</p>
+                    <p class="presentation-venue">EACL 2026 &mdash; HeaLing Workshop</p>
+                </div>
+
+            </div>
+            </div><!-- end talks-content -->
         </div>
     </section>
 
     <!-- Professional Service & Memberships Section -->
     <section class="service-section" id="service" aria-labelledby="service-heading">
         <div class="container">
-            <h2 id="service-heading">Professional Service & Memberships</h2>
+            <div class="section-header" onclick="toggleSection('service-content', this)">
+                <h2 id="service-heading">Professional Service & Memberships</h2>
+                <button class="collapse-toggle" aria-expanded="false" aria-controls="service-content" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+            </div>
+            <div id="service-content" class="collapsible-content collapsed">
             <div class="service-layout">
                 <div class="service-icon-lg">
                     <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
@@ -2206,13 +2799,20 @@
                     <div class="membership-item">Orthopaedic Research Society (ORS)</div>
                 </div>
             </div>
+            </div><!-- end service-content -->
         </div>
     </section>
 
     <!-- Beyond the Lab Section -->
     <section class="personal-section" id="personal" aria-labelledby="personal-heading">
         <div class="container">
-            <h2 id="personal-heading">Beyond the Lab</h2>
+            <div class="section-header" onclick="toggleSection('personal-content', this)">
+                <h2 id="personal-heading">Beyond the Lab</h2>
+                <button class="collapse-toggle" aria-expanded="false" aria-controls="personal-content" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+            </div>
+            <div id="personal-content" class="collapsible-content collapsed">
             <div class="personal-grid">
                 <div>
                     <p class="personal-text">
@@ -2264,6 +2864,7 @@
                     </div>
                 </div>
             </div>
+            </div><!-- end personal-content -->
         </div>
     </section>
 
@@ -2294,25 +2895,16 @@
                 interested in advancing healthcare through AI. Whether you have a research idea,
                 collaboration opportunity, or just want to chat about the future of medicine—let's talk.
             </p>
-            <div class="contact-methods">
-                <a href="mailto:sungeun_kim2@hms.harvard.edu" class="contact-method">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <polyline points="22,6 12,13 2,6"/>
-                    </svg>
-                    sungeun_kim2@hms.harvard.edu
-                </a>
-            </div>
             <div class="contact-cta">
                 <a href="mailto:sungeun_kim2@hms.harvard.edu" class="btn btn-light">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                         <polyline points="22,6 12,13 2,6"/>
                     </svg>
                     Send Email
                 </a>
-                <a href="https://www.linkedin.com/in/sung-eun-kim-19267a2a4/" target="_blank" class="btn btn-outline-light">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                <a href="https://www.linkedin.com/in/sung-eun-kim-19267a2a4/" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
                         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                     </svg>
                     Connect on LinkedIn
@@ -2327,13 +2919,30 @@
     <footer>
         <p>&copy; 2026 Sung Eun Kim.</p>
         <div class="footer-links">
-            <a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank">Google Scholar</a>
-            <a href="https://www.linkedin.com/in/sung-eun-kim-19267a2a4/" target="_blank">LinkedIn</a>
+            <a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+            <a href="https://www.linkedin.com/in/sung-eun-kim-19267a2a4/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a href="mailto:sungeun_kim2@hms.harvard.edu">Email</a>
         </div>
     </footer>
 
     <script>
+        // Theme toggle
+        (function() {
+            const toggle = document.getElementById('themeToggle');
+            const stored = localStorage.getItem('theme');
+            if (stored) {
+                document.documentElement.setAttribute('data-theme', stored);
+            }
+            toggle.addEventListener('click', () => {
+                const current = document.documentElement.getAttribute('data-theme');
+                const isDark = current === 'dark' ||
+                    (!current && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                const next = isDark ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+            });
+        })();
+
         // Navigation scroll effect
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
@@ -2371,6 +2980,38 @@
         });
 
         // Show more publications toggle
+        function toggleSection(contentId, headerEl) {
+            const content = document.getElementById(contentId);
+            const btn = headerEl.querySelector('.collapse-toggle');
+            const isCollapsed = content.classList.contains('collapsed');
+
+            if (isCollapsed) {
+                content.classList.remove('collapsed');
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.classList.add('expanded');
+                btn.setAttribute('aria-expanded', 'true');
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                requestAnimationFrame(() => {
+                    content.classList.remove('expanded');
+                    content.classList.add('collapsed');
+                    content.style.maxHeight = '0';
+                    btn.setAttribute('aria-expanded', 'false');
+                });
+            }
+        }
+
+        // When navigating to a collapsed section via anchor link, expand it
+        function expandIfCollapsed(hash) {
+            const target = document.querySelector(hash);
+            if (!target) return;
+            const collapsible = target.querySelector('.collapsible-content.collapsed');
+            if (collapsible) {
+                const header = target.querySelector('.section-header');
+                if (header) toggleSection(collapsible.id, header);
+            }
+        }
+
         function togglePublications() {
             const earlierPubs = document.getElementById('earlierPubs');
             const showMoreText = document.getElementById('showMoreText');
@@ -2405,14 +3046,39 @@
                 }
                 const target = document.querySelector(href);
                 if (target) {
-                    const navHeight = document.getElementById('navbar').offsetHeight;
-                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
+                    expandIfCollapsed(href);
+                    setTimeout(() => {
+                        const navHeight = document.getElementById('navbar').offsetHeight;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }, 50);
                 }
             });
+        });
+        // Make entire pub-list-item clickable
+        document.querySelectorAll('.pub-list-item').forEach(item => {
+            const link = item.querySelector('h4 a');
+            if (link) {
+                item.addEventListener('click', (e) => {
+                    if (e.target.tagName !== 'A') {
+                        window.open(link.href, '_blank', 'noopener');
+                    }
+                });
+            } else {
+                item.style.cursor = 'default';
+            }
+        });
+
+        // Scroll progress bar
+        const scrollProgress = document.getElementById('scrollProgress');
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            scrollProgress.style.width = progress + '%';
         });
     </script>
 </body>
