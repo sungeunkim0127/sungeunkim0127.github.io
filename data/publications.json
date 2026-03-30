@@ -1,17 +1,5 @@
 [
   {
-    "id": "ces-framework-nature-medicine-2026",
-    "title": "A clinical environment simulator for dynamic AI evaluation",
-    "authors": "Luo L*, Kim SE*, Zhang X, Kernbach JM, Kenia R, Acosta JN, ..., Topol E, Rajpurkar P",
-    "venue": "Nature Medicine",
-    "year": 2026,
-    "is_first_author": true,
-    "author_role": "co-first",
-    "citation_count": 0,
-    "scholar_cid": "",
-    "url": "https://doi.org/10.1038/s41591-026-04252-6"
-  },
-  {
     "id": "3dreasonknee-psb-2026",
     "title": "3DReasonKnee: Advancing Grounded Reasoning in Medical Vision Language Models",
     "authors": "Sambara S*, Kim SE*, Zhang X, et al",
@@ -19,33 +7,32 @@
     "year": 2026,
     "is_first_author": true,
     "author_role": "co-first",
-    "citation_count": 0,
-    "scholar_cid": "",
+    "citation_count": 2,
+    "scholar_cid": "KriQPeEAAAAJ:aqlVkmm33-oC",
     "url": "https://psb.stanford.edu/psb-online/proceedings/psb26/sambara.pdf"
   },
   {
-    "id": "axial-malrotation-pts-2026",
-    "title": "Effects of axial malrotation on posterior tibial slope measurement",
-    "authors": "Park J, Persson A, Martin RK, et al",
-    "venue": "Knee Surg Relat Res 2026;38:3",
+    "id": "ces-framework-nature-medicine-2026",
+    "title": "A clinical environment simulator for dynamic AI evaluation",
+    "authors": "Luo L*, Kim SE*, Zhang X, Kernbach JM, Kenia R, Acosta JN, ..., Topol E, Rajpurkar P",
+    "venue": "Nature Medicine",
     "year": 2026,
-    "is_first_author": false,
-    "author_role": "",
-    "citation_count": 0,
-    "scholar_cid": "",
-    "url": "https://doi.org/10.1186/s43019-026-00303-x"
+    "is_first_author": true,
+    "author_role": "co-first",
+    "citation_count": 2,
+    "scholar_cid": "KriQPeEAAAAJ:7PzlFSSx8tAC",
+    "url": "https://doi.org/10.1038/s41591-026-04252-6"
   },
   {
-    "id": "sycophancy-llm-eacl-2026",
-    "title": "The Doctor Will Agree With You Now: Sycophancy of Large Language Models in Multi-Turn Medical Conversations",
-    "authors": "Kim TM, Luo L, Kim SE, Manrai AK, Topol E, Rajpurkar P",
-    "venue": "HeaLing Workshop at EACL 2026",
+    "id": "crimson-a-clinicallygrounded-llmbased-metric-for-generative-2026",
+    "title": "CRIMSON: A Clinically-Grounded LLM-Based Metric for Generative Radiology Report Evaluation",
+    "authors": "Mohammed Baharoon and Thibault Heintz and Siavash Raissi and Mahmoud Alabbad and Mona Alhammad and Hassan AlOmaish and Sung Eun Kim and Oishi Banerjee and Pranav Rajpurkar",
+    "venue": "arXiv preprint arXiv:2603.06183",
     "year": 2026,
     "is_first_author": false,
     "author_role": "",
     "citation_count": 0,
-    "scholar_cid": "",
-    "url": ""
+    "scholar_cid": "KriQPeEAAAAJ:L8Ckcad2t8MC"
   },
   {
     "id": "mixed-vendor-multi-agent-eacl-2026",
@@ -60,88 +47,39 @@
     "url": "https://arxiv.org/abs/2603.04421"
   },
   {
-    "id": "delirium-tka-jbjs-2025",
-    "title": "Preoperative low cognitive function and somatic psychological symptoms are associated with an increased risk of postoperative delirium following total knee arthroplasty: a prospective cohort study",
-    "authors": "Lee JY, Park JE, Kim SE, et al",
-    "venue": "J Bone Joint Surg Am 2025",
-    "year": 2025,
+    "id": "axial-malrotation-pts-2026",
+    "title": "Effects of axial malrotation on posterior tibial slope measurement",
+    "authors": "Park J, Persson A, Martin RK, et al",
+    "venue": "Knee Surg Relat Res 2026;38:3",
+    "year": 2026,
     "is_first_author": false,
     "author_role": "",
     "citation_count": 0,
     "scholar_cid": "",
-    "url": "https://doi.org/10.2106/JBJS.25.00392"
+    "url": "https://doi.org/10.1186/s43019-026-00303-x"
   },
   {
-    "id": "pts-acl-tears-2025",
-    "title": "Posterior tibial slope as a risk factor for anterior cruciate ligament tears",
-    "authors": "Kwak D*, Kim SE*, Park J, et al",
-    "venue": "Arthrosc Orthop Sports Med 2025;12:64-69",
-    "year": 2025,
-    "is_first_author": true,
-    "author_role": "co-first",
+    "id": "effects-of-axial-malrotation-on-posterior-tibial-slope-measu-2026",
+    "title": "Effects of axial malrotation on posterior tibial slope measurement: a digitally reconstructed radiograph study enabling automated quality assessment",
+    "authors": "Jaeseok Park and Andreas Persson and R Kyle Martin and Eivind Inderhaug and Sung Eun Kim and Sangyoon Kim and Donghyuk Kwak and Du hyun Ro",
+    "venue": "Knee Surgery & Related Research",
+    "year": 2026,
+    "is_first_author": false,
+    "author_role": "",
     "citation_count": 0,
-    "scholar_cid": "",
-    "url": "https://doi.org/10.14517/aosm25006"
+    "scholar_cid": "KriQPeEAAAAJ:mVmsd5A6BfQC"
   },
   {
-    "id": "radgame-ml4h-2025",
-    "title": "RadGame: An AI-Powered Platform for Radiology Education",
-    "authors": "Baharoon M, Raissi S, Jun JS, et al.",
-    "venue": "Machine Learning for Health (ML4H) 2025",
-    "year": 2025,
+    "id": "sycophancy-llm-eacl-2026",
+    "title": "The Doctor Will Agree With You Now: Sycophancy of Large Language Models in Multi-Turn Medical Conversations",
+    "authors": "Kim TM, Luo L, Kim SE, Manrai AK, Topol E, Rajpurkar P",
+    "venue": "HeaLing Workshop at EACL 2026",
+    "year": 2026,
     "is_first_author": false,
     "author_role": "",
     "citation_count": 0,
     "scholar_cid": "",
-    "url": "https://doi.org/10.48550/arXiv.2509.13270"
-  },
-  {
-    "id": "voice-stroke-ieee-2025",
-    "title": "Voice-guided Orchestrated Intelligence for Clinical Evaluation (VOICE): A Voice AI Agent System for Prehospital Stroke Assessment",
-    "authors": "Acosta JN, Adams SJ, Kernbach JM, et al.",
-    "venue": "IEEE AIxMHC 2025",
-    "year": 2025,
-    "is_first_author": false,
-    "author_role": "",
-    "citation_count": 0,
-    "scholar_cid": "",
-    "url": "https://arxiv.org/abs/2507.22898"
-  },
-  {
-    "id": "text-prompted-segmentation-mlhc-2025",
-    "title": "State-of-the-art text-prompted medical segmentation models struggle to ground chest CT findings",
-    "authors": "Baharoon M, Luo L, Moritz M, et al.",
-    "venue": "MLHC 2025",
-    "year": 2025,
-    "is_first_author": false,
-    "author_role": "",
-    "citation_count": 0,
-    "scholar_cid": "",
-    "url": "https://proceedings.mlr.press/v298/baharoon25a.html"
-  },
-  {
-    "id": "rextrust-hallucination-2025",
-    "title": "ReXTrust: A Model for Fine-Grained Hallucination Detection in AI-Generated Radiology Reports",
-    "authors": "Hardy R, Kim SE, Ro DH, Rajpurkar P",
-    "venue": "Proceedings of the AAAI Bridge Program on AI for Medicine and Healthcare, PMLR 281:173-182, 2025",
-    "year": 2025,
-    "is_first_author": false,
-    "author_role": "",
-    "citation_count": 0,
-    "scholar_cid": "",
-    "url": "https://doi.org/10.48550/arXiv.2412.15264"
-  },
-  {
-    "id": "factchexcker-cvpr-2025",
-    "title": "FactCheXcker: Mitigating Measurement Hallucinations in Chest X-ray Report Generation Models",
-    "authors": "Heiman A, Zhang X, Chen E, Kim SE, Rajpurkar P",
-    "venue": "CVPR 2025",
-    "year": 2025,
-    "is_first_author": false,
-    "author_role": "",
-    "citation_count": 0,
-    "scholar_cid": "",
-    "url": "https://doi.org/10.48550/arXiv.2411.18672"
+    "url": ""
   },
   {
     "id": "ml-insufficient-improvement-tka-2025",
@@ -152,20 +90,8 @@
     "is_first_author": false,
     "author_role": "",
     "citation_count": 0,
-    "scholar_cid": "",
+    "scholar_cid": "KriQPeEAAAAJ:YOwf2qJgpHMC",
     "url": "https://doi.org/10.1186/s13018-025-06206-z"
-  },
-  {
-    "id": "knee-alignment-middle-eastern-2025",
-    "title": "Do knee alignment patterns differ between Middle Eastern and East Asian populations? A propensity-matched analysis using artificial intelligence",
-    "authors": "Park J, Chaar O, Narayanakurup J, Abdelhamead ASA, Ro DH, Kim SE",
-    "venue": "Knee Surg Relat Res 2025;37(1):11",
-    "year": 2025,
-    "is_first_author": false,
-    "author_role": "corresponding",
-    "citation_count": 0,
-    "scholar_cid": "",
-    "url": "https://doi.org/10.1186/s43019-025-00261-w"
   },
   {
     "id": "automated-pts-lateral-knee-2025",
@@ -180,6 +106,41 @@
     "url": "https://doi.org/10.1177/23259671251331067"
   },
   {
+    "id": "automated-posterior-tibial-slope-measurement-using-lateral-k-2025",
+    "title": "Automated posterior tibial slope measurement using lateral knee radiographs: a novel landmark-based approach using deep learning",
+    "authors": "ByeongYeong Ryu and Jun Woo Nam and Du Hyun Ro and R Kyle Martin and Eivind Inderhaug and Andreas Persson and Sanna Haland and Sung Eun Kim",
+    "venue": "Orthopaedic Journal of Sports Medicine",
+    "year": 2025,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 5,
+    "scholar_cid": "KriQPeEAAAAJ:Zph67rFs4hoC"
+  },
+  {
+    "id": "dl-hip-fracture-bonejointj-2025",
+    "title": "Deep learning for automated hip fracture detection and classification: achieving superior accuracy",
+    "authors": "Zheng Z, Ryu B, Kim SE, et al",
+    "venue": "Bone Joint J 2025;107-B(2):213-220",
+    "year": 2025,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 16,
+    "scholar_cid": "KriQPeEAAAAJ:kNdYIx-mwKoC",
+    "url": "https://doi.org/10.1302/0301-620X.107B2.BJJ-2024-0791.R1"
+  },
+  {
+    "id": "knee-alignment-middle-eastern-2025",
+    "title": "Do knee alignment patterns differ between Middle Eastern and East Asian populations? A propensity-matched analysis using artificial intelligence",
+    "authors": "Park J, Chaar O, Narayanakurup J, Abdelhamead ASA, Ro DH, Kim SE",
+    "venue": "Knee Surg Relat Res 2025;37(1):11",
+    "year": 2025,
+    "is_first_author": false,
+    "author_role": "corresponding",
+    "citation_count": 13,
+    "scholar_cid": "KriQPeEAAAAJ:KlAtU1dfN6UC",
+    "url": "https://doi.org/10.1186/s43019-025-00261-w"
+  },
+  {
     "id": "external-validation-pts-dl-2025",
     "title": "External validation of a novel landmark-based deep learning automated tibial slope measurement algorithm applied on short radiographs from ACL injured patients",
     "authors": "Martin RK, Haaland S, Persson A, Kim SE, et al.",
@@ -192,16 +153,38 @@
     "url": "https://doi.org/10.1177/23259671251333607"
   },
   {
-    "id": "dl-hip-fracture-bonejointj-2025",
-    "title": "Deep learning for automated hip fracture detection and classification: achieving superior accuracy",
-    "authors": "Zheng Z, Ryu B, Kim SE, et al",
-    "venue": "Bone Joint J 2025;107-B(2):213-220",
+    "id": "external-validation-of-a-novel-landmarkbased-deep-learning-a-2025",
+    "title": "External validation of a novel landmark-based deep learning automated tibial slope measurement algorithm applied on short radiographs obtained in patients with ACL injuries",
+    "authors": "Kyle R Martin and Sanna Haaland and Andreas Persson and Sung Eun Kim and ByeongYeong Ryu and Jun Woo Nam and Du Hyun Ro and Eivind Inderhaug",
+    "venue": "Orthopaedic Journal of Sports Medicine",
+    "year": 2025,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 3,
+    "scholar_cid": "KriQPeEAAAAJ:ULOm3_A8WrAC"
+  },
+  {
+    "id": "factchexcker-cvpr-2025",
+    "title": "FactCheXcker: Mitigating Measurement Hallucinations in Chest X-ray Report Generation Models",
+    "authors": "Heiman A, Zhang X, Chen E, Kim SE, Rajpurkar P",
+    "venue": "CVPR 2025",
+    "year": 2025,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 8,
+    "scholar_cid": "KriQPeEAAAAJ:3fE2CSJIrl8C",
+    "url": "https://doi.org/10.48550/arXiv.2411.18672"
+  },
+  {
+    "id": "low-cognitive-function-and-somatic-psychological-symptoms-ar-2025",
+    "title": "Low Cognitive Function and Somatic Psychological Symptoms Are Correlated with Greater Risk of Delirium After Total Knee Arthroplasty: A Prospective Cohort Study",
+    "authors": "Joon Young Lee and Jee Eun Park and Sung Eun Kim and Byung Sun Choi and Myung Chul Lee and Chong Bum Chang and Hyuk-Soo Han and Hye Youn Park and Du Hyun Ro",
+    "venue": "JBJS",
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
     "citation_count": 0,
-    "scholar_cid": "",
-    "url": "https://doi.org/10.1302/0301-620X.107B2.BJJ-2024-0791.R1"
+    "scholar_cid": "KriQPeEAAAAJ:Wp0gIr-vW9MC"
   },
   {
     "id": "ml-contralateral-oa-progression-2025",
@@ -211,9 +194,91 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
+    "citation_count": 4,
+    "scholar_cid": "KriQPeEAAAAJ:hqOjcs7Dif8C",
+    "url": "https://doi.org/10.1002/jor.26018"
+  },
+  {
+    "id": "pts-acl-tears-2025",
+    "title": "Posterior tibial slope as a risk factor for anterior cruciate ligament tears",
+    "authors": "Kwak D*, Kim SE*, Park J, et al",
+    "venue": "Arthrosc Orthop Sports Med 2025;12:64-69",
+    "year": 2025,
+    "is_first_author": true,
+    "author_role": "co-first",
     "citation_count": 0,
     "scholar_cid": "",
-    "url": "https://doi.org/10.1002/jor.26018"
+    "url": "https://doi.org/10.14517/aosm25006"
+  },
+  {
+    "id": "posterior-tibial-slope-as-a-risk-factor-for-anterior-cruciat-2025",
+    "title": "Posterior tibial slope as a risk factor for anterior cruciate ligament tears: a retrospective study using automated measurement",
+    "authors": "Donghyuk Kwak and Sung Eun Kim and Jaeseok Park and Hyuk-Soo Han and Byung Sun Choi and Du Hyun Ro",
+    "venue": "Arthroscopy and Orthopedic Sports Medicine",
+    "year": 2025,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 0,
+    "scholar_cid": "KriQPeEAAAAJ:4DMP91E08xMC"
+  },
+  {
+    "id": "delirium-tka-jbjs-2025",
+    "title": "Preoperative low cognitive function and somatic psychological symptoms are associated with an increased risk of postoperative delirium following total knee arthroplasty: a prospective cohort study",
+    "authors": "Lee JY, Park JE, Kim SE, et al",
+    "venue": "J Bone Joint Surg Am 2025",
+    "year": 2025,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 0,
+    "scholar_cid": "",
+    "url": "https://doi.org/10.2106/JBJS.25.00392"
+  },
+  {
+    "id": "radgame-ml4h-2025",
+    "title": "RadGame: An AI-Powered Platform for Radiology Education",
+    "authors": "Baharoon M, Raissi S, Jun JS, et al.",
+    "venue": "Machine Learning for Health (ML4H) 2025",
+    "year": 2025,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 2,
+    "scholar_cid": "KriQPeEAAAAJ:_kc_bZDykSQC",
+    "url": "https://doi.org/10.48550/arXiv.2509.13270"
+  },
+  {
+    "id": "rextrust-hallucination-2025",
+    "title": "ReXTrust: A Model for Fine-Grained Hallucination Detection in AI-Generated Radiology Reports",
+    "authors": "Hardy R, Kim SE, Ro DH, Rajpurkar P",
+    "venue": "Proceedings of the AAAI Bridge Program on AI for Medicine and Healthcare, PMLR 281:173-182, 2025",
+    "year": 2025,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 12,
+    "scholar_cid": "KriQPeEAAAAJ:MXK_kJrjxJIC",
+    "url": "https://doi.org/10.48550/arXiv.2412.15264"
+  },
+  {
+    "id": "rexgroundingct-a-3d-chest-ct-dataset-for-segmentation-of-fin-2025",
+    "title": "Rexgroundingct: A 3d chest ct dataset for segmentation of findings from free-text reports",
+    "authors": "Mohammed Baharoon and Luyang Luo and Michael Moritz and Abhinav Kumar and Sung Eun Kim and Xiaoman Zhang and Miao Zhu and Mahmoud Hussain Alabbad and Maha Sbayel Alhazmi and Neel P Mistry and Lucas Bijnens and Kent Ryan Kleinschmidt and Brady Chrisler and Sathvik Suryadevara and Sri Sai Dinesh Jaliparthi and Noah Michael Prudlo and Mark David Marino and Jeremy Palacio and Rithvik Akula and Di Zhou and Hong-Yu Zhou and Ibrahim Ethem Hamamci and Scott J Adams and Hassan Rayhan AlOmaish and Pranav Rajpurkar",
+    "venue": "arXiv preprint arXiv:2507.22030",
+    "year": 2025,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 9,
+    "scholar_cid": "KriQPeEAAAAJ:4TOpqqG69KYC"
+  },
+  {
+    "id": "text-prompted-segmentation-mlhc-2025",
+    "title": "State-of-the-art text-prompted medical segmentation models struggle to ground chest CT findings",
+    "authors": "Baharoon M, Luo L, Moritz M, et al.",
+    "venue": "MLHC 2025",
+    "year": 2025,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 2,
+    "scholar_cid": "KriQPeEAAAAJ:M3ejUd6NZC8C",
+    "url": "https://proceedings.mlr.press/v298/baharoon25a.html"
   },
   {
     "id": "cr-mobile-ps-fixed-tka-knee-2025",
@@ -228,6 +293,29 @@
     "url": "https://doi.org/10.1016/j.knee.2024.11.003"
   },
   {
+    "id": "superior-oneyear-forgotten-joint-scores-with-cruciateretaini-2025",
+    "title": "Superior One-year Forgotten Joint Scores with cruciate-retaining mobile bearings versus posterior-stabilized mobile and fixed bearings in a contemporary total knee system",
+    "authors": "Sung Eun Kim and Hyun Suk Shin and Hyuk-Soo Han",
+    "venue": "The Knee",
+    "year": 2025,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 0,
+    "scholar_cid": "KriQPeEAAAAJ:0EnyYjriUFMC"
+  },
+  {
+    "id": "voice-stroke-ieee-2025",
+    "title": "Voice-guided Orchestrated Intelligence for Clinical Evaluation (VOICE): A Voice AI Agent System for Prehospital Stroke Assessment",
+    "authors": "Acosta JN, Adams SJ, Kernbach JM, et al.",
+    "venue": "IEEE AIxMHC 2025",
+    "year": 2025,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 0,
+    "scholar_cid": "KriQPeEAAAAJ:qxL8FJ1GzNcC",
+    "url": "https://arxiv.org/abs/2507.22898"
+  },
+  {
     "id": "dl-templating-tka-2024",
     "title": "A deep learning based automatic two-dimensional digital templating model for total knee arthroplasty",
     "authors": "Park J, Kim SE, et al",
@@ -235,33 +323,9 @@
     "year": 2024,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 0,
-    "scholar_cid": "",
+    "citation_count": 6,
+    "scholar_cid": "KriQPeEAAAAJ:UebtZRa9Y70C",
     "url": "https://doi.org/10.1186/s43019-024-00240-7"
-  },
-  {
-    "id": "primary-tka-patellar-dislocation-2024",
-    "title": "Primary total knee arthroplasty for treating knees with neglected patellar dislocation",
-    "authors": "Kim SE, Kim SH, Lee JI, Han HS, Lee MC, Ro DH",
-    "venue": "Medicina 2024;60(9):1492",
-    "year": 2024,
-    "is_first_author": true,
-    "author_role": "first",
-    "citation_count": 0,
-    "scholar_cid": "",
-    "url": "https://doi.org/10.3390/medicina60091492"
-  },
-  {
-    "id": "dedifferentiated-liposarcoma-2024",
-    "title": "Dedifferentiated Liposarcoma of the Extremities: A Korean Multi-Center Study of 107 Cases",
-    "authors": "Park JH, Kim SE, et al",
-    "venue": "BMC Cancer 2024;24(1):1259",
-    "year": 2024,
-    "is_first_author": false,
-    "author_role": "",
-    "citation_count": 0,
-    "scholar_cid": "",
-    "url": "https://doi.org/10.1186/s12885-024-13021-y"
   },
   {
     "id": "predicting-functional-improvements-tka-2024",
@@ -271,9 +335,20 @@
     "year": 2024,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 0,
-    "scholar_cid": "",
+    "citation_count": 9,
+    "scholar_cid": "KriQPeEAAAAJ:roLk4NBRz8UC",
     "url": "https://doi.org/10.1186/s43019-024-00238-1"
+  },
+  {
+    "id": "coronal-plane-alignment-of-the-knee-cpak-type-shifts-toward-2024",
+    "title": "Coronal Plane Alignment of the Knee (CPAK) Type Shifts Toward Constitutional Varus with Increasing Kellgren and Lawrence Grade: A Radiographic Analysis of 17,365 Knees",
+    "authors": "Sung Eun Kim and Samuel MacDessi and Daeseok Song and Joong Il Kim and Byung Sun Choi and Hyuk-Soo Han and Du Hyun Ro",
+    "venue": "JBJS",
+    "year": 2024,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 19,
+    "scholar_cid": "KriQPeEAAAAJ:5nxA0vEk-isC"
   },
   {
     "id": "cpak-constitutional-varus-jbjs-2024",
@@ -288,6 +363,30 @@
     "url": "https://doi.org/10.2106/JBJS.24.00316"
   },
   {
+    "id": "dedifferentiated-liposarcoma-2024",
+    "title": "Dedifferentiated Liposarcoma of the Extremities: A Korean Multi-Center Study of 107 Cases",
+    "authors": "Park JH, Kim SE, et al",
+    "venue": "BMC Cancer 2024;24(1):1259",
+    "year": 2024,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 1,
+    "scholar_cid": "KriQPeEAAAAJ:Se3iqnhoufwC",
+    "url": "https://doi.org/10.1186/s12885-024-13021-y"
+  },
+  {
+    "id": "dl-alignment-imaging-protocols-2024",
+    "title": "Enhanced deep learning model enables accurate alignment measurement across diverse institutional imaging protocols",
+    "authors": "Kim SE, Nam JW, Kim JI, Kim JK, Ro DH",
+    "venue": "Knee Surg Relat Res 2024;36(1):4",
+    "year": 2024,
+    "is_first_author": true,
+    "author_role": "first",
+    "citation_count": 18,
+    "scholar_cid": "KriQPeEAAAAJ:Tyk-4Ss8FVUC",
+    "url": "https://doi.org/10.1186/s43019-023-00209-y"
+  },
+  {
     "id": "muscle-coactivation-prom-2024",
     "title": "Estimation of patient-reported outcome measures based on features of knee joint muscle co-activation",
     "authors": "Hussain I*, Kim SE*, et al",
@@ -300,16 +399,15 @@
     "url": "https://doi.org/10.1038/s41598-024-63266-7"
   },
   {
-    "id": "shallow-trochlear-groove-2024",
-    "title": "Shallow trochlear groove and narrow medial trochlear width at the proximal trochlea in patients with trochlear dysplasia: A three-dimensional computed tomography analysis",
-    "authors": "Lee JY*, Kim SE*, et al",
-    "venue": "KSSTA 2024;32(6):1434-1445",
+    "id": "estimation-of-patientreported-outcome-measures-based-on-feat-2024",
+    "title": "Estimation of patient-reported outcome measures based on features of knee joint muscle co-activation in advanced knee osteoarthritis",
+    "authors": "Iqram Hussain* and Sung Eun Kim* and Chiheon Kwon and Seo Kyung Hoon and Hee Chan Kim and Yunseo Ku and Du Hyun Ro",
+    "venue": "Scientific Reports",
     "year": 2024,
-    "is_first_author": true,
-    "author_role": "co-first",
-    "citation_count": 0,
-    "scholar_cid": "",
-    "url": "https://doi.org/10.1002/ksa.12166"
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 16,
+    "scholar_cid": "KriQPeEAAAAJ:YsMSGLbcyi4C"
   },
   {
     "id": "fixed-bearing-flexion-tka-2024",
@@ -324,6 +422,28 @@
     "url": "https://doi.org/10.4055/cios23166"
   },
   {
+    "id": "fixedbearing-and-higher-postoperative-knee-flexion-angle-as-2024",
+    "title": "Fixed-bearing and higher postoperative knee flexion angle as predictors of satisfaction in Asian patients undergoing posterior-stabilized total knee arthroplasty",
+    "authors": "Sung Eun Kim and Byung Sun Choi and Myung Chul Lee and Hyuk-Soo Han",
+    "venue": "Clinics in Orthopedic Surgery",
+    "year": 2024,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 6,
+    "scholar_cid": "KriQPeEAAAAJ:WF5omc3nYNoC"
+  },
+  {
+    "id": "method-and-apparatus-for-calculating-indicators-related-to-k-2024",
+    "title": "Method and apparatus for calculating indicators related to knee osteoarthritis by using electromyography data",
+    "authors": "HC Kim and DH Ro and SE Kim",
+    "venue": "",
+    "year": 2024,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 0,
+    "scholar_cid": "KriQPeEAAAAJ:dhFuZR0502QC"
+  },
+  {
     "id": "beam-projection-skyline-2024",
     "title": "Minimal impact of beam projection angle deviations in skyline (Laurin) view and the efficacy of the anterior border of proximal tibia as a guiding landmark",
     "authors": "Kim SE, Hwang S, Lee JH, Gimm G, Han HS, Choi BS, Ro DH",
@@ -332,44 +452,8 @@
     "is_first_author": true,
     "author_role": "first",
     "citation_count": 0,
-    "scholar_cid": "",
+    "scholar_cid": "KriQPeEAAAAJ:ufrVoPGSRksC",
     "url": "https://doi.org/10.1007/s00256-024-04619-1"
-  },
-  {
-    "id": "robotic-tka-osteopetrosis-2024",
-    "title": "Robotic arm-assisted total knee arthroplasty in a patient with osteopetrosis",
-    "authors": "Kim SE, Han HS",
-    "venue": "Orthop Rev (Pavia) 2024;16:94238",
-    "year": 2024,
-    "is_first_author": true,
-    "author_role": "first",
-    "citation_count": 0,
-    "scholar_cid": "",
-    "url": "https://doi.org/10.52965/001c.94238"
-  },
-  {
-    "id": "dl-alignment-imaging-protocols-2024",
-    "title": "Enhanced deep learning model enables accurate alignment measurement across diverse institutional imaging protocols",
-    "authors": "Kim SE, Nam JW, Kim JI, Kim JK, Ro DH",
-    "venue": "Knee Surg Relat Res 2024;36(1):4",
-    "year": 2024,
-    "is_first_author": true,
-    "author_role": "first",
-    "citation_count": 0,
-    "scholar_cid": "",
-    "url": "https://doi.org/10.1186/s43019-023-00209-y"
-  },
-  {
-    "id": "medial-joint-opening-hto-2024",
-    "title": "The use of medial joint opening rather than mechanical axis deviation to determine the clinical outcomes after high tibial osteotomy",
-    "authors": "Kim SE, Kwak J, Ro DH, Lee MC, Han HS",
-    "venue": "Bone Joint J 2024;106-B(3):240-248",
-    "year": 2024,
-    "is_first_author": true,
-    "author_role": "first",
-    "citation_count": 0,
-    "scholar_cid": "",
-    "url": "https://doi.org/10.1302/0301-620X.106B3.BJJ-2023-0337.R3"
   },
   {
     "id": "chatgpt-orthopedic-board-2024",
@@ -384,6 +468,17 @@
     "url": "https://doi.org/10.4055/cios23179"
   },
   {
+    "id": "performance-of-chatgpt-on-solving-orthopedic-boardstyle-ques-2024",
+    "title": "Performance of ChatGPT on Solving Orthopedic Board-Style Questions: A Comparative Analysis of ChatGPT 3.5 and ChatGPT 4",
+    "authors": "Sung Eun Kim and Ji Han Lee and Byung Sun Choi and Hyuk-Soo Han and Myung Chul Lee and Du Hyun Ro",
+    "venue": "Clinics in Orthopedic Surgery",
+    "year": 2024,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 17,
+    "scholar_cid": "KriQPeEAAAAJ:LkGwnXOMwfcC"
+  },
+  {
     "id": "cpak-uka-2024",
     "title": "Preserving coronal knee alignment of the knee (CPAK) in unicompartmental knee arthroplasty correlates with superior patient-reported outcomes",
     "authors": "Kim SE, Yun KR, Lee JM, Lee MC, Han HS",
@@ -391,9 +486,79 @@
     "year": 2024,
     "is_first_author": true,
     "author_role": "first",
+    "citation_count": 20,
+    "scholar_cid": "KriQPeEAAAAJ:Y0pCki6q_DkC",
+    "url": "https://doi.org/10.1186/s43019-023-00204-3"
+  },
+  {
+    "id": "primary-total-knee-arthroplasty-for-treating-osteoarthritic-2024",
+    "title": "Primary Total Knee Arthroplasty for Treating Osteoarthritic Knees with Neglected Patellar Dislocation",
+    "authors": "Sung Eun Kim and Seong Hwan Kim and Jung-In Lee and Hyuk-Soo Han and Myung Chul Lee and Du Hyun Ro",
+    "venue": "Medicina",
+    "year": 2024,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 0,
+    "scholar_cid": "KriQPeEAAAAJ:8k81kl-MbHgC"
+  },
+  {
+    "id": "primary-tka-patellar-dislocation-2024",
+    "title": "Primary total knee arthroplasty for treating knees with neglected patellar dislocation",
+    "authors": "Kim SE, Kim SH, Lee JI, Han HS, Lee MC, Ro DH",
+    "venue": "Medicina 2024;60(9):1492",
+    "year": 2024,
+    "is_first_author": true,
+    "author_role": "first",
     "citation_count": 0,
     "scholar_cid": "",
-    "url": "https://doi.org/10.1186/s43019-023-00204-3"
+    "url": "https://doi.org/10.3390/medicina60091492"
+  },
+  {
+    "id": "robotic-tka-osteopetrosis-2024",
+    "title": "Robotic arm-assisted total knee arthroplasty in a patient with osteopetrosis",
+    "authors": "Kim SE, Han HS",
+    "venue": "Orthop Rev (Pavia) 2024;16:94238",
+    "year": 2024,
+    "is_first_author": true,
+    "author_role": "first",
+    "citation_count": 0,
+    "scholar_cid": "",
+    "url": "https://doi.org/10.52965/001c.94238"
+  },
+  {
+    "id": "robotic-armassisted-total-knee-arthroplasty-in-a-patient-wit-2024",
+    "title": "Robotic arm-assisted total knee arthroplasty in a patient with osteopetrosis: a case report and review of literature",
+    "authors": "Sung Eun Kim and Hyuk-Soo Han",
+    "venue": "Orthopedic Reviews",
+    "year": 2024,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 1,
+    "scholar_cid": "KriQPeEAAAAJ:_FxGoFyzp5QC"
+  },
+  {
+    "id": "shallow-trochlear-groove-2024",
+    "title": "Shallow trochlear groove and narrow medial trochlear width at the proximal trochlea in patients with trochlear dysplasia: A three-dimensional computed tomography analysis",
+    "authors": "Lee JY*, Kim SE*, et al",
+    "venue": "KSSTA 2024;32(6):1434-1445",
+    "year": 2024,
+    "is_first_author": true,
+    "author_role": "co-first",
+    "citation_count": 4,
+    "scholar_cid": "KriQPeEAAAAJ:eQOLeE2rZwMC",
+    "url": "https://doi.org/10.1002/ksa.12166"
+  },
+  {
+    "id": "medial-joint-opening-hto-2024",
+    "title": "The use of medial joint opening rather than mechanical axis deviation to determine the clinical outcomes after high tibial osteotomy",
+    "authors": "Kim SE, Kwak J, Ro DH, Lee MC, Han HS",
+    "venue": "Bone Joint J 2024;106-B(3):240-248",
+    "year": 2024,
+    "is_first_author": true,
+    "author_role": "first",
+    "citation_count": 6,
+    "scholar_cid": "KriQPeEAAAAJ:W7OEmFMy1HYC",
+    "url": "https://doi.org/10.1302/0301-620X.106B3.BJJ-2023-0337.R3"
   },
   {
     "id": "knee-joint-space-width-2023",
@@ -403,33 +568,21 @@
     "year": 2023,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 0,
-    "scholar_cid": "",
+    "citation_count": 2,
+    "scholar_cid": "KriQPeEAAAAJ:zYLM7Y9cAGgC",
     "url": "https://doi.org/10.1016/j.knee.2023.09.006"
   },
   {
-    "id": "functional-alignment-robotic-tka-2023",
-    "title": "Functional alignment with robotic-arm assisted total knee arthroplasty demonstrated better patient-reported outcomes than mechanical alignment with manual total knee arthroplasty",
-    "authors": "Choi BS, Kim SE, Yang M, Ro DH, Han HS",
-    "venue": "KSSTA 2023;31(3):1072-1080",
-    "year": 2023,
-    "is_first_author": false,
-    "author_role": "",
-    "citation_count": 0,
-    "scholar_cid": "",
-    "url": "https://doi.org/10.1007/s00167-022-07227-5"
-  },
-  {
-    "id": "robotic-uka-review-2023",
-    "title": "Robotic-assisted unicompartmental knee arthroplasty: historical perspectives and current innovations",
-    "authors": "Kim SE, Han HS",
-    "venue": "Biomed Eng Lett 2023;13(4):543-552",
+    "id": "anatomic-dome-patellar-rct-2023",
+    "title": "Anatomic Patellar Design Has No Clinical Superiority Over Dome Patellar Design in Total Knee Arthroplasty: A Randomized Clinical Trial",
+    "authors": "Kim SE, Jung H, Ro DH, et al",
+    "venue": "J Arthroplasty 2023;38(9):1742-1747",
     "year": 2023,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 0,
-    "scholar_cid": "",
-    "url": "https://doi.org/10.1007/s13534-023-00323-6"
+    "citation_count": 5,
+    "scholar_cid": "KriQPeEAAAAJ:2osOgNQ5qMEC",
+    "url": "https://doi.org/10.1016/j.arth.2023.03.056"
   },
   {
     "id": "persona-knee-multicenter-2023",
@@ -444,6 +597,29 @@
     "url": "https://doi.org/10.3390/medicina59122105"
   },
   {
+    "id": "earlyto-midterm-review-of-a-prospective-multicenter-internat-2023",
+    "title": "Early-to mid-term review of a prospective, multi-center, international, outcomes study of an anatomically designed implant with posterior-stabilized bearing in total knee arthroplasty",
+    "authors": "Sung Eun Kim and Du Hyun Ro and Myung Chul Lee and Jason M Cholewa",
+    "venue": "Medicina",
+    "year": 2023,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 7,
+    "scholar_cid": "KriQPeEAAAAJ:IjCSPb-OGe4C"
+  },
+  {
+    "id": "functional-alignment-robotic-tka-2023",
+    "title": "Functional alignment with robotic-arm assisted total knee arthroplasty demonstrated better patient-reported outcomes than mechanical alignment with manual total knee arthroplasty",
+    "authors": "Choi BS, Kim SE, Yang M, Ro DH, Han HS",
+    "venue": "KSSTA 2023;31(3):1072-1080",
+    "year": 2023,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 80,
+    "scholar_cid": "KriQPeEAAAAJ:9yKSN-GCB0IC",
+    "url": "https://doi.org/10.1007/s00167-022-07227-5"
+  },
+  {
     "id": "osteotomy-plane-violation-hto-2023",
     "title": "Risk Factors and Clinical Outcomes of Osteotomy Plane Violation by D-Hole Screws in Medial Open Wedge High Tibial Osteotomy: A Simulation and Comparative Study",
     "authors": "Kim SE, Lee MH, Cho CH, Lee JI, Han HS, Lee MC, Ro DH",
@@ -452,20 +628,20 @@
     "is_first_author": true,
     "author_role": "first",
     "citation_count": 0,
-    "scholar_cid": "",
+    "scholar_cid": "KriQPeEAAAAJ:qjMakFHDy7sC",
     "url": "https://doi.org/10.3390/medicina59122104"
   },
   {
-    "id": "anatomic-dome-patellar-rct-2023",
-    "title": "Anatomic Patellar Design Has No Clinical Superiority Over Dome Patellar Design in Total Knee Arthroplasty: A Randomized Clinical Trial",
-    "authors": "Kim SE, Jung H, Ro DH, et al",
-    "venue": "J Arthroplasty 2023;38(9):1742-1747",
+    "id": "robotic-uka-review-2023",
+    "title": "Robotic-assisted unicompartmental knee arthroplasty: historical perspectives and current innovations",
+    "authors": "Kim SE, Han HS",
+    "venue": "Biomed Eng Lett 2023;13(4):543-552",
     "year": 2023,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 0,
-    "scholar_cid": "",
-    "url": "https://doi.org/10.1016/j.arth.2023.03.056"
+    "citation_count": 5,
+    "scholar_cid": "KriQPeEAAAAJ:UeHWp8X0CEIC",
+    "url": "https://doi.org/10.1007/s13534-023-00323-6"
   },
   {
     "id": "single-vs-continuous-acb-tka-2022",
@@ -475,8 +651,8 @@
     "year": 2022,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 0,
-    "scholar_cid": "",
+    "citation_count": 7,
+    "scholar_cid": "KriQPeEAAAAJ:d1gkVwhDpl0C",
     "url": "https://doi.org/10.1186/s40634-022-00523-6"
   },
   {
@@ -487,8 +663,8 @@
     "year": 2020,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 0,
-    "scholar_cid": "",
+    "citation_count": 7,
+    "scholar_cid": "KriQPeEAAAAJ:u-x6o8ySG0sC",
     "url": "https://doi.org/10.1186/s12891-020-03579-6"
   },
   {
@@ -499,8 +675,8 @@
     "year": 2014,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 0,
-    "scholar_cid": "",
+    "citation_count": 115,
+    "scholar_cid": "KriQPeEAAAAJ:u5HHmVD_uO8C",
     "url": "https://doi.org/10.1007/s13139-013-0260-2"
   }
 ]
