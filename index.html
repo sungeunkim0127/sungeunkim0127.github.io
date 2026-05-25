@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sung Eun Kim, MD | Translational Medicine AI Researcher</title>
-    <meta name="description" content="Sung Eun Kim, MD — Postdoctoral Research Fellow at Harvard Medical School and Associate Research Professor at Seoul National University Hospital. 40+ publications including Nature Medicine. Bridging orthopedic surgery with AI.">
+    <meta name="description" content="Sung Eun Kim, MD — Postdoctoral Research Fellow at Harvard Medical School and Research Professor at Seoul National University Hospital. 40+ publications including Nature Medicine. Bridging orthopedic surgery with AI.">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Sung Eun Kim, MD | Translational Medicine AI Researcher">
     <meta property="og:description" content="Postdoctoral Research Fellow at Harvard Medical School. 40+ publications including Nature Medicine. Bridging orthopedic surgery with cutting-edge AI research.">
     <meta property="og:type" content="profile">
     <meta property="og:url" content="https://sungeunkim0127.github.io/">
-    <meta property="og:image" content="https://sungeunkim0127.github.io/sung-eun-kim-headshot.jpg">
+    <meta property="og:image" content="https://sungeunkim0127.github.io/headshot-2026.jpg">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
@@ -56,2050 +56,286 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔬</text></svg>">
 
     <style>
         :root {
-            --color-primary: #1a2f4a;
-            --color-secondary: #2d4a6f;
-            --color-accent: #3d8b8b;
-            --color-accent-light: #5fb3b3;
-            --color-gold: #c9a227;
-            --color-gold-light: #e8d5a3;
-            --color-text: #2c3e50;
-            --color-text-light: #5a6c7d;
-            --color-bg: #fdfcfa;
-            --color-bg-warm: #f9f6f1;
-            --color-bg-card: #ffffff;
-            --color-border: #e8e4dd;
-            --font-serif: 'Cormorant Garamond', Georgia, serif;
-            --font-sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
-            --shadow-soft: 0 4px 20px rgba(26, 47, 74, 0.08);
-            --shadow-medium: 0 8px 30px rgba(26, 47, 74, 0.12);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --nav-height: 64px;
+            --max-width: 800px;
+            --color-text: #1a1a1a;
+            --color-muted: #6b6b6b;
+            --color-link: #1f5fa8;
+            --color-link-hover: #c0392b;
+            --color-rule: #e4e4e4;
+            --color-highlight: #fff8dc;
+            --color-highlight-rule: #e6c200;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: var(--nav-height);
-        }
+        html { -webkit-text-size-adjust: 100%; }
 
         body {
-            font-family: var(--font-sans);
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             color: var(--color-text);
-            background: var(--color-bg);
-            line-height: 1.7;
-            font-weight: 400;
-            overflow-x: hidden;
+            background: #ffffff;
+            line-height: 1.6;
+            font-size: 17px;
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Skip Navigation Link */
-        .skip-link {
-            position: absolute;
-            top: -100%;
-            left: 1rem;
-            padding: 0.75rem 1.5rem;
-            background: var(--color-primary);
-            color: white;
-            border-radius: 0 0 6px 6px;
-            font-weight: 600;
-            z-index: 10000;
-            transition: top 0.2s;
-        }
-
-        .skip-link:focus {
-            top: 0;
-            color: white;
-        }
-
-        /* Focus indicators */
-        *:focus-visible {
-            outline: 3px solid var(--color-accent);
-            outline-offset: 2px;
-        }
-
-        /* Decorative Background */
-        .bg-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            opacity: 0.4;
-            background-image:
-                radial-gradient(circle at 20% 80%, rgba(61, 139, 139, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(201, 162, 39, 0.06) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(45, 74, 111, 0.04) 0%, transparent 40%);
-        }
-
-        /* Typography */
-        h1, h2, h3, h4 {
-            font-family: var(--font-serif);
-            font-weight: 600;
-            color: var(--color-primary);
-        }
-
-        h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-        }
-
-        h2 {
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
-            margin-bottom: 1.5rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--color-accent), var(--color-gold));
-            border-radius: 2px;
-        }
-
-        h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.75rem;
-        }
-
-        p {
-            margin-bottom: 1rem;
+        .wrap {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 56px 24px 80px;
         }
 
         a {
-            color: var(--color-accent);
+            color: var(--color-link);
             text-decoration: none;
-            transition: var(--transition);
         }
+        a:hover { color: var(--color-link-hover); text-decoration: underline; }
 
-        a:hover {
-            color: var(--color-gold);
-        }
-
-        /* Layout */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(253, 252, 250, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--color-border);
-            transition: var(--transition);
-        }
-
-        nav.scrolled {
-            box-shadow: var(--shadow-soft);
-        }
-
-        .nav-content {
+        /* ---------- Intro ---------- */
+        .intro {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-logo {
-            font-family: var(--font-serif);
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--color-primary);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--color-text);
-            font-size: 0.95rem;
-            font-weight: 500;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--color-accent);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 5px;
-            background: none;
-            border: none;
-        }
-
-        .nav-toggle span {
-            width: 25px;
-            height: 2px;
-            background: var(--color-primary);
-            transition: var(--transition);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 80px;
-            background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-warm) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 80%;
-            height: 150%;
-            background: radial-gradient(ellipse, rgba(61, 139, 139, 0.06) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 0.75fr 1.6fr;
-            gap: 3rem;
+            gap: 36px;
             align-items: center;
         }
-
-        .hero-image {
-            position: relative;
-            max-width: 100%;
-        }
-
-        .hero-image-frame {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow-medium);
-            aspect-ratio: 3/4;
-            background: linear-gradient(135deg, var(--color-bg-warm) 0%, #e8e4dd 100%);
-        }
-
-        .hero-image-frame::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border: 1px solid rgba(201, 162, 39, 0.3);
-            border-radius: 12px;
-            pointer-events: none;
-        }
-
-        .hero-image-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-decoration {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            border: 2px solid var(--color-gold-light);
-            border-radius: 8px;
-            top: -20px;
-            right: -20px;
-            z-index: -1;
-        }
-
-        .hero-text h1 {
-            margin-bottom: 1rem;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .hero-tagline {
-            font-family: var(--font-serif);
-            font-size: 1.3rem;
-            color: var(--color-accent);
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 0.8s ease-out 0.1s both;
-        }
-
-        .hero-affiliations {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        .affiliation {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 0.95rem;
-            color: var(--color-text-light);
-        }
-
-        .affiliation-icon {
-            width: 8px;
-            height: 8px;
-            background: var(--color-gold);
+        .intro-text { flex: 1 1 auto; min-width: 0; }
+        .intro-photo { flex: 0 0 auto; }
+        .intro-photo img {
+            width: 210px;
+            height: 210px;
             border-radius: 50%;
-            flex-shrink: 0;
+            object-fit: cover;
+            object-position: center 18%;
+            display: block;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.12);
         }
 
-        .hero-description {
-            font-size: 1.1rem;
-            color: var(--color-text);
-            max-width: 540px;
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease-out 0.3s both;
+        h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            line-height: 1.15;
+            margin: 0 0 6px;
+            letter-spacing: -0.01em;
         }
-
-        .hero-links {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.85rem 1.75rem;
-            border-radius: 6px;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background: var(--color-primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--color-secondary);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-soft);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--color-primary);
-            border: 1.5px solid var(--color-primary);
-        }
-
-        .btn-secondary:hover {
-            background: var(--color-primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .btn-scholar {
-            background: var(--color-gold);
-            color: var(--color-primary);
-        }
-
-        .btn-scholar:hover {
-            background: #b8911f;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-soft);
-        }
-
-        .btn svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        /* About Section */
-        .about {
-            background: var(--color-bg-warm);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-        }
-
-        .about-text .lead {
-            font-size: 1.25rem;
-            color: var(--color-primary);
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-highlights {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .highlight-card {
-            background: var(--color-bg-card);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border-left: 4px solid var(--color-accent);
-            box-shadow: var(--shadow-soft);
-            transition: var(--transition);
-        }
-
-        .highlight-card:hover {
-            transform: translateX(5px);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .highlight-card h4 {
-            font-family: var(--font-sans);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--color-accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .highlight-card p {
-            margin: 0;
-            color: var(--color-text);
-            font-size: 1.05rem;
-        }
-
-        /* Research Areas */
-        .research {
-            background: var(--color-bg);
-        }
-
-        .research-intro {
-            max-width: 700px;
-            color: var(--color-text-light);
-            font-size: 1.1rem;
-        }
-
-        .research-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .research-card {
-            background: var(--color-bg-card);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-soft);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .research-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--color-accent), var(--color-gold));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: var(--transition);
-        }
-
-        .research-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .research-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .research-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--color-accent-light), var(--color-accent));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.25rem;
-        }
-
-        .research-icon svg {
-            width: 26px;
-            height: 26px;
-            color: white;
-        }
-
-        .research-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .research-card p {
-            color: var(--color-text-light);
-            font-size: 0.95rem;
-            margin: 0;
-        }
-
-        /* Patent Callout */
-        .patent-callout {
-            margin-top: 2.5rem;
-            padding: 1.5rem 2rem;
-            background: var(--color-bg-card);
-            border-radius: 12px;
-            border-left: 4px solid var(--color-gold);
-            box-shadow: var(--shadow-soft);
-            display: flex;
-            gap: 1.25rem;
-            align-items: start;
-        }
-
-        .patent-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .patent-icon svg {
-            width: 24px;
-            height: 24px;
-            color: var(--color-primary);
-        }
-
-        .patent-callout h4 {
-            font-family: var(--font-sans);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--color-gold);
-            margin-bottom: 0.4rem;
-        }
-
-        .patent-callout .patent-title {
+        .affil {
+            color: var(--color-muted);
             font-size: 1rem;
-            font-weight: 500;
-            color: var(--color-primary);
-            margin-bottom: 0.3rem;
+            margin: 0 0 16px;
+        }
+        .bio { margin: 0 0 18px; }
+
+        .links {
+            font-size: 0.98rem;
+            line-height: 1.9;
+        }
+        .links a { white-space: nowrap; }
+        .links .sep {
+            color: var(--color-rule);
+            margin: 0 9px;
         }
 
-        .patent-callout .patent-meta {
-            font-size: 0.85rem;
-            color: var(--color-text-light);
-            margin: 0;
-        }
-
-        /* Featured Publications */
-        .publications {
-            background: var(--color-bg-warm);
-        }
-
-        .pub-featured {
-            display: grid;
-            gap: 1.5rem;
-            margin-top: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .pub-card {
-            background: var(--color-bg-card);
-            padding: 1.75rem;
-            border-radius: 10px;
-            box-shadow: var(--shadow-soft);
-            transition: var(--transition);
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 1.5rem;
-            align-items: start;
-        }
-
-        .pub-card:hover {
-            box-shadow: var(--shadow-medium);
-        }
-
-        .pub-card-highlight {
-            border: 2px solid var(--color-gold);
-            background: linear-gradient(135deg, #fffef7 0%, #fdf8e8 100%);
-            position: relative;
-        }
-
-        .pub-card-highlight::after {
-            content: 'FLAGSHIP';
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: var(--color-gold);
-            color: var(--color-primary);
-            font-size: 0.65rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            padding: 0.2rem 0.6rem;
-            border-radius: 3px;
-        }
-
-        .pub-venue {
-            background: var(--color-primary);
-            color: white;
-            padding: 0.5rem 0.75rem;
-            border-radius: 6px;
-            font-size: 0.75rem;
+        /* ---------- Sections ---------- */
+        section { margin-top: 52px; }
+        h2 {
+            font-size: 1.5rem;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            white-space: nowrap;
+            margin: 0 0 4px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--color-text);
+            letter-spacing: -0.01em;
         }
-
-        .pub-venue.review {
-            background: var(--color-accent);
-        }
-
-        .pub-venue.accepted {
-            background: var(--color-gold);
-            color: var(--color-primary);
-        }
-
-        .pub-content h4 {
-            font-family: var(--font-sans);
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            line-height: 1.4;
-        }
-
-        .pub-authors {
+        .section-note {
+            color: var(--color-muted);
             font-size: 0.9rem;
-            color: var(--color-text-light);
-            margin: 0;
+            margin: 10px 0 22px;
         }
 
-        .pub-authors strong {
-            color: var(--color-primary);
-        }
-
-        .pub-badge {
-            font-size: 0.8rem;
-            padding: 0.35rem 0.75rem;
-            border-radius: 20px;
-            background: var(--color-bg-warm);
-            color: var(--color-text-light);
-            white-space: nowrap;
-        }
-
-        .pub-badge.first-author {
-            background: rgba(201, 162, 39, 0.15);
-            color: var(--color-gold);
-        }
-
-        /* Publication List */
-        .pub-list {
-            margin-top: 2rem;
-        }
-
+        /* ---------- Publications ---------- */
         .pub-list-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
+            align-items: baseline;
+            margin: 22px 0 4px;
         }
-
         .pub-list-header h3 {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0;
         }
-
         .pub-count {
-            background: var(--color-accent);
-            color: white;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--color-muted);
         }
 
-        .pub-year-group {
-            margin-bottom: 2rem;
-        }
-
+        .pub-year-group { margin-top: 26px; }
         .pub-year-label {
-            font-family: var(--font-serif);
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--color-accent);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid var(--color-border);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--color-text);
+            padding-bottom: 5px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--color-rule);
         }
-
-        .pub-year-label .year-count {
-            font-family: var(--font-sans);
-            font-size: 0.75rem;
-            font-weight: 600;
-            background: var(--color-bg-warm);
-            color: var(--color-text-light);
-            padding: 0.2rem 0.6rem;
-            border-radius: 10px;
-        }
-
-        .pub-list-items {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        .year-count {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--color-muted);
+            margin-left: 6px;
         }
 
         .pub-list-item {
-            padding: 1.25rem 1.5rem;
-            background: var(--color-bg-card);
-            border-radius: 8px;
-            border-left: 3px solid transparent;
-            transition: var(--transition);
+            padding: 11px 12px;
+            border-radius: 6px;
             cursor: pointer;
+            transition: background 0.15s ease;
         }
-
-        .pub-list-item:hover {
-            border-left-color: var(--color-accent);
-            box-shadow: var(--shadow-soft);
-            transform: translateX(4px);
-        }
-
-        .pub-list-item.first-author-item {
-            border-left-color: transparent;
-        }
-
+        .pub-list-item:hover { background: #f5f7fa; }
         .pub-list-item h4 {
-            font-family: var(--font-sans);
-            font-size: 0.95rem;
-            font-weight: 500;
-            margin-bottom: 0.4rem;
-            color: var(--color-primary);
+            font-size: 1.02rem;
+            font-weight: 600;
+            margin: 0 0 3px;
+            line-height: 1.35;
+        }
+        .pub-list-item h4 a { color: var(--color-text); }
+        .pub-list-item h4 a:hover { color: var(--color-link-hover); }
+        .pub-meta {
+            font-size: 0.92rem;
+            color: var(--color-muted);
+            margin: 0;
+        }
+        .pub-meta strong { color: var(--color-text); }
+
+        /* First-author papers get a subtle left accent */
+        .first-author-item {
+            border-left: 3px solid #c9d6e6;
+            padding-left: 12px;
+            margin-left: -3px;
         }
 
-        .pub-list-item h4 a {
-            color: inherit;
-            text-decoration: none;
-            transition: var(--transition);
+        /* Selected / highlighted papers (Barron-style pale yellow) */
+        .pub-list-item-highlight {
+            background: var(--color-highlight);
+            border-left: 3px solid var(--color-highlight-rule);
         }
-
-        .pub-list-item:hover h4 a {
-            color: var(--color-accent);
-        }
-
-        .pub-list-item .pub-meta {
-            font-size: 0.85rem;
-            color: var(--color-text-light);
-        }
+        .pub-list-item-highlight:hover { background: #fff3c4; }
 
         .show-more-btn {
-            margin-top: 1.5rem;
-            width: 100%;
-            padding: 1rem;
-            background: transparent;
-            border: 1.5px dashed var(--color-border);
-            border-radius: 8px;
-            color: var(--color-text-light);
-            font-size: 0.95rem;
+            margin-top: 22px;
+            padding: 9px 18px;
+            font: inherit;
+            font-size: 0.92rem;
+            color: var(--color-link);
+            background: #fff;
+            border: 1px solid var(--color-rule);
+            border-radius: 6px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: background 0.15s ease, border-color 0.15s ease;
         }
+        .show-more-btn:hover { background: #f5f7fa; border-color: #c9d6e6; }
 
-        .show-more-btn:hover {
-            border-color: var(--color-accent);
-            color: var(--color-accent);
+        /* ---------- CV-style lists (Experience / Awards) ---------- */
+        .cv-list { margin-top: 22px; }
+        .cv-item {
+            display: flex;
+            gap: 18px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--color-rule);
         }
-
-        /* Timeline */
-        .experience {
-            background: var(--color-bg);
-        }
-
-        .timeline {
-            position: relative;
-            margin-top: 3rem;
-            padding-left: 2rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 7px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, var(--color-accent), var(--color-gold));
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-bottom: 2.5rem;
-            padding-left: 2rem;
-        }
-
-        .timeline-item:last-child {
-            padding-bottom: 0;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: -2rem;
-            top: 5px;
-            width: 16px;
-            height: 16px;
-            background: var(--color-bg);
-            border: 3px solid var(--color-accent);
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .timeline-item.highlight .timeline-dot {
-            background: var(--color-gold);
-            border-color: var(--color-gold);
-        }
-
-        .timeline-date {
-            font-size: 0.85rem;
-            color: var(--color-accent);
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-
-        .timeline-title {
-            font-family: var(--font-serif);
-            font-size: 1.2rem;
-            color: var(--color-primary);
-            margin-bottom: 0.3rem;
-        }
-
-        .timeline-org {
-            font-size: 0.95rem;
-            color: var(--color-text-light);
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-desc {
+        .cv-item:last-child { border-bottom: none; }
+        .cv-date {
+            flex: 0 0 150px;
+            color: var(--color-muted);
             font-size: 0.9rem;
-            color: var(--color-text);
+            padding-top: 2px;
         }
+        .cv-body { flex: 1 1 auto; min-width: 0; }
+        .cv-title { font-weight: 600; }
+        .cv-org { color: var(--color-muted); font-size: 0.95rem; }
+        .cv-desc { font-size: 0.92rem; margin-top: 2px; }
 
-        /* Milestones Timeline */
-        .milestones {
-            background: var(--color-bg-warm);
-        }
-
-        .milestone-timeline {
-            position: relative;
-            margin-top: 2.5rem;
-            padding: 1rem 0;
-        }
-
-        .milestone-timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--color-accent), var(--color-gold));
-            transform: translateX(-50%);
-        }
-
-        .milestone-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 2rem;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .milestone-item:hover {
-            transform: translateY(-3px);
-        }
-
-        .milestone-item:nth-child(odd) {
-            flex-direction: row;
-            padding-right: calc(50% + 30px);
-        }
-
-        .milestone-item:nth-child(even) {
-            flex-direction: row-reverse;
-            padding-left: calc(50% + 30px);
-        }
-
-        .milestone-icon {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1;
-            flex-shrink: 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .milestone-icon svg {
-            width: 18px;
-            height: 18px;
-            fill: #fff;
-        }
-
-        .milestone-icon.publication { background: var(--color-accent); }
-        .milestone-icon.award { background: var(--color-gold); }
-        .milestone-icon.career { background: var(--color-secondary); }
-
-        .milestone-content {
-            background: var(--color-bg-card);
-            padding: 1.25rem 1.5rem;
-            border-radius: 10px;
-            box-shadow: var(--shadow-soft);
-            width: 100%;
-            transition: var(--transition);
-        }
-
-        .milestone-content:hover {
-            box-shadow: var(--shadow-medium);
-        }
-
-        .milestone-date {
-            display: inline-block;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--color-accent);
-            margin-bottom: 0.4rem;
-        }
-
-        .milestone-content h4 {
-            font-family: var(--font-sans);
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-            color: var(--color-primary);
-        }
-
-        .milestone-content p {
-            font-size: 0.88rem;
-            color: var(--color-text-light);
-            margin: 0;
-            line-height: 1.5;
-        }
-
-        /* Awards */
-        .awards {
-            background: var(--color-bg);
-        }
-
-        .awards-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .award-card {
-            background: var(--color-bg-card);
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: var(--shadow-soft);
-            display: flex;
-            gap: 1rem;
-            align-items: start;
-        }
-
-        .award-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold));
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .award-icon svg {
-            width: 20px;
-            height: 20px;
-            color: var(--color-primary);
-        }
-
-        .award-content h4 {
-            font-family: var(--font-sans);
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-            color: var(--color-primary);
-        }
-
-        .award-content p {
-            font-size: 0.85rem;
-            color: var(--color-text-light);
-            margin: 0;
-        }
-
-        /* Professional Service Section */
-        .service-section {
-            background: var(--color-bg);
-        }
-
-        .service-layout {
-            display: flex;
-            gap: 2rem;
-            margin-top: 2rem;
-            align-items: start;
-        }
-
-        .service-icon-lg {
-            flex-shrink: 0;
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--color-accent-light), var(--color-accent));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .service-icon-lg svg {
-            width: 32px;
-            height: 32px;
-        }
-
-        .service-title {
-            font-family: var(--font-sans);
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--color-primary);
-            margin-bottom: 0.75rem;
-        }
-
-        .service-description {
-            font-size: 1.05rem;
-            color: var(--color-text);
-            margin-bottom: 1rem;
-        }
-
-        .journal-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .journal-tag {
-            padding: 0.4rem 0.85rem;
-            background: var(--color-bg-warm);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--color-text-light);
-        }
-
-        /* Memberships Grid */
-        .memberships-section {
-            margin-top: 3rem;
-        }
-
-        .memberships-title {
-            font-family: var(--font-sans);
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--color-primary);
-            margin-bottom: 1rem;
-        }
-
-        .memberships-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-        }
-
-        .membership-item {
-            padding: 1rem 1.25rem;
-            background: var(--color-bg-card);
-            border-radius: 8px;
-            border-left: 3px solid var(--color-gold);
-            font-size: 0.95rem;
-            color: var(--color-text);
-            box-shadow: var(--shadow-soft);
-        }
-
-        .membership-item .membership-date {
-            font-size: 0.8rem;
-            color: var(--color-text-light);
-            margin-top: 0.25rem;
-        }
-
-        /* Personal Section */
-        .personal-section {
-            background: var(--color-bg);
-        }
-
-        .personal-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            margin-top: 2rem;
-        }
-
-        .personal-text {
-            font-size: 1.1rem;
-            color: var(--color-text);
-            margin-bottom: 1.5rem;
-        }
-
-        .personal-text:last-child {
-            margin-bottom: 0;
-        }
-
-        .personal-cards {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .personal-card {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.25rem;
-            background: var(--color-bg-warm);
-            border-radius: 10px;
-        }
-
-        .personal-card-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .personal-card-icon.family-icon {
-            background: linear-gradient(135deg, #e8d5a3, #c9a227);
-        }
-
-        .personal-card-icon.tennis-icon {
-            background: linear-gradient(135deg, #a8e6cf, #3d8b8b);
-        }
-
-        .personal-card-icon.travel-icon {
-            background: linear-gradient(135deg, #a8d8ea, #2d4a6f);
-        }
-
-        .personal-card-icon svg {
-            width: 22px;
-            height: 22px;
-        }
-
-        .personal-card-title {
-            font-weight: 600;
-            color: var(--color-primary);
-        }
-
-        .personal-card-desc {
-            font-size: 0.9rem;
-            color: var(--color-text-light);
-        }
-
-        /* CV Section */
-        .cv-section {
-            background: var(--color-bg-warm);
-            padding: 3rem 0;
-        }
-
-        .cv-center {
-            text-align: center;
-        }
-
-        .cv-description {
-            color: var(--color-text-light);
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        /* Contact Section */
-        .contact {
-            background: var(--color-primary);
-            color: white;
-            text-align: center;
-        }
-
-        .contact h2 {
-            color: white;
-        }
-
-        .contact h2::after {
-            background: linear-gradient(90deg, var(--color-gold), var(--color-accent-light));
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .contact-intro {
-            font-size: 1.15rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto 2.5rem;
-        }
-
-        .contact-methods {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-bottom: 2.5rem;
-        }
-
-        .contact-method {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            color: white;
-            opacity: 0.9;
-            transition: var(--transition);
-        }
-
-        .contact-method:hover {
-            opacity: 1;
-            color: var(--color-gold-light);
-        }
-
-        .contact-method svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .contact-cta {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn-light {
-            background: white;
-            color: var(--color-primary);
-        }
-
-        .btn-light:hover {
-            background: var(--color-gold-light);
-            color: var(--color-primary);
-            transform: translateY(-2px);
-        }
-
-        .btn-outline-light {
-            background: transparent;
-            color: white;
-            border: 1.5px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .btn-outline-light:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: white;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Footer */
+        /* ---------- Footer ---------- */
         footer {
-            background: #0f1a2a;
-            color: rgba(255, 255, 255, 0.6);
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.9rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 0.75rem;
-        }
-
-        footer a {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        footer a:hover {
-            color: var(--color-gold-light);
-        }
-
-        /* Dark Mode */
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme="light"]) {
-                --color-primary: #c8d6e5;
-                --color-secondary: #a0b4c8;
-                --color-accent: #5fb3b3;
-                --color-accent-light: #7ecaca;
-                --color-gold: #d4ad2e;
-                --color-gold-light: #b8911f;
-                --color-text: #dde4ec;
-                --color-text-light: #9baab8;
-                --color-bg: #0f1a2a;
-                --color-bg-warm: #141f30;
-                --color-bg-card: #1a2940;
-                --color-border: #2a3a50;
-                --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.3);
-                --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.4);
-            }
-        }
-
-        [data-theme="dark"] {
-            --color-primary: #c8d6e5;
-            --color-secondary: #a0b4c8;
-            --color-accent: #5fb3b3;
-            --color-accent-light: #7ecaca;
-            --color-gold: #d4ad2e;
-            --color-gold-light: #b8911f;
-            --color-text: #dde4ec;
-            --color-text-light: #9baab8;
-            --color-bg: #0f1a2a;
-            --color-bg-warm: #141f30;
-            --color-bg-card: #1a2940;
-            --color-border: #2a3a50;
-            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.3);
-            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        [data-theme="dark"] nav,
-        :root:not([data-theme="light"]) nav {
-            background: rgba(15, 26, 42, 0.95);
-        }
-
-        [data-theme="dark"] .hero,
-        :root:not([data-theme="light"]) .hero {
-            background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-warm) 100%);
-        }
-
-        [data-theme="dark"] .pub-card-highlight,
-        :root:not([data-theme="light"]) .pub-card-highlight {
-            background: linear-gradient(135deg, #1a2940 0%, #1f2f45 100%);
-        }
-
-        [data-theme="dark"] footer,
-        :root:not([data-theme="light"]) footer {
-            background: #080f1a;
-        }
-
-        [data-theme="dark"] .contact,
-        :root:not([data-theme="light"]) .contact {
-            background: #1a2940;
-        }
-
-        /* Dark mode only applies inside the media query scope */
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme="light"]) nav {
-                background: rgba(15, 26, 42, 0.95);
-            }
-        }
-
-        /* Theme toggle button */
-        .theme-toggle {
-            background: none;
-            border: 1.5px solid var(--color-border);
-            border-radius: 8px;
-            padding: 0.4rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            transition: var(--transition);
-            color: var(--color-text);
-        }
-
-        .theme-toggle:hover {
-            border-color: var(--color-accent);
-            color: var(--color-accent);
-        }
-
-        .theme-toggle svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        .theme-toggle .icon-moon { display: block; }
-        .theme-toggle .icon-sun { display: none; }
-
-        [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
-        [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
-
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
-            :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: block; }
-        }
-
-        /* Presentations Section */
-        .presentations {
-            background: var(--color-bg-warm);
-        }
-
-        .presentations-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
-            margin-top: 2rem;
-        }
-
-        .presentation-item {
-            padding: 1.25rem 1.5rem;
-            background: var(--color-bg-card);
-            border-radius: 8px;
-            border-left: 3px solid var(--color-accent);
-            box-shadow: var(--shadow-soft);
-            transition: var(--transition);
-        }
-
-        .presentation-item:hover {
-            box-shadow: var(--shadow-medium);
-            transform: translateY(-2px);
-        }
-
-        .presentation-item h4 {
-            font-family: var(--font-sans);
-            font-size: 0.95rem;
-            font-weight: 500;
-            margin-bottom: 0.4rem;
-            color: var(--color-primary);
-        }
-
-        .presentation-item .pres-meta {
+            margin-top: 64px;
+            padding-top: 22px;
+            border-top: 1px solid var(--color-rule);
+            color: var(--color-muted);
             font-size: 0.85rem;
-            color: var(--color-text-light);
-            margin: 0;
+            text-align: center;
         }
 
-        .presentation-item .pres-venue {
-            font-weight: 600;
-            color: var(--color-accent);
-        }
-
-        /* Collapsible Sections */
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .section-header h2 {
-            margin: 0;
-        }
-
-        .collapse-toggle {
-            background: none;
-            border: 1px solid var(--color-border);
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-            color: var(--color-text-light);
-            flex-shrink: 0;
-            margin-left: 1rem;
-        }
-
-        .collapse-toggle:hover {
-            background: var(--color-accent);
-            color: white;
-            border-color: var(--color-accent);
-        }
-
-        .collapse-toggle svg {
-            width: 18px;
-            height: 18px;
-            transition: transform 0.3s ease;
-        }
-
-        .collapse-toggle[aria-expanded="false"] svg {
-            transform: rotate(-90deg);
-        }
-
-        .collapsible-content {
-            overflow: hidden;
-            transition: max-height 0.4s ease, opacity 0.3s ease;
-        }
-
-        .collapsible-content.collapsed {
-            max-height: 0 !important;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .collapsible-content.expanded {
-            opacity: 1;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Hero name gradient */
-        .hero-text h1 {
-            background: linear-gradient(135deg, var(--color-accent), var(--color-gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Scroll progress indicator */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--color-accent), var(--color-gold));
-            z-index: 10001;
-            transition: width 0.05s linear;
-        }
-
-        /* Staggered fade-in animations */
-        .milestone-timeline .fade-in:nth-child(1) { transition-delay: 0s; }
-        .milestone-timeline .fade-in:nth-child(2) { transition-delay: 0.08s; }
-        .milestone-timeline .fade-in:nth-child(3) { transition-delay: 0.16s; }
-        .milestone-timeline .fade-in:nth-child(4) { transition-delay: 0.24s; }
-        .milestone-timeline .fade-in:nth-child(5) { transition-delay: 0.32s; }
-        .milestone-timeline .fade-in:nth-child(6) { transition-delay: 0.4s; }
-        .milestone-timeline .fade-in:nth-child(7) { transition-delay: 0.48s; }
-        .milestone-timeline .fade-in:nth-child(8) { transition-delay: 0.56s; }
-        .milestone-timeline .fade-in:nth-child(9) { transition-delay: 0.64s; }
-        .milestone-timeline .fade-in:nth-child(10) { transition-delay: 0.72s; }
-        .milestone-timeline .fade-in:nth-child(11) { transition-delay: 0.8s; }
-        .milestone-timeline .fade-in:nth-child(12) { transition-delay: 0.88s; }
-        .milestone-timeline .fade-in:nth-child(13) { transition-delay: 0.96s; }
-        .milestone-timeline .fade-in:nth-child(14) { transition-delay: 1.04s; }
-
-        .awards-grid .fade-in:nth-child(1) { transition-delay: 0s; }
-        .awards-grid .fade-in:nth-child(2) { transition-delay: 0.1s; }
-        .awards-grid .fade-in:nth-child(3) { transition-delay: 0.2s; }
-        .awards-grid .fade-in:nth-child(4) { transition-delay: 0.3s; }
-
-        /* Card hover refinements */
-        .award-card:hover .award-icon {
-            background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 968px) {
-            .hero-content {
-                grid-template-columns: 1fr;
+        /* ---------- Responsive ---------- */
+        @media (max-width: 600px) {
+            .wrap { padding: 36px 18px 60px; }
+            .intro {
+                flex-direction: column-reverse;
                 text-align: center;
+                gap: 20px;
             }
-
-            .hero-image {
-                max-width: 300px;
-                margin: 0 auto;
-            }
-
-            .hero-affiliations {
-                align-items: center;
-            }
-
-            .hero-description {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .hero-links {
-                justify-content: center;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
-            .research-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .pub-card {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .pub-venue {
-                justify-self: start;
-            }
-
-            .pub-card-highlight::after {
-                top: 8px;
-                right: 8px;
-            }
-
-            /* Milestones single-column on mobile */
-            .milestone-timeline::before {
-                left: 20px;
-            }
-
-            .milestone-item:nth-child(odd),
-            .milestone-item:nth-child(even) {
-                flex-direction: row;
-                padding-left: 60px;
-                padding-right: 0;
-            }
-
-            .milestone-icon {
-                left: 20px;
-            }
-
-            .awards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .memberships-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .personal-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .service-layout {
-                flex-direction: column;
-            }
-
-            .presentations-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--color-bg);
-                flex-direction: column;
-                padding: 1rem 2rem;
-                gap: 1rem;
-                border-bottom: 1px solid var(--color-border);
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-toggle {
-                display: flex;
-            }
-
-            section {
-                padding: 3rem 0;
-            }
-
-            .container {
-                padding: 0 1.25rem;
-            }
-
-            .contact-methods {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-            }
-
-            .memberships-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .patent-callout {
-                flex-direction: column;
-            }
-
-            .hero-links {
-                flex-direction: column;
-                align-items: center;
-            }
+            .intro-photo img { width: 160px; height: 160px; }
+            h1 { font-size: 1.75rem; }
+            .cv-item { flex-direction: column; gap: 2px; }
+            .cv-date { flex-basis: auto; }
         }
     </style>
 </head>
 <body>
-    <a class="skip-link" href="#main-content">Skip to main content</a>
-    <div class="bg-pattern" aria-hidden="true"></div>
+    <div class="wrap">
 
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress" id="scrollProgress"></div>
-
-    <!-- Navigation -->
-    <nav id="navbar" role="navigation" aria-label="Main navigation">
-        <div class="nav-content">
-            <a href="#" class="nav-logo">Sung Eun Kim</a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#about">About</a></li>
-                <li><a href="#research">Research</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#milestones">Milestones</a></li>
-                <li><a href="#awards">Awards</a></li>
-                <li><a href="#talks">Talks</a></li>
-                <li><a href="#service">Service</a></li>
-                <li><a href="#personal">Personal</a></li>
-                <li><a href="#cv">CV</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-                </svg>
-                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-                </svg>
-            </button>
-            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
-
-    <main id="main-content">
-
-    <!-- Hero Section -->
-    <section class="hero" id="home" aria-labelledby="hero-heading">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-image">
-                    <div class="hero-image-frame">
-                        <img src="sung-eun-kim-headshot.jpg" alt="Portrait of Dr. Sung Eun Kim, orthopedic surgeon and AI researcher at Harvard Medical School">
-                    </div>
-                    <div class="hero-decoration"></div>
-                </div>
-                <div class="hero-text">
-                    <h1 id="hero-heading">Sung Eun Kim, MD</h1>
-                    <p class="hero-tagline">From the operating room to the algorithm — building AI that understands medicine</p>
-                    <div class="hero-affiliations">
-                        <div class="affiliation">
-                            <span class="affiliation-icon"></span>
-                            <span>Postdoctoral Research Fellow, Harvard Medical School</span>
-                        </div>
-                        <div class="affiliation">
-                            <span class="affiliation-icon"></span>
-                            <span>Research Professor, Seoul National University Hospital</span>
-                        </div>
-                    </div>
-                    <p class="hero-description">
-                        Surgeon-scientist with experience in 1,000+ knee surgeries and 40+ publications including
-                        Nature Medicine. I build AI systems grounded in the clinical reality
-                        of a decade in medicine.
-                    </p>
-                    <div class="hero-links">
-                        <a href="mailto:sungeun_kim2@hms.harvard.edu" class="btn btn-primary">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
-                            </svg>
-                            Get in Touch
-                        </a>
-                        <a href="https://www.linkedin.com/in/sung-eun-kim-19267a2a4/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
-                            LinkedIn
-                        </a>
-                        <a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" rel="noopener noreferrer" class="btn btn-scholar">
-                            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
-                                <path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-24L0 9.5l4.838 3.94A8 8 0 0112 9a8 8 0 017.162 4.44L24 9.5z"/>
-                            </svg>
-                            Google Scholar
-                        </a>
-                    </div>
-                </div>
+        <!-- Intro -->
+        <header class="intro">
+            <div class="intro-text">
+                <h1>Sung Eun Kim, MD</h1>
+                <p class="affil">Postdoctoral Research Fellow, Harvard Medical School &middot; Research Professor, Seoul National University Hospital</p>
+                <p class="bio">
+                    I am a surgeon-scientist working at the intersection of medicine and artificial intelligence.
+                    At Harvard Medical School's Department of Biomedical Informatics I work with
+                    <a href="https://www.rajpurkarlab.hms.harvard.edu/" target="_blank" rel="noopener noreferrer">Dr. Pranav Rajpurkar</a>
+                    to develop and validate AI systems for medical imaging, clinical decision support, and healthcare evaluation.
+                    After seven years and over a thousand knee surgeries, I build AI grounded in the realities of clinical
+                    practice — across 40+ publications, including <em>Nature Medicine</em>.
+                </p>
+                <nav class="links">
+                    <a href="mailto:sungeun_kim2@hms.harvard.edu">Email</a><span class="sep">/</span>
+                    <a href="CV_SungEunKim.pdf" target="_blank" rel="noopener">CV</a><span class="sep">/</span>
+                    <a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a><span class="sep">/</span>
+                    <a href="https://www.linkedin.com/in/sung-eun-kim-19267a2a4/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </nav>
             </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about" aria-labelledby="about-heading">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2 id="about-heading">About Me</h2>
-                    <p class="lead">
-                        After seven years and over a thousand knee surgeries, I realized: the patterns I was
-                        seeing in the operating room could be taught to machines — if someone who understood
-                        both sides built the bridge.
-                    </p>
-                    <p>
-                        My path started in the trenches of public health — as an Epidemic Intelligence Service
-                        Officer during South Korea's MERS crisis, earning the Highest Commendation from the
-                        Minister of Health. That experience crystallized my belief that healthcare needs
-                        smarter systems, not just harder-working doctors.
-                    </p>
-                    <p>
-                        Now, as a postdoctoral fellow at Harvard Medical School working with
-                        <a href="https://www.rajpurkarlab.hms.harvard.edu/" target="_blank" rel="noopener noreferrer">Dr. Pranav Rajpurkar</a>,
-                        I develop and validate AI models for medical imaging interpretation, clinical decision support, healthcare workflow optimization, and robotic/physical AI systems — always grounded in real-world clinical needs.
-                    </p>
-                    <p>
-                        I don't just build AI that works on benchmarks. I build AI that works in hospitals —
-                        because I've been the doctor waiting for better tools.
-                    </p>
-                </div>
-                <div class="about-highlights">
-                    <div class="highlight-card">
-                        <h4>Clinical Foundation</h4>
-                        <p>7+ years of orthopedic surgery experience including 1,000+ knee surgeries, providing deep insight into clinical workflows and diagnostic challenges</p>
-                    </div>
-                    <div class="highlight-card">
-                        <h4>Research Impact</h4>
-                        <p>40+ peer-reviewed publications spanning clinical outcomes research and AI applications in medical imaging, including Nature Medicine</p>
-                    </div>
-                    <div class="highlight-card">
-                        <h4>Global Collaboration</h4>
-                        <p>International research network spanning Harvard Medical School, Seoul National University, and collaborators across Asia, Europe, North America, and South America</p>
-                    </div>
-                </div>
+            <div class="intro-photo">
+                <img src="headshot-2026.jpg" alt="Portrait of Dr. Sung Eun Kim, orthopedic surgeon and AI researcher at Harvard Medical School">
             </div>
-        </div>
-    </section>
+        </header>
 
-    <!-- Research Section -->
-    <section class="research" id="research" aria-labelledby="research-heading">
-        <div class="container">
-            <h2 id="research-heading">Research Focus</h2>
-            <p class="research-intro">
-                My research aims to bridge the gap between AI innovation and clinical implementation,
-                developing systems that work in the complexity of real healthcare environments.
-            </p>
-            <div class="research-grid">
-                <div class="research-card fade-in">
-                    <div class="research-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="3"/>
-                            <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-                        </svg>
-                    </div>
-                    <h3>Medical Vision AI</h3>
-                    <p>Developing multimodal AI systems for medical image interpretation, including knee MRI analysis with 3D spatial reasoning and radiology report generation with hallucination detection.</p>
-                </div>
-                <div class="research-card fade-in">
-                    <div class="research-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-                        </svg>
-                    </div>
-                    <h3>Clinical Decision Support</h3>
-                    <p>Building predictive models for surgical outcomes and patient-reported measures, enabling personalized treatment planning and evidence-based clinical decisions.</p>
-                </div>
-                <div class="research-card fade-in">
-                    <div class="research-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="3" width="20" height="14" rx="2"/>
-                            <path d="M8 21h8m-4-4v4"/>
-                        </svg>
-                    </div>
-                    <h3>Healthcare AI Evaluation</h3>
-                    <p>Creating simulation frameworks like the Clinical Environment Simulator (CES) to assess AI performance under realistic hospital conditions beyond static benchmarks.</p>
-                </div>
-                <div class="research-card fade-in">
-                    <div class="research-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/>
-                            <circle cx="12" cy="12" r="4"/>
-                        </svg>
-                    </div>
-                    <h3>Robotic & Physical AI</h3>
-                    <p>Exploring autonomous medical robotics and physical AI systems, including robotic-assisted surgery and intelligent automation for clinical procedures.</p>
-                </div>
-            </div>
-
-            <!-- Patent Callout -->
-            <div class="patent-callout fade-in">
-                <div class="patent-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M9 18h6m-5 4h4M12 2a7 7 0 00-4 12.7V17a1 1 0 001 1h6a1 1 0 001-1v-2.3A7 7 0 0012 2z"/>
-                    </svg>
-                </div>
-                <div>
-                    <h4>Patent</h4>
-                    <p class="patent-title">Method and Apparatus for Calculating Indicators Related to Knee Osteoarthritis Using Electromyography Data</p>
-                    <p class="patent-meta">Kim HC, Ro DH, Kim SE · Korean Patent Application No. 10-2024-0007447 · Published 2024</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Publications Section -->
-    <section class="publications" id="publications" aria-labelledby="publications-heading">
-        <div class="container">
-            <h2 id="publications-heading">Publications</h2>
-
-            <!-- Featured Publications -->
-            <div class="pub-featured">
-                <!-- Nature Medicine - Flagship -->
-                <div class="pub-card pub-card-highlight fade-in">
-                    <span class="pub-venue">NAT MED</span>
-                    <div class="pub-content">
-                        <h4><a href="https://doi.org/10.1038/s41591-026-04252-6" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; border-bottom: 1px solid var(--color-accent-light);">A clinical environment simulator for dynamic AI evaluation</a></h4>
-                        <p class="pub-authors">Luo L*, <strong>Kim SE*</strong>, Zhang X, Kernbach JM, Kenia R, Acosta JN, ..., Topol E, Rajpurkar P. <em>Nature Medicine</em> (2026)</p>
-                    </div>
-                    <span class="pub-badge first-author">Co-First Author</span>
-                </div>
-
-                <div class="pub-card fade-in">
-                    <span class="pub-venue">JBJS 2024</span>
-                    <div class="pub-content">
-                        <h4><a href="https://doi.org/10.2106/JBJS.24.00316" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; border-bottom: 1px solid var(--color-accent-light);">Coronal plane alignment of the knee (CPAK) type shifts towards constitutional varus with increasing KL grade: a deep learning radiographic analysis of 17,365 knees</a></h4>
-                        <p class="pub-authors"><strong>Kim SE</strong>, MacDessi S, Song D, Kim JI, Choi BS, Han HS, Ro DH. <em>J Bone Joint Surg Am</em> 2024</p>
-                    </div>
-                    <span class="pub-badge first-author">First Author</span>
-                </div>
-
-                <div class="pub-card fade-in">
-                    <span class="pub-venue">CVPR 2025</span>
-                    <div class="pub-content">
-                        <h4><a href="https://doi.org/10.48550/arXiv.2411.18672" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; border-bottom: 1px solid var(--color-accent-light);">FactCheXcker: Mitigating Measurement Hallucinations in Chest X-ray Report Generation Models</a></h4>
-                        <p class="pub-authors">Heiman A, Zhang X, Chen E, <strong>Kim SE</strong>, Rajpurkar P. <em>CVPR 2025</em></p>
-                    </div>
-                    <span class="pub-badge">Computer Vision</span>
-                </div>
-
-                <div class="pub-card fade-in">
-                    <span class="pub-venue">BJJ 2024</span>
-                    <div class="pub-content">
-                        <h4><a href="https://doi.org/10.1302/0301-620X.106B3.BJJ-2023-0337.R3" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; border-bottom: 1px solid var(--color-accent-light);">The use of medial joint opening rather than mechanical axis deviation to determine the clinical outcomes after high tibial osteotomy</a></h4>
-                        <p class="pub-authors"><strong>Kim SE</strong>, Kwak J, Ro DH, Lee MC, Han HS. <em>Bone Joint J</em> 2024;106-B(3):240-248</p>
-                    </div>
-                    <span class="pub-badge first-author">First Author</span>
-                </div>
-
-                <div class="pub-card fade-in">
-                    <span class="pub-venue">KSSTA 2024</span>
-                    <div class="pub-content">
-                        <h4><a href="https://doi.org/10.1002/ksa.12166" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; border-bottom: 1px solid var(--color-accent-light);">Shallow trochlear groove and narrow medial trochlear width at the proximal trochlea in patients with trochlear dysplasia</a></h4>
-                        <p class="pub-authors">Lee JY*, <strong>Kim SE*</strong>, et al. <em>KSSTA</em> 2024;32(6):1434-1445</p>
-                    </div>
-                    <span class="pub-badge first-author">Co-First Author</span>
-                </div>
-
-                <div class="pub-card fade-in">
-                    <span class="pub-venue">KSSTA 2023</span>
-                    <div class="pub-content">
-                        <h4><a href="https://doi.org/10.1007/s00167-022-07227-5" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; border-bottom: 1px solid var(--color-accent-light);">Functional alignment with robotic-arm assisted total knee arthroplasty demonstrated better patient-reported outcomes than mechanical alignment with manual TKA</a></h4>
-                        <p class="pub-authors">Choi BS, <strong>Kim SE</strong>, Yang M, Ro DH, Han HS. <em>KSSTA</em> 2023;31(3):1072-1080</p>
-                    </div>
-                    <span class="pub-badge">Robotic Surgery</span>
-                </div>
-            </div>
-
-            <!-- Full Publication List -->
-            <div class="pub-list">
-                <div class="pub-list-header">
-                    <h3>All Publications</h3>
-                    <a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" class="pub-count" style="text-decoration: none;">
+        <!-- Publications -->
+        <section id="publications">
+            <h2>Publications</h2>
+            <p class="section-note">Selected papers are <span style="background: var(--color-highlight); padding: 0 4px; border-radius: 3px;">highlighted</span>. First-author papers are marked with a left accent.</p>
+            <div class="pub-list-header">
+                <h3>All Publications</h3>
+                <a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" rel="noopener" class="pub-count">
                         40+ Publications
                     </a>
-                </div>
+            </div>
 
-                <!-- AUTO-GENERATED-PUBS-START -->
+            <!-- AUTO-GENERATED-PUBS-START -->
                 <div class="pub-year-group" id="pubs-2026">
-                    <div class="pub-year-label">2026 <span class="year-count">10 papers</span></div>
+                    <div class="pub-year-label">2026 <span class="year-count">5 papers</span></div>
                     <div class="pub-list-items">
                         <div class="pub-list-item first-author-item">
                             <h4><a href="https://psb.stanford.edu/psb-online/proceedings/psb26/sambara.pdf" target="_blank" rel="noopener">3DReasonKnee: Advancing Grounded Reasoning in Medical Vision Language Models</a></h4>
                             <p class="pub-meta">Sambara S*, <strong>Kim SE</strong>*, Zhang X, et al. <em>Pacific Symposium on Biocomputing 31:99-113</em></p>
                         </div>
-                        <div class="pub-list-item first-author-item">
+                        <div class="pub-list-item first-author-item pub-list-item-highlight">
                             <h4><a href="https://doi.org/10.1038/s41591-026-04252-6" target="_blank" rel="noopener">A clinical environment simulator for dynamic AI evaluation</a></h4>
                             <p class="pub-meta">Luo L*, <strong>Kim SE</strong>*, Zhang X, Kernbach JM, Kenia R, Acosta JN, ..., Topol E, Rajpurkar P. <em>Nature Medicine</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Beyond the Scanner: A Benchmark for Medical Photograph Understanding</h4>
-                            <p class="pub-meta">Oishi Banerjee and Julius M Kernbach and Sung Eun Kim and Abeer Rihan Alomaish and Reema Abdulwahab S Alghamdi and Hassan Alomaish and Mohammed Baharoon and Xiaoman Zhang and Julian Nicolas Acosta and Pranav Rajpurkar</p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>CRIMSON: A Clinically-Grounded LLM-Based Metric for Generative Radiology Report Evaluation</h4>
-                            <p class="pub-meta">Mohammed Baharoon and Thibault Heintz and Siavash Raissi and Mahmoud Alabbad and Mona Alhammad and Hassan AlOmaish and Sung Eun Kim and Oishi Banerjee and Pranav Rajpurkar. <em>arXiv preprint arXiv:2603.06183</em></p>
                         </div>
                         <div class="pub-list-item">
                             <h4><a href="https://arxiv.org/abs/2603.04421" target="_blank" rel="noopener">Do Mixed-Vendor Multi-Agent LLMs Improve Clinical Diagnosis?</a></h4>
@@ -2110,25 +346,13 @@
                             <p class="pub-meta">Park J, Persson A, Martin RK, et al. <em>Knee Surg Relat Res 2026;38:3</em></p>
                         </div>
                         <div class="pub-list-item">
-                            <h4>Effects of axial malrotation on posterior tibial slope measurement: a digitally reconstructed radiograph study enabling automated quality assessment</h4>
-                            <p class="pub-meta">Jaeseok Park and Andreas Persson and R Kyle Martin and Eivind Inderhaug and Sung Eun Kim and Sangyoon Kim and Donghyuk Kwak and Du hyun Ro. <em>Knee Surgery &amp; Related Research</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>ReXInTheWild: A Unified Benchmark for Medical Photograph Understanding</h4>
-                            <p class="pub-meta">Oishi Banerjee and Sung Eun Kim and Alexandra N Willauer and Julius M Kernbach and Abeer Rihan Alomaish and Reema Abdulwahab S Alghamdi and Hassan Rayhan Alomaish and Mohammed Baharoon and Xiaoman Zhang and Julian Nicolas Acosta and Christine Zhou and Pranav Rajpurkar. <em>arXiv preprint arXiv:2603.19517</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>ReXSonoVQA: A Video QA Benchmark for Procedure-Centric Ultrasound Understanding</h4>
-                            <p class="pub-meta">Xucheng Wang and Xiaoman Zhang and Sung Eun Kim and Ankit Pal and Pranav Rajpurkar. <em>arXiv preprint arXiv:2604.10916</em></p>
-                        </div>
-                        <div class="pub-list-item">
                             <h4>The Doctor Will Agree With You Now: Sycophancy of Large Language Models in Multi-Turn Medical Conversations</h4>
                             <p class="pub-meta">Kim TM, Luo L, <strong>Kim SE</strong>, Manrai AK, Topol E, Rajpurkar P. <em>HeaLing Workshop at EACL 2026</em></p>
                         </div>
                     </div>
                 </div>
                 <div class="pub-year-group" id="pubs-2025">
-                    <div class="pub-year-label">2025 <span class="year-count">20 papers</span></div>
+                    <div class="pub-year-label">2025 <span class="year-count">14 papers</span></div>
                     <div class="pub-list-items">
                         <div class="pub-list-item">
                             <h4><a href="https://doi.org/10.1186/s13018-025-06206-z" target="_blank" rel="noopener">A development of machine learning models to preoperatively predict insufficient clinical improvement after total knee arthroplasty</a></h4>
@@ -2137,10 +361,6 @@
                         <div class="pub-list-item">
                             <h4><a href="https://doi.org/10.1177/23259671251331067" target="_blank" rel="noopener">Automated Posterior Tibial Slope Measurement Using Lateral Knee Radiographs</a></h4>
                             <p class="pub-meta">Ryu B, Nam JW, Ro DH, et al. (<strong>Kim SE</strong> corresponding). <em>Orthop J Sports Med 2025;13(4)</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Automated posterior tibial slope measurement using lateral knee radiographs: a novel landmark-based approach using deep learning</h4>
-                            <p class="pub-meta">ByeongYeong Ryu and Jun Woo Nam and Du Hyun Ro and R Kyle Martin and Eivind Inderhaug and Andreas Persson and Sanna Haland and Sung Eun Kim. <em>Orthopaedic Journal of Sports Medicine</em></p>
                         </div>
                         <div class="pub-list-item">
                             <h4><a href="https://doi.org/10.1302/0301-620X.107B2.BJJ-2024-0791.R1" target="_blank" rel="noopener">Deep learning for automated hip fracture detection and classification: achieving superior accuracy</a></h4>
@@ -2154,17 +374,9 @@
                             <h4><a href="https://doi.org/10.1177/23259671251333607" target="_blank" rel="noopener">External validation of a novel landmark-based deep learning automated tibial slope measurement algorithm applied on short radiographs from ACL injured patients</a></h4>
                             <p class="pub-meta">Martin RK, Haaland S, Persson A, <strong>Kim SE</strong>, et al.. <em>Orthop J Sports Med 2025;13(5)</em></p>
                         </div>
-                        <div class="pub-list-item">
-                            <h4>External validation of a novel landmark-based deep learning automated tibial slope measurement algorithm applied on short radiographs obtained in patients with ACL injuries</h4>
-                            <p class="pub-meta">Kyle R Martin and Sanna Haaland and Andreas Persson and Sung Eun Kim and ByeongYeong Ryu and Jun Woo Nam and Du Hyun Ro and Eivind Inderhaug. <em>Orthopaedic Journal of Sports Medicine</em></p>
-                        </div>
-                        <div class="pub-list-item">
+                        <div class="pub-list-item pub-list-item-highlight">
                             <h4><a href="https://doi.org/10.48550/arXiv.2411.18672" target="_blank" rel="noopener">FactCheXcker: Mitigating Measurement Hallucinations in Chest X-ray Report Generation Models</a></h4>
                             <p class="pub-meta">Heiman A, Zhang X, Chen E, <strong>Kim SE</strong>, Rajpurkar P. <em>CVPR 2025</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Low Cognitive Function and Somatic Psychological Symptoms Are Correlated with Greater Risk of Delirium After Total Knee Arthroplasty: A Prospective Cohort Study</h4>
-                            <p class="pub-meta">Joon Young Lee and Jee Eun Park and Sung Eun Kim and Byung Sun Choi and Myung Chul Lee and Chong Bum Chang and Hyuk-Soo Han and Hye Youn Park and Du Hyun Ro. <em>JBJS</em></p>
                         </div>
                         <div class="pub-list-item">
                             <h4><a href="https://doi.org/10.1002/jor.26018" target="_blank" rel="noopener">Machine learning-based prediction of contralateral knee osteoarthritis development using the Osteoarthritis Initiative and the Multicenter Osteoarthritis Study dataset</a></h4>
@@ -2173,10 +385,6 @@
                         <div class="pub-list-item first-author-item">
                             <h4><a href="https://doi.org/10.14517/aosm25006" target="_blank" rel="noopener">Posterior tibial slope as a risk factor for anterior cruciate ligament tears</a></h4>
                             <p class="pub-meta">Kwak D*, <strong>Kim SE</strong>*, Park J, et al. <em>Arthrosc Orthop Sports Med 2025;12:64-69</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Posterior tibial slope as a risk factor for anterior cruciate ligament tears: a retrospective study using automated measurement</h4>
-                            <p class="pub-meta">Donghyuk Kwak and Sung Eun Kim and Jaeseok Park and Hyuk-Soo Han and Byung Sun Choi and Du Hyun Ro. <em>Arthroscopy and Orthopedic Sports Medicine</em></p>
                         </div>
                         <div class="pub-list-item">
                             <h4><a href="https://doi.org/10.2106/JBJS.25.00392" target="_blank" rel="noopener">Preoperative low cognitive function and somatic psychological symptoms are associated with an increased risk of postoperative delirium following total knee arthroplasty: a prospective cohort study</a></h4>
@@ -2191,20 +399,12 @@
                             <p class="pub-meta">Hardy R, <strong>Kim SE</strong>, Ro DH, Rajpurkar P. <em>Proceedings of the AAAI Bridge Program on AI for Medicine and Healthcare, PMLR 281:173-182, 2025</em></p>
                         </div>
                         <div class="pub-list-item">
-                            <h4>Rexgroundingct: A 3d chest ct dataset for segmentation of findings from free-text reports</h4>
-                            <p class="pub-meta">Mohammed Baharoon and Luyang Luo and Michael Moritz and Abhinav Kumar and Sung Eun Kim and Xiaoman Zhang and Miao Zhu and Mahmoud Hussain Alabbad and Maha Sbayel Alhazmi and Neel P Mistry and Lucas Bijnens and Kent Ryan Kleinschmidt and Brady Chrisler and Sathvik Suryadevara and Sri Sai Dinesh Jaliparthi and Noah Michael Prudlo and Mark David Marino and Jeremy Palacio and Rithvik Akula and Di Zhou and Hong-Yu Zhou and Ibrahim Ethem Hamamci and Scott J Adams and Hassan Rayhan AlOmaish and Pranav Rajpurkar. <em>arXiv preprint arXiv:2507.22030</em></p>
-                        </div>
-                        <div class="pub-list-item">
                             <h4><a href="https://proceedings.mlr.press/v298/baharoon25a.html" target="_blank" rel="noopener">State-of-the-art text-prompted medical segmentation models struggle to ground chest CT findings</a></h4>
                             <p class="pub-meta">Baharoon M, Luo L, Moritz M, et al.. <em>MLHC 2025</em></p>
                         </div>
                         <div class="pub-list-item first-author-item">
                             <h4><a href="https://doi.org/10.1016/j.knee.2024.11.003" target="_blank" rel="noopener">Superior Forgotten Joint Scores with Cruciate-Retaining Mobile bearings Versus Posterior-Stabilized Mobile and Fixed bearings in a contemporary Total Knee System</a></h4>
                             <p class="pub-meta"><strong>Kim SE</strong>, Shin HS, Han HS. <em>The Knee 2025;53:118-125</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Superior One-year Forgotten Joint Scores with cruciate-retaining mobile bearings versus posterior-stabilized mobile and fixed bearings in a contemporary total knee system</h4>
-                            <p class="pub-meta">Sung Eun Kim and Hyun Suk Shin and Hyuk-Soo Han. <em>The Knee</em></p>
                         </div>
                         <div class="pub-list-item">
                             <h4><a href="https://arxiv.org/abs/2507.22898" target="_blank" rel="noopener">Voice-guided Orchestrated Intelligence for Clinical Evaluation (VOICE): A Voice AI Agent System for Prehospital Stroke Assessment</a></h4>
@@ -2217,7 +417,7 @@
                 <div id="earlierPubs" style="display: none;">
 
                 <div class="pub-year-group" id="pubs-2024">
-                    <div class="pub-year-label">2024 <span class="year-count">21 papers</span></div>
+                    <div class="pub-year-label">2024 <span class="year-count">14 papers</span></div>
                     <div class="pub-list-items">
                         <div class="pub-list-item">
                             <h4><a href="https://doi.org/10.1186/s43019-024-00240-7" target="_blank" rel="noopener">A deep learning based automatic two-dimensional digital templating model for total knee arthroplasty</a></h4>
@@ -2227,11 +427,7 @@
                             <h4><a href="https://doi.org/10.1186/s43019-024-00238-1" target="_blank" rel="noopener">Can individual functional improvements be predicted in osteoarthritic patients after total knee arthroplasty?</a></h4>
                             <p class="pub-meta"><strong>Kim SE</strong>, Ro DH, Lee MC, Han HS. <em>Knee Surg Relat Res 2024;36(1):31</em></p>
                         </div>
-                        <div class="pub-list-item">
-                            <h4>Coronal Plane Alignment of the Knee (CPAK) Type Shifts Toward Constitutional Varus with Increasing Kellgren and Lawrence Grade: A Radiographic Analysis of 17,365 Knees</h4>
-                            <p class="pub-meta">Sung Eun Kim and Samuel MacDessi and Daeseok Song and Joong Il Kim and Byung Sun Choi and Hyuk-Soo Han and Du Hyun Ro. <em>JBJS</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
+                        <div class="pub-list-item first-author-item pub-list-item-highlight">
                             <h4><a href="https://doi.org/10.2106/JBJS.24.00316" target="_blank" rel="noopener">Coronal plane alignment of the knee (CPAK) type shifts towards constitutional varus with increasing Kellgren and Lawrence grade: a deep learning radiographic analysis of 17,365 knees</a></h4>
                             <p class="pub-meta"><strong>Kim SE</strong>, MacDessi S, Song D, Kim JI, Choi BS, Han HS, Ro DH. <em>J Bone Joint Surg Am 2024</em></p>
                         </div>
@@ -2247,21 +443,9 @@
                             <h4><a href="https://doi.org/10.1038/s41598-024-63266-7" target="_blank" rel="noopener">Estimation of patient-reported outcome measures based on features of knee joint muscle co-activation</a></h4>
                             <p class="pub-meta">Hussain I*, <strong>Kim SE</strong>*, et al. <em>Scientific Reports 2024;14(1):12428</em></p>
                         </div>
-                        <div class="pub-list-item">
-                            <h4>Estimation of patient-reported outcome measures based on features of knee joint muscle co-activation in advanced knee osteoarthritis</h4>
-                            <p class="pub-meta">Iqram Hussain* and Sung Eun Kim* and Chiheon Kwon and Seo Kyung Hoon and Hee Chan Kim and Yunseo Ku and Du Hyun Ro. <em>Scientific Reports</em></p>
-                        </div>
                         <div class="pub-list-item first-author-item">
                             <h4><a href="https://doi.org/10.4055/cios23166" target="_blank" rel="noopener">Fixed bearing and higher postoperative knee flexion angle as predictors of satisfaction in Asian patients undergoing posterior stabilized total knee arthroplasty</a></h4>
                             <p class="pub-meta"><strong>Kim SE</strong>, Choi BS, Ro DH, Lee MC, Han HS. <em>Clin Orthop Surg 2024;16:e19</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Fixed-bearing and higher postoperative knee flexion angle as predictors of satisfaction in Asian patients undergoing posterior-stabilized total knee arthroplasty</h4>
-                            <p class="pub-meta">Sung Eun Kim and Byung Sun Choi and Myung Chul Lee and Hyuk-Soo Han. <em>Clinics in Orthopedic Surgery</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Method and apparatus for calculating indicators related to knee osteoarthritis by using electromyography data</h4>
-                            <p class="pub-meta">HC Kim and DH Ro and SE Kim</p>
                         </div>
                         <div class="pub-list-item first-author-item">
                             <h4><a href="https://doi.org/10.1007/s00256-024-04619-1" target="_blank" rel="noopener">Minimal impact of beam projection angle deviations in skyline (Laurin) view and the efficacy of the anterior border of proximal tibia as a guiding landmark</a></h4>
@@ -2271,17 +455,9 @@
                             <h4><a href="https://doi.org/10.4055/cios23179" target="_blank" rel="noopener">Performance of ChatGPT on Solving Orthopedic Board-Style Questions</a></h4>
                             <p class="pub-meta"><strong>Kim SE</strong>, Lee JH, Choi BS, et al. <em>Clin Orthop Surg 2024;16:e13</em></p>
                         </div>
-                        <div class="pub-list-item">
-                            <h4>Performance of ChatGPT on Solving Orthopedic Board-Style Questions: A Comparative Analysis of ChatGPT 3.5 and ChatGPT 4</h4>
-                            <p class="pub-meta">Sung Eun Kim and Ji Han Lee and Byung Sun Choi and Hyuk-Soo Han and Myung Chul Lee and Du Hyun Ro. <em>Clinics in Orthopedic Surgery</em></p>
-                        </div>
                         <div class="pub-list-item first-author-item">
                             <h4><a href="https://doi.org/10.1186/s43019-023-00204-3" target="_blank" rel="noopener">Preserving coronal knee alignment of the knee (CPAK) in unicompartmental knee arthroplasty correlates with superior patient-reported outcomes</a></h4>
                             <p class="pub-meta"><strong>Kim SE</strong>, Yun KR, Lee JM, Lee MC, Han HS. <em>Knee Surg Relat Res 2024;36(1):1</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Primary Total Knee Arthroplasty for Treating Osteoarthritic Knees with Neglected Patellar Dislocation</h4>
-                            <p class="pub-meta">Sung Eun Kim and Seong Hwan Kim and Jung-In Lee and Hyuk-Soo Han and Myung Chul Lee and Du Hyun Ro. <em>Medicina</em></p>
                         </div>
                         <div class="pub-list-item first-author-item">
                             <h4><a href="https://doi.org/10.3390/medicina60091492" target="_blank" rel="noopener">Primary total knee arthroplasty for treating knees with neglected patellar dislocation</a></h4>
@@ -2291,15 +467,11 @@
                             <h4><a href="https://doi.org/10.52965/001c.94238" target="_blank" rel="noopener">Robotic arm-assisted total knee arthroplasty in a patient with osteopetrosis</a></h4>
                             <p class="pub-meta"><strong>Kim SE</strong>, Han HS. <em>Orthop Rev (Pavia) 2024;16:94238</em></p>
                         </div>
-                        <div class="pub-list-item">
-                            <h4>Robotic arm-assisted total knee arthroplasty in a patient with osteopetrosis: a case report and review of literature</h4>
-                            <p class="pub-meta">Sung Eun Kim and Hyuk-Soo Han. <em>Orthopedic Reviews</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
+                        <div class="pub-list-item first-author-item pub-list-item-highlight">
                             <h4><a href="https://doi.org/10.1002/ksa.12166" target="_blank" rel="noopener">Shallow trochlear groove and narrow medial trochlear width at the proximal trochlea in patients with trochlear dysplasia: A three-dimensional computed tomography analysis</a></h4>
                             <p class="pub-meta">Lee JY*, <strong>Kim SE</strong>*, et al. <em>KSSTA 2024;32(6):1434-1445</em></p>
                         </div>
-                        <div class="pub-list-item first-author-item">
+                        <div class="pub-list-item first-author-item pub-list-item-highlight">
                             <h4><a href="https://doi.org/10.1302/0301-620X.106B3.BJJ-2023-0337.R3" target="_blank" rel="noopener">The use of medial joint opening rather than mechanical axis deviation to determine the clinical outcomes after high tibial osteotomy</a></h4>
                             <p class="pub-meta"><strong>Kim SE</strong>, Kwak J, Ro DH, Lee MC, Han HS. <em>Bone Joint J 2024;106-B(3):240-248</em></p>
                         </div>
@@ -2307,7 +479,7 @@
                 </div>
 
                 <div class="pub-year-group" id="pubs-2023">
-                    <div class="pub-year-label">2023 <span class="year-count">7 papers</span></div>
+                    <div class="pub-year-label">2023 <span class="year-count">6 papers</span></div>
                     <div class="pub-list-items">
                         <div class="pub-list-item first-author-item">
                             <h4><a href="https://doi.org/10.1016/j.knee.2023.09.006" target="_blank" rel="noopener">An accurate method for measuring knee joint space width despite variations in beam projection angles</a></h4>
@@ -2321,11 +493,7 @@
                             <h4><a href="https://doi.org/10.3390/medicina59122105" target="_blank" rel="noopener">Early- to Mid-Term Review of a Prospective, Multi-Center, International, Outcomes Study of an Anatomically Designed Implant with Posterior-Stabilized Bearing in Total Knee Arthroplasty</a></h4>
                             <p class="pub-meta"><strong>Kim SE</strong>, Ro DH, Lee MC, Cholewa JM. <em>Medicina 2023;59(12):2105</em></p>
                         </div>
-                        <div class="pub-list-item">
-                            <h4>Early-to mid-term review of a prospective, multi-center, international, outcomes study of an anatomically designed implant with posterior-stabilized bearing in total knee arthroplasty</h4>
-                            <p class="pub-meta">Sung Eun Kim and Du Hyun Ro and Myung Chul Lee and Jason M Cholewa. <em>Medicina</em></p>
-                        </div>
-                        <div class="pub-list-item">
+                        <div class="pub-list-item pub-list-item-highlight">
                             <h4><a href="https://doi.org/10.1007/s00167-022-07227-5" target="_blank" rel="noopener">Functional alignment with robotic-arm assisted total knee arthroplasty demonstrated better patient-reported outcomes than mechanical alignment with manual total knee arthroplasty</a></h4>
                             <p class="pub-meta">Choi BS, <strong>Kim SE</strong>, Yang M, Ro DH, Han HS. <em>KSSTA 2023;31(3):1072-1080</em></p>
                         </div>
@@ -2376,765 +544,160 @@
                     <span id="showMoreText">Show 2024 & Earlier Publications</span>
                 </button>
                 <!-- AUTO-GENERATED-PUBS-END -->
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Experience Section -->
-    <section class="experience" id="experience" aria-labelledby="experience-heading">
-        <div class="container">
-            <h2 id="experience-heading">Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item highlight">
-                    <div class="timeline-dot"></div>
-                    <span class="timeline-date">Sep 2024 – Present</span>
-                    <h4 class="timeline-title">Postdoctoral Research Fellow</h4>
-                    <p class="timeline-org">Harvard Medical School, Department of Biomedical Informatics</p>
-                    <p class="timeline-desc">PI: Pranav Rajpurkar. Developing AI systems for medical applications.</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <span class="timeline-date">Sep 2024 – Present</span>
-                    <h4 class="timeline-title">Associate Research Professor</h4>
-                    <p class="timeline-org">Seoul National University Hospital, Biomedical Research Institute</p>
-                    <p class="timeline-desc">National Strategic Technology Research Institute. Leading AI research across orthopedics and diverse medical fields.</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <span class="timeline-date">Mar 2023 – Present</span>
-                    <h4 class="timeline-title">Ph.D. Candidate in Orthopedic Surgery</h4>
-                    <p class="timeline-org">Seoul National University Graduate School of Medicine</p>
-                    <p class="timeline-desc">AI applications in orthopedic surgery research.</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <span class="timeline-date">Mar 2022 – Jul 2024</span>
-                    <h4 class="timeline-title">Clinical & Research Fellow (Knee Surgery)</h4>
-                    <p class="timeline-org">Seoul National University Hospital</p>
-                    <p class="timeline-desc">Specialized training in knee arthroplasty, sports medicine, and robotic surgery under Profs. Han and Ro.</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <span class="timeline-date">Feb 2023</span>
-                    <h4 class="timeline-title">M.S. in Orthopedic Surgery</h4>
-                    <p class="timeline-org">Seoul National University Graduate School of Medicine</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <span class="timeline-date">Mar 2018 – Feb 2022</span>
-                    <h4 class="timeline-title">Orthopedic Surgery Resident</h4>
-                    <p class="timeline-org">Seoul National University Hospital</p>
-                    <p class="timeline-desc">Comprehensive orthopedic training. Received Best Resident Award (2020).</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <span class="timeline-date">May 2017 – Feb 2018</span>
-                    <h4 class="timeline-title">Intern</h4>
-                    <p class="timeline-org">Seoul National University Hospital</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <span class="timeline-date">Apr 2014 – Apr 2017</span>
-                    <h4 class="timeline-title">Epidemic Intelligence Service Officer</h4>
-                    <p class="timeline-org">Korea Disease Control and Prevention Agency</p>
-                    <p class="timeline-desc">Public health service during MERS crisis. Received Highest Commendation from Minister of Health.</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <span class="timeline-date">Feb 2014</span>
-                    <h4 class="timeline-title">Doctor of Medicine (M.D.)</h4>
-                    <p class="timeline-org">Seoul National University College of Medicine</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Milestones Section -->
-    <section class="milestones" id="milestones" aria-labelledby="milestones-heading">
-        <div class="container">
-            <h2 id="milestones-heading">Milestones</h2>
-            <div class="milestone-timeline">
-
-                <div class="milestone-item fade-in">
-                    <div class="milestone-icon publication">
-                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
-                    </div>
-                    <div class="milestone-content">
-                        <span class="milestone-date">Feb 2026</span>
-                        <h4>Published in Nature Medicine</h4>
-                        <p>CES framework for dynamic AI evaluation in clinical environments. Co-first author with Luo L.</p>
+        <!-- Experience -->
+        <section id="experience">
+            <h2>Experience</h2>
+            <div class="cv-list">
+                <div class="cv-item">
+                    <div class="cv-date">Sep 2024 – Present</div>
+                    <div class="cv-body">
+                        <div class="cv-title">Postdoctoral Research Fellow</div>
+                        <div class="cv-org">Harvard Medical School, Department of Biomedical Informatics</div>
+                        <div class="cv-desc">PI: Pranav Rajpurkar. Developing AI systems for medical applications.</div>
                     </div>
                 </div>
-
-                <div class="milestone-item fade-in">
-                    <div class="milestone-icon publication">
-                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
-                    </div>
-                    <div class="milestone-content">
-                        <span class="milestone-date">Jan 2026</span>
-                        <h4>3DReasonKnee at PSB 2026</h4>
-                        <p>3D spatial reasoning for knee MRI interpretation by vision-language models. Co-first author.</p>
+                <div class="cv-item">
+                    <div class="cv-date">Sep 2024 – Present</div>
+                    <div class="cv-body">
+                        <div class="cv-title">Associate Research Professor</div>
+                        <div class="cv-org">Seoul National University Hospital, Biomedical Research Institute</div>
+                        <div class="cv-desc">National Strategic Technology Research Institute. Leading AI research across orthopedics and diverse medical fields.</div>
                     </div>
                 </div>
-
-                <div class="milestone-item fade-in">
-                    <div class="milestone-icon publication">
-                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
-                    </div>
-                    <div class="milestone-content">
-                        <span class="milestone-date">Jun 2025</span>
-                        <h4>FactCheXcker at CVPR 2025</h4>
-                        <p>Hallucination detection for chest X-ray report generation models.</p>
+                <div class="cv-item">
+                    <div class="cv-date">Mar 2023 – Present</div>
+                    <div class="cv-body">
+                        <div class="cv-title">Ph.D. Candidate in Orthopedic Surgery</div>
+                        <div class="cv-org">Seoul National University Graduate School of Medicine</div>
+                        <div class="cv-desc">AI applications in orthopedic surgery research.</div>
                     </div>
                 </div>
-
-                <div class="milestone-item fade-in">
-                    <div class="milestone-icon award">
-                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/></svg>
-                    </div>
-                    <div class="milestone-content">
-                        <span class="milestone-date">May 2025</span>
-                        <h4>KSRR Citation Award</h4>
-                        <p>Two highly cited articles in knee surgery imaging recognized by Korean Society of Knee Surgery and Related Research.</p>
+                <div class="cv-item">
+                    <div class="cv-date">Mar 2022 – Jul 2024</div>
+                    <div class="cv-body">
+                        <div class="cv-title">Clinical & Research Fellow (Knee Surgery)</div>
+                        <div class="cv-org">Seoul National University Hospital</div>
+                        <div class="cv-desc">Specialized training in knee arthroplasty, sports medicine, and robotic surgery under Profs. Han and Ro.</div>
                     </div>
                 </div>
-
-                <div class="milestone-item fade-in">
-                    <div class="milestone-icon career">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                    </div>
-                    <div class="milestone-content">
-                        <span class="milestone-date">Mar 2025</span>
-                        <h4>AAOS Presentation</h4>
-                        <p>Automated posterior tibial slope measurement using deep learning, presented at the American Academy of Orthopaedic Surgeons.</p>
+                <div class="cv-item">
+                    <div class="cv-date">Feb 2023</div>
+                    <div class="cv-body">
+                        <div class="cv-title">M.S. in Orthopedic Surgery</div>
+                        <div class="cv-org">Seoul National University Graduate School of Medicine</div>
                     </div>
                 </div>
-
-                <div class="milestone-item fade-in">
-                    <div class="milestone-icon publication">
-                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6z"/></svg>
-                    </div>
-                    <div class="milestone-content">
-                        <span class="milestone-date">Dec 2024</span>
-                        <h4>CPAK Paper in JBJS</h4>
-                        <p>Deep learning radiographic analysis of 17,365 knees published in J Bone Joint Surg Am. First author.</p>
+                <div class="cv-item">
+                    <div class="cv-date">Mar 2018 – Feb 2022</div>
+                    <div class="cv-body">
+                        <div class="cv-title">Orthopedic Surgery Resident</div>
+                        <div class="cv-org">Seoul National University Hospital</div>
+                        <div class="cv-desc">Comprehensive orthopedic training. Received Best Resident Award (2020).</div>
                     </div>
                 </div>
-
-                <div class="milestone-item fade-in">
-                    <div class="milestone-icon career">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                    </div>
-                    <div class="milestone-content">
-                        <span class="milestone-date">Sep 2024</span>
-                        <h4>Joined Harvard Medical School</h4>
-                        <p>Postdoctoral Research Fellow with Dr. Pranav Rajpurkar, Dept of Biomedical Informatics.</p>
+                <div class="cv-item">
+                    <div class="cv-date">May 2017 – Feb 2018</div>
+                    <div class="cv-body">
+                        <div class="cv-title">Intern</div>
+                        <div class="cv-org">Seoul National University Hospital</div>
                     </div>
                 </div>
-
-                <div class="milestone-item fade-in">
-                    <div class="milestone-icon award">
-                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/></svg>
-                    </div>
-                    <div class="milestone-content">
-                        <span class="milestone-date">May 2024</span>
-                        <h4>Best Paper Award, KSRR</h4>
-                        <p>Enhanced deep learning alignment measurement across diverse institutional imaging protocols.</p>
+                <div class="cv-item">
+                    <div class="cv-date">Apr 2014 – Apr 2017</div>
+                    <div class="cv-body">
+                        <div class="cv-title">Epidemic Intelligence Service Officer</div>
+                        <div class="cv-org">Korea Disease Control and Prevention Agency</div>
+                        <div class="cv-desc">Public health service during MERS crisis. Received Highest Commendation from Minister of Health.</div>
                     </div>
                 </div>
-
-                <div class="milestone-item fade-in">
-                    <div class="milestone-icon career">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                    </div>
-                    <div class="milestone-content">
-                        <span class="milestone-date">May 2024</span>
-                        <h4>4 Presentations at ESSKA, Milan</h4>
-                        <p>CPAK classification, HTO outcomes, PTS measurement, and UKA outcomes at the European Society of Sports Traumatology.</p>
-                    </div>
-                </div>
-
-                <div class="milestone-item fade-in">
-                    <div class="milestone-icon award">
-                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/></svg>
-                    </div>
-                    <div class="milestone-content">
-                        <span class="milestone-date">Oct 2023</span>
-                        <h4>Best Oral Presentation, Korean CAOS</h4>
-                        <p>CPAK classification presented at the 18th Korean Computer Assisted Orthopedic Surgery Congress.</p>
-                    </div>
-                </div>
-
-                <div class="milestone-item fade-in">
-                    <div class="milestone-icon career">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                    </div>
-                    <div class="milestone-content">
-                        <span class="milestone-date">Mar 2022</span>
-                        <h4>Board-Certified Orthopedic Surgeon</h4>
-                        <p>Seoul National University Hospital, after 4-year residency.</p>
-                    </div>
-                </div>
-
-                <div class="milestone-item fade-in">
-                    <div class="milestone-icon award">
-                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/></svg>
-                    </div>
-                    <div class="milestone-content">
-                        <span class="milestone-date">Dec 2020</span>
-                        <h4>Best Resident Award</h4>
-                        <p>SNUH Department of Orthopedic Surgery.</p>
-                    </div>
-                </div>
-
-                <div class="milestone-item fade-in">
-                    <div class="milestone-icon award">
-                        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/></svg>
-                    </div>
-                    <div class="milestone-content">
-                        <span class="milestone-date">Apr 2017</span>
-                        <h4>Minister of Health Commendation</h4>
-                        <p>For MERS crisis response as Epidemic Intelligence Service Officer.</p>
-                    </div>
-                </div>
-
-                <div class="milestone-item fade-in">
-                    <div class="milestone-icon career">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                    </div>
-                    <div class="milestone-content">
-                        <span class="milestone-date">Feb 2014</span>
-                        <h4>Doctor of Medicine, SNU</h4>
-                        <p>Seoul National University College of Medicine.</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Awards Section -->
-    <section class="awards" id="awards" aria-labelledby="awards-heading">
-        <div class="container">
-            <div class="section-header" onclick="toggleSection('awards-content', this)">
-                <h2 id="awards-heading">Awards & Recognition</h2>
-                <button class="collapse-toggle" aria-expanded="false" aria-controls="awards-content" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-            </div>
-            <div id="awards-content" class="collapsible-content collapsed">
-            <div class="awards-grid">
-                <div class="award-card fade-in">
-                    <div class="award-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-                            <polyline points="14,2 14,8 20,8"/>
-                            <line x1="16" y1="13" x2="8" y2="13"/>
-                            <line x1="16" y1="17" x2="8" y2="17"/>
-                        </svg>
-                    </div>
-                    <div class="award-content">
-                        <h4>Highest Commendation from Minister of Health</h4>
-                        <p>Republic of Korea — Recognized for dedication during MERS crisis response (2017)</p>
-                    </div>
-                </div>
-                <div class="award-card fade-in">
-                    <div class="award-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="8" r="6"/>
-                            <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
-                        </svg>
-                    </div>
-                    <div class="award-content">
-                        <h4>Harvard-SNU Trainee Position</h4>
-                        <p>Selected for collaborative research program in AI development for knee MRI (2024)</p>
-                    </div>
-                </div>
-                <div class="award-card fade-in">
-                    <div class="award-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/>
-                        </svg>
-                    </div>
-                    <div class="award-content">
-                        <h4>Citation Award — KSRR</h4>
-                        <p>Recognized for two highly cited articles in 2024 (May 2025)</p>
-                    </div>
-                </div>
-                <div class="award-card fade-in">
-                    <div class="award-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/>
-                        </svg>
-                    </div>
-                    <div class="award-content">
-                        <h4>Best Paper Award — KSRR</h4>
-                        <p>Deep learning model for alignment measurement across imaging protocols (2024)</p>
-                    </div>
-                </div>
-                <div class="award-card fade-in">
-                    <div class="award-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>
-                        </svg>
-                    </div>
-                    <div class="award-content">
-                        <h4>Best Oral Presentation</h4>
-                        <p>Korean Society of Computer-Assisted Orthopaedic Surgery (2023)</p>
-                    </div>
-                </div>
-                <div class="award-card fade-in">
-                    <div class="award-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="8" r="6"/>
-                            <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
-                        </svg>
-                    </div>
-                    <div class="award-content">
-                        <h4>Best Resident Award</h4>
-                        <p>Seoul National University Hospital, Department of Orthopedic Surgery (Dec 2020)</p>
-                    </div>
-                </div>
-                <div class="award-card fade-in">
-                    <div class="award-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-                        </svg>
-                    </div>
-                    <div class="award-content">
-                        <h4>Academic Scholarships</h4>
-                        <p>Superior Academic Performance, Merit-Based, and College Scholarships — SNU (2010–2013)</p>
+                <div class="cv-item">
+                    <div class="cv-date">Feb 2014</div>
+                    <div class="cv-body">
+                        <div class="cv-title">Doctor of Medicine (M.D.)</div>
+                        <div class="cv-org">Seoul National University College of Medicine</div>
                     </div>
                 </div>
             </div>
-            </div><!-- end awards-content -->
-        </div>
-    </section>
+        </section>
 
-    <!-- Talks & Presentations Section -->
-    <section class="presentations" id="talks" aria-labelledby="talks-heading">
-        <div class="container">
-            <div class="section-header" onclick="toggleSection('talks-content', this)">
-                <h2 id="talks-heading">Talks & Presentations</h2>
-                <button class="collapse-toggle" aria-expanded="false" aria-controls="talks-content" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-            </div>
-            <div id="talks-content" class="collapsible-content collapsed">
-            <div class="presentations-grid">
-
-                <div class="presentation-item">
-                    <h4>Assessment of Large Multimodal Reasoning Model Performance and Chain-of-Thought Quality in Chest Radiograph Interpretation</h4>
-                    <p class="presentation-meta">Luo L, Zhang X, <strong>Kim SE</strong>, et al.</p>
-                    <p class="presentation-venue">RSNA Cutting Edge 2025</p>
+        <!-- Awards -->
+        <section id="awards">
+            <h2>Awards &amp; Recognition</h2>
+            <div class="cv-list">
+                <div class="cv-item">
+                    <div class="cv-date">2017</div>
+                    <div class="cv-body">
+                        <div class="cv-title">Highest Commendation from Minister of Health</div>
+                        <div class="cv-org">Republic of Korea — for dedication during MERS crisis response</div>
+                    </div>
                 </div>
-
-                <div class="presentation-item">
-                    <h4>Automated Posterior Tibial Slope Measurement Using Lateral Knee Radiographs: A Novel Landmark-Based Approach Using Deep Learning</h4>
-                    <p class="presentation-meta">Ryu B, Ro DH, Martin RK, Inderhaug E, Persson A, Choi BS, Haaland S, <strong>Kim SE</strong></p>
-                    <p class="presentation-venue">AAOS Annual Meeting &mdash; March 2025, United States</p>
+                <div class="cv-item">
+                    <div class="cv-date">2024</div>
+                    <div class="cv-body">
+                        <div class="cv-title">Harvard–SNU Trainee Position</div>
+                        <div class="cv-org">Selected for collaborative research program in AI development for knee MRI</div>
+                    </div>
                 </div>
-
-                <div class="presentation-item">
-                    <h4>Medial Joint Opening Rather Than Mechanical Axis Deviation Determined Clinical Outcomes After High Tibial Osteotomy</h4>
-                    <p class="presentation-meta"><strong>Kim SE</strong>, Ro DH, Lee MC, Han HS</p>
-                    <p class="presentation-venue">ESSKA 21st Congress &mdash; May 2024, Milan, Italy</p>
+                <div class="cv-item">
+                    <div class="cv-date">May 2025</div>
+                    <div class="cv-body">
+                        <div class="cv-title">Citation Award — KSRR</div>
+                        <div class="cv-org">Recognized for two highly cited articles in 2024</div>
+                    </div>
                 </div>
-
-                <div class="presentation-item">
-                    <h4>CPAK Classification According to Kellgren and Lawrence Grade</h4>
-                    <p class="presentation-meta"><strong>Kim SE</strong>, MacDessi S, Song D, Kim JI, Choi BS, Han HS, Ro DH</p>
-                    <p class="presentation-venue">ESSKA 21st Congress &mdash; May 2024, Milan, Italy</p>
+                <div class="cv-item">
+                    <div class="cv-date">2024</div>
+                    <div class="cv-body">
+                        <div class="cv-title">Best Paper Award — KSRR</div>
+                        <div class="cv-org">Deep learning model for alignment measurement across imaging protocols</div>
+                    </div>
                 </div>
-
-                <div class="presentation-item">
-                    <h4>Automated Posterior Tibial Slope Measurement Using Deep Learning in Lateral Knee Radiographs</h4>
-                    <p class="presentation-meta"><strong>Kim SE</strong>, Ro DH, Lee MC, Han HS</p>
-                    <p class="presentation-venue">ESSKA 21st Congress &mdash; May 2024, Milan, Italy</p>
+                <div class="cv-item">
+                    <div class="cv-date">2023</div>
+                    <div class="cv-body">
+                        <div class="cv-title">Best Oral Presentation</div>
+                        <div class="cv-org">Korean Society of Computer-Assisted Orthopaedic Surgery</div>
+                    </div>
                 </div>
-
-                <div class="presentation-item">
-                    <h4>Does CPAK Change in UKA Correlate with Patient-Reported Outcome Measures?</h4>
-                    <p class="presentation-meta"><strong>Kim SE</strong>, Ro DH, Lee MC, Han HS</p>
-                    <p class="presentation-venue">ESSKA 21st Congress &mdash; May 2024, Milan, Italy</p>
+                <div class="cv-item">
+                    <div class="cv-date">Dec 2020</div>
+                    <div class="cv-body">
+                        <div class="cv-title">Best Resident Award</div>
+                        <div class="cv-org">Seoul National University Hospital, Department of Orthopedic Surgery</div>
+                    </div>
                 </div>
-
-                <div class="presentation-item">
-                    <h4>CPAK Classification According to Kellgren and Lawrence Grade</h4>
-                    <p class="presentation-meta"><strong>Kim SE</strong>, MacDessi S, Song D, Kim JI, Choi BS, Han HS, Ro DH</p>
-                    <p class="presentation-venue">Korean Society of CAOS &mdash; October 2023, Korea</p>
-                </div>
-
-                <div class="presentation-item">
-                    <h4>Medial Joint Opening Rather Than Mechanical Axis Deviation Determined Outcomes After HTO</h4>
-                    <p class="presentation-meta"><strong>Kim SE</strong>, Kwak J, Ro DH, Lee MC, Han HS</p>
-                    <p class="presentation-venue">Korean Orthopaedic Association 67th Congress &mdash; October 2023, Korea</p>
-                </div>
-
-                <div class="presentation-item">
-                    <h4>Anatomic vs Dome Patellar Design in TKA: A Randomized Clinical Trial</h4>
-                    <p class="presentation-meta"><strong>Kim SE</strong>, Jung H, Ro DH, Lee MC, Han HS</p>
-                    <p class="presentation-venue">Korean Orthopaedic Association 67th Congress &mdash; October 2023, Korea</p>
-                </div>
-
-                <div class="presentation-item">
-                    <h4>Prospective Multi-center Outcomes Study of Persona Knee System in TKA: Mid-term Outcomes</h4>
-                    <p class="presentation-meta"><strong>Kim SE</strong>, Lee MC, Ro DH, et al.</p>
-                    <p class="presentation-venue">Korean Orthopaedic Association 66th Congress &mdash; October 2022, Korea</p>
-                </div>
-
-                <div class="presentation-item">
-                    <h4>Low Muscle Mass Is an Independent Risk Factor for Postoperative Blood Transfusion in TKA</h4>
-                    <p class="presentation-meta"><strong>Kim SE</strong>, Hwang DH, Han HS, Lee MC, Ro DH</p>
-                    <p class="presentation-venue">Korean Knee Society 40th Congress &mdash; May 2022, Korea</p>
-                </div>
-
-                <div class="presentation-item">
-                    <h4>Muscle Activation and Sagittal Knee Biomechanics in Patellofemoral Pain Syndrome</h4>
-                    <p class="presentation-meta"><strong>Kim SE</strong>, Kwon SB, Jeon S, Kim M, Ro DH, Lee MC, Han HS</p>
-                    <p class="presentation-venue">Korean Orthopaedic Association 65th Congress &mdash; October 2021, Korea</p>
-                </div>
-
-                <div class="presentation-item">
-                    <h4>Pain Control After TKA: IV PCA vs Continuous vs Single Adductor Canal Block</h4>
-                    <p class="presentation-meta"><strong>Kim SE</strong>, Han HS, Lee MC, Ro DH</p>
-                    <p class="presentation-venue">Korean Orthopaedic Association 64th Congress &mdash; October 2020, Korea</p>
-                </div>
-
-                <div class="presentation-item">
-                    <h4>Quantitative Evaluation of Gait Features After TKA: Comparison with Age and Sex-Matched Controls</h4>
-                    <p class="presentation-meta"><strong>Kim SE</strong>, Ro DH, Kang T, Han DH, Lee DY, Han HS, Lee MC</p>
-                    <p class="presentation-venue">Korean Orthopaedic Association 63rd Congress &mdash; October 2019, Korea</p>
-                </div>
-
-                <div class="presentation-item">
-                    <h4>The Doctor Will Agree With You Now: Sycophancy of LLMs in Multi-Turn Medical Conversations</h4>
-                    <p class="presentation-meta">Kim TM, Luo L, <strong>Kim SE</strong>, Manrai AK, Topol E, Rajpurkar P</p>
-                    <p class="presentation-venue">EACL 2026 &mdash; HeaLing Workshop</p>
-                </div>
-
-                <div class="presentation-item">
-                    <h4>Do Mixed-Vendor Multi-Agent LLMs Improve Clinical Diagnosis?</h4>
-                    <p class="presentation-meta">Yuan GC, Zhang X, <strong>Kim SE</strong>, Rajpurkar P</p>
-                    <p class="presentation-venue">EACL 2026 &mdash; HeaLing Workshop</p>
-                </div>
-
-            </div>
-            </div><!-- end talks-content -->
-        </div>
-    </section>
-
-    <!-- Professional Service & Memberships Section -->
-    <section class="service-section" id="service" aria-labelledby="service-heading">
-        <div class="container">
-            <div class="section-header" onclick="toggleSection('service-content', this)">
-                <h2 id="service-heading">Professional Service & Memberships</h2>
-                <button class="collapse-toggle" aria-expanded="false" aria-controls="service-content" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-            </div>
-            <div id="service-content" class="collapsible-content collapsed">
-            <div class="service-layout">
-                <div class="service-icon-lg">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
-                        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                    </svg>
-                </div>
-                <div>
-                    <h3 class="service-title">Ad hoc Peer Reviewer</h3>
-                    <p class="service-description">
-                        Reviewed <strong>40+ manuscripts</strong> for high-impact international journals in orthopedic surgery, musculoskeletal research, and medical artificial intelligence.
-                    </p>
-                    <div class="journal-tags">
-                        <span class="journal-tag">The Journal of Bone and Joint Surgery</span>
-                        <span class="journal-tag">npj Digital Medicine</span>
-                        <span class="journal-tag">Scientific Reports</span>
-                        <span class="journal-tag">The Knee</span>
-                        <span class="journal-tag">Knee Surgery & Related Research</span>
-                        <span class="journal-tag">Clinics in Orthopedic Surgery</span>
-                        <span class="journal-tag">BMC Musculoskeletal Disorders</span>
-                        <span class="journal-tag">Archives of Orthopaedic and Trauma Surgery</span>
-                        <span class="journal-tag">European Journal of Medical Research</span>
-                        <span class="journal-tag">Journal of Orthopaedic Surgery and Research</span>
-                        <span class="journal-tag">Arthroplasty</span>
+                <div class="cv-item">
+                    <div class="cv-date">2010–2013</div>
+                    <div class="cv-body">
+                        <div class="cv-title">Academic Scholarships</div>
+                        <div class="cv-org">Superior Academic Performance, Merit-Based, and College Scholarships — SNU</div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Memberships -->
-            <div class="memberships-section">
-                <h3 class="memberships-title">Professional Memberships</h3>
-                <div class="memberships-grid">
-                    <div class="membership-item">Korean Orthopaedic Association (KOA)</div>
-                    <div class="membership-item">Korean Knee Society (KKS)</div>
-                    <div class="membership-item">Korean Arthroscopy Society</div>
-                    <div class="membership-item">Korean Society of CAOS</div>
-                    <div class="membership-item">American Academy of Orthopaedic Surgeons (AAOS)</div>
-                    <div class="membership-item">Orthopaedic Research Society (ORS)</div>
-                </div>
-            </div>
-            </div><!-- end service-content -->
-        </div>
-    </section>
+        <footer>
+            <p>&copy; 2026 Sung Eun Kim &middot; Last updated automatically from <a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a></p>
+        </footer>
 
-    <!-- Beyond the Lab Section -->
-    <section class="personal-section" id="personal" aria-labelledby="personal-heading">
-        <div class="container">
-            <div class="section-header" onclick="toggleSection('personal-content', this)">
-                <h2 id="personal-heading">Beyond the Lab</h2>
-                <button class="collapse-toggle" aria-expanded="false" aria-controls="personal-content" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                </button>
-            </div>
-            <div id="personal-content" class="collapsible-content collapsed">
-            <div class="personal-grid">
-                <div>
-                    <p class="personal-text">
-                        When I'm not developing AI models or reviewing MRI scans, I'm a proud husband and father. My loving wife and our three sons are my greatest energizers—they remind me every day why advancing healthcare matters.
-                    </p>
-                    <p class="personal-text">
-                        I'm an avid tennis enthusiast and never miss a chance to hit the courts—I won the National Medical Doctors Tennis Tournament in 2023, was runner-up at the KOA Tennis Tournament, and championed the Harvard-MIT Korean Tennis Championship in 2025. There's something about the sport that mirrors research: strategy, persistence, and the thrill of a well-executed play.
-                    </p>
-                    <p class="personal-text">
-                        I also love to travel and explore new places around the world. Each journey brings fresh perspectives that often inspire my work in unexpected ways. In 2023, I won the Grand Prize at the SNU Hospital Group Slogan Contest with "Beyond Excellence."
-                    </p>
-                </div>
-                <div class="personal-cards">
-                    <div class="personal-card">
-                        <div class="personal-card-icon family-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2">
-                                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <div class="personal-card-title">Family</div>
-                            <div class="personal-card-desc">Loving wife & 3 energetic sons</div>
-                        </div>
-                    </div>
-                    <div class="personal-card">
-                        <div class="personal-card-icon tennis-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M18.09 5.91A10 10 0 0 0 5.91 18.09"/>
-                                <path d="M5.91 5.91A10 10 0 0 1 18.09 18.09"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <div class="personal-card-title">Tennis</div>
-                            <div class="personal-card-desc">National tournament champion (2023)</div>
-                        </div>
-                    </div>
-                    <div class="personal-card">
-                        <div class="personal-card-icon travel-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <div class="personal-card-title">Travel</div>
-                            <div class="personal-card-desc">Exploring the world</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div><!-- end personal-content -->
-        </div>
-    </section>
-
-    <!-- CV Download Section -->
-    <section class="cv-section" id="cv" aria-labelledby="cv-heading">
-        <div class="container cv-center">
-            <h2 id="cv-heading">Curriculum Vitae</h2>
-            <p class="cv-description">
-                Download my full CV for a complete overview of my academic and professional background.
-            </p>
-            <a href="CV_SungEunKim.pdf" target="_blank" class="btn btn-primary">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-                    <polyline points="7,10 12,15 17,10"/>
-                    <line x1="12" y1="15" x2="12" y2="3"/>
-                </svg>
-                Download CV (PDF)
-            </a>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact" aria-labelledby="contact-heading">
-        <div class="container">
-            <h2 id="contact-heading">Let's Collaborate</h2>
-            <p class="contact-intro">
-                I'm always excited to connect with researchers, clinicians, and organizations
-                interested in advancing healthcare through AI. Whether you have a research idea,
-                collaboration opportunity, or just want to chat about the future of medicine—let's talk.
-            </p>
-            <div class="contact-cta">
-                <a href="mailto:sungeun_kim2@hms.harvard.edu" class="btn btn-light">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <polyline points="22,6 12,13 2,6"/>
-                    </svg>
-                    Send Email
-                </a>
-                <a href="https://www.linkedin.com/in/sung-eun-kim-19267a2a4/" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                    Connect on LinkedIn
-                </a>
-            </div>
-        </div>
-    </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Sung Eun Kim.</p>
-        <div class="footer-links">
-            <a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a>
-            <a href="https://www.linkedin.com/in/sung-eun-kim-19267a2a4/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="mailto:sungeun_kim2@hms.harvard.edu">Email</a>
-        </div>
-    </footer>
+    </div>
 
     <script>
-        // Theme toggle
-        (function() {
-            const toggle = document.getElementById('themeToggle');
-            const stored = localStorage.getItem('theme');
-            if (stored) {
-                document.documentElement.setAttribute('data-theme', stored);
-            }
-            toggle.addEventListener('click', () => {
-                const current = document.documentElement.getAttribute('data-theme');
-                const isDark = current === 'dark' ||
-                    (!current && window.matchMedia('(prefers-color-scheme: dark)').matches);
-                const next = isDark ? 'light' : 'dark';
-                document.documentElement.setAttribute('data-theme', next);
-                localStorage.setItem('theme', next);
-            });
-        })();
-
-        // Navigation scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Mobile navigation toggle with keyboard support
-        const navToggle = document.getElementById('navToggle');
-        const navLinks = document.getElementById('navLinks');
-
-        function toggleNav() {
-            const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-            navToggle.setAttribute('aria-expanded', !isExpanded);
-            navLinks.classList.toggle('active');
-        }
-
-        navToggle.addEventListener('click', toggleNav);
-        navToggle.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                toggleNav();
-            }
-        });
-
-        // Close mobile nav on link click
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                navToggle.setAttribute('aria-expanded', 'false');
-            });
-        });
-
-        // Show more publications toggle
-        function toggleSection(contentId, headerEl) {
-            const content = document.getElementById(contentId);
-            const btn = headerEl.querySelector('.collapse-toggle');
-            const isCollapsed = content.classList.contains('collapsed');
-
-            if (isCollapsed) {
-                content.classList.remove('collapsed');
-                content.style.maxHeight = content.scrollHeight + 'px';
-                content.classList.add('expanded');
-                btn.setAttribute('aria-expanded', 'true');
-            } else {
-                content.style.maxHeight = content.scrollHeight + 'px';
-                requestAnimationFrame(() => {
-                    content.classList.remove('expanded');
-                    content.classList.add('collapsed');
-                    content.style.maxHeight = '0';
-                    btn.setAttribute('aria-expanded', 'false');
-                });
-            }
-        }
-
-        // When navigating to a collapsed section via anchor link, expand it
-        function expandIfCollapsed(hash) {
-            const target = document.querySelector(hash);
-            if (!target) return;
-            const collapsible = target.querySelector('.collapsible-content.collapsed');
-            if (collapsible) {
-                const header = target.querySelector('.section-header');
-                if (header) toggleSection(collapsible.id, header);
-            }
-        }
-
+        // Toggle earlier publications (button is auto-generated)
         function togglePublications() {
             const earlierPubs = document.getElementById('earlierPubs');
             const showMoreText = document.getElementById('showMoreText');
             const showMoreBtn = document.getElementById('showMoreBtn');
+            if (!earlierPubs) return;
             const isHidden = earlierPubs.style.display === 'none';
-
             earlierPubs.style.display = isHidden ? 'block' : 'none';
             showMoreText.textContent = isHidden ? 'Show Fewer Publications' : 'Show 2024 & Earlier Publications';
             showMoreBtn.setAttribute('aria-expanded', isHidden);
         }
 
-        // Fade in animation on scroll
-        const fadeElements = document.querySelectorAll('.fade-in');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        fadeElements.forEach(el => observer.observe(el));
-
-        // Smooth scroll for anchor links with navbar offset
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const href = this.getAttribute('href');
-                if (href === '#') {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    return;
-                }
-                const target = document.querySelector(href);
-                if (target) {
-                    expandIfCollapsed(href);
-                    setTimeout(() => {
-                        const navHeight = document.getElementById('navbar').offsetHeight;
-                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }, 50);
-                }
-            });
-        });
-        // Make entire pub-list-item clickable
+        // Make each publication row clickable
         document.querySelectorAll('.pub-list-item').forEach(item => {
             const link = item.querySelector('h4 a');
             if (link) {
@@ -3146,15 +709,6 @@
             } else {
                 item.style.cursor = 'default';
             }
-        });
-
-        // Scroll progress bar
-        const scrollProgress = document.getElementById('scrollProgress');
-        window.addEventListener('scroll', () => {
-            const scrollTop = document.documentElement.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const progress = (scrollTop / scrollHeight) * 100;
-            scrollProgress.style.width = progress + '%';
         });
     </script>
 </body>

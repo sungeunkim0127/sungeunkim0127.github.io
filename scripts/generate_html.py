@@ -48,10 +48,15 @@ def format_venue(venue: str) -> str:
     return f"<em>{escape(venue)}</em>"
 
 
-def generate_pub_item(pub: dict, highlight_name: str) -> str:
+def generate_pub_item(pub: dict, highlight_name: str, highlight_ids: set[str] | None = None) -> str:
     """Generate HTML for a single publication list item."""
     is_first = pub.get("is_first_author", False)
-    css_class = "pub-list-item first-author-item" if is_first else "pub-list-item"
+    classes = ["pub-list-item"]
+    if is_first:
+        classes.append("first-author-item")
+    if highlight_ids and pub.get("id", "") in highlight_ids:
+        classes.append("pub-list-item-highlight")
+    css_class = " ".join(classes)
 
     title = escape(pub.get("title", ""))
     authors_raw = pub.get("authors", "")
@@ -84,12 +89,12 @@ def generate_pub_item(pub: dict, highlight_name: str) -> str:
     )
 
 
-def generate_year_group(year_label: str, pubs: list[dict], highlight_name: str, year_id: str) -> str:
+def generate_year_group(year_label: str, pubs: list[dict], highlight_name: str, year_id: str, highlight_ids: set[str] | None = None) -> str:
     """Generate HTML for a year group."""
     count = len(pubs)
     papers_word = "paper" if count == 1 else "papers"
 
-    items_html = "\n".join(generate_pub_item(p, highlight_name) for p in pubs)
+    items_html = "\n".join(generate_pub_item(p, highlight_name, highlight_ids) for p in pubs)
 
     return (
         f'                <div class="pub-year-group" id="{year_id}">\n'
@@ -116,6 +121,7 @@ def generate_all_pubs_html(pubs: list[dict], overrides: dict) -> str:
     """Generate the complete year-grouped publications HTML."""
     highlight_name = overrides.get("author_highlight_name", "Kim SE")
     cutoff_year = overrides.get("show_more_cutoff_year", 2025)
+    highlight_ids = set(overrides.get("highlight_ids", []))
 
     # Apply overrides
     pubs = apply_overrides(pubs, overrides)
@@ -138,7 +144,7 @@ def generate_all_pubs_html(pubs: list[dict], overrides: dict) -> str:
     for year in visible_years:
         year_pubs = by_year[year]
         year_id = f"pubs-{year}"
-        html_parts.append(generate_year_group(str(year), year_pubs, highlight_name, year_id))
+        html_parts.append(generate_year_group(str(year), year_pubs, highlight_name, year_id, highlight_ids))
 
     # Hidden year groups (inside earlierPubs div)
     if hidden_years:
@@ -155,7 +161,7 @@ def generate_all_pubs_html(pubs: list[dict], overrides: dict) -> str:
             else:
                 year_label = str(year)
             year_id = f"pubs-{year}"
-            html_parts.append(generate_year_group(year_label, year_pubs, highlight_name, year_id))
+            html_parts.append(generate_year_group(year_label, year_pubs, highlight_name, year_id, highlight_ids))
             html_parts.append("")
 
         html_parts.append("                </div><!-- end earlierPubs -->")
