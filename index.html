@@ -241,6 +241,27 @@
         }
         .show-more-btn:hover { background: #f5f7fa; border-color: #c9d6e6; }
 
+        /* ---------- Preprints / Under Review ---------- */
+        .status {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #1f7a44;
+            background: #e6f4ea;
+            padding: 1px 9px;
+            border-radius: 10px;
+            margin-left: 4px;
+            white-space: nowrap;
+        }
+        .review-list {
+            margin: 14px 0 0;
+            padding-left: 20px;
+        }
+        .review-list li {
+            margin: 6px 0;
+            color: var(--color-text);
+        }
+
         /* ---------- CV-style lists (Experience / Awards) ---------- */
         .cv-list { margin-top: 22px; }
         .cv-item {
@@ -295,7 +316,7 @@
                 <h1>Sung Eun Kim, MD</h1>
                 <p class="affil">Postdoctoral Research Fellow, Harvard Medical School &middot; Research Professor, Seoul National University Hospital</p>
                 <p class="bio">
-                    I am a surgeon-scientist working at the intersection of medicine and artificial intelligence.
+                    I am a surgeon and AI researcher working at the intersection of medicine and artificial intelligence.
                     At Harvard Medical School's Department of Biomedical Informatics I work with
                     <a href="https://www.rajpurkarlab.hms.harvard.edu/" target="_blank" rel="noopener noreferrer">Dr. Pranav Rajpurkar</a>
                     to develop and validate AI systems for medical imaging, clinical decision support, and healthcare evaluation.
@@ -313,6 +334,39 @@
                 <img src="headshot-2026.jpg" alt="Portrait of Dr. Sung Eun Kim, orthopedic surgeon and AI researcher at Harvard Medical School">
             </div>
         </header>
+
+        <!-- Preprints & Under Review (manual; outside the auto-generated markers) -->
+        <section id="preprints">
+            <h2>Preprints &amp; Under Review</h2>
+
+            <div class="pub-list-header">
+                <h3>In Press / Accepted</h3>
+            </div>
+            <div class="pub-list-items">
+                <div class="pub-list-item">
+                    <h4><a href="https://arxiv.org/abs/2507.22030" target="_blank" rel="noopener">ReXGroundingCT: A Dataset for Free-Text Finding Segmentation in Chest CT</a></h4>
+                    <p class="pub-meta">Baharoon M, Luo L, &hellip;, <strong>Kim SE</strong>, &hellip;, Rajpurkar P. <span class="status">In press &middot; NEJM AI</span></p>
+                </div>
+                <div class="pub-list-item">
+                    <h4>ReXSonoVQA: A Video QA Benchmark for Procedure-Centric Ultrasound Understanding</h4>
+                    <p class="pub-meta">Wang X, Zhang X, <strong>Kim SE</strong>, Pal A, Rajpurkar P. <span class="status">Accepted &middot; CHIL 2026</span></p>
+                </div>
+                <div class="pub-list-item">
+                    <h4>Open-Ended Clinical Text Generation for Acute Care: Reinforcement Learning with Clinically Grounded Rewards</h4>
+                    <p class="pub-meta">Wang M, Luo L, <strong>Kim SE</strong>, Cao F, Kim DA, Rajpurkar P. <span class="status">Accepted &middot; CHIL 2026</span></p>
+                </div>
+            </div>
+
+            <div class="pub-list-header" style="margin-top: 26px;">
+                <h3>Under Review</h3>
+            </div>
+            <ul class="review-list">
+                <li>1 first-author manuscript under review at <strong>CoRL 2026</strong></li>
+                <li>2 manuscripts under review at <strong>ACL ARR 2026</strong></li>
+                <li>1 manuscript under review at <strong>MIDL 2026</strong></li>
+                <li>1 manuscript under review at <strong>MLHC 2026</strong></li>
+            </ul>
+        </section>
 
         <!-- Publications -->
         <section id="publications">
