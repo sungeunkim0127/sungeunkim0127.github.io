@@ -7,7 +7,7 @@
     "year": 2026,
     "is_first_author": true,
     "author_role": "co-first",
-    "citation_count": 2,
+    "citation_count": 3,
     "scholar_cid": "KriQPeEAAAAJ:aqlVkmm33-oC",
     "url": "https://psb.stanford.edu/psb-online/proceedings/psb26/sambara.pdf"
   },
@@ -19,9 +19,20 @@
     "year": 2026,
     "is_first_author": true,
     "author_role": "co-first",
-    "citation_count": 2,
+    "citation_count": 5,
     "scholar_cid": "KriQPeEAAAAJ:7PzlFSSx8tAC",
     "url": "https://doi.org/10.1038/s41591-026-04252-6"
+  },
+  {
+    "id": "beyond-the-scanner-a-benchmark-for-medical-photograph-unders-2026",
+    "title": "Beyond the Scanner: A Benchmark for Medical Photograph Understanding",
+    "authors": "Oishi Banerjee and Julius M Kernbach and Sung Eun Kim and Abeer Rihan Alomaish and Reema Abdulwahab S Alghamdi and Hassan Alomaish and Mohammed Baharoon and Xiaoman Zhang and Julian Nicolas Acosta and Pranav Rajpurkar",
+    "venue": "",
+    "year": 2026,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 0,
+    "scholar_cid": "KriQPeEAAAAJ:IWHjjKOFINEC"
   },
   {
     "id": "crimson-a-clinicallygrounded-llmbased-metric-for-generative-2026",
@@ -70,6 +81,28 @@
     "scholar_cid": "KriQPeEAAAAJ:mVmsd5A6BfQC"
   },
   {
+    "id": "rexinthewild-a-unified-benchmark-for-medical-photograph-unde-2026",
+    "title": "ReXInTheWild: A Unified Benchmark for Medical Photograph Understanding",
+    "authors": "Oishi Banerjee and Sung Eun Kim and Alexandra N Willauer and Julius M Kernbach and Abeer Rihan Alomaish and Reema Abdulwahab S Alghamdi and Hassan Rayhan Alomaish and Mohammed Baharoon and Xiaoman Zhang and Julian Nicolas Acosta and Christine Zhou and Pranav Rajpurkar",
+    "venue": "arXiv preprint arXiv:2603.19517",
+    "year": 2026,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 1,
+    "scholar_cid": "KriQPeEAAAAJ:ZeXyd9-uunAC"
+  },
+  {
+    "id": "rexsonovqa-a-video-qa-benchmark-for-procedurecentric-ultraso-2026",
+    "title": "ReXSonoVQA: A Video QA Benchmark for Procedure-Centric Ultrasound Understanding",
+    "authors": "Xucheng Wang and Xiaoman Zhang and Sung Eun Kim and Ankit Pal and Pranav Rajpurkar",
+    "venue": "arXiv preprint arXiv:2604.10916",
+    "year": 2026,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 0,
+    "scholar_cid": "KriQPeEAAAAJ:qUcmZB5y_30C"
+  },
+  {
     "id": "sycophancy-llm-eacl-2026",
     "title": "The Doctor Will Agree With You Now: Sycophancy of Large Language Models in Multi-Turn Medical Conversations",
     "authors": "Kim TM, Luo L, Kim SE, Manrai AK, Topol E, Rajpurkar P",
@@ -113,7 +146,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 5,
+    "citation_count": 6,
     "scholar_cid": "KriQPeEAAAAJ:Zph67rFs4hoC"
   },
   {
@@ -124,7 +157,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 16,
+    "citation_count": 22,
     "scholar_cid": "KriQPeEAAAAJ:kNdYIx-mwKoC",
     "url": "https://doi.org/10.1302/0301-620X.107B2.BJJ-2024-0791.R1"
   },
@@ -136,7 +169,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "corresponding",
-    "citation_count": 13,
+    "citation_count": 15,
     "scholar_cid": "KriQPeEAAAAJ:KlAtU1dfN6UC",
     "url": "https://doi.org/10.1186/s43019-025-00261-w"
   },
@@ -160,7 +193,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 3,
+    "citation_count": 4,
     "scholar_cid": "KriQPeEAAAAJ:ULOm3_A8WrAC"
   },
   {
@@ -171,7 +204,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 9,
+    "citation_count": 11,
     "scholar_cid": "KriQPeEAAAAJ:3fE2CSJIrl8C",
     "url": "https://doi.org/10.48550/arXiv.2411.18672"
   },
@@ -194,7 +227,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 4,
+    "citation_count": 5,
     "scholar_cid": "KriQPeEAAAAJ:hqOjcs7Dif8C",
     "url": "https://doi.org/10.1002/jor.26018"
   },
@@ -253,7 +286,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 12,
+    "citation_count": 14,
     "scholar_cid": "KriQPeEAAAAJ:MXK_kJrjxJIC",
     "url": "https://doi.org/10.48550/arXiv.2412.15264"
   },
@@ -265,7 +298,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 10,
+    "citation_count": 13,
     "scholar_cid": "KriQPeEAAAAJ:4TOpqqG69KYC"
   },
   {
@@ -311,7 +344,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 0,
+    "citation_count": 1,
     "scholar_cid": "KriQPeEAAAAJ:qxL8FJ1GzNcC",
     "url": "https://arxiv.org/abs/2507.22898"
   },
@@ -347,7 +380,7 @@
     "year": 2024,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 20,
+    "citation_count": 27,
     "scholar_cid": "KriQPeEAAAAJ:5nxA0vEk-isC"
   },
   {
@@ -370,7 +403,7 @@
     "year": 2024,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 1,
+    "citation_count": 3,
     "scholar_cid": "KriQPeEAAAAJ:Se3iqnhoufwC",
     "url": "https://doi.org/10.1186/s12885-024-13021-y"
   },
@@ -382,7 +415,7 @@
     "year": 2024,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 19,
+    "citation_count": 23,
     "scholar_cid": "KriQPeEAAAAJ:Tyk-4Ss8FVUC",
     "url": "https://doi.org/10.1186/s43019-023-00209-y"
   },
@@ -475,7 +508,7 @@
     "year": 2024,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 17,
+    "citation_count": 18,
     "scholar_cid": "KriQPeEAAAAJ:LkGwnXOMwfcC"
   },
   {
@@ -486,7 +519,7 @@
     "year": 2024,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 21,
+    "citation_count": 24,
     "scholar_cid": "KriQPeEAAAAJ:Y0pCki6q_DkC",
     "url": "https://doi.org/10.1186/s43019-023-00204-3"
   },
@@ -615,7 +648,7 @@
     "year": 2023,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 82,
+    "citation_count": 87,
     "scholar_cid": "KriQPeEAAAAJ:9yKSN-GCB0IC",
     "url": "https://doi.org/10.1007/s00167-022-07227-5"
   },
@@ -663,7 +696,7 @@
     "year": 2020,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 7,
+    "citation_count": 8,
     "scholar_cid": "KriQPeEAAAAJ:u-x6o8ySG0sC",
     "url": "https://doi.org/10.1186/s12891-020-03579-6"
   },
