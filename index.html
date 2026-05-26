@@ -1,22 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sung Eun Kim, MD | Translational Medicine AI Researcher</title>
-    <meta name="description" content="Sung Eun Kim, MD — Postdoctoral Research Fellow at Harvard Medical School and Research Professor at Seoul National University Hospital. 40+ publications including Nature Medicine. Bridging orthopedic surgery with AI.">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sung Eun Kim, MD — Translational Medicine AI Researcher</title>
+    <meta name="description" content="Sung Eun Kim, MD — Postdoctoral Research Fellow at Harvard Medical School and Research Professor at Seoul National University Hospital. 40+ publications including Nature Medicine. Bridging orthopedic surgery with AI." />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Sung Eun Kim, MD | Translational Medicine AI Researcher">
-    <meta property="og:description" content="Postdoctoral Research Fellow at Harvard Medical School. 40+ publications including Nature Medicine. Bridging orthopedic surgery with cutting-edge AI research.">
-    <meta property="og:type" content="profile">
-    <meta property="og:url" content="https://sungeunkim0127.github.io/">
-    <meta property="og:image" content="https://sungeunkim0127.github.io/headshot-2026.jpg">
+    <meta property="og:title" content="Sung Eun Kim, MD | Translational Medicine AI Researcher" />
+    <meta property="og:description" content="Postdoctoral Research Fellow at Harvard Medical School. 40+ publications including Nature Medicine. Bridging orthopedic surgery with cutting-edge AI research." />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://sungeunkim0127.github.io/" />
+    <meta property="og:image" content="https://sungeunkim0127.github.io/headshot-2026.jpg" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Sung Eun Kim, MD | Harvard Medical School">
-    <meta name="twitter:description" content="Orthopedic surgeon and AI researcher. 40+ publications including Nature Medicine.">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Sung Eun Kim, MD | Harvard Medical School" />
+    <meta name="twitter:description" content="Orthopedic surgeon and AI researcher. 40+ publications including Nature Medicine." />
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -28,21 +28,10 @@
         "honorificSuffix": "MD",
         "jobTitle": "Postdoctoral Research Fellow",
         "affiliation": [
-            {
-                "@type": "Organization",
-                "name": "Harvard Medical School",
-                "department": "Department of Biomedical Informatics"
-            },
-            {
-                "@type": "Organization",
-                "name": "Seoul National University Hospital",
-                "department": "Biomedical Research Institute"
-            }
+            { "@type": "Organization", "name": "Harvard Medical School", "department": "Department of Biomedical Informatics" },
+            { "@type": "Organization", "name": "Seoul National University Hospital", "department": "Biomedical Research Institute" }
         ],
-        "alumniOf": {
-            "@type": "CollegeOrUniversity",
-            "name": "Seoul National University College of Medicine"
-        },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Seoul National University College of Medicine" },
         "url": "https://sungeunkim0127.github.io/",
         "sameAs": [
             "https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ",
@@ -53,825 +42,1377 @@
     }
     </script>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔬</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔬</text></svg>" />
 
     <style>
         :root {
-            --max-width: 800px;
-            --color-text: #1a1a1a;
-            --color-muted: #6b6b6b;
-            --color-link: #1f5fa8;
-            --color-link-hover: #c0392b;
-            --color-rule: #e4e4e4;
-            --color-highlight: #fff8dc;
-            --color-highlight-rule: #e6c200;
+            --paper:        #F2EEE3;
+            --paper-deep:   #E9E3D3;
+            --paper-edge:   #D9D2BE;
+            --ink:          #161513;
+            --ink-soft:     #6A6258;
+            --ink-faint:    #9A9080;
+            --rule:         #C6BFAE;
+            --rule-soft:    #DCD5C2;
+            --accent:       #B0202B;
+            --accent-mid:   #7A4A3A;
+            --display-stack: 'Newsreader', Georgia, serif;
+            --serif-stack:   'Newsreader', Georgia, serif;
+            --mono-stack:    'JetBrains Mono', ui-monospace, Menlo, monospace;
+            --max:          1200px;
+            --gap:          clamp(20px, 2.5vw, 32px);
+            --pad-x:        clamp(20px, 4vw, 56px);
         }
 
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        html { -webkit-text-size-adjust: 100%; }
-
-        body {
-            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            color: var(--color-text);
-            background: #ffffff;
-            line-height: 1.6;
+        html, body {
+            background: var(--paper);
+            color: var(--ink);
+            font-family: var(--serif-stack);
             font-size: 17px;
-            margin: 0;
+            line-height: 1.55;
+            text-rendering: geometricPrecision;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
-        .wrap {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 56px 24px 80px;
-        }
+        a { color: inherit; text-decoration: none; }
 
-        a {
-            color: var(--color-link);
-            text-decoration: none;
+        .mono {
+            font-family: var(--mono-stack);
+            font-feature-settings: "ss01", "ss02";
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            font-weight: 500;
         }
-        a:hover { color: var(--color-link-hover); text-decoration: underline; }
+        .mono--sm { font-size: 11px; letter-spacing: 0.08em; }
 
-        /* ---------- Intro ---------- */
-        .intro {
-            display: flex;
-            gap: 36px;
-            align-items: center;
-        }
-        .intro-text { flex: 1 1 auto; min-width: 0; }
-        .intro-photo { flex: 0 0 auto; }
-        .intro-photo img {
-            width: 210px;
-            height: 210px;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: center 18%;
-            display: block;
-            box-shadow: 0 4px 18px rgba(0,0,0,0.12);
-        }
-
-        h1 {
-            font-size: 2.1rem;
-            font-weight: 600;
-            line-height: 1.15;
-            margin: 0 0 6px;
-            letter-spacing: -0.01em;
-        }
-        .affil {
-            color: var(--color-muted);
-            font-size: 1rem;
-            margin: 0 0 16px;
-        }
-        .bio { margin: 0 0 18px; }
-
-        .links {
-            font-size: 0.98rem;
-            line-height: 1.9;
-        }
-        .links a { white-space: nowrap; }
-        .links .sep {
-            color: var(--color-rule);
-            margin: 0 9px;
-        }
-
-        /* ---------- Sections ---------- */
-        section { margin-top: 52px; }
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin: 0 0 4px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--color-text);
-            letter-spacing: -0.01em;
-        }
-        .section-note {
-            color: var(--color-muted);
-            font-size: 0.9rem;
-            margin: 10px 0 22px;
-        }
-
-        /* ---------- Publications ---------- */
-        .pub-list-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin: 22px 0 4px;
-        }
-        .pub-list-header h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin: 0;
-        }
-        .pub-count {
-            font-size: 0.9rem;
-            color: var(--color-muted);
-        }
-
-        .pub-year-group { margin-top: 26px; }
-        .pub-year-label {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--color-text);
-            padding-bottom: 5px;
-            margin-bottom: 8px;
-            border-bottom: 1px solid var(--color-rule);
-        }
-        .year-count {
-            font-size: 0.8rem;
-            font-weight: 400;
-            color: var(--color-muted);
-            margin-left: 6px;
-        }
-
-        .pub-list-item {
-            padding: 11px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.15s ease;
-        }
-        .pub-list-item:hover { background: #f5f7fa; }
-        .pub-list-item h4 {
-            font-size: 1.02rem;
-            font-weight: 600;
-            margin: 0 0 3px;
-            line-height: 1.35;
-        }
-        .pub-list-item h4 a { color: var(--color-text); }
-        .pub-list-item h4 a:hover { color: var(--color-link-hover); }
-        .pub-meta {
-            font-size: 0.92rem;
-            color: var(--color-muted);
-            margin: 0;
-        }
-        .pub-meta strong { color: var(--color-text); }
-
-        /* First-author papers get a subtle left accent */
-        .first-author-item {
-            border-left: 3px solid #c9d6e6;
-            padding-left: 12px;
-            margin-left: -3px;
-        }
-
-        /* Selected / highlighted papers (Barron-style pale yellow) */
-        .pub-list-item-highlight {
-            background: var(--color-highlight);
-            border-left: 3px solid var(--color-highlight-rule);
-        }
-        .pub-list-item-highlight:hover { background: #fff3c4; }
-
-        .show-more-btn {
-            margin-top: 22px;
-            padding: 9px 18px;
-            font: inherit;
-            font-size: 0.92rem;
-            color: var(--color-link);
-            background: #fff;
-            border: 1px solid var(--color-rule);
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.15s ease, border-color 0.15s ease;
-        }
-        .show-more-btn:hover { background: #f5f7fa; border-color: #c9d6e6; }
-
-        /* ---------- Recent News ---------- */
-        .news-intro {
-            font-size: 0.95rem;
-            color: var(--color-muted);
-            margin: 12px 0 16px;
-        }
-        .news-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .news-list li {
-            padding: 7px 0;
-            font-size: 0.97rem;
-            border-bottom: 1px solid var(--color-rule);
-        }
-        .news-list li:last-child { border-bottom: none; }
-        .news-date {
-            color: var(--color-muted);
-            font-variant-numeric: tabular-nums;
-            margin-right: 8px;
-            font-size: 0.9rem;
-        }
-
-        /* ---------- Preprints / Under Review ---------- */
-        .status {
+        .dot {
             display: inline-block;
-            font-size: 0.78rem;
-            font-weight: 600;
-            color: #1f7a44;
-            background: #e6f4ea;
-            padding: 1px 9px;
-            border-radius: 10px;
-            margin-left: 4px;
-            white-space: nowrap;
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            margin-right: 0.5em;
+            vertical-align: middle;
+            background: var(--ink-soft);
         }
-        .review-list {
-            margin: 14px 0 0;
-            padding-left: 20px;
-        }
-        .review-list li {
-            margin: 6px 0;
-            color: var(--color-text);
+        .dot--accent { background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%      { opacity: 0.5; transform: scale(0.78); }
         }
 
-        /* ---------- CV-style lists (Experience / Awards) ---------- */
-        .cv-list { margin-top: 22px; }
-        .cv-item {
-            display: flex;
-            gap: 18px;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--color-rule);
-        }
-        .cv-item:last-child { border-bottom: none; }
-        .cv-date {
-            flex: 0 0 150px;
-            color: var(--color-muted);
-            font-size: 0.9rem;
-            padding-top: 2px;
-        }
-        .cv-body { flex: 1 1 auto; min-width: 0; }
-        .cv-title { font-weight: 600; }
-        .cv-org { color: var(--color-muted); font-size: 0.95rem; }
-        .cv-desc { font-size: 0.92rem; margin-top: 2px; }
+        /* ----- Layout shell ----- */
+        .app { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad-x); }
+        .section { padding-block: clamp(48px, 7vw, 96px); border-top: 1px solid var(--rule-soft); }
+        .section:first-of-type { border-top: 0; }
 
-        /* ---------- Footer ---------- */
-        footer {
-            margin-top: 64px;
-            padding-top: 22px;
-            border-top: 1px solid var(--color-rule);
-            color: var(--color-muted);
-            font-size: 0.85rem;
-            text-align: center;
+        /* ----- Hero ----- */
+        .hero { position: relative; padding: 28px 0 56px; }
+        .hero__attn {
+            position: absolute; inset: 0; z-index: 0; pointer-events: none;
+            mask-image: linear-gradient(180deg, black 0%, transparent 70%);
+            -webkit-mask-image: linear-gradient(180deg, black 0%, transparent 70%);
+            opacity: 0; transition: opacity 0.6s;
         }
+        [data-attn="on"] .hero__attn { opacity: 0.16; }
+        .hero > * { position: relative; z-index: 1; }
+        .hero__top {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-bottom: 28px; border-bottom: 1px solid var(--rule);
+            color: var(--ink-soft); gap: 16px; flex-wrap: wrap;
+        }
+        .hero__top-right { text-align: right; }
+        .hero__grid {
+            display: grid; grid-template-columns: 1.5fr 1fr;
+            gap: clamp(28px, 5vw, 64px); padding-top: 56px; align-items: start;
+        }
+        .hero__portrait { max-width: 260px; justify-self: end; width: 100%; }
+        @media (max-width: 900px) {
+            .hero__grid { grid-template-columns: 1fr; }
+            .hero__portrait { max-width: 220px; justify-self: start; }
+        }
+        .hero__role { color: var(--ink-soft); margin-bottom: 24px; display: inline-flex; align-items: center; }
+        .hero__name {
+            font-family: var(--display-stack);
+            font-size: clamp(34px, 4.8vw, 54px);
+            line-height: 1.0; letter-spacing: -0.022em; font-weight: 400;
+            margin-bottom: 28px; text-wrap: pretty;
+        }
+        .hero__titles { display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; font-size: 17px; color: var(--ink); }
+        .hero__title-line {
+            display: grid; grid-template-columns: 36px 1fr; gap: 8px; align-items: baseline;
+            border-top: 1px dashed var(--rule); padding-top: 6px;
+        }
+        .hero__title-line:first-child { border-top: 1px solid var(--rule); }
+        .hero__title-num { color: var(--ink-faint); }
+        .hero__bio { font-size: 17px; line-height: 1.6; color: var(--ink); max-width: 56ch; margin: 24px 0 28px; text-wrap: pretty; }
+        .hero__links { display: flex; gap: 10px; flex-wrap: wrap; }
+        .link {
+            font-family: var(--mono-stack); font-size: 11.5px; letter-spacing: 0.08em;
+            text-transform: uppercase; font-weight: 500; padding: 9px 14px 9px 12px;
+            border: 1px solid var(--ink); background: transparent; color: var(--ink);
+            display: inline-flex; align-items: center; gap: 6px; transition: all 0.18s ease; cursor: pointer;
+        }
+        .link:hover { background: var(--ink); color: var(--paper); }
+        .link__arrow { display: inline-block; transition: transform 0.18s ease; font-size: 14px; line-height: 1; }
+        .link:hover .link__arrow { transform: translate(2px, -2px); }
 
-        /* ---------- Responsive ---------- */
-        @media (max-width: 600px) {
-            .wrap { padding: 36px 18px 60px; }
-            .intro {
-                flex-direction: column-reverse;
-                text-align: center;
-                gap: 20px;
-            }
-            .intro-photo img { width: 160px; height: 160px; }
-            h1 { font-size: 1.75rem; }
-            .cv-item { flex-direction: column; gap: 2px; }
-            .cv-date { flex-basis: auto; }
+        /* ----- Portrait ----- */
+        .portrait { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 18%; display: block; filter: contrast(1.02) saturate(0.92); }
+
+        /* ----- Stats ----- */
+        .hero__stats {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 64px;
+            border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+        }
+        @media (max-width: 740px) { .hero__stats { grid-template-columns: repeat(2, 1fr); } }
+        .stat { padding: 22px 18px 22px 0; border-left: 1px solid var(--rule-soft); padding-left: 16px; }
+        .stat:first-child { border-left: 0; padding-left: 0; }
+        .stat__value { font-family: var(--display-stack); font-size: clamp(36px, 4vw, 52px); line-height: 1; letter-spacing: -0.02em; font-weight: 400; margin-bottom: 6px; }
+        .stat__label { font-size: 14px; color: var(--ink); margin-bottom: 4px; }
+        .stat__note { color: var(--ink-soft); }
+
+        /* ----- Section headers ----- */
+        .sech { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 16px 24px; margin-bottom: 36px; padding-bottom: 16px; border-bottom: 1px solid var(--rule); }
+        .sech__left { display: flex; align-items: center; gap: 12px; color: var(--ink-soft); grid-column: 1 / -1; }
+        .sech__num { color: var(--accent); white-space: nowrap; }
+        .sech__title { font-family: var(--display-stack); font-size: clamp(32px, 4.5vw, 56px); line-height: 1; letter-spacing: -0.02em; font-weight: 400; grid-column: 1; }
+        .sech__right { grid-column: 2; align-self: end; }
+        .sech--sm .sech__title { font-size: clamp(24px, 3vw, 36px); }
+
+        /* ----- Publication constellation ----- */
+        .vizsection { padding-block: clamp(48px, 6vw, 72px); }
+        .vizsection__hint { color: var(--ink-soft); }
+        .pubviz { background: var(--paper-deep); border: 1px solid var(--rule); padding: 8px; }
+        .pubviz__svg { width: 100%; display: block; background: var(--paper); }
+        .pubviz__year { fill: var(--ink-soft); font-family: var(--mono-stack); font-size: 10px; letter-spacing: 0.08em; }
+        .pubviz__axis { fill: var(--ink-soft); font-family: var(--mono-stack); font-size: 9px; letter-spacing: 0.08em; }
+        .pubviz__caption { display: grid; grid-template-columns: 1fr auto; gap: 16px; padding: 14px 12px 8px; border-top: 1px solid var(--rule-soft); margin-top: 8px; align-items: center; }
+        @media (max-width: 720px) { .pubviz__caption { grid-template-columns: 1fr; } }
+        .pubviz__legend { display: flex; gap: 16px; flex-wrap: wrap; }
+        .pubviz__lg { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+        .pubviz__dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+        .pubviz__hover { min-height: 24px; display: flex; gap: 12px; align-items: baseline; justify-content: flex-end; font-size: 13px; color: var(--ink); }
+        @media (max-width: 720px) { .pubviz__hover { justify-content: flex-start; } }
+        .pubviz__hover-venue { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+        .pubviz__hover-title { font-style: italic; }
+        .pubviz__hover-empty { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
+
+        /* ----- Attention grid ----- */
+        .attn { position: absolute; inset: 0; overflow: hidden; }
+        .attn__grid { display: grid; width: 100%; height: 100%; gap: 2px; padding: 4px; }
+        .attn__cell { background: var(--accent); mix-blend-mode: multiply; }
+
+        /* ----- Research themes ----- */
+        .themes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border-top: 1px solid var(--rule-soft); }
+        @media (max-width: 760px) { .themes { grid-template-columns: 1fr; } }
+        .theme { padding: 32px 24px 32px 0; border-bottom: 1px solid var(--rule-soft); border-right: 1px solid var(--rule-soft); padding-left: 24px; position: relative; }
+        .theme:nth-child(2n) { border-right: 0; }
+        .theme:nth-child(odd) { padding-left: 0; }
+        .theme:nth-child(even) { padding-left: 24px; }
+        .theme:nth-last-child(-n+2) { border-bottom: 0; }
+        @media (max-width: 760px) {
+            .theme { border-right: 0; padding-left: 0 !important; }
+            .theme:nth-last-child(-n+2) { border-bottom: 1px solid var(--rule-soft); }
+            .theme:last-child { border-bottom: 0; }
+        }
+        .theme__num { color: var(--ink-faint); font-size: 12px; margin-bottom: 12px; }
+        .theme__label { font-family: var(--display-stack); font-size: 28px; line-height: 1.05; letter-spacing: -0.015em; font-weight: 400; margin-bottom: 12px; }
+        .theme__blurb { font-size: 16px; color: var(--ink); margin-bottom: 18px; max-width: 48ch; text-wrap: pretty; }
+        .theme__papers { list-style: none; display: flex; flex-direction: column; gap: 4px; color: var(--ink-soft); }
+        .theme__papers li { font-size: 11px; }
+
+        /* ----- Featured paper ----- */
+        .feat { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(20px, 3vw, 36px); align-items: stretch; background: var(--paper-deep); color: var(--ink); padding: clamp(20px, 2.4vw, 28px); position: relative; transition: transform 0.2s ease, box-shadow 0.2s ease; border: 1px solid var(--rule); }
+        @media (max-width: 820px) { .feat { grid-template-columns: 1fr; } }
+        .feat:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -20px rgba(0, 0, 0, 0.22); }
+        .feat__figure { display: flex; flex-direction: column; gap: 10px; }
+        .feat__figure img { width: 100%; height: auto; display: block; background: #fff; border: 1px solid var(--rule-soft); padding: 16px; box-sizing: border-box; }
+        .feat__figure-caption { color: var(--ink-soft); font-size: 10px !important; line-height: 1.5; text-transform: none; letter-spacing: 0.02em; font-style: italic; }
+        .feat__body { display: flex; flex-direction: column; justify-content: center; padding: 6px 4px 6px 0; }
+        .feat__meta { display: flex; gap: 14px; margin-bottom: 18px; flex-wrap: wrap; color: var(--ink-soft); }
+        .feat__venue { color: var(--accent) !important; }
+        .feat__title { font-family: var(--display-stack); font-size: clamp(22px, 2.4vw, 30px); line-height: 1.15; letter-spacing: -0.015em; font-weight: 400; margin-bottom: 14px; text-wrap: pretty; }
+        .feat__authors { font-size: 13.5px; font-style: italic; color: var(--ink-soft); margin-bottom: 14px; }
+        .feat__abstract { font-size: 15px; line-height: 1.55; margin-bottom: 18px; text-wrap: pretty; }
+        .feat__cta { font-size: 11px; letter-spacing: 0.1em; color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 2px; align-self: flex-start; }
+
+        /* ----- Highlights ----- */
+        .highlights { display: flex; flex-direction: column; }
+        .hl { display: grid; grid-template-columns: 80px 1fr 24px; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--rule-soft); transition: all 0.18s ease; align-items: start; }
+        .hl:hover { padding-left: 8px; }
+        .hl:last-child { border-bottom: 0; }
+        .hl__year { font-size: 22px; color: var(--accent); letter-spacing: 0; font-family: var(--display-stack); text-transform: none; }
+        .hl__title { font-family: var(--display-stack); font-size: 22px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 400; margin-bottom: 6px; text-wrap: pretty; }
+        .hl__authors { font-size: 13.5px; color: var(--ink-soft); font-style: italic; margin-bottom: 8px; }
+        .hl__meta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+        .hl__tags { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+        .hl__arrow { font-size: 18px; color: var(--ink-faint); transition: all 0.18s ease; align-self: center; }
+        .hl:hover .hl__arrow { color: var(--accent); transform: translate(3px, -3px); }
+
+        /* ----- Chips ----- */
+        .chip { font-family: var(--mono-stack); font-size: 9.5px; letter-spacing: 0.08em; font-weight: 500; padding: 3px 8px; border: 1px solid var(--rule); color: var(--ink-soft); white-space: nowrap; }
+        .chip--ai     { color: var(--accent); border-color: var(--accent); }
+        .chip--both   { color: var(--accent-mid); border-color: var(--accent-mid); }
+        .chip--ortho  { color: var(--ink-soft); }
+        .chip--sm     { font-size: 9px; padding: 2px 6px; }
+
+        /* ----- Filters / pills ----- */
+        .filters { display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px; padding: 18px; background: var(--paper-deep); border: 1px solid var(--rule-soft); }
+        .filters__group { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+        .filters__label { color: var(--ink-soft); margin-right: 6px; }
+        .pill { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 10px; background: transparent; border: 1px solid var(--rule); color: var(--ink); cursor: pointer; transition: all 0.15s ease; }
+        .pill:hover { border-color: var(--ink); }
+        .pill--on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+        .pubcount { color: var(--ink-faint); margin-bottom: 16px; padding-left: 4px; }
+
+        /* ----- Publications list ----- */
+        .pubs__year-block { margin-bottom: 28px; }
+        .pubs__year-label { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+        .pubs__year-num { font-family: var(--display-stack); font-size: 28px; letter-spacing: -0.01em; text-transform: none; color: var(--accent); }
+        .pubs__year-rule { flex: 1; height: 1px; background: var(--rule-soft); }
+        .pubs__year-count { color: var(--ink-soft); }
+        .pub { display: block; padding: 14px 0; border-bottom: 1px dashed var(--rule-soft); transition: all 0.15s ease; position: relative; }
+        .pub:last-child { border-bottom: 0; }
+        .pub:hover { padding-left: 12px; background: linear-gradient(90deg, var(--paper-deep) 0%, transparent 60%); }
+        .pub--no-link { cursor: default; }
+        .pub--no-link:hover { padding-left: 0; background: none; }
+        .pub__title-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+        .pub__title { font-family: var(--display-stack); font-size: 18px; line-height: 1.3; letter-spacing: -0.005em; text-wrap: pretty; }
+        .pub__star { color: var(--accent); font-size: 14px; }
+        .pub__authors { display: block; font-size: 13px; font-style: italic; color: var(--ink-soft); margin-bottom: 6px; }
+        .pub__meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+        .pub__tags { display: inline-flex; gap: 4px; flex-wrap: wrap; }
+        .expand { margin-top: 18px; padding: 14px 20px; width: 100%; background: transparent; border: 1px solid var(--rule); color: var(--ink); cursor: pointer; transition: all 0.18s ease; }
+        .expand:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+        /* ----- News / under review ----- */
+        .twocol { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(32px, 5vw, 64px); }
+        @media (max-width: 800px) { .twocol { grid-template-columns: 1fr; } }
+        .news { list-style: none; display: flex; flex-direction: column; gap: 0; }
+        .news__item { display: grid; grid-template-columns: 80px 1fr; gap: 16px; align-items: baseline; padding: 12px 0; border-bottom: 1px dashed var(--rule-soft); }
+        .news__item:last-child { border-bottom: 0; }
+        .news__date { color: var(--accent); }
+        .news__text { font-size: 15.5px; transition: color 0.15s ease; }
+        .news__text:hover { color: var(--accent); }
+        .ur { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .ur__item { display: grid; grid-template-columns: 20px 1fr; gap: 10px; font-size: 15.5px; font-style: italic; color: var(--ink); padding: 8px 0; border-bottom: 1px dashed var(--rule-soft); }
+        .ur__item:last-child { border-bottom: 0; }
+        .ur__item .mono { color: var(--accent); font-style: normal; }
+
+        /* ----- Timeline ----- */
+        .timeline { list-style: none; display: flex; flex-direction: column; position: relative; }
+        .tl { display: grid; grid-template-columns: 180px 32px 1fr; gap: 18px; padding: 18px 0; position: relative; }
+        @media (max-width: 760px) { .tl { grid-template-columns: 1fr; gap: 4px; padding: 14px 0; } .tl__marker { display: none; } }
+        .tl__dates { display: flex; gap: 6px; flex-wrap: wrap; align-items: baseline; color: var(--ink-soft); padding-top: 4px; }
+        .tl__dash { color: var(--ink-faint); }
+        .tl__marker { position: relative; display: flex; justify-content: center; }
+        .tl__marker::before { content: ""; position: absolute; top: 0; bottom: -36px; left: 50%; width: 1px; background: var(--rule); }
+        .tl:last-child .tl__marker::before { bottom: 0; }
+        .tl__dot { width: 9px; height: 9px; border-radius: 50%; background: var(--paper); border: 1.6px solid var(--accent); position: relative; margin-top: 8px; z-index: 1; }
+        .tl:first-child .tl__dot { background: var(--accent); }
+        .tl__role { font-family: var(--display-stack); font-size: 22px; line-height: 1.2; letter-spacing: -0.01em; font-weight: 400; margin-bottom: 2px; }
+        .tl__org { font-size: 14px; color: var(--ink); margin-bottom: 4px; }
+        .tl__detail { font-size: 14px; color: var(--ink-soft); font-style: italic; max-width: 70ch; text-wrap: pretty; }
+
+        /* ----- Awards ----- */
+        .awards { list-style: none; display: flex; flex-direction: column; }
+        .award { display: grid; grid-template-columns: 120px 1fr; gap: 18px; padding: 14px 0; border-bottom: 1px dashed var(--rule-soft); align-items: baseline; }
+        .award:last-child { border-bottom: 0; }
+        .award__year { color: var(--accent); padding-top: 2px; }
+        .award__title { font-family: var(--display-stack); font-size: 20px; line-height: 1.2; letter-spacing: -0.005em; }
+        .award__note { font-size: 14px; color: var(--ink-soft); font-style: italic; }
+
+        /* ----- Footer ----- */
+        .footer { padding: 48px 0 64px; position: relative; }
+        .footer__rule { height: 1px; background: var(--rule); margin-bottom: 24px; }
+        .footer__row { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--ink-soft); }
+
+        ::selection { background: var(--accent); color: var(--paper); }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
         }
     </style>
 </head>
-<body>
-    <div class="wrap">
+<body data-attn="on">
+    <div class="app">
 
-        <!-- Intro -->
-        <header class="intro">
-            <div class="intro-text">
-                <h1>Sung Eun Kim, MD</h1>
-                <p class="affil">Postdoctoral Research Fellow, Harvard Medical School &middot; Research Professor, Seoul National University Hospital</p>
-                <p class="bio">
-                    I am a surgeon and AI researcher working at the intersection of medicine and artificial intelligence.
-                    At Harvard Medical School's Department of Biomedical Informatics I work with
-                    <a href="https://www.rajpurkarlab.hms.harvard.edu/" target="_blank" rel="noopener noreferrer">Dr. Pranav Rajpurkar</a>
-                    to develop and validate AI systems for medical imaging, clinical decision support, and healthcare evaluation.
-                    After seven years and over a thousand knee surgeries, I build AI grounded in the realities of clinical
-                    practice — across 40+ publications, including <em>Nature Medicine</em>.
-                </p>
-                <nav class="links">
-                    <a href="mailto:sungeun_kim2@hms.harvard.edu">Email</a><span class="sep">/</span>
-                    <a href="CV_SungEunKim.pdf" target="_blank" rel="noopener">CV</a><span class="sep">/</span>
-                    <a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a><span class="sep">/</span>
-                    <a href="https://www.linkedin.com/in/sung-eun-kim-19267a2a4/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                </nav>
+        <!-- ===== Hero ===== -->
+        <header class="hero">
+            <div class="hero__attn" id="hero-attn" aria-hidden="true"></div>
+
+            <div class="hero__top">
+                <span class="mono mono--sm">SUNGEUNKIM0127.GITHUB.IO &nbsp;·&nbsp; <span id="updated-stamp"></span></span>
+                <span class="mono mono--sm hero__top-right">↳ HARVARD MEDICAL SCHOOL &nbsp;×&nbsp; SEOUL NATIONAL UNIVERSITY</span>
             </div>
-            <div class="intro-photo">
-                <img src="headshot-2026.jpg" alt="Portrait of Dr. Sung Eun Kim, orthopedic surgeon and AI researcher at Harvard Medical School">
+
+            <div class="hero__grid">
+                <div class="hero__copy">
+                    <div class="mono mono--sm hero__role"><span class="dot dot--accent"></span> SURGEON × AI RESEARCHER</div>
+                    <h1 class="hero__name">Sung Eun Kim, MD</h1>
+                    <div class="hero__titles">
+                        <div class="hero__title-line"><span class="mono mono--sm hero__title-num">01</span><span>Postdoctoral Research Fellow · Harvard Medical School</span></div>
+                        <div class="hero__title-line"><span class="mono mono--sm hero__title-num">02</span><span>Research Professor · Seoul National University Hospital</span></div>
+                    </div>
+                    <p class="hero__bio">I am an orthopedic surgeon and AI researcher working at the intersection of medicine and machine learning. At Harvard Medical School's Department of Biomedical Informatics I work with <a href="https://www.rajpurkarlab.hms.harvard.edu/" target="_blank" rel="noopener" style="border-bottom:1px solid var(--rule);">Dr. Pranav Rajpurkar</a> on AI for medical imaging, clinical decision support, and healthcare evaluation. After seven years and over a thousand knee surgeries, I build AI grounded in the realities of clinical practice — across 40+ publications, including Nature Medicine.</p>
+                    <div class="hero__links">
+                        <a href="mailto:sungeun_kim2@hms.harvard.edu" class="link"><span class="link__arrow">↗</span>Email</a>
+                        <a href="CV_SungEunKim.pdf" target="_blank" rel="noopener" class="link"><span class="link__arrow">↗</span>CV</a>
+                        <a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" rel="noopener" class="link"><span class="link__arrow">↗</span>Google Scholar</a>
+                        <a href="https://www.linkedin.com/in/sung-eun-kim-19267a2a4/" target="_blank" rel="noopener" class="link"><span class="link__arrow">↗</span>LinkedIn</a>
+                    </div>
+                </div>
+                <div class="hero__portrait">
+                    <img class="portrait" src="headshot-2026.jpg" alt="Sung Eun Kim, MD" />
+                </div>
+            </div>
+
+            <div class="hero__stats">
+                <div class="stat"><div class="stat__value">40+</div><div class="stat__label">Peer-reviewed papers</div><div class="stat__note mono mono--sm">incl. Nature Medicine, JBJS, CVPR</div></div>
+                <div class="stat"><div class="stat__value">1,000+</div><div class="stat__label">Knee surgeries performed</div><div class="stat__note mono mono--sm">7 years clinical practice</div></div>
+                <div class="stat"><div class="stat__value">12</div><div class="stat__label">First / co-first author</div><div class="stat__note mono mono--sm">ortho × AI translational</div></div>
+                <div class="stat"><div class="stat__value">2</div><div class="stat__label">Affiliations</div><div class="stat__note mono mono--sm">Harvard · SNU</div></div>
             </div>
         </header>
 
-        <!-- Recent News (manual) -->
-        <section id="news">
-            <h2>Recent News</h2>
-            <p class="news-intro">Congratulations to all co-authors on these acceptances &mdash; thank you for the excellent teamwork!</p>
-            <ul class="news-list">
-                <li><span class="news-date">[04/2026]</span> <a href="https://arxiv.org/abs/2604.10916" target="_blank" rel="noopener">2 papers</a> accepted by CHIL 2026.</li>
-                <li><span class="news-date">[03/2026]</span> <a href="https://doi.org/10.1038/s41591-026-04252-6" target="_blank" rel="noopener">1 paper</a> accepted by Nature Medicine.</li>
-                <li><span class="news-date">[12/2025]</span> <a href="https://arxiv.org/abs/2507.22030" target="_blank" rel="noopener">1 paper</a> accepted by NEJM AI.</li>
-                <li><span class="news-date">[11/2025]</span> <a href="https://doi.org/10.48550/arXiv.2509.13270" target="_blank" rel="noopener">1 paper</a> accepted by Machine Learning for Health (ML4H) 2025.</li>
-                <li><span class="news-date">[09/2025]</span> <a href="https://psb.stanford.edu/psb-online/proceedings/psb26/sambara.pdf" target="_blank" rel="noopener">1 paper</a> accepted by Pacific Symposium on Biocomputing (PSB) 2026.</li>
-            </ul>
+        <!-- ===== § I  Publications, plotted ===== -->
+        <section class="section vizsection">
+            <div class="sech">
+                <div class="sech__left"><span class="mono mono--sm sech__num">§ I</span><span class="mono mono--sm">A MAP OF THE WORK</span></div>
+                <h2 class="sech__title">Publications, plotted</h2>
+                <div class="sech__right"><span class="mono mono--sm vizsection__hint">↗ HOVER ANY NODE</span></div>
+            </div>
+            <div id="pubviz-mount"></div>
         </section>
 
-        <!-- Preprints & Under Review (manual; outside the auto-generated markers) -->
-        <section id="preprints">
-            <h2>Preprints &amp; Under Review</h2>
-
-            <div class="pub-list-header">
-                <h3>In Press / Accepted</h3>
-            </div>
-            <div class="pub-list-items">
-                <div class="pub-list-item">
-                    <h4><a href="https://arxiv.org/abs/2507.22030" target="_blank" rel="noopener">ReXGroundingCT: A Dataset for Free-Text Finding Segmentation in Chest CT</a></h4>
-                    <p class="pub-meta">Baharoon M, Luo L, &hellip;, <strong>Kim SE</strong>, &hellip;, Rajpurkar P. <span class="status">In press &middot; NEJM AI</span></p>
-                </div>
-                <div class="pub-list-item">
-                    <h4><a href="https://arxiv.org/abs/2604.10916" target="_blank" rel="noopener">ReXSonoVQA: A Video QA Benchmark for Procedure-Centric Ultrasound Understanding</a></h4>
-                    <p class="pub-meta">Wang X, Zhang X, <strong>Kim SE</strong>, Pal A, Rajpurkar P. <span class="status">Accepted &middot; CHIL 2026</span></p>
-                </div>
-                <div class="pub-list-item">
-                    <h4><a href="https://openreview.net/forum?id=Q6DDBCgR4D" target="_blank" rel="noopener">Open-Ended Clinical Text Generation for Acute Care: Reinforcement Learning with Clinically Grounded Rewards</a></h4>
-                    <p class="pub-meta">Wang M, Luo L, <strong>Kim SE</strong>, Cao F, Kim DA, Rajpurkar P. <span class="status">Accepted &middot; CHIL 2026</span></p>
-                </div>
-            </div>
-
-            <div class="pub-list-header" style="margin-top: 26px;">
-                <h3>Under Review</h3>
-            </div>
-            <ul class="review-list">
-                <li>1 first-author manuscript under review at <strong>CoRL 2026</strong></li>
-                <li>2 manuscripts under review at <strong>ACL ARR 2026</strong></li>
-                <li>1 manuscript under review at <strong>MLHC 2026</strong></li>
-            </ul>
-        </section>
-
-        <!-- Publications -->
-        <section id="publications">
-            <h2>Publications</h2>
-            <p class="section-note">Selected papers are <span style="background: var(--color-highlight); padding: 0 4px; border-radius: 3px;">highlighted</span>. First-author papers are marked with a left accent.</p>
-            <div class="pub-list-header">
-                <h3>All Publications</h3>
-                <a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" rel="noopener" class="pub-count">
-                        40+ Publications
-                    </a>
-            </div>
-
-            <!-- AUTO-GENERATED-PUBS-START -->
-                <div class="pub-year-group" id="pubs-2026">
-                    <div class="pub-year-label">2026 <span class="year-count">9 papers</span></div>
-                    <div class="pub-list-items">
-                        <div class="pub-list-item first-author-item">
-                            <h4><a href="https://psb.stanford.edu/psb-online/proceedings/psb26/sambara.pdf" target="_blank" rel="noopener">3DReasonKnee: Advancing Grounded Reasoning in Medical Vision Language Models</a></h4>
-                            <p class="pub-meta">Sambara S*, <strong>Kim SE</strong>*, Zhang X, et al. <em>Pacific Symposium on Biocomputing 31:99-113</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item pub-list-item-highlight">
-                            <h4><a href="https://doi.org/10.1038/s41591-026-04252-6" target="_blank" rel="noopener">A clinical environment simulator for dynamic AI evaluation</a></h4>
-                            <p class="pub-meta">Luo L*, <strong>Kim SE</strong>*, Zhang X, Kernbach JM, Kenia R, Acosta JN, ..., Topol E, Rajpurkar P. <em>Nature Medicine</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>CRIMSON: A Clinically-Grounded LLM-Based Metric for Generative Radiology Report Evaluation</h4>
-                            <p class="pub-meta">Baharoon M, Heintz T, Raissi S, Alabbad M, Alhammad M, AlOmaish H, <strong>Kim SE</strong>, Banerjee O, Rajpurkar P. <em>arXiv preprint arXiv:2603.06183</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4><a href="https://arxiv.org/abs/2603.04421" target="_blank" rel="noopener">Do Mixed-Vendor Multi-Agent LLMs Improve Clinical Diagnosis?</a></h4>
-                            <p class="pub-meta">Yuan GC, Zhang X, <strong>Kim SE</strong>, Rajpurkar P. <em>HeaLing Workshop at EACL 2026</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4><a href="https://doi.org/10.1186/s43019-026-00303-x" target="_blank" rel="noopener">Effects of axial malrotation on posterior tibial slope measurement</a></h4>
-                            <p class="pub-meta">Park J, Persson A, Martin RK, et al. <em>Knee Surg Relat Res 2026;38:3</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Effects of axial malrotation on posterior tibial slope measurement: a digitally reconstructed radiograph study enabling automated quality assessment</h4>
-                            <p class="pub-meta">Park J, Persson A, Martin RK, Inderhaug E, <strong>Kim SE</strong>, Kim S, Kwak D, Ro DH. <em>Knee Surgery &amp; Related Research</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>ReXInTheWild: A Unified Benchmark for Medical Photograph Understanding</h4>
-                            <p class="pub-meta">Banerjee O, <strong>Kim SE</strong>, Willauer AN, Kernbach JM, Alomaish AR, Alghamdi RAS, Alomaish HR, Baharoon M, Zhang X, Acosta JN, Zhou C, Rajpurkar P. <em>arXiv preprint arXiv:2603.19517</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>ReXSonoVQA: A Video QA Benchmark for Procedure-Centric Ultrasound Understanding</h4>
-                            <p class="pub-meta">Wang X, Zhang X, <strong>Kim SE</strong>, Pal A, Rajpurkar P. <em>arXiv preprint arXiv:2604.10916</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>The Doctor Will Agree With You Now: Sycophancy of Large Language Models in Multi-Turn Medical Conversations</h4>
-                            <p class="pub-meta">Kim TM, Luo L, <strong>Kim SE</strong>, Manrai AK, Topol E, Rajpurkar P. <em>HeaLing Workshop at EACL 2026</em></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="pub-year-group" id="pubs-2025">
-                    <div class="pub-year-label">2025 <span class="year-count">20 papers</span></div>
-                    <div class="pub-list-items">
-                        <div class="pub-list-item">
-                            <h4><a href="https://doi.org/10.1186/s13018-025-06206-z" target="_blank" rel="noopener">A development of machine learning models to preoperatively predict insufficient clinical improvement after total knee arthroplasty</a></h4>
-                            <p class="pub-meta">Gimm G, Jeon B, <strong>Kim SE</strong>, et al.. <em>J Orthop Surg Res 2025;20(1):778</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4><a href="https://doi.org/10.1177/23259671251331067" target="_blank" rel="noopener">Automated Posterior Tibial Slope Measurement Using Lateral Knee Radiographs</a></h4>
-                            <p class="pub-meta">Ryu B, Nam JW, Ro DH, et al. (<strong>Kim SE</strong> corresponding). <em>Orthop J Sports Med 2025;13(4)</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Automated posterior tibial slope measurement using lateral knee radiographs: a novel landmark-based approach using deep learning</h4>
-                            <p class="pub-meta">Ryu B, Nam JW, Ro DH, Martin RK, Inderhaug E, Persson A, Haland S, <strong>Kim SE</strong>. <em>Orthopaedic Journal of Sports Medicine</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4><a href="https://doi.org/10.1302/0301-620X.107B2.BJJ-2024-0791.R1" target="_blank" rel="noopener">Deep learning for automated hip fracture detection and classification: achieving superior accuracy</a></h4>
-                            <p class="pub-meta">Zheng Z, Ryu B, <strong>Kim SE</strong>, et al. <em>Bone Joint J 2025;107-B(2):213-220</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4><a href="https://doi.org/10.1186/s43019-025-00261-w" target="_blank" rel="noopener">Do knee alignment patterns differ between Middle Eastern and East Asian populations? A propensity-matched analysis using artificial intelligence</a></h4>
-                            <p class="pub-meta">Park J, et al., <strong>Kim SE</strong> (corresponding). <em>Knee Surg Relat Res 2025;37(1):11</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4><a href="https://doi.org/10.1177/23259671251333607" target="_blank" rel="noopener">External validation of a novel landmark-based deep learning automated tibial slope measurement algorithm applied on short radiographs from ACL injured patients</a></h4>
-                            <p class="pub-meta">Martin RK, Haaland S, Persson A, <strong>Kim SE</strong>, et al.. <em>Orthop J Sports Med 2025;13(5)</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>External validation of a novel landmark-based deep learning automated tibial slope measurement algorithm applied on short radiographs obtained in patients with ACL injuries</h4>
-                            <p class="pub-meta">Martin KR, Haaland S, Persson A, <strong>Kim SE</strong>, Ryu B, Nam JW, Ro DH, Inderhaug E. <em>Orthopaedic Journal of Sports Medicine</em></p>
-                        </div>
-                        <div class="pub-list-item pub-list-item-highlight">
-                            <h4><a href="https://doi.org/10.48550/arXiv.2411.18672" target="_blank" rel="noopener">FactCheXcker: Mitigating Measurement Hallucinations in Chest X-ray Report Generation Models</a></h4>
-                            <p class="pub-meta">Heiman A, Zhang X, Chen E, <strong>Kim SE</strong>, Rajpurkar P. <em>CVPR 2025</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Low Cognitive Function and Somatic Psychological Symptoms Are Correlated with Greater Risk of Delirium After Total Knee Arthroplasty: A Prospective Cohort Study</h4>
-                            <p class="pub-meta">Lee JY, Park JE, <strong>Kim SE</strong>, Choi BS, Lee MC, Chang CB, Han HS, Park HY, Ro DH. <em>JBJS</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4><a href="https://doi.org/10.1002/jor.26018" target="_blank" rel="noopener">Machine learning-based prediction of contralateral knee osteoarthritis development using the Osteoarthritis Initiative and the Multicenter Osteoarthritis Study dataset</a></h4>
-                            <p class="pub-meta">Kim JS, Choi BS, <strong>Kim SE</strong>, et al. <em>J Orthop Res 2025;43(3):576-585</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
-                            <h4><a href="https://doi.org/10.14517/aosm25006" target="_blank" rel="noopener">Posterior tibial slope as a risk factor for anterior cruciate ligament tears</a></h4>
-                            <p class="pub-meta">Kwak D*, <strong>Kim SE</strong>*, Park J, et al. <em>Arthrosc Orthop Sports Med 2025;12:64-69</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Posterior tibial slope as a risk factor for anterior cruciate ligament tears: a retrospective study using automated measurement</h4>
-                            <p class="pub-meta">Kwak D, <strong>Kim SE</strong>, Park J, Han HS, Choi BS, Ro DH. <em>Arthroscopy and Orthopedic Sports Medicine</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4><a href="https://doi.org/10.2106/JBJS.25.00392" target="_blank" rel="noopener">Preoperative low cognitive function and somatic psychological symptoms are associated with an increased risk of postoperative delirium following total knee arthroplasty: a prospective cohort study</a></h4>
-                            <p class="pub-meta">Lee JY, Park JE, <strong>Kim SE</strong>, et al. <em>J Bone Joint Surg Am 2025</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4><a href="https://doi.org/10.48550/arXiv.2509.13270" target="_blank" rel="noopener">RadGame: An AI-Powered Platform for Radiology Education</a></h4>
-                            <p class="pub-meta">Baharoon M, Raissi S, Jun JS, et al.. <em>Machine Learning for Health (ML4H) 2025</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4><a href="https://doi.org/10.48550/arXiv.2412.15264" target="_blank" rel="noopener">ReXTrust: A Model for Fine-Grained Hallucination Detection in AI-Generated Radiology Reports</a></h4>
-                            <p class="pub-meta">Hardy R, <strong>Kim SE</strong>, Ro DH, Rajpurkar P. <em>Proceedings of the AAAI Bridge Program on AI for Medicine and Healthcare, PMLR 281:173-182, 2025</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Rexgroundingct: A 3d chest ct dataset for segmentation of findings from free-text reports</h4>
-                            <p class="pub-meta">Baharoon M, Luo L, Moritz M, Kumar A, <strong>Kim SE</strong>, Zhang X, Zhu M, Alabbad MH, Alhazmi MS, Mistry NP, Bijnens L, Kleinschmidt KR, Chrisler B, Suryadevara S, Jaliparthi SSD, Prudlo NM, Marino MD, Palacio J, Akula R, Zhou D, Zhou HY, Hamamci IE, Adams SJ, AlOmaish HR, Rajpurkar P. <em>arXiv preprint arXiv:2507.22030</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4><a href="https://proceedings.mlr.press/v298/baharoon25a.html" target="_blank" rel="noopener">State-of-the-art text-prompted medical segmentation models struggle to ground chest CT findings</a></h4>
-                            <p class="pub-meta">Baharoon M, Luo L, Moritz M, et al.. <em>MLHC 2025</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
-                            <h4><a href="https://doi.org/10.1016/j.knee.2024.11.003" target="_blank" rel="noopener">Superior Forgotten Joint Scores with Cruciate-Retaining Mobile bearings Versus Posterior-Stabilized Mobile and Fixed bearings in a contemporary Total Knee System</a></h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Shin HS, Han HS. <em>The Knee 2025;53:118-125</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Superior One-year Forgotten Joint Scores with cruciate-retaining mobile bearings versus posterior-stabilized mobile and fixed bearings in a contemporary total knee system</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Shin HS, Han HS. <em>The Knee</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4><a href="https://arxiv.org/abs/2507.22898" target="_blank" rel="noopener">Voice-guided Orchestrated Intelligence for Clinical Evaluation (VOICE): A Voice AI Agent System for Prehospital Stroke Assessment</a></h4>
-                            <p class="pub-meta">Acosta JN, Adams SJ, Kernbach JM, et al.. <em>IEEE AIxMHC 2025</em></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Earlier years - hidden by default -->
-                <div id="earlierPubs" style="display: none;">
-
-                <div class="pub-year-group" id="pubs-2024">
-                    <div class="pub-year-label">2024 <span class="year-count">21 papers</span></div>
-                    <div class="pub-list-items">
-                        <div class="pub-list-item">
-                            <h4><a href="https://doi.org/10.1186/s43019-024-00240-7" target="_blank" rel="noopener">A deep learning based automatic two-dimensional digital templating model for total knee arthroplasty</a></h4>
-                            <p class="pub-meta">Park J, <strong>Kim SE</strong>, et al. <em>Knee Surg Relat Res 2024;36(1):38</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
-                            <h4><a href="https://doi.org/10.1186/s43019-024-00238-1" target="_blank" rel="noopener">Can individual functional improvements be predicted in osteoarthritic patients after total knee arthroplasty?</a></h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Ro DH, Lee MC, Han HS. <em>Knee Surg Relat Res 2024;36(1):31</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Coronal Plane Alignment of the Knee (CPAK) Type Shifts Toward Constitutional Varus with Increasing Kellgren and Lawrence Grade: A Radiographic Analysis of 17,365 Knees</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, MacDessi S, Song D, Kim JI, Choi BS, Han HS, Ro DH. <em>JBJS</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item pub-list-item-highlight">
-                            <h4><a href="https://doi.org/10.2106/JBJS.24.00316" target="_blank" rel="noopener">Coronal plane alignment of the knee (CPAK) type shifts towards constitutional varus with increasing Kellgren and Lawrence grade: a deep learning radiographic analysis of 17,365 knees</a></h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, MacDessi S, Song D, Kim JI, Choi BS, Han HS, Ro DH. <em>J Bone Joint Surg Am 2024</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4><a href="https://doi.org/10.1186/s12885-024-13021-y" target="_blank" rel="noopener">Dedifferentiated Liposarcoma of the Extremities: A Korean Multi-Center Study of 107 Cases</a></h4>
-                            <p class="pub-meta">Park JH, <strong>Kim SE</strong>, et al. <em>BMC Cancer 2024;24(1):1259</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
-                            <h4><a href="https://doi.org/10.1186/s43019-023-00209-y" target="_blank" rel="noopener">Enhanced deep learning model enables accurate alignment measurement across diverse institutional imaging protocols</a></h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Nam JW, Kim JI, Kim JK, Ro DH. <em>Knee Surg Relat Res 2024;36(1):4</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
-                            <h4><a href="https://doi.org/10.1038/s41598-024-63266-7" target="_blank" rel="noopener">Estimation of patient-reported outcome measures based on features of knee joint muscle co-activation</a></h4>
-                            <p class="pub-meta">Hussain I*, <strong>Kim SE</strong>*, et al. <em>Scientific Reports 2024;14(1):12428</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Estimation of patient-reported outcome measures based on features of knee joint muscle co-activation in advanced knee osteoarthritis</h4>
-                            <p class="pub-meta">Hussain I*, <strong>Kim SE</strong>*, Kwon C, Hoon SK, Kim HC, Ku Y, Ro DH. <em>Scientific Reports</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
-                            <h4><a href="https://doi.org/10.4055/cios23166" target="_blank" rel="noopener">Fixed bearing and higher postoperative knee flexion angle as predictors of satisfaction in Asian patients undergoing posterior stabilized total knee arthroplasty</a></h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Choi BS, Ro DH, Lee MC, Han HS. <em>Clin Orthop Surg 2024;16:e19</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Fixed-bearing and higher postoperative knee flexion angle as predictors of satisfaction in Asian patients undergoing posterior-stabilized total knee arthroplasty</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Choi BS, Lee MC, Han HS. <em>Clinics in Orthopedic Surgery</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Method and apparatus for calculating indicators related to knee osteoarthritis by using electromyography data</h4>
-                            <p class="pub-meta">Kim HC, Ro DH, <strong>Kim SE</strong></p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
-                            <h4><a href="https://doi.org/10.1007/s00256-024-04619-1" target="_blank" rel="noopener">Minimal impact of beam projection angle deviations in skyline (Laurin) view and the efficacy of the anterior border of proximal tibia as a guiding landmark</a></h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Hwang S, Lee JH, Gimm G, Han HS, Choi BS, Ro DH. <em>Skeletal Radiology 2024;53(7):1399-1406</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
-                            <h4><a href="https://doi.org/10.4055/cios23179" target="_blank" rel="noopener">Performance of ChatGPT on Solving Orthopedic Board-Style Questions</a></h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Lee JH, Choi BS, et al. <em>Clin Orthop Surg 2024;16:e13</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Performance of ChatGPT on Solving Orthopedic Board-Style Questions: A Comparative Analysis of ChatGPT 3.5 and ChatGPT 4</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Lee JH, Choi BS, Han HS, Lee MC, Ro DH. <em>Clinics in Orthopedic Surgery</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
-                            <h4><a href="https://doi.org/10.1186/s43019-023-00204-3" target="_blank" rel="noopener">Preserving coronal knee alignment of the knee (CPAK) in unicompartmental knee arthroplasty correlates with superior patient-reported outcomes</a></h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Yun KR, Lee JM, Lee MC, Han HS. <em>Knee Surg Relat Res 2024;36(1):1</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Primary Total Knee Arthroplasty for Treating Osteoarthritic Knees with Neglected Patellar Dislocation</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Kim SH, Lee JI, Han HS, Lee MC, Ro DH. <em>Medicina</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
-                            <h4><a href="https://doi.org/10.3390/medicina60091492" target="_blank" rel="noopener">Primary total knee arthroplasty for treating knees with neglected patellar dislocation</a></h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Kim SH, Lee JI, Han HS, Lee MC, Ro DH. <em>Medicina 2024;60(9):1492</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
-                            <h4><a href="https://doi.org/10.52965/001c.94238" target="_blank" rel="noopener">Robotic arm-assisted total knee arthroplasty in a patient with osteopetrosis</a></h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Han HS. <em>Orthop Rev (Pavia) 2024;16:94238</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Robotic arm-assisted total knee arthroplasty in a patient with osteopetrosis: a case report and review of literature</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Han HS. <em>Orthopedic Reviews</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item pub-list-item-highlight">
-                            <h4><a href="https://doi.org/10.1002/ksa.12166" target="_blank" rel="noopener">Shallow trochlear groove and narrow medial trochlear width at the proximal trochlea in patients with trochlear dysplasia: A three-dimensional computed tomography analysis</a></h4>
-                            <p class="pub-meta">Lee JY*, <strong>Kim SE</strong>*, et al. <em>KSSTA 2024;32(6):1434-1445</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item pub-list-item-highlight">
-                            <h4><a href="https://doi.org/10.1302/0301-620X.106B3.BJJ-2023-0337.R3" target="_blank" rel="noopener">The use of medial joint opening rather than mechanical axis deviation to determine the clinical outcomes after high tibial osteotomy</a></h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Kwak J, Ro DH, Lee MC, Han HS. <em>Bone Joint J 2024;106-B(3):240-248</em></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pub-year-group" id="pubs-2023">
-                    <div class="pub-year-label">2023 <span class="year-count">7 papers</span></div>
-                    <div class="pub-list-items">
-                        <div class="pub-list-item first-author-item">
-                            <h4><a href="https://doi.org/10.1016/j.knee.2023.09.006" target="_blank" rel="noopener">An accurate method for measuring knee joint space width despite variations in beam projection angles</a></h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Kim K, Lee MC, Han HS, Choi BS, Ro DH. <em>The Knee 2023;45:85-91</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
-                            <h4><a href="https://doi.org/10.1016/j.arth.2023.03.056" target="_blank" rel="noopener">Anatomic Patellar Design Has No Clinical Superiority Over Dome Patellar Design in Total Knee Arthroplasty: A Randomized Clinical Trial</a></h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Jung H, Ro DH, et al. <em>J Arthroplasty 2023;38(9):1742-1747</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
-                            <h4><a href="https://doi.org/10.3390/medicina59122105" target="_blank" rel="noopener">Early- to Mid-Term Review of a Prospective, Multi-Center, International, Outcomes Study of an Anatomically Designed Implant with Posterior-Stabilized Bearing in Total Knee Arthroplasty</a></h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Ro DH, Lee MC, Cholewa JM. <em>Medicina 2023;59(12):2105</em></p>
-                        </div>
-                        <div class="pub-list-item">
-                            <h4>Early-to mid-term review of a prospective, multi-center, international, outcomes study of an anatomically designed implant with posterior-stabilized bearing in total knee arthroplasty</h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Ro DH, Lee MC, Cholewa JM. <em>Medicina</em></p>
-                        </div>
-                        <div class="pub-list-item pub-list-item-highlight">
-                            <h4><a href="https://doi.org/10.1007/s00167-022-07227-5" target="_blank" rel="noopener">Functional alignment with robotic-arm assisted total knee arthroplasty demonstrated better patient-reported outcomes than mechanical alignment with manual total knee arthroplasty</a></h4>
-                            <p class="pub-meta">Choi BS, <strong>Kim SE</strong>, Yang M, Ro DH, Han HS. <em>KSSTA 2023;31(3):1072-1080</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
-                            <h4><a href="https://doi.org/10.3390/medicina59122104" target="_blank" rel="noopener">Risk Factors and Clinical Outcomes of Osteotomy Plane Violation by D-Hole Screws in Medial Open Wedge High Tibial Osteotomy: A Simulation and Comparative Study</a></h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Lee MH, Cho CH, Lee JI, Han HS, Lee MC, Ro DH. <em>Medicina 2023;59(12):2104</em></p>
-                        </div>
-                        <div class="pub-list-item first-author-item">
-                            <h4><a href="https://doi.org/10.1007/s13534-023-00323-6" target="_blank" rel="noopener">Robotic-assisted unicompartmental knee arthroplasty: historical perspectives and current innovations</a></h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Han HS. <em>Biomed Eng Lett 2023;13(4):543-552</em></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pub-year-group" id="pubs-2022">
-                    <div class="pub-year-label">2022 <span class="year-count">1 paper</span></div>
-                    <div class="pub-list-items">
-                        <div class="pub-list-item first-author-item">
-                            <h4><a href="https://doi.org/10.1186/s40634-022-00523-6" target="_blank" rel="noopener">Single shot adductor canal block combined with intravenous patient-controlled analgesia can be effective as continuous adductor canal block in reducing opioid consumption and breakthrough pain after total knee arthroplasty</a></h4>
-                            <p class="pub-meta"><strong>Kim SE</strong>, Han HS, Lee MC, Ro DH. <em>J Exp Orthop 2022;9(1):84</em></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pub-year-group" id="pubs-2020">
-                    <div class="pub-year-label">2020 <span class="year-count">1 paper</span></div>
-                    <div class="pub-list-items">
-                        <div class="pub-list-item">
-                            <h4><a href="https://doi.org/10.1186/s12891-020-03579-6" target="_blank" rel="noopener">Elastic pneumatic tourniquet cuff can reduce postoperative thigh pain after total knee arthroplasty: a prospective randomized trial</a></h4>
-                            <p class="pub-meta">Park JY, <strong>Kim SE</strong>, Lee MC, Han HS. <em>BMC Musculoskelet Disord 2020;21(1):565</em></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pub-year-group" id="pubs-2014">
-                    <div class="pub-year-label">2014 & Earlier <span class="year-count">1 paper</span></div>
-                    <div class="pub-list-items">
-                        <div class="pub-list-item">
-                            <h4><a href="https://doi.org/10.1007/s13139-013-0260-2" target="_blank" rel="noopener">Recent Trends in PET Image Interpretations Using Volumetric and Texture-based Quantification Methods in Nuclear Oncology</a></h4>
-                            <p class="pub-meta">Rahim MK, <strong>Kim SE</strong>, et al. <em>Nucl Med Mol Imaging 2014;48(1):1-15</em></p>
-                        </div>
-                    </div>
-                </div>
-
-                </div><!-- end earlierPubs -->
-
-                <button class="show-more-btn" id="showMoreBtn" aria-expanded="false" aria-controls="earlierPubs" onclick="togglePublications()">
-                    <span id="showMoreText">Show 2024 & Earlier Publications</span>
-                </button>
+        <!-- Publication data (auto-generated from publications.json; feeds the constellation + list) -->
+        <!-- AUTO-GENERATED-PUBS-START -->
+                <script id="pub-data" type="application/json">
+[
+{
+"year": 2026,
+"title": "3DReasonKnee: Advancing Grounded Reasoning in Medical Vision Language Models",
+"venue": "Pacific Symposium on Biocomputing 31:99-113",
+"authors": "Sambara S*, Kim SE*, Zhang X, et al",
+"href": "https://psb.stanford.edu/psb-online/proceedings/psb26/sambara.pdf",
+"tags": [
+"ai",
+"first"
+]
+},
+{
+"year": 2026,
+"title": "A clinical environment simulator for dynamic AI evaluation",
+"venue": "Nature Medicine",
+"authors": "Luo L*, Kim SE*, Zhang X, Kernbach JM, Kenia R, Acosta JN, ..., Topol E, Rajpurkar P",
+"href": "https://doi.org/10.1038/s41591-026-04252-6",
+"tags": [
+"ai",
+"first"
+]
+},
+{
+"year": 2026,
+"title": "CRIMSON: A Clinically-Grounded LLM-Based Metric for Generative Radiology Report Evaluation",
+"venue": "arXiv preprint arXiv:2603.06183",
+"authors": "Baharoon M, Heintz T, Raissi S, Alabbad M, Alhammad M, AlOmaish H, Kim SE, Banerjee O, Rajpurkar P",
+"href": "",
+"tags": [
+"ai"
+]
+},
+{
+"year": 2026,
+"title": "Do Mixed-Vendor Multi-Agent LLMs Improve Clinical Diagnosis?",
+"venue": "HeaLing Workshop at EACL 2026",
+"authors": "Yuan GC, Zhang X, Kim SE, Rajpurkar P",
+"href": "https://arxiv.org/abs/2603.04421",
+"tags": [
+"ai"
+]
+},
+{
+"year": 2026,
+"title": "Effects of axial malrotation on posterior tibial slope measurement",
+"venue": "Knee Surg Relat Res 2026;38:3",
+"authors": "Park J, Persson A, Martin RK, et al",
+"href": "https://doi.org/10.1186/s43019-026-00303-x",
+"tags": [
+"ortho"
+]
+},
+{
+"year": 2026,
+"title": "Effects of axial malrotation on posterior tibial slope measurement: a digitally reconstructed radiograph study enabling automated quality assessment",
+"venue": "Knee Surgery & Related Research",
+"authors": "Park J, Persson A, Martin RK, Inderhaug E, Kim SE, Kim S, Kwak D, Ro DH",
+"href": "",
+"tags": [
+"ai"
+]
+},
+{
+"year": 2026,
+"title": "ReXInTheWild: A Unified Benchmark for Medical Photograph Understanding",
+"venue": "arXiv preprint arXiv:2603.19517",
+"authors": "Banerjee O, Kim SE, Willauer AN, Kernbach JM, Alomaish AR, Alghamdi RAS, Alomaish HR, Baharoon M, Zhang X, Acosta JN, Zhou C, Rajpurkar P",
+"href": "",
+"tags": [
+"ai"
+]
+},
+{
+"year": 2026,
+"title": "ReXSonoVQA: A Video QA Benchmark for Procedure-Centric Ultrasound Understanding",
+"venue": "arXiv preprint arXiv:2604.10916",
+"authors": "Wang X, Zhang X, Kim SE, Pal A, Rajpurkar P",
+"href": "",
+"tags": [
+"ai"
+]
+},
+{
+"year": 2026,
+"title": "The Doctor Will Agree With You Now: Sycophancy of Large Language Models in Multi-Turn Medical Conversations",
+"venue": "HeaLing Workshop at EACL 2026",
+"authors": "Kim TM, Luo L, Kim SE, Manrai AK, Topol E, Rajpurkar P",
+"href": "",
+"tags": [
+"ai"
+]
+},
+{
+"year": 2025,
+"title": "A development of machine learning models to preoperatively predict insufficient clinical improvement after total knee arthroplasty",
+"venue": "J Orthop Surg Res 2025;20(1):778",
+"authors": "Gimm G, Jeon B, Kim SE, et al.",
+"href": "https://doi.org/10.1186/s13018-025-06206-z",
+"tags": [
+"both"
+]
+},
+{
+"year": 2025,
+"title": "Automated Posterior Tibial Slope Measurement Using Lateral Knee Radiographs",
+"venue": "Orthop J Sports Med 2025;13(4)",
+"authors": "Ryu B, Nam JW, Ro DH, et al. (Kim SE corresponding)",
+"href": "https://doi.org/10.1177/23259671251331067",
+"tags": [
+"both"
+]
+},
+{
+"year": 2025,
+"title": "Automated posterior tibial slope measurement using lateral knee radiographs: a novel landmark-based approach using deep learning",
+"venue": "Orthopaedic Journal of Sports Medicine",
+"authors": "Ryu B, Nam JW, Ro DH, Martin RK, Inderhaug E, Persson A, Haland S, Kim SE",
+"href": "",
+"tags": [
+"both"
+]
+},
+{
+"year": 2025,
+"title": "Deep learning for automated hip fracture detection and classification: achieving superior accuracy",
+"venue": "Bone Joint J 2025;107-B(2):213-220",
+"authors": "Zheng Z, Ryu B, Kim SE, et al",
+"href": "https://doi.org/10.1302/0301-620X.107B2.BJJ-2024-0791.R1",
+"tags": [
+"both"
+]
+},
+{
+"year": 2025,
+"title": "Do knee alignment patterns differ between Middle Eastern and East Asian populations? A propensity-matched analysis using artificial intelligence",
+"venue": "Knee Surg Relat Res 2025;37(1):11",
+"authors": "Park J, et al., Kim SE (corresponding)",
+"href": "https://doi.org/10.1186/s43019-025-00261-w",
+"tags": [
+"both"
+]
+},
+{
+"year": 2025,
+"title": "External validation of a novel landmark-based deep learning automated tibial slope measurement algorithm applied on short radiographs from ACL injured patients",
+"venue": "Orthop J Sports Med 2025;13(5)",
+"authors": "Martin RK, Haaland S, Persson A, Kim SE, et al.",
+"href": "https://doi.org/10.1177/23259671251333607",
+"tags": [
+"both"
+]
+},
+{
+"year": 2025,
+"title": "External validation of a novel landmark-based deep learning automated tibial slope measurement algorithm applied on short radiographs obtained in patients with ACL injuries",
+"venue": "Orthopaedic Journal of Sports Medicine",
+"authors": "Martin KR, Haaland S, Persson A, Kim SE, Ryu B, Nam JW, Ro DH, Inderhaug E",
+"href": "",
+"tags": [
+"both"
+]
+},
+{
+"year": 2025,
+"title": "FactCheXcker: Mitigating Measurement Hallucinations in Chest X-ray Report Generation Models",
+"venue": "CVPR 2025",
+"authors": "Heiman A, Zhang X, Chen E, Kim SE, Rajpurkar P",
+"href": "https://doi.org/10.48550/arXiv.2411.18672",
+"tags": [
+"ai"
+]
+},
+{
+"year": 2025,
+"title": "Low Cognitive Function and Somatic Psychological Symptoms Are Correlated with Greater Risk of Delirium After Total Knee Arthroplasty: A Prospective Cohort Study",
+"venue": "JBJS",
+"authors": "Lee JY, Park JE, Kim SE, Choi BS, Lee MC, Chang CB, Han HS, Park HY, Ro DH",
+"href": "",
+"tags": [
+"ortho"
+]
+},
+{
+"year": 2025,
+"title": "Machine learning-based prediction of contralateral knee osteoarthritis development using the Osteoarthritis Initiative and the Multicenter Osteoarthritis Study dataset",
+"venue": "J Orthop Res 2025;43(3):576-585",
+"authors": "Kim JS, Choi BS, Kim SE, et al",
+"href": "https://doi.org/10.1002/jor.26018",
+"tags": [
+"both"
+]
+},
+{
+"year": 2025,
+"title": "Posterior tibial slope as a risk factor for anterior cruciate ligament tears",
+"venue": "Arthrosc Orthop Sports Med 2025;12:64-69",
+"authors": "Kwak D*, Kim SE*, Park J, et al",
+"href": "https://doi.org/10.14517/aosm25006",
+"tags": [
+"ortho",
+"first"
+]
+},
+{
+"year": 2025,
+"title": "Posterior tibial slope as a risk factor for anterior cruciate ligament tears: a retrospective study using automated measurement",
+"venue": "Arthroscopy and Orthopedic Sports Medicine",
+"authors": "Kwak D, Kim SE, Park J, Han HS, Choi BS, Ro DH",
+"href": "",
+"tags": [
+"both"
+]
+},
+{
+"year": 2025,
+"title": "Preoperative low cognitive function and somatic psychological symptoms are associated with an increased risk of postoperative delirium following total knee arthroplasty: a prospective cohort study",
+"venue": "J Bone Joint Surg Am 2025",
+"authors": "Lee JY, Park JE, Kim SE, et al",
+"href": "https://doi.org/10.2106/JBJS.25.00392",
+"tags": [
+"ortho"
+]
+},
+{
+"year": 2025,
+"title": "RadGame: An AI-Powered Platform for Radiology Education",
+"venue": "Machine Learning for Health (ML4H) 2025",
+"authors": "Baharoon M, Raissi S, Jun JS, et al.",
+"href": "https://doi.org/10.48550/arXiv.2509.13270",
+"tags": [
+"ai"
+]
+},
+{
+"year": 2025,
+"title": "ReXTrust: A Model for Fine-Grained Hallucination Detection in AI-Generated Radiology Reports",
+"venue": "Proceedings of the AAAI Bridge Program on AI for Medicine and Healthcare, PMLR 281:173-182, 2025",
+"authors": "Hardy R, Kim SE, Ro DH, Rajpurkar P",
+"href": "https://doi.org/10.48550/arXiv.2412.15264",
+"tags": [
+"ai"
+]
+},
+{
+"year": 2025,
+"title": "Rexgroundingct: A 3d chest ct dataset for segmentation of findings from free-text reports",
+"venue": "arXiv preprint arXiv:2507.22030",
+"authors": "Baharoon M, Luo L, Moritz M, Kumar A, Kim SE, Zhang X, Zhu M, Alabbad MH, Alhazmi MS, Mistry NP, Bijnens L, Kleinschmidt KR, Chrisler B, Suryadevara S, Jaliparthi SSD, Prudlo NM, Marino MD, Palacio J, Akula R, Zhou D, Zhou HY, Hamamci IE, Adams SJ, AlOmaish HR, Rajpurkar P",
+"href": "",
+"tags": [
+"ai"
+]
+},
+{
+"year": 2025,
+"title": "State-of-the-art text-prompted medical segmentation models struggle to ground chest CT findings",
+"venue": "MLHC 2025",
+"authors": "Baharoon M, Luo L, Moritz M, et al.",
+"href": "https://proceedings.mlr.press/v298/baharoon25a.html",
+"tags": [
+"ai"
+]
+},
+{
+"year": 2025,
+"title": "Superior Forgotten Joint Scores with Cruciate-Retaining Mobile bearings Versus Posterior-Stabilized Mobile and Fixed bearings in a contemporary Total Knee System",
+"venue": "The Knee 2025;53:118-125",
+"authors": "Kim SE, Shin HS, Han HS",
+"href": "https://doi.org/10.1016/j.knee.2024.11.003",
+"tags": [
+"ortho",
+"first"
+]
+},
+{
+"year": 2025,
+"title": "Superior One-year Forgotten Joint Scores with cruciate-retaining mobile bearings versus posterior-stabilized mobile and fixed bearings in a contemporary total knee system",
+"venue": "The Knee",
+"authors": "Kim SE, Shin HS, Han HS",
+"href": "",
+"tags": [
+"ortho"
+]
+},
+{
+"year": 2025,
+"title": "Voice-guided Orchestrated Intelligence for Clinical Evaluation (VOICE): A Voice AI Agent System for Prehospital Stroke Assessment",
+"venue": "IEEE AIxMHC 2025",
+"authors": "Acosta JN, Adams SJ, Kernbach JM, et al.",
+"href": "https://arxiv.org/abs/2507.22898",
+"tags": [
+"ai"
+]
+},
+{
+"year": 2024,
+"title": "A deep learning based automatic two-dimensional digital templating model for total knee arthroplasty",
+"venue": "Knee Surg Relat Res 2024;36(1):38",
+"authors": "Park J, Kim SE, et al",
+"href": "https://doi.org/10.1186/s43019-024-00240-7",
+"tags": [
+"both"
+]
+},
+{
+"year": 2024,
+"title": "Can individual functional improvements be predicted in osteoarthritic patients after total knee arthroplasty?",
+"venue": "Knee Surg Relat Res 2024;36(1):31",
+"authors": "Kim SE, Ro DH, Lee MC, Han HS",
+"href": "https://doi.org/10.1186/s43019-024-00238-1",
+"tags": [
+"both",
+"first"
+]
+},
+{
+"year": 2024,
+"title": "Coronal Plane Alignment of the Knee (CPAK) Type Shifts Toward Constitutional Varus with Increasing Kellgren and Lawrence Grade: A Radiographic Analysis of 17,365 Knees",
+"venue": "JBJS",
+"authors": "Kim SE, MacDessi S, Song D, Kim JI, Choi BS, Han HS, Ro DH",
+"href": "",
+"tags": [
+"ortho"
+]
+},
+{
+"year": 2024,
+"title": "Coronal plane alignment of the knee (CPAK) type shifts towards constitutional varus with increasing Kellgren and Lawrence grade: a deep learning radiographic analysis of 17,365 knees",
+"venue": "J Bone Joint Surg Am 2024",
+"authors": "Kim SE, MacDessi S, Song D, Kim JI, Choi BS, Han HS, Ro DH",
+"href": "https://doi.org/10.2106/JBJS.24.00316",
+"tags": [
+"both",
+"first"
+]
+},
+{
+"year": 2024,
+"title": "Dedifferentiated Liposarcoma of the Extremities: A Korean Multi-Center Study of 107 Cases",
+"venue": "BMC Cancer 2024;24(1):1259",
+"authors": "Park JH, Kim SE, et al",
+"href": "https://doi.org/10.1186/s12885-024-13021-y",
+"tags": [
+"ortho"
+]
+},
+{
+"year": 2024,
+"title": "Enhanced deep learning model enables accurate alignment measurement across diverse institutional imaging protocols",
+"venue": "Knee Surg Relat Res 2024;36(1):4",
+"authors": "Kim SE, Nam JW, Kim JI, Kim JK, Ro DH",
+"href": "https://doi.org/10.1186/s43019-023-00209-y",
+"tags": [
+"both",
+"first"
+]
+},
+{
+"year": 2024,
+"title": "Estimation of patient-reported outcome measures based on features of knee joint muscle co-activation",
+"venue": "Scientific Reports 2024;14(1):12428",
+"authors": "Hussain I*, Kim SE*, et al",
+"href": "https://doi.org/10.1038/s41598-024-63266-7",
+"tags": [
+"ortho",
+"first"
+]
+},
+{
+"year": 2024,
+"title": "Estimation of patient-reported outcome measures based on features of knee joint muscle co-activation in advanced knee osteoarthritis",
+"venue": "Scientific Reports",
+"authors": "Hussain I*, Kim SE*, Kwon C, Hoon SK, Kim HC, Ku Y, Ro DH",
+"href": "",
+"tags": [
+"ortho"
+]
+},
+{
+"year": 2024,
+"title": "Fixed bearing and higher postoperative knee flexion angle as predictors of satisfaction in Asian patients undergoing posterior stabilized total knee arthroplasty",
+"venue": "Clin Orthop Surg 2024;16:e19",
+"authors": "Kim SE, Choi BS, Ro DH, Lee MC, Han HS",
+"href": "https://doi.org/10.4055/cios23166",
+"tags": [
+"both",
+"first"
+]
+},
+{
+"year": 2024,
+"title": "Fixed-bearing and higher postoperative knee flexion angle as predictors of satisfaction in Asian patients undergoing posterior-stabilized total knee arthroplasty",
+"venue": "Clinics in Orthopedic Surgery",
+"authors": "Kim SE, Choi BS, Lee MC, Han HS",
+"href": "",
+"tags": [
+"both"
+]
+},
+{
+"year": 2024,
+"title": "Method and apparatus for calculating indicators related to knee osteoarthritis by using electromyography data",
+"venue": "",
+"authors": "Kim HC, Ro DH, Kim SE",
+"href": "",
+"tags": [
+"ortho"
+]
+},
+{
+"year": 2024,
+"title": "Minimal impact of beam projection angle deviations in skyline (Laurin) view and the efficacy of the anterior border of proximal tibia as a guiding landmark",
+"venue": "Skeletal Radiology 2024;53(7):1399-1406",
+"authors": "Kim SE, Hwang S, Lee JH, Gimm G, Han HS, Choi BS, Ro DH",
+"href": "https://doi.org/10.1007/s00256-024-04619-1",
+"tags": [
+"ortho",
+"first"
+]
+},
+{
+"year": 2024,
+"title": "Performance of ChatGPT on Solving Orthopedic Board-Style Questions",
+"venue": "Clin Orthop Surg 2024;16:e13",
+"authors": "Kim SE, Lee JH, Choi BS, et al",
+"href": "https://doi.org/10.4055/cios23179",
+"tags": [
+"both",
+"first"
+]
+},
+{
+"year": 2024,
+"title": "Performance of ChatGPT on Solving Orthopedic Board-Style Questions: A Comparative Analysis of ChatGPT 3.5 and ChatGPT 4",
+"venue": "Clinics in Orthopedic Surgery",
+"authors": "Kim SE, Lee JH, Choi BS, Han HS, Lee MC, Ro DH",
+"href": "",
+"tags": [
+"both"
+]
+},
+{
+"year": 2024,
+"title": "Preserving coronal knee alignment of the knee (CPAK) in unicompartmental knee arthroplasty correlates with superior patient-reported outcomes",
+"venue": "Knee Surg Relat Res 2024;36(1):1",
+"authors": "Kim SE, Yun KR, Lee JM, Lee MC, Han HS",
+"href": "https://doi.org/10.1186/s43019-023-00204-3",
+"tags": [
+"ortho",
+"first"
+]
+},
+{
+"year": 2024,
+"title": "Primary Total Knee Arthroplasty for Treating Osteoarthritic Knees with Neglected Patellar Dislocation",
+"venue": "Medicina",
+"authors": "Kim SE, Kim SH, Lee JI, Han HS, Lee MC, Ro DH",
+"href": "",
+"tags": [
+"ortho"
+]
+},
+{
+"year": 2024,
+"title": "Primary total knee arthroplasty for treating knees with neglected patellar dislocation",
+"venue": "Medicina 2024;60(9):1492",
+"authors": "Kim SE, Kim SH, Lee JI, Han HS, Lee MC, Ro DH",
+"href": "https://doi.org/10.3390/medicina60091492",
+"tags": [
+"ortho",
+"first"
+]
+},
+{
+"year": 2024,
+"title": "Robotic arm-assisted total knee arthroplasty in a patient with osteopetrosis",
+"venue": "Orthop Rev (Pavia) 2024;16:94238",
+"authors": "Kim SE, Han HS",
+"href": "https://doi.org/10.52965/001c.94238",
+"tags": [
+"ortho",
+"first"
+]
+},
+{
+"year": 2024,
+"title": "Robotic arm-assisted total knee arthroplasty in a patient with osteopetrosis: a case report and review of literature",
+"venue": "Orthopedic Reviews",
+"authors": "Kim SE, Han HS",
+"href": "",
+"tags": [
+"ortho"
+]
+},
+{
+"year": 2024,
+"title": "Shallow trochlear groove and narrow medial trochlear width at the proximal trochlea in patients with trochlear dysplasia: A three-dimensional computed tomography analysis",
+"venue": "KSSTA 2024;32(6):1434-1445",
+"authors": "Lee JY*, Kim SE*, et al",
+"href": "https://doi.org/10.1002/ksa.12166",
+"tags": [
+"ortho",
+"first"
+]
+},
+{
+"year": 2024,
+"title": "The use of medial joint opening rather than mechanical axis deviation to determine the clinical outcomes after high tibial osteotomy",
+"venue": "Bone Joint J 2024;106-B(3):240-248",
+"authors": "Kim SE, Kwak J, Ro DH, Lee MC, Han HS",
+"href": "https://doi.org/10.1302/0301-620X.106B3.BJJ-2023-0337.R3",
+"tags": [
+"ortho",
+"first"
+]
+},
+{
+"year": 2023,
+"title": "An accurate method for measuring knee joint space width despite variations in beam projection angles",
+"venue": "The Knee 2023;45:85-91",
+"authors": "Kim SE, Kim K, Lee MC, Han HS, Choi BS, Ro DH",
+"href": "https://doi.org/10.1016/j.knee.2023.09.006",
+"tags": [
+"ortho",
+"first"
+]
+},
+{
+"year": 2023,
+"title": "Anatomic Patellar Design Has No Clinical Superiority Over Dome Patellar Design in Total Knee Arthroplasty: A Randomized Clinical Trial",
+"venue": "J Arthroplasty 2023;38(9):1742-1747",
+"authors": "Kim SE, Jung H, Ro DH, et al",
+"href": "https://doi.org/10.1016/j.arth.2023.03.056",
+"tags": [
+"ortho",
+"first"
+]
+},
+{
+"year": 2023,
+"title": "Early- to Mid-Term Review of a Prospective, Multi-Center, International, Outcomes Study of an Anatomically Designed Implant with Posterior-Stabilized Bearing in Total Knee Arthroplasty",
+"venue": "Medicina 2023;59(12):2105",
+"authors": "Kim SE, Ro DH, Lee MC, Cholewa JM",
+"href": "https://doi.org/10.3390/medicina59122105",
+"tags": [
+"ortho",
+"first"
+]
+},
+{
+"year": 2023,
+"title": "Early-to mid-term review of a prospective, multi-center, international, outcomes study of an anatomically designed implant with posterior-stabilized bearing in total knee arthroplasty",
+"venue": "Medicina",
+"authors": "Kim SE, Ro DH, Lee MC, Cholewa JM",
+"href": "",
+"tags": [
+"ortho"
+]
+},
+{
+"year": 2023,
+"title": "Functional alignment with robotic-arm assisted total knee arthroplasty demonstrated better patient-reported outcomes than mechanical alignment with manual total knee arthroplasty",
+"venue": "KSSTA 2023;31(3):1072-1080",
+"authors": "Choi BS, Kim SE, Yang M, Ro DH, Han HS",
+"href": "https://doi.org/10.1007/s00167-022-07227-5",
+"tags": [
+"ortho"
+]
+},
+{
+"year": 2023,
+"title": "Risk Factors and Clinical Outcomes of Osteotomy Plane Violation by D-Hole Screws in Medial Open Wedge High Tibial Osteotomy: A Simulation and Comparative Study",
+"venue": "Medicina 2023;59(12):2104",
+"authors": "Kim SE, Lee MH, Cho CH, Lee JI, Han HS, Lee MC, Ro DH",
+"href": "https://doi.org/10.3390/medicina59122104",
+"tags": [
+"ortho",
+"first"
+]
+},
+{
+"year": 2023,
+"title": "Robotic-assisted unicompartmental knee arthroplasty: historical perspectives and current innovations",
+"venue": "Biomed Eng Lett 2023;13(4):543-552",
+"authors": "Kim SE, Han HS",
+"href": "https://doi.org/10.1007/s13534-023-00323-6",
+"tags": [
+"ortho",
+"first"
+]
+},
+{
+"year": 2022,
+"title": "Single shot adductor canal block combined with intravenous patient-controlled analgesia can be effective as continuous adductor canal block in reducing opioid consumption and breakthrough pain after total knee arthroplasty",
+"venue": "J Exp Orthop 2022;9(1):84",
+"authors": "Kim SE, Han HS, Lee MC, Ro DH",
+"href": "https://doi.org/10.1186/s40634-022-00523-6",
+"tags": [
+"ortho",
+"first"
+]
+},
+{
+"year": 2020,
+"title": "Elastic pneumatic tourniquet cuff can reduce postoperative thigh pain after total knee arthroplasty: a prospective randomized trial",
+"venue": "BMC Musculoskelet Disord 2020;21(1):565",
+"authors": "Park JY, Kim SE, Lee MC, Han HS",
+"href": "https://doi.org/10.1186/s12891-020-03579-6",
+"tags": [
+"ortho"
+]
+},
+{
+"year": 2014,
+"title": "Recent Trends in PET Image Interpretations Using Volumetric and Texture-based Quantification Methods in Nuclear Oncology",
+"venue": "Nucl Med Mol Imaging 2014;48(1):1-15",
+"authors": "Rahim MK, Kim SE, et al",
+"href": "https://doi.org/10.1007/s13139-013-0260-2",
+"tags": [
+"ortho"
+]
+}
+]
+                </script>
                 <!-- AUTO-GENERATED-PUBS-END -->
-        </section>
 
-        <!-- Experience -->
-        <section id="experience">
-            <h2>Experience</h2>
-            <div class="cv-list">
-                <div class="cv-item">
-                    <div class="cv-date">Sep 2024 – Present</div>
-                    <div class="cv-body">
-                        <div class="cv-title">Postdoctoral Research Fellow</div>
-                        <div class="cv-org">Harvard Medical School, Department of Biomedical Informatics</div>
-                        <div class="cv-desc">PI: Pranav Rajpurkar. Developing AI systems for medical applications.</div>
-                    </div>
-                </div>
-                <div class="cv-item">
-                    <div class="cv-date">Sep 2024 – Present</div>
-                    <div class="cv-body">
-                        <div class="cv-title">Associate Research Professor</div>
-                        <div class="cv-org">Seoul National University Hospital, Biomedical Research Institute</div>
-                        <div class="cv-desc">National Strategic Technology Research Institute. Leading AI research across orthopedics and diverse medical fields.</div>
-                    </div>
-                </div>
-                <div class="cv-item">
-                    <div class="cv-date">Mar 2023 – Present</div>
-                    <div class="cv-body">
-                        <div class="cv-title">Ph.D. Candidate in Orthopedic Surgery</div>
-                        <div class="cv-org">Seoul National University Graduate School of Medicine</div>
-                        <div class="cv-desc">AI applications in orthopedic surgery research.</div>
-                    </div>
-                </div>
-                <div class="cv-item">
-                    <div class="cv-date">Mar 2022 – Jul 2024</div>
-                    <div class="cv-body">
-                        <div class="cv-title">Clinical & Research Fellow (Knee Surgery)</div>
-                        <div class="cv-org">Seoul National University Hospital</div>
-                        <div class="cv-desc">Specialized training in knee arthroplasty, sports medicine, and robotic surgery under Profs. Han and Ro.</div>
-                    </div>
-                </div>
-                <div class="cv-item">
-                    <div class="cv-date">Feb 2023</div>
-                    <div class="cv-body">
-                        <div class="cv-title">M.S. in Orthopedic Surgery</div>
-                        <div class="cv-org">Seoul National University Graduate School of Medicine</div>
-                    </div>
-                </div>
-                <div class="cv-item">
-                    <div class="cv-date">Mar 2018 – Feb 2022</div>
-                    <div class="cv-body">
-                        <div class="cv-title">Orthopedic Surgery Resident</div>
-                        <div class="cv-org">Seoul National University Hospital</div>
-                        <div class="cv-desc">Comprehensive orthopedic training. Received Best Resident Award (2020).</div>
-                    </div>
-                </div>
-                <div class="cv-item">
-                    <div class="cv-date">May 2017 – Feb 2018</div>
-                    <div class="cv-body">
-                        <div class="cv-title">Intern</div>
-                        <div class="cv-org">Seoul National University Hospital</div>
-                    </div>
-                </div>
-                <div class="cv-item">
-                    <div class="cv-date">Apr 2014 – Apr 2017</div>
-                    <div class="cv-body">
-                        <div class="cv-title">Epidemic Intelligence Service Officer</div>
-                        <div class="cv-org">Korea Disease Control and Prevention Agency</div>
-                        <div class="cv-desc">Public health service during MERS crisis. Received Highest Commendation from Minister of Health.</div>
-                    </div>
-                </div>
-                <div class="cv-item">
-                    <div class="cv-date">Feb 2014</div>
-                    <div class="cv-body">
-                        <div class="cv-title">Doctor of Medicine (M.D.)</div>
-                        <div class="cv-org">Seoul National University College of Medicine</div>
-                    </div>
-                </div>
+        <!-- ===== § II  Research themes ===== -->
+        <section class="section">
+            <div class="sech">
+                <div class="sech__left"><span class="mono mono--sm sech__num">§ II</span><span class="mono mono--sm">WHAT I WORK ON</span></div>
+                <h2 class="sech__title">Research themes</h2>
+            </div>
+            <div class="themes">
+                <article class="theme">
+                    <div class="theme__num mono">01</div>
+                    <h3 class="theme__label">Medical Vision Models</h3>
+                    <p class="theme__blurb">Grounded reasoning, segmentation, and report generation across X-ray, CT, ultrasound, and MRI. Building datasets and benchmarks that hold models accountable to clinical truth.</p>
+                    <ul class="theme__papers"><li class="mono mono--sm">→ 3DReasonKnee</li><li class="mono mono--sm">→ ReXGroundingCT</li><li class="mono mono--sm">→ FactCheXcker</li><li class="mono mono--sm">→ ReXSonoVQA</li></ul>
+                </article>
+                <article class="theme">
+                    <div class="theme__num mono">02</div>
+                    <h3 class="theme__label">Dynamic AI Evaluation</h3>
+                    <p class="theme__blurb">Static benchmarks miss how AI behaves in the wild. We build simulators and clinically grounded metrics so models are evaluated the way they are deployed.</p>
+                    <ul class="theme__papers"><li class="mono mono--sm">→ Clinical Environment Simulator (Nature Medicine)</li><li class="mono mono--sm">→ CRIMSON</li><li class="mono mono--sm">→ ReXTrust</li></ul>
+                </article>
+                <article class="theme">
+                    <div class="theme__num mono">03</div>
+                    <h3 class="theme__label">LLMs in the Clinic</h3>
+                    <p class="theme__blurb">Multi-agent diagnosis, voice agents for prehospital care, and the under-studied failure modes of chatty models — sycophancy, hallucination, premature closure.</p>
+                    <ul class="theme__papers"><li class="mono mono--sm">→ VOICE (IEEE AIxMHC)</li><li class="mono mono--sm">→ Sycophancy in Medical LLMs</li><li class="mono mono--sm">→ Mixed-Vendor Diagnosis</li></ul>
+                </article>
+                <article class="theme">
+                    <div class="theme__num mono">04</div>
+                    <h3 class="theme__label">Translational Orthopedic AI</h3>
+                    <p class="theme__blurb">Deployed deep-learning pipelines for alignment measurement, fracture detection, and outcome prediction — validated across institutions and now used in real clinical workflows.</p>
+                    <ul class="theme__papers"><li class="mono mono--sm">→ Hip Fracture DL</li><li class="mono mono--sm">→ Automated Tibial Slope</li><li class="mono mono--sm">→ CPAK Analysis (JBJS)</li></ul>
+                </article>
             </div>
         </section>
 
-        <!-- Awards -->
-        <section id="awards">
-            <h2>Awards &amp; Recognition</h2>
-            <div class="cv-list">
-                <div class="cv-item">
-                    <div class="cv-date">2017</div>
-                    <div class="cv-body">
-                        <div class="cv-title">Highest Commendation from Minister of Health</div>
-                        <div class="cv-org">Republic of Korea — for dedication during MERS crisis response</div>
-                    </div>
+        <!-- ===== § III  Featured publication ===== -->
+        <section class="section featured">
+            <div class="sech">
+                <div class="sech__left"><span class="mono mono--sm sech__num">§ III</span><span class="mono mono--sm">SPOTLIGHT</span></div>
+                <h2 class="sech__title">Featured publication</h2>
+            </div>
+            <a href="https://doi.org/10.1038/s41591-026-04252-6" class="feat" target="_blank" rel="noopener">
+                <div class="feat__figure">
+                    <img src="https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41591-026-04252-6/MediaObjects/41591_2026_4252_Fig1_HTML.png" alt="Figure 1: Paradigm of a Clinical Environment Simulator" />
+                    <div class="feat__figure-caption mono mono--sm">Fig. 1 · Paradigm of a Clinical Environment Simulator (CES). Nat Med 32, 820–827 (2026).</div>
                 </div>
-                <div class="cv-item">
-                    <div class="cv-date">2024</div>
-                    <div class="cv-body">
-                        <div class="cv-title">Harvard–SNU Trainee Position</div>
-                        <div class="cv-org">Selected for collaborative research program in AI development for knee MRI</div>
-                    </div>
+                <div class="feat__body">
+                    <div class="feat__meta"><span class="mono mono--sm feat__venue">NATURE MEDICINE</span><span class="mono mono--sm feat__year">2026</span></div>
+                    <h3 class="feat__title">A clinical environment simulator for dynamic AI evaluation</h3>
+                    <p class="feat__authors">Luo L*, Kim SE*, Zhang X, Kernbach JM, Kenia R, Acosta JN, …, Topol E, Rajpurkar P.</p>
+                    <p class="feat__abstract">A simulation framework for evaluating medical AI the way it will actually be used — dynamic, multi-turn, and grounded in clinical decision pathways. Co-first authored with Dr. Luyang Luo.</p>
+                    <span class="feat__cta mono">READ PAPER ↗</span>
                 </div>
-                <div class="cv-item">
-                    <div class="cv-date">May 2025</div>
-                    <div class="cv-body">
-                        <div class="cv-title">Citation Award — KSRR</div>
-                        <div class="cv-org">Recognized for two highly cited articles in 2024</div>
-                    </div>
-                </div>
-                <div class="cv-item">
-                    <div class="cv-date">2024</div>
-                    <div class="cv-body">
-                        <div class="cv-title">Best Paper Award — KSRR</div>
-                        <div class="cv-org">Deep learning model for alignment measurement across imaging protocols</div>
-                    </div>
-                </div>
-                <div class="cv-item">
-                    <div class="cv-date">2023</div>
-                    <div class="cv-body">
-                        <div class="cv-title">Best Oral Presentation</div>
-                        <div class="cv-org">Korean Society of Computer-Assisted Orthopaedic Surgery</div>
-                    </div>
-                </div>
-                <div class="cv-item">
-                    <div class="cv-date">Dec 2020</div>
-                    <div class="cv-body">
-                        <div class="cv-title">Best Resident Award</div>
-                        <div class="cv-org">Seoul National University Hospital, Department of Orthopedic Surgery</div>
-                    </div>
-                </div>
-                <div class="cv-item">
-                    <div class="cv-date">2010–2013</div>
-                    <div class="cv-body">
-                        <div class="cv-title">Academic Scholarships</div>
-                        <div class="cv-org">Superior Academic Performance, Merit-Based, and College Scholarships — SNU</div>
-                    </div>
-                </div>
+            </a>
+        </section>
+
+        <!-- ===== § IV  Selected papers ===== -->
+        <section class="section">
+            <div class="sech">
+                <div class="sech__left"><span class="mono mono--sm sech__num">§ IV</span><span class="mono mono--sm">HAND-PICKED</span></div>
+                <h2 class="sech__title">Selected papers</h2>
+            </div>
+            <div class="highlights">
+                <a href="https://psb.stanford.edu/psb-online/proceedings/psb26/sambara.pdf" target="_blank" rel="noopener" class="hl">
+                    <div class="hl__year mono">2026</div>
+                    <div class="hl__body"><h4 class="hl__title">3DReasonKnee: Advancing Grounded Reasoning in Medical Vision Language Models</h4><p class="hl__authors">Sambara S*, Kim SE*, Zhang X, et al.</p><div class="hl__meta"><span class="mono mono--sm">PSB 2026</span><span class="hl__tags"><span class="chip chip--ai">AI/ML</span></span></div></div>
+                    <span class="hl__arrow">↗</span>
+                </a>
+                <a href="https://arxiv.org/abs/2507.22030" target="_blank" rel="noopener" class="hl">
+                    <div class="hl__year mono">2025</div>
+                    <div class="hl__body"><h4 class="hl__title">ReXGroundingCT: Free-Text Finding Segmentation in Chest CT</h4><p class="hl__authors">Baharoon M, Luo L, …, Kim SE, …, Rajpurkar P.</p><div class="hl__meta"><span class="mono mono--sm">NEJM AI (in press)</span><span class="hl__tags"><span class="chip chip--ai">AI/ML</span></span></div></div>
+                    <span class="hl__arrow">↗</span>
+                </a>
+                <a href="https://doi.org/10.1302/0301-620X.107B2.BJJ-2024-0791.R1" target="_blank" rel="noopener" class="hl">
+                    <div class="hl__year mono">2025</div>
+                    <div class="hl__body"><h4 class="hl__title">Deep learning for automated hip fracture detection and classification</h4><p class="hl__authors">Zheng Z, Ryu B, Kim SE, et al.</p><div class="hl__meta"><span class="mono mono--sm">Bone &amp; Joint Journal</span><span class="hl__tags"><span class="chip chip--both">TRANSLATIONAL</span></span></div></div>
+                    <span class="hl__arrow">↗</span>
+                </a>
+                <a href="https://doi.org/10.2106/JBJS.24.00316" target="_blank" rel="noopener" class="hl">
+                    <div class="hl__year mono">2024</div>
+                    <div class="hl__body"><h4 class="hl__title">CPAK shifts toward constitutional varus with increasing K&amp;L grade (17,365 knees)</h4><p class="hl__authors">Kim SE, MacDessi S, Song D, …, Ro DH.</p><div class="hl__meta"><span class="mono mono--sm">JBJS</span><span class="hl__tags"><span class="chip chip--both">TRANSLATIONAL</span></span></div></div>
+                    <span class="hl__arrow">↗</span>
+                </a>
+                <a href="https://doi.org/10.48550/arXiv.2411.18672" target="_blank" rel="noopener" class="hl">
+                    <div class="hl__year mono">2025</div>
+                    <div class="hl__body"><h4 class="hl__title">FactCheXcker: Mitigating Measurement Hallucinations in CXR Report Generation</h4><p class="hl__authors">Heiman A, Zhang X, Chen E, Kim SE, Rajpurkar P.</p><div class="hl__meta"><span class="mono mono--sm">CVPR 2025</span><span class="hl__tags"><span class="chip chip--ai">AI/ML</span></span></div></div>
+                    <span class="hl__arrow">↗</span>
+                </a>
+                <a href="https://doi.org/10.4055/cios23179" target="_blank" rel="noopener" class="hl">
+                    <div class="hl__year mono">2024</div>
+                    <div class="hl__body"><h4 class="hl__title">Performance of ChatGPT on Orthopedic Board-Style Questions</h4><p class="hl__authors">Kim SE, Lee JH, Choi BS, et al.</p><div class="hl__meta"><span class="mono mono--sm">Clinics in Orthopedic Surgery</span><span class="hl__tags"><span class="chip chip--both">TRANSLATIONAL</span></span></div></div>
+                    <span class="hl__arrow">↗</span>
+                </a>
             </div>
         </section>
 
-        <footer>
-            <p>&copy; 2026 Sung Eun Kim &middot; Last updated automatically from <a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a></p>
+        <!-- ===== § V  All publications (rendered from pub-data) ===== -->
+        <section class="section">
+            <div class="sech">
+                <div class="sech__left"><span class="mono mono--sm sech__num">§ V</span><span class="mono mono--sm">THE FULL RECORD</span></div>
+                <h2 class="sech__title">All publications</h2>
+                <div class="sech__right"><a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" rel="noopener" class="link mono mono--sm"><span class="link__arrow">↗</span>GOOGLE SCHOLAR</a></div>
+            </div>
+            <div id="allpubs-mount"></div>
+        </section>
+
+        <!-- ===== § VI / VII  News + Under review ===== -->
+        <section class="section twocol">
+            <div>
+                <div class="sech sech--sm">
+                    <div class="sech__left"><span class="mono mono--sm sech__num">§ VI</span><span class="mono mono--sm">RECENT</span></div>
+                    <h2 class="sech__title">News</h2>
+                </div>
+                <ul class="news">
+                    <li class="news__item"><span class="mono mono--sm news__date">04/2026</span><a href="https://arxiv.org/abs/2604.10916" target="_blank" rel="noopener" class="news__text">2 papers accepted by CHIL 2026.</a></li>
+                    <li class="news__item"><span class="mono mono--sm news__date">03/2026</span><a href="https://doi.org/10.1038/s41591-026-04252-6" target="_blank" rel="noopener" class="news__text">1 paper accepted by Nature Medicine.</a></li>
+                    <li class="news__item"><span class="mono mono--sm news__date">12/2025</span><a href="https://arxiv.org/abs/2507.22030" target="_blank" rel="noopener" class="news__text">1 paper accepted by NEJM AI.</a></li>
+                    <li class="news__item"><span class="mono mono--sm news__date">11/2025</span><a href="https://doi.org/10.48550/arXiv.2509.13270" target="_blank" rel="noopener" class="news__text">1 paper accepted by Machine Learning for Health (ML4H) 2025.</a></li>
+                    <li class="news__item"><span class="mono mono--sm news__date">09/2025</span><a href="https://psb.stanford.edu/psb-online/proceedings/psb26/sambara.pdf" target="_blank" rel="noopener" class="news__text">1 paper accepted by Pacific Symposium on Biocomputing (PSB) 2026.</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="sech sech--sm">
+                    <div class="sech__left"><span class="mono mono--sm sech__num">§ VII</span><span class="mono mono--sm">IN THE PIPELINE</span></div>
+                    <h2 class="sech__title">Under review</h2>
+                </div>
+                <ul class="ur">
+                    <li class="ur__item"><span class="mono mono--sm">→</span><span>1 first-author manuscript under review at <span class="mono mono--sm">CoRL 2026</span></span></li>
+                    <li class="ur__item"><span class="mono mono--sm">→</span><span>2 manuscripts under review at <span class="mono mono--sm">ACL ARR 2026</span></span></li>
+                    <li class="ur__item"><span class="mono mono--sm">→</span><span>1 manuscript under review at <span class="mono mono--sm">MLHC 2026</span></span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ===== § VIII  Experience ===== -->
+        <section class="section">
+            <div class="sech">
+                <div class="sech__left"><span class="mono mono--sm sech__num">§ VIII</span><span class="mono mono--sm">PATH</span></div>
+                <h2 class="sech__title">Experience &amp; training</h2>
+            </div>
+            <ol class="timeline">
+                <li class="tl"><div class="tl__dates mono mono--sm"><span>Sep 2024</span><span class="tl__dash">—</span><span>Present</span></div><div class="tl__marker"><span class="tl__dot"></span></div><div class="tl__body"><h4 class="tl__role">Postdoctoral Research Fellow</h4><div class="tl__org">Harvard Medical School · Department of Biomedical Informatics</div><div class="tl__detail">PI: Pranav Rajpurkar. Developing AI systems for medical applications.</div></div></li>
+                <li class="tl"><div class="tl__dates mono mono--sm"><span>Sep 2024</span><span class="tl__dash">—</span><span>Present</span></div><div class="tl__marker"><span class="tl__dot"></span></div><div class="tl__body"><h4 class="tl__role">Associate Research Professor</h4><div class="tl__org">Seoul National University Hospital · Biomedical Research Institute</div><div class="tl__detail">National Strategic Technology Research Institute. Leading AI research across orthopedics and diverse medical fields.</div></div></li>
+                <li class="tl"><div class="tl__dates mono mono--sm"><span>Mar 2023</span><span class="tl__dash">—</span><span>Present</span></div><div class="tl__marker"><span class="tl__dot"></span></div><div class="tl__body"><h4 class="tl__role">Ph.D. Candidate, Orthopedic Surgery</h4><div class="tl__org">Seoul National University Graduate School of Medicine</div><div class="tl__detail">AI applications in orthopedic surgery research.</div></div></li>
+                <li class="tl"><div class="tl__dates mono mono--sm"><span>Mar 2022</span><span class="tl__dash">—</span><span>Jul 2024</span></div><div class="tl__marker"><span class="tl__dot"></span></div><div class="tl__body"><h4 class="tl__role">Clinical &amp; Research Fellow (Knee Surgery)</h4><div class="tl__org">Seoul National University Hospital</div><div class="tl__detail">Specialized training in knee arthroplasty, sports medicine, and robotic surgery under Profs. Han and Ro.</div></div></li>
+                <li class="tl"><div class="tl__dates mono mono--sm"><span>Feb 2023</span></div><div class="tl__marker"><span class="tl__dot"></span></div><div class="tl__body"><h4 class="tl__role">M.S. in Orthopedic Surgery</h4><div class="tl__org">Seoul National University Graduate School of Medicine</div></div></li>
+                <li class="tl"><div class="tl__dates mono mono--sm"><span>Mar 2018</span><span class="tl__dash">—</span><span>Feb 2022</span></div><div class="tl__marker"><span class="tl__dot"></span></div><div class="tl__body"><h4 class="tl__role">Orthopedic Surgery Resident</h4><div class="tl__org">Seoul National University Hospital</div><div class="tl__detail">Comprehensive orthopedic training. Best Resident Award (2020).</div></div></li>
+                <li class="tl"><div class="tl__dates mono mono--sm"><span>May 2017</span><span class="tl__dash">—</span><span>Feb 2018</span></div><div class="tl__marker"><span class="tl__dot"></span></div><div class="tl__body"><h4 class="tl__role">Intern</h4><div class="tl__org">Seoul National University Hospital</div></div></li>
+                <li class="tl"><div class="tl__dates mono mono--sm"><span>Apr 2014</span><span class="tl__dash">—</span><span>Apr 2017</span></div><div class="tl__marker"><span class="tl__dot"></span></div><div class="tl__body"><h4 class="tl__role">Epidemic Intelligence Service Officer</h4><div class="tl__org">Korea Disease Control and Prevention Agency</div><div class="tl__detail">Public health service during MERS crisis. Highest Commendation from Minister of Health.</div></div></li>
+                <li class="tl"><div class="tl__dates mono mono--sm"><span>Feb 2014</span></div><div class="tl__marker"><span class="tl__dot"></span></div><div class="tl__body"><h4 class="tl__role">Doctor of Medicine (M.D.)</h4><div class="tl__org">Seoul National University College of Medicine</div></div></li>
+            </ol>
+        </section>
+
+        <!-- ===== § IX  Awards ===== -->
+        <section class="section">
+            <div class="sech">
+                <div class="sech__left"><span class="mono mono--sm sech__num">§ IX</span><span class="mono mono--sm">RECOGNITION</span></div>
+                <h2 class="sech__title">Awards &amp; honors</h2>
+            </div>
+            <ul class="awards">
+                <li class="award"><span class="mono mono--sm award__year">2017</span><div class="award__body"><div class="award__title">Highest Commendation from Minister of Health</div><div class="award__note">ROK — dedication during MERS crisis response</div></div></li>
+                <li class="award"><span class="mono mono--sm award__year">2024</span><div class="award__body"><div class="award__title">Harvard–SNU Trainee Position</div><div class="award__note">AI development for knee MRI</div></div></li>
+                <li class="award"><span class="mono mono--sm award__year">May 2025</span><div class="award__body"><div class="award__title">Citation Award — KSRR</div><div class="award__note">Two highly cited 2024 articles</div></div></li>
+                <li class="award"><span class="mono mono--sm award__year">2024</span><div class="award__body"><div class="award__title">Best Paper Award — KSRR</div><div class="award__note">DL alignment measurement across protocols</div></div></li>
+                <li class="award"><span class="mono mono--sm award__year">2023</span><div class="award__body"><div class="award__title">Best Oral Presentation</div><div class="award__note">Korean Society of Computer-Assisted Orthopaedic Surgery</div></div></li>
+                <li class="award"><span class="mono mono--sm award__year">Dec 2020</span><div class="award__body"><div class="award__title">Best Resident Award</div><div class="award__note">SNUH, Department of Orthopedic Surgery</div></div></li>
+                <li class="award"><span class="mono mono--sm award__year">2010–2013</span><div class="award__body"><div class="award__title">Academic Scholarships</div><div class="award__note">Superior Academic Performance, Merit-Based, College — SNU</div></div></li>
+            </ul>
+        </section>
+
+        <!-- ===== Footer ===== -->
+        <footer class="footer">
+            <div class="footer__rule"></div>
+            <div class="footer__row">
+                <span class="mono mono--sm">© 2026 SUNG EUN KIM</span>
+                <span class="mono mono--sm">CAMBRIDGE, MA · SEOUL, KR</span>
+                <span class="mono mono--sm">PUBLICATIONS SYNCED FROM SCHOLAR</span>
+            </div>
         </footer>
 
     </div>
 
     <script>
-        // Toggle earlier publications (button is auto-generated)
-        function togglePublications() {
-            const earlierPubs = document.getElementById('earlierPubs');
-            const showMoreText = document.getElementById('showMoreText');
-            const showMoreBtn = document.getElementById('showMoreBtn');
-            if (!earlierPubs) return;
-            const isHidden = earlierPubs.style.display === 'none';
-            earlierPubs.style.display = isHidden ? 'block' : 'none';
-            showMoreText.textContent = isHidden ? 'Show Fewer Publications' : 'Show 2024 & Earlier Publications';
-            showMoreBtn.setAttribute('aria-expanded', isHidden);
+    (function () {
+        "use strict";
+
+        // ----- Palette (resolved hex for SVG fills) -----
+        var C = { accent: "#B0202B", accentMid: "#7A4A3A", inkSoft: "#6A6258", paper: "#F2EEE3", ink: "#161513", rule: "#C6BFAE" };
+
+        // ----- Updated stamp -----
+        var stamp = document.getElementById("updated-stamp");
+        if (stamp) stamp.textContent = "UPDATED " + new Date().toLocaleDateString("en-US", { month: "short", year: "numeric" }).toUpperCase();
+
+        // ----- Load publication data -----
+        var PUBS = [];
+        try {
+            var el = document.getElementById("pub-data");
+            PUBS = JSON.parse(el.textContent.trim() || "[]");
+        } catch (e) { PUBS = []; }
+
+        function domainColor(tags) {
+            if (tags.indexOf("ai") !== -1 && tags.indexOf("both") === -1) return C.accent;
+            if (tags.indexOf("both") !== -1) return C.accentMid;
+            return C.inkSoft;
+        }
+        function tagLabel(t) {
+            if (t === "ai") return "AI/ML";
+            if (t === "ortho") return "ORTHO";
+            if (t === "both") return "TRANSLATIONAL";
+            return t.toUpperCase();
+        }
+        function esc(s) {
+            return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
         }
 
-        // Make each publication row clickable
-        document.querySelectorAll('.pub-list-item').forEach(item => {
-            const link = item.querySelector('h4 a');
-            if (link) {
-                item.addEventListener('click', (e) => {
-                    if (e.target.tagName !== 'A') {
-                        window.open(link.href, '_blank', 'noopener');
-                    }
-                });
-            } else {
-                item.style.cursor = 'default';
+        // ===== Attention grid (decorative hero texture) =====
+        (function renderAttn() {
+            var mount = document.getElementById("hero-attn");
+            if (!mount) return;
+            var cols = 28, rows = 14, seed = 11, s = seed;
+            function rand() { s = (s * 9301 + 49297) % 233280; return s / 233280; }
+            var cells = [];
+            for (var r = 0; r < rows; r++) {
+                for (var c = 0; c < cols; c++) {
+                    var diag = 1 - Math.abs((c / cols) - (r / rows)) * 1.4;
+                    var blob = Math.exp(-((Math.pow(c - cols * 0.7, 2) + Math.pow(r - rows * 0.3, 2)) / 30));
+                    var v = Math.max(0, Math.min(1, diag * 0.6 + blob * 0.9 + rand() * 0.15 - 0.1));
+                    cells.push(v);
+                }
             }
-        });
+            var html = '<div class="attn"><div class="attn__grid" style="grid-template-columns:repeat(' + cols + ',1fr)">';
+            for (var i = 0; i < cells.length; i++) html += '<div class="attn__cell" style="opacity:' + (cells[i] * 0.9).toFixed(3) + '"></div>';
+            html += "</div></div>";
+            mount.innerHTML = html;
+        })();
+
+        // ===== Publication constellation =====
+        (function renderConstellation() {
+            var mount = document.getElementById("pubviz-mount");
+            if (!mount) return;
+            var W = 920, H = 280, PAD_L = 56, PAD_R = 24, PAD_T = 28, PAD_B = 36, MIN_YEAR = 2022;
+            var pubs = PUBS.filter(function (p) { return p.year >= MIN_YEAR; });
+            if (!pubs.length) { mount.style.display = "none"; return; }
+
+            var yearsSet = {};
+            pubs.forEach(function (p) { yearsSet[p.year] = true; });
+            var years = Object.keys(yearsSet).map(Number).sort(function (a, b) { return a - b; });
+            var minYear = Math.min.apply(null, years), maxYear = Math.max.apply(null, years);
+
+            function hash(str) { var h = 0; for (var i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) | 0; return ((h % 1000) + 1000) % 1000; }
+
+            var byYear = {};
+            pubs.forEach(function (p) { (byYear[p.year] = byYear[p.year] || []).push(p); });
+            var points = [];
+            Object.keys(byYear).forEach(function (yr) {
+                var arr = byYear[yr], year = Number(yr);
+                var xBase = PAD_L + ((year - minYear) / Math.max(1, maxYear - minYear)) * (W - PAD_L - PAD_R);
+                arr.forEach(function (p, i) {
+                    var j = hash(p.title);
+                    var colCount = arr.length;
+                    var yFrac = colCount === 1 ? 0.5 : i / (colCount - 1);
+                    var yJitter = ((j % 40) - 20) * 0.3;
+                    var xJitter = (((j >> 2) % 30) - 15) * 0.6;
+                    var ring = p.tags.indexOf("first") !== -1;
+                    points.push({ p: p, x: xBase + xJitter, y: PAD_T + yFrac * (H - PAD_T - PAD_B) + yJitter, r: ring ? 6.5 : 4.5, ring: ring });
+                });
+            });
+
+            // edges within year
+            var edges = [];
+            Object.keys(byYear).forEach(function (yr) {
+                var pts = points.filter(function (pt) { return pt.p.year === Number(yr); });
+                for (var i = 0; i < pts.length - 1; i++) edges.push([pts[i], pts[i + 1]]);
+            });
+
+            var svgNS = "http://www.w3.org/2000/svg";
+            var parts = [];
+            parts.push('<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMidYMid meet" class="pubviz__svg">');
+            parts.push('<defs><pattern id="microgrid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="' + C.rule + '" stroke-width="0.5"/></pattern></defs>');
+            parts.push('<rect x="0" y="0" width="' + W + '" height="' + H + '" fill="url(#microgrid)" opacity="0.5"/>');
+            years.forEach(function (y) {
+                var x = PAD_L + ((y - minYear) / Math.max(1, maxYear - minYear)) * (W - PAD_L - PAD_R);
+                parts.push('<line x1="' + x + '" y1="' + PAD_T + '" x2="' + x + '" y2="' + (H - PAD_B + 4) + '" stroke="' + C.rule + '" stroke-dasharray="2 4"/>');
+                parts.push('<text x="' + x + '" y="' + (H - PAD_B + 20) + '" text-anchor="middle" class="pubviz__year">' + y + "</text>");
+            });
+            edges.forEach(function (e) {
+                parts.push('<line x1="' + e[0].x + '" y1="' + e[0].y + '" x2="' + e[1].x + '" y2="' + e[1].y + '" stroke="' + C.inkSoft + '" stroke-opacity="0.18" stroke-width="0.7"/>');
+            });
+            points.forEach(function (pt, idx) {
+                var col = domainColor(pt.p.tags);
+                parts.push('<g class="pubnode" data-idx="' + idx + '" style="cursor:' + (pt.p.href ? "pointer" : "default") + '">');
+                parts.push('<circle class="halo" cx="' + pt.x + '" cy="' + pt.y + '" r="' + (pt.r + 2) + '" fill="' + col + '" opacity="0"/>');
+                parts.push('<circle cx="' + pt.x + '" cy="' + pt.y + '" r="' + pt.r + '" fill="' + (pt.ring ? C.paper : col) + '" stroke="' + col + '" stroke-width="' + (pt.ring ? 1.8 : 0) + '"/>');
+                parts.push("</g>");
+            });
+            parts.push('<text x="' + (PAD_L - 12) + '" y="' + (PAD_T - 8) + '" class="pubviz__axis" text-anchor="start">↑ PAPERS</text>');
+            parts.push("</svg>");
+
+            var html = '<div class="pubviz">' + parts.join("") +
+                '<div class="pubviz__caption"><div class="pubviz__legend">' +
+                '<span class="pubviz__lg"><span class="pubviz__dot" style="background:' + C.accent + '"></span> AI / ML</span>' +
+                '<span class="pubviz__lg"><span class="pubviz__dot" style="background:' + C.accentMid + '"></span> Translational</span>' +
+                '<span class="pubviz__lg"><span class="pubviz__dot" style="background:' + C.inkSoft + '"></span> Clinical orthopedics</span>' +
+                '</div><div class="pubviz__hover" id="pubviz-hover" aria-live="polite">' +
+                '<span class="pubviz__hover-empty">↑ hover any node — ' + points.length + ' papers, ' + years.length + ' years</span>' +
+                "</div></div></div>";
+            mount.innerHTML = html;
+
+            var hover = document.getElementById("pubviz-hover");
+            var emptyHTML = '<span class="pubviz__hover-empty">↑ hover any node — ' + points.length + ' papers, ' + years.length + ' years</span>';
+            mount.querySelectorAll(".pubnode").forEach(function (g) {
+                var pt = points[Number(g.getAttribute("data-idx"))];
+                var halo = g.querySelector(".halo");
+                g.addEventListener("mouseenter", function () {
+                    halo.setAttribute("opacity", "0.3");
+                    hover.innerHTML = '<span class="pubviz__hover-venue">' + esc(pt.p.venue) + '</span><span class="pubviz__hover-title">' + esc(pt.p.title) + "</span>";
+                });
+                g.addEventListener("mouseleave", function () { halo.setAttribute("opacity", "0"); hover.innerHTML = emptyHTML; });
+                g.addEventListener("click", function () { if (pt.p.href) window.open(pt.p.href, "_blank", "noopener"); });
+            });
+        })();
+
+        // ===== All publications (filterable list) =====
+        (function renderAllPubs() {
+            var mount = document.getElementById("allpubs-mount");
+            if (!mount) return;
+            var state = { filter: "all", year: "all", expanded: false };
+            var allYears = (function () {
+                var s = {}; PUBS.forEach(function (p) { s[p.year] = true; });
+                return Object.keys(s).map(Number).sort(function (a, b) { return b - a; });
+            })();
+            var FILTERS = [["all", "All"], ["ai", "AI / ML"], ["both", "Translational"], ["ortho", "Clinical"], ["first", "First author"]];
+
+            function applyFilter() {
+                return PUBS.filter(function (p) {
+                    var tagOK = state.filter === "all" ||
+                        (state.filter === "first" && p.tags.indexOf("first") !== -1) ||
+                        p.tags.indexOf(state.filter) !== -1;
+                    var yearOK = state.year === "all" || p.year === state.year;
+                    return tagOK && yearOK;
+                });
+            }
+
+            function render() {
+                var filtered = applyFilter();
+                var visible = state.expanded ? filtered : filtered.slice(0, 10);
+                var groups = {};
+                visible.forEach(function (p) { (groups[p.year] = groups[p.year] || []).push(p); });
+                var years = Object.keys(groups).map(Number).sort(function (a, b) { return b - a; });
+
+                var h = '<div class="filters">';
+                h += '<div class="filters__group"><span class="mono mono--sm filters__label">FILTER:</span>';
+                FILTERS.forEach(function (f) { h += '<button class="pill' + (state.filter === f[0] ? " pill--on" : "") + '" data-filter="' + f[0] + '">' + f[1] + "</button>"; });
+                h += "</div>";
+                h += '<div class="filters__group"><span class="mono mono--sm filters__label">YEAR:</span>';
+                h += '<button class="pill' + (state.year === "all" ? " pill--on" : "") + '" data-year="all">All</button>';
+                allYears.forEach(function (y) { h += '<button class="pill' + (state.year === y ? " pill--on" : "") + '" data-year="' + y + '">' + y + "</button>"; });
+                h += "</div></div>";
+
+                h += '<div class="pubcount mono mono--sm">SHOWING ' + visible.length + " / " + filtered.length + " " + (filtered.length === 1 ? "PAPER" : "PAPERS") + "</div>";
+
+                h += '<div class="pubs">';
+                years.forEach(function (yr) {
+                    var papers = groups[yr];
+                    h += '<div class="pubs__year-block"><div class="pubs__year-label"><span class="mono pubs__year-num">' + yr + '</span><span class="pubs__year-rule"></span><span class="mono mono--sm pubs__year-count">' + papers.length + " PAPERS</span></div>";
+                    papers.forEach(function (p) {
+                        var noLink = !p.href;
+                        h += '<a class="pub' + (noLink ? " pub--no-link" : "") + '" href="' + (p.href ? esc(p.href) : "#") + '"' + (p.href ? ' target="_blank" rel="noopener"' : ' data-nolink="1"') + ">";
+                        h += '<div class="pub__title-row"><span class="pub__title">' + esc(p.title) + "</span>" + (p.tags.indexOf("first") !== -1 ? '<span class="pub__star">★</span>' : "") + "</div>";
+                        h += '<span class="pub__authors">' + esc(p.authors) + "</span>";
+                        h += '<div class="pub__meta"><span class="mono mono--sm">' + esc(p.venue) + '</span><span class="pub__tags">';
+                        p.tags.filter(function (t) { return t !== "first"; }).forEach(function (t) { h += '<span class="chip chip--' + t + ' chip--sm">' + tagLabel(t) + "</span>"; });
+                        h += "</span></div></a>";
+                    });
+                    h += "</div>";
+                });
+                h += "</div>";
+
+                if (filtered.length > 10) {
+                    h += '<button class="expand" data-expand="1"><span class="mono mono--sm">' +
+                        (state.expanded ? "↑ COLLAPSE  (showing all " + filtered.length + ")" : "↓ SHOW ALL  (" + (filtered.length - 10) + " more)") +
+                        "</span></button>";
+                }
+                mount.innerHTML = h;
+
+                mount.querySelectorAll("[data-filter]").forEach(function (b) { b.addEventListener("click", function () { state.filter = b.getAttribute("data-filter"); state.expanded = false; render(); }); });
+                mount.querySelectorAll("[data-year]").forEach(function (b) { b.addEventListener("click", function () { var y = b.getAttribute("data-year"); state.year = y === "all" ? "all" : Number(y); state.expanded = false; render(); }); });
+                var ex = mount.querySelector("[data-expand]");
+                if (ex) ex.addEventListener("click", function () { state.expanded = !state.expanded; render(); });
+                mount.querySelectorAll('a[data-nolink="1"]').forEach(function (a) { a.addEventListener("click", function (e) { e.preventDefault(); }); });
+            }
+            render();
+        })();
+    })();
     </script>
 </body>
 </html>
