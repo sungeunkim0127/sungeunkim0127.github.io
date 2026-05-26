@@ -241,6 +241,30 @@
         }
         .show-more-btn:hover { background: #f5f7fa; border-color: #c9d6e6; }
 
+        /* ---------- Recent News ---------- */
+        .news-intro {
+            font-size: 0.95rem;
+            color: var(--color-muted);
+            margin: 12px 0 16px;
+        }
+        .news-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .news-list li {
+            padding: 7px 0;
+            font-size: 0.97rem;
+            border-bottom: 1px solid var(--color-rule);
+        }
+        .news-list li:last-child { border-bottom: none; }
+        .news-date {
+            color: var(--color-muted);
+            font-variant-numeric: tabular-nums;
+            margin-right: 8px;
+            font-size: 0.9rem;
+        }
+
         /* ---------- Preprints / Under Review ---------- */
         .status {
             display: inline-block;
@@ -335,6 +359,19 @@
             </div>
         </header>
 
+        <!-- Recent News (manual) -->
+        <section id="news">
+            <h2>Recent News</h2>
+            <p class="news-intro">Congratulations to all co-authors on these acceptances &mdash; thank you for the excellent teamwork!</p>
+            <ul class="news-list">
+                <li><span class="news-date">[04/2026]</span> <a href="https://arxiv.org/abs/2604.10916" target="_blank" rel="noopener">2 papers</a> accepted by CHIL 2026.</li>
+                <li><span class="news-date">[03/2026]</span> <a href="https://doi.org/10.1038/s41591-026-04252-6" target="_blank" rel="noopener">1 paper</a> accepted by Nature Medicine.</li>
+                <li><span class="news-date">[12/2025]</span> <a href="https://arxiv.org/abs/2507.22030" target="_blank" rel="noopener">1 paper</a> accepted by NEJM AI.</li>
+                <li><span class="news-date">[11/2025]</span> <a href="https://doi.org/10.48550/arXiv.2509.13270" target="_blank" rel="noopener">1 paper</a> accepted by Machine Learning for Health (ML4H) 2025.</li>
+                <li><span class="news-date">[09/2025]</span> <a href="https://psb.stanford.edu/psb-online/proceedings/psb26/sambara.pdf" target="_blank" rel="noopener">1 paper</a> accepted by Pacific Symposium on Biocomputing (PSB) 2026.</li>
+            </ul>
+        </section>
+
         <!-- Preprints & Under Review (manual; outside the auto-generated markers) -->
         <section id="preprints">
             <h2>Preprints &amp; Under Review</h2>
@@ -348,7 +385,7 @@
                     <p class="pub-meta">Baharoon M, Luo L, &hellip;, <strong>Kim SE</strong>, &hellip;, Rajpurkar P. <span class="status">In press &middot; NEJM AI</span></p>
                 </div>
                 <div class="pub-list-item">
-                    <h4>ReXSonoVQA: A Video QA Benchmark for Procedure-Centric Ultrasound Understanding</h4>
+                    <h4><a href="https://arxiv.org/abs/2604.10916" target="_blank" rel="noopener">ReXSonoVQA: A Video QA Benchmark for Procedure-Centric Ultrasound Understanding</a></h4>
                     <p class="pub-meta">Wang X, Zhang X, <strong>Kim SE</strong>, Pal A, Rajpurkar P. <span class="status">Accepted &middot; CHIL 2026</span></p>
                 </div>
                 <div class="pub-list-item">
