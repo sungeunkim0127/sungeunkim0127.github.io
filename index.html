@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>try{var _t=localStorage.getItem("theme");if(_t)document.documentElement.setAttribute("data-theme",_t);}catch(e){}</script>
     <title>Sung Eun Kim, MD — Translational Medicine AI Researcher</title>
     <meta name="description" content="Sung Eun Kim, MD — Postdoctoral Research Fellow at Harvard Medical School and Research Professor at Seoul National University Hospital. 40+ publications including Nature Medicine. Bridging orthopedic surgery with AI." />
 
@@ -334,8 +335,46 @@
         .footer__row { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--ink-soft); }
 
         ::selection { background: var(--accent); color: var(--paper); }
+
+        /* ----- Dark theme ----- */
+        [data-theme="dark"] {
+            --paper: #14130F; --paper-deep: #1B1A15; --paper-edge: #26241D;
+            --ink: #EEEAE0; --ink-soft: #A8A192; --ink-faint: #6A6258;
+            --rule: #34322B; --rule-soft: #232118;
+        }
+        [data-theme="dark"] .portrait { filter: contrast(1.02) saturate(0.85) brightness(0.95); }
+        [data-theme="dark"] .attn__cell { mix-blend-mode: screen; }
+        [data-theme="dark"] .feat__figure img { background: #f4f1ea; }
+
+        /* ----- Reading progress bar ----- */
+        .progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--accent); z-index: 200; transition: width 0.08s linear; }
+
+        /* ----- Theme toggle ----- */
+        .themebtn {
+            position: fixed; right: 18px; bottom: 18px; z-index: 200;
+            font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 8px 12px; border: 1px solid var(--rule); background: var(--paper-deep); color: var(--ink-soft);
+            cursor: pointer; display: inline-flex; align-items: center; gap: 7px; transition: all 0.18s ease;
+            box-shadow: 0 4px 16px -10px rgba(0,0,0,0.4);
+        }
+        .themebtn:hover { color: var(--ink); border-color: var(--ink); }
+        .themebtn__icon { font-size: 13px; line-height: 1; }
+
+        /* ----- Scroll reveal ----- */
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .reveal.in { opacity: 1; transform: none; }
+
+        /* ----- Section-header accent grow ----- */
+        .sech { position: relative; }
+        .sech::after { content: ""; position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background: var(--accent); transition: width 0.8s cubic-bezier(0.22,1,0.36,1) 0.15s; }
+        .section.in .sech::after, .hero.in .sech::after { width: 56px; }
+
+        /* ----- Attention shimmer ----- */
+        @keyframes attnShimmer { 0%, 100% { opacity: var(--o); } 50% { opacity: calc(var(--o) * 0.32); } }
+
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+            *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+            .reveal { opacity: 1; transform: none; }
         }
     </style>
 </head>
@@ -1205,8 +1244,19 @@
     (function () {
         "use strict";
 
-        // ----- Palette (resolved hex for SVG fills) -----
+        var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        // ----- Palette (resolved hex for SVG fills; refreshed from CSS vars so it tracks the theme) -----
         var C = { accent: "#B0202B", accentMid: "#7A4A3A", inkSoft: "#6A6258", paper: "#F2EEE3", ink: "#161513", rule: "#C6BFAE" };
+        function refreshPalette() {
+            var cs = getComputedStyle(document.documentElement);
+            ["accent", "accent-mid", "ink-soft", "paper", "ink", "rule"].forEach(function (n) {
+                var key = n.replace(/-(\w)/g, function (m, c) { return c.toUpperCase(); });
+                var val = cs.getPropertyValue("--" + n).trim();
+                if (val) C[key] = val;
+            });
+        }
+        refreshPalette();
 
         // ----- Updated stamp -----
         var stamp = document.getElementById("updated-stamp");
@@ -1250,15 +1300,21 @@
                 }
             }
             var html = '<div class="attn"><div class="attn__grid" style="grid-template-columns:repeat(' + cols + ',1fr)">';
-            for (var i = 0; i < cells.length; i++) html += '<div class="attn__cell" style="opacity:' + (cells[i] * 0.9).toFixed(3) + '"></div>';
+            for (var i = 0; i < cells.length; i++) {
+                var op = (cells[i] * 0.9).toFixed(3);
+                var anim = REDUCED ? "" : ";animation:attnShimmer " + (3 + (i % 5) * 0.7).toFixed(1) + "s ease-in-out " + ((i % 11) * 0.18).toFixed(2) + "s infinite";
+                html += '<div class="attn__cell" style="--o:' + op + ";opacity:" + op + anim + '"></div>';
+            }
             html += "</div></div>";
             mount.innerHTML = html;
         })();
 
         // ===== Publication constellation =====
-        (function renderConstellation() {
+        function renderConstellation() {
             var mount = document.getElementById("pubviz-mount");
             if (!mount) return;
+            refreshPalette();
+            mount.innerHTML = "";
             var W = 920, H = 280, PAD_L = 56, PAD_R = 24, PAD_T = 28, PAD_B = 36, MIN_YEAR = 2022;
             var pubs = PUBS.filter(function (p) { return p.year >= MIN_YEAR; });
             if (!pubs.length) { mount.style.display = "none"; return; }
@@ -1308,7 +1364,6 @@
                 parts.push('<line x1="' + e[0].x + '" y1="' + e[0].y + '" x2="' + e[1].x + '" y2="' + e[1].y + '" stroke="' + C.inkSoft + '" stroke-opacity="0.18" stroke-width="0.7"/>');
             });
             parts.push('<g id="cursor-edges"></g>');
-            var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
             points.forEach(function (pt, idx) {
                 var col = domainColor(pt.p.tags);
                 var cur = pt.p.href ? "pointer" : "default";
@@ -1391,7 +1446,8 @@
                 });
                 svgEl.addEventListener("mouseleave", clearReact);
             }
-        })();
+        }
+        renderConstellation();
 
         // ===== All publications (filterable list) =====
         (function renderAllPubs() {
@@ -1463,6 +1519,58 @@
                 mount.querySelectorAll('a[data-nolink="1"]').forEach(function (a) { a.addEventListener("click", function (e) { e.preventDefault(); }); });
             }
             render();
+        })();
+
+        // ===== Reading progress bar =====
+        (function () {
+            var bar = document.createElement("div");
+            bar.className = "progress";
+            document.body.appendChild(bar);
+            function update() {
+                var st = document.documentElement.scrollTop || document.body.scrollTop;
+                var sh = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                bar.style.width = (sh > 0 ? (st / sh) * 100 : 0) + "%";
+            }
+            window.addEventListener("scroll", update, { passive: true });
+            window.addEventListener("resize", update);
+            update();
+        })();
+
+        // ===== Theme toggle (paper / dark) =====
+        (function () {
+            var btn = document.createElement("button");
+            btn.className = "themebtn";
+            btn.setAttribute("aria-label", "Toggle light or dark theme");
+            function isDark() { return document.documentElement.getAttribute("data-theme") === "dark"; }
+            function paint() {
+                btn.innerHTML = '<span class="themebtn__icon">' + (isDark() ? "☀" : "☾") + "</span>" + (isDark() ? "Light" : "Dark");
+            }
+            btn.addEventListener("click", function () {
+                var next = isDark() ? "" : "dark";
+                if (next) document.documentElement.setAttribute("data-theme", next);
+                else document.documentElement.removeAttribute("data-theme");
+                try { localStorage.setItem("theme", next); } catch (e) {}
+                paint();
+                renderConstellation();
+            });
+            paint();
+            document.body.appendChild(btn);
+        })();
+
+        // ===== Scroll reveal =====
+        (function () {
+            var targets = document.querySelectorAll(".section, .hero");
+            if (REDUCED || !("IntersectionObserver" in window)) {
+                targets.forEach(function (t) { t.classList.add("in"); });
+                return;
+            }
+            targets.forEach(function (t) { if (!t.classList.contains("hero")) t.classList.add("reveal"); });
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+                });
+            }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+            targets.forEach(function (t) { io.observe(t); });
         })();
     })();
     </script>
