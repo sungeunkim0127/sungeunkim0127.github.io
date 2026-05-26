@@ -2,6 +2,9 @@
   "author_highlight_name": "Kim SE",
   "show_more_cutoff_year": 2025,
   "pub_count_display": "40+ Publications",
+  "exclude_ids": [
+    "beyond-the-scanner-a-benchmark-for-medical-photograph-unders-2026"
+  ],
   "highlight_ids": [
     "ces-framework-nature-medicine-2026",
     "cpak-constitutional-varus-jbjs-2024",

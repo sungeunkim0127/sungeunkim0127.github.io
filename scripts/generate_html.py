@@ -29,6 +29,61 @@ def load_json(path: Path) -> dict | list:
         return json.load(f)
 
 
+def _is_initials(tok: str) -> bool:
+    """True if a token looks like an initials block (e.g. 'SE', 'JM', 'H')."""
+    t = tok.replace("-", "").replace(".", "")
+    return t.isalpha() and t.isupper() and 1 <= len(t) <= 4
+
+
+def _condense_one(name: str) -> str:
+    """Condense a single author name to 'Surname Initials' (e.g. 'Sung Eun Kim' -> 'Kim SE')."""
+    name = name.strip()
+    if not name:
+        return name
+    # Pass through placeholders and annotated tokens (e.g. '...', 'et al', '(corresponding)')
+    if name in ("...", "…") or name.lower() in ("et al", "et al.") or "(" in name:
+        return name
+    # Capture a trailing co-first / corresponding marker (* or †)
+    marker = ""
+    m = re.search(r"([*†]+)$", name)
+    if m:
+        marker = m.group(1)
+        name = name[: -len(marker)].strip()
+    tokens = name.split()
+    if len(tokens) == 1:
+        return name + marker
+    first, last = tokens[0], tokens[-1]
+    # Already 'Surname Initials' (e.g. 'Kim SE') -> keep as is
+    if _is_initials(last) and not _is_initials(first):
+        return name + marker
+    # 'Initials Surname' (e.g. 'HC Kim') -> reorder; only for a 2-token, >=2-letter caps block
+    if len(tokens) == 2 and _is_initials(first) and len(first.replace(".", "")) >= 2 and not _is_initials(last):
+        return f"{tokens[1]} {first}{marker}"
+    # Full name 'Given [Middle] Surname' -> 'Surname Initials'
+    surname = tokens[-1]
+    initials = ""
+    for given in tokens[:-1]:
+        for part in given.split("-"):
+            if part and part[0].isalpha():
+                initials += part[0].upper()
+    return f"{surname} {initials}{marker}"
+
+
+def condense_authors(authors: str) -> str:
+    """Normalize an author string to comma-separated 'Surname Initials' form.
+
+    Handles scraped 'Firstname Lastname and ...' lists as well as strings that are
+    already condensed (passes those through unchanged).
+    """
+    if not authors:
+        return authors
+    if " and " in authors:
+        parts = authors.split(" and ")
+    else:
+        parts = [p.strip() for p in authors.split(",")]
+    return ", ".join(_condense_one(p) for p in parts if p.strip())
+
+
 def highlight_author(authors_str: str, highlight_name: str) -> str:
     """Wrap the highlighted author name with <strong> tags."""
     # Escape HTML first
@@ -69,8 +124,8 @@ def generate_pub_item(pub: dict, highlight_name: str, highlight_ids: set[str] | 
     else:
         title_html = title
 
-    # Apply overrides for author display
-    authors_html = highlight_author(authors_raw, highlight_name)
+    # Condense to "Surname Initials" form, then highlight the target author
+    authors_html = highlight_author(condense_authors(authors_raw), highlight_name)
 
     # Build the pub-meta line: "Authors. Venue"
     meta_parts = []
@@ -122,6 +177,11 @@ def generate_all_pubs_html(pubs: list[dict], overrides: dict) -> str:
     highlight_name = overrides.get("author_highlight_name", "Kim SE")
     cutoff_year = overrides.get("show_more_cutoff_year", 2025)
     highlight_ids = set(overrides.get("highlight_ids", []))
+    exclude_ids = set(overrides.get("exclude_ids", []))
+
+    # Drop excluded publications (e.g. rejected manuscripts that were scraped)
+    if exclude_ids:
+        pubs = [p for p in pubs if p.get("id", "") not in exclude_ids]
 
     # Apply overrides
     pubs = apply_overrides(pubs, overrides)
