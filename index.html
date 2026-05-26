@@ -1307,11 +1307,21 @@
             edges.forEach(function (e) {
                 parts.push('<line x1="' + e[0].x + '" y1="' + e[0].y + '" x2="' + e[1].x + '" y2="' + e[1].y + '" stroke="' + C.inkSoft + '" stroke-opacity="0.18" stroke-width="0.7"/>');
             });
+            parts.push('<g id="cursor-edges"></g>');
+            var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
             points.forEach(function (pt, idx) {
                 var col = domainColor(pt.p.tags);
-                parts.push('<g class="pubnode" data-idx="' + idx + '" style="cursor:' + (pt.p.href ? "pointer" : "default") + '">');
+                var cur = pt.p.href ? "pointer" : "default";
+                var st = "cursor:" + cur + (REDUCED ? "" : ";opacity:0;transition:opacity .5s ease;transition-delay:" + (idx * 14) + "ms");
+                parts.push('<g class="pubnode" data-idx="' + idx + '" style="' + st + '">');
                 parts.push('<circle class="halo" cx="' + pt.x + '" cy="' + pt.y + '" r="' + (pt.r + 2) + '" fill="' + col + '" opacity="0"/>');
-                parts.push('<circle cx="' + pt.x + '" cy="' + pt.y + '" r="' + pt.r + '" fill="' + (pt.ring ? C.paper : col) + '" stroke="' + col + '" stroke-width="' + (pt.ring ? 1.8 : 0) + '"/>');
+                if (pt.ring && !REDUCED) {
+                    var b = (idx * 0.13).toFixed(2);
+                    parts.push('<circle cx="' + pt.x + '" cy="' + pt.y + '" r="' + pt.r + '" fill="none" stroke="' + col + '" stroke-width="1.2" opacity="0.5">' +
+                        '<animate attributeName="r" values="' + pt.r + ';' + (pt.r + 11) + '" dur="2.6s" begin="' + b + 's" repeatCount="indefinite"/>' +
+                        '<animate attributeName="opacity" values="0.5;0" dur="2.6s" begin="' + b + 's" repeatCount="indefinite"/></circle>');
+                }
+                parts.push('<circle class="core" cx="' + pt.x + '" cy="' + pt.y + '" r="' + pt.r + '" fill="' + (pt.ring ? C.paper : col) + '" stroke="' + col + '" stroke-width="' + (pt.ring ? 1.8 : 0) + '"/>');
                 parts.push("</g>");
             });
             parts.push('<text x="' + (PAD_L - 12) + '" y="' + (PAD_T - 8) + '" class="pubviz__axis" text-anchor="start">↑ PAPERS</text>');
@@ -1329,8 +1339,10 @@
 
             var hover = document.getElementById("pubviz-hover");
             var emptyHTML = '<span class="pubviz__hover-empty">↑ hover any node — ' + points.length + ' papers, ' + years.length + ' years</span>';
+            var svgEl = mount.querySelector("svg");
             mount.querySelectorAll(".pubnode").forEach(function (g) {
                 var pt = points[Number(g.getAttribute("data-idx"))];
+                pt.core = g.querySelector(".core");
                 var halo = g.querySelector(".halo");
                 g.addEventListener("mouseenter", function () {
                     halo.setAttribute("opacity", "0.3");
@@ -1339,6 +1351,46 @@
                 g.addEventListener("mouseleave", function () { halo.setAttribute("opacity", "0"); hover.innerHTML = emptyHTML; });
                 g.addEventListener("click", function () { if (pt.p.href) window.open(pt.p.href, "_blank", "noopener"); });
             });
+
+            // Stagger nodes in on load
+            if (!REDUCED) {
+                requestAnimationFrame(function () {
+                    mount.querySelectorAll(".pubnode").forEach(function (g) { g.style.opacity = "1"; });
+                });
+            }
+
+            // Cursor-reactive: enlarge nearby nodes + draw faint links from the cursor
+            if (svgEl && !REDUCED) {
+                var NS = "http://www.w3.org/2000/svg";
+                var edgeLayer = svgEl.querySelector("#cursor-edges");
+                var sp = svgEl.createSVGPoint();
+                var R = 120;
+                var clearReact = function () {
+                    while (edgeLayer.firstChild) edgeLayer.removeChild(edgeLayer.firstChild);
+                    points.forEach(function (p) { if (p.core) p.core.setAttribute("r", p.r); });
+                };
+                svgEl.addEventListener("mousemove", function (ev) {
+                    var ctm = svgEl.getScreenCTM();
+                    if (!ctm) return;
+                    sp.x = ev.clientX; sp.y = ev.clientY;
+                    var loc = sp.matrixTransform(ctm.inverse());
+                    while (edgeLayer.firstChild) edgeLayer.removeChild(edgeLayer.firstChild);
+                    points.forEach(function (p) {
+                        var d = Math.hypot(loc.x - p.x, loc.y - p.y);
+                        if (d < R) {
+                            var f = 1 - d / R;
+                            if (p.core) p.core.setAttribute("r", (p.r + f * 4).toFixed(2));
+                            var ln = document.createElementNS(NS, "line");
+                            ln.setAttribute("x1", loc.x.toFixed(1)); ln.setAttribute("y1", loc.y.toFixed(1));
+                            ln.setAttribute("x2", p.x.toFixed(1)); ln.setAttribute("y2", p.y.toFixed(1));
+                            ln.setAttribute("stroke", C.accent); ln.setAttribute("stroke-width", "0.6");
+                            ln.setAttribute("stroke-opacity", (f * 0.5).toFixed(2));
+                            edgeLayer.appendChild(ln);
+                        } else if (p.core) { p.core.setAttribute("r", p.r); }
+                    });
+                });
+                svgEl.addEventListener("mouseleave", clearReact);
+            }
         })();
 
         // ===== All publications (filterable list) =====
