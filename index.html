@@ -129,13 +129,13 @@
         }
         .hero__top-right { text-align: right; }
         .hero__grid {
-            display: grid; grid-template-columns: 1.5fr 1fr;
-            gap: clamp(28px, 5vw, 64px); padding-top: 56px; align-items: start;
+            display: grid; grid-template-columns: 1fr minmax(200px, 280px);
+            gap: clamp(28px, 3.5vw, 44px); padding-top: 56px; align-items: start;
         }
-        .hero__portrait { max-width: 260px; justify-self: end; width: 100%; }
+        .hero__portrait { max-width: 280px; justify-self: end; width: 100%; overflow: hidden; }
         @media (max-width: 900px) {
             .hero__grid { grid-template-columns: 1fr; }
-            .hero__portrait { max-width: 220px; justify-self: start; }
+            .hero__portrait { max-width: 230px; justify-self: start; }
         }
         .hero__role { color: var(--ink-soft); margin-bottom: 24px; display: inline-flex; align-items: center; }
         .hero__name {
@@ -151,7 +151,7 @@
         }
         .hero__title-line:first-child { border-top: 1px solid var(--rule); }
         .hero__title-num { color: var(--ink-faint); }
-        .hero__bio { font-size: 17px; line-height: 1.6; color: var(--ink); max-width: 56ch; margin: 24px 0 28px; text-wrap: pretty; }
+        .hero__bio { font-size: 17px; line-height: 1.6; color: var(--ink); max-width: 64ch; margin: 24px 0 28px; text-wrap: pretty; }
         .hero__links { display: flex; gap: 10px; flex-wrap: wrap; }
         .link {
             font-family: var(--mono-stack); font-size: 11.5px; letter-spacing: 0.08em;
@@ -164,7 +164,7 @@
         .link:hover .link__arrow { transform: translate(2px, -2px); }
 
         /* ----- Portrait ----- */
-        .portrait { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 18%; display: block; filter: contrast(1.02) saturate(0.92); }
+        .portrait { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 14%; transform: scale(1.12); transform-origin: center 24%; display: block; filter: contrast(1.02) saturate(0.92); }
 
         /* ----- Stats ----- */
         .hero__stats {
@@ -371,6 +371,26 @@
 
         /* ----- Attention shimmer ----- */
         @keyframes attnShimmer { 0%, 100% { opacity: var(--o); } 50% { opacity: calc(var(--o) * 0.32); } }
+
+        /* ----- Sticky section nav ----- */
+        .secnav { position: fixed; right: 16px; top: 50%; transform: translateY(-50%); z-index: 90; display: flex; flex-direction: column; gap: 11px; }
+        @media (max-width: 1180px) { .secnav { display: none; } }
+        .secnav a { display: flex; align-items: center; justify-content: flex-end; gap: 8px; color: var(--ink-faint); font-family: var(--mono-stack); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; }
+        .secnav__label { opacity: 0; transform: translateX(4px); transition: opacity 0.2s ease, transform 0.2s ease; white-space: nowrap; }
+        .secnav a:hover .secnav__label { opacity: 1; transform: none; }
+        .secnav__dot { width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--ink-faint); background: transparent; transition: all 0.2s ease; flex: none; }
+        .secnav a.on .secnav__dot { background: var(--accent); border-color: var(--accent); transform: scale(1.25); }
+        .secnav a.on .secnav__label { opacity: 1; transform: none; color: var(--ink-soft); }
+
+        /* ----- Publication search ----- */
+        .pubsearch { width: 100%; font-family: var(--mono-stack); font-size: 12px; letter-spacing: 0.03em; padding: 10px 12px; background: var(--paper); border: 1px solid var(--rule); color: var(--ink); }
+        .pubsearch::placeholder { color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px; }
+        .pubsearch:focus { outline: none; border-color: var(--ink); }
+
+        /* ----- Clickable constellation legend ----- */
+        .pubviz__lg { cursor: pointer; transition: color 0.18s ease, opacity 0.18s ease; }
+        .pubviz__lg.on { color: var(--ink); }
+        .pubviz__lg.dim { opacity: 0.4; }
 
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
@@ -1274,6 +1294,11 @@
             if (tags.indexOf("both") !== -1) return C.accentMid;
             return C.inkSoft;
         }
+        function domainKey(tags) {
+            if (tags.indexOf("both") !== -1) return "both";
+            if (tags.indexOf("ai") !== -1) return "ai";
+            return "ortho";
+        }
         function tagLabel(t) {
             if (t === "ai") return "AI/ML";
             if (t === "ortho") return "ORTHO";
@@ -1339,7 +1364,7 @@
                     var yJitter = ((j % 40) - 20) * 0.3;
                     var xJitter = (((j >> 2) % 30) - 15) * 0.6;
                     var ring = p.tags.indexOf("first") !== -1;
-                    points.push({ p: p, x: xBase + xJitter, y: PAD_T + yFrac * (H - PAD_T - PAD_B) + yJitter, r: ring ? 6.5 : 4.5, ring: ring });
+                    points.push({ p: p, x: xBase + xJitter, y: PAD_T + yFrac * (H - PAD_T - PAD_B) + yJitter, r: ring ? 6.5 : 4.5, ring: ring, domain: domainKey(p.tags) });
                 });
             });
 
@@ -1384,9 +1409,9 @@
 
             var html = '<div class="pubviz">' + parts.join("") +
                 '<div class="pubviz__caption"><div class="pubviz__legend">' +
-                '<span class="pubviz__lg"><span class="pubviz__dot" style="background:' + C.accent + '"></span> AI / ML</span>' +
-                '<span class="pubviz__lg"><span class="pubviz__dot" style="background:' + C.accentMid + '"></span> Translational</span>' +
-                '<span class="pubviz__lg"><span class="pubviz__dot" style="background:' + C.inkSoft + '"></span> Clinical orthopedics</span>' +
+                '<span class="pubviz__lg" data-domain="ai"><span class="pubviz__dot" style="background:' + C.accent + '"></span> AI / ML</span>' +
+                '<span class="pubviz__lg" data-domain="both"><span class="pubviz__dot" style="background:' + C.accentMid + '"></span> Translational</span>' +
+                '<span class="pubviz__lg" data-domain="ortho"><span class="pubviz__dot" style="background:' + C.inkSoft + '"></span> Clinical orthopedics</span>' +
                 '</div><div class="pubviz__hover" id="pubviz-hover" aria-live="polite">' +
                 '<span class="pubviz__hover-empty">↑ hover any node — ' + points.length + ' papers, ' + years.length + ' years</span>' +
                 "</div></div></div>";
@@ -1397,6 +1422,7 @@
             var svgEl = mount.querySelector("svg");
             mount.querySelectorAll(".pubnode").forEach(function (g) {
                 var pt = points[Number(g.getAttribute("data-idx"))];
+                pt.el = g;
                 pt.core = g.querySelector(".core");
                 var halo = g.querySelector(".halo");
                 g.addEventListener("mouseenter", function () {
@@ -1405,6 +1431,25 @@
                 });
                 g.addEventListener("mouseleave", function () { halo.setAttribute("opacity", "0"); hover.innerHTML = emptyHTML; });
                 g.addEventListener("click", function () { if (pt.p.href) window.open(pt.p.href, "_blank", "noopener"); });
+            });
+
+            // Clickable legend → spotlight a domain
+            var activeDom = null;
+            var lgs = mount.querySelectorAll(".pubviz__lg");
+            function spotlight(dom) {
+                points.forEach(function (p) { if (p.el) p.el.style.opacity = (!dom || p.domain === dom) ? "1" : "0.12"; });
+                lgs.forEach(function (l) {
+                    var d = l.getAttribute("data-domain");
+                    l.classList.toggle("on", dom === d);
+                    l.classList.toggle("dim", !!dom && dom !== d);
+                });
+            }
+            lgs.forEach(function (l) {
+                l.addEventListener("click", function () {
+                    var d = l.getAttribute("data-domain");
+                    activeDom = (activeDom === d) ? null : d;
+                    spotlight(activeDom);
+                });
             });
 
             // Stagger nodes in on load
@@ -1449,46 +1494,64 @@
         }
         renderConstellation();
 
-        // ===== All publications (filterable list) =====
+        // ===== All publications (filterable + searchable list) =====
         (function renderAllPubs() {
             var mount = document.getElementById("allpubs-mount");
             if (!mount) return;
-            var state = { filter: "all", year: "all", expanded: false };
+            var state = { filter: "all", year: "all", expanded: false, search: "" };
             var allYears = (function () {
                 var s = {}; PUBS.forEach(function (p) { s[p.year] = true; });
                 return Object.keys(s).map(Number).sort(function (a, b) { return b - a; });
             })();
             var FILTERS = [["all", "All"], ["ai", "AI / ML"], ["both", "Translational"], ["ortho", "Clinical"], ["first", "First author"]];
 
+            // ---- Controls (built once so the search field keeps focus) ----
+            var ctrl = '<div class="filters">';
+            ctrl += '<input type="search" class="pubsearch" id="pubsearch" placeholder="Search title, author, or venue…" autocomplete="off" />';
+            ctrl += '<div class="filters__group"><span class="mono mono--sm filters__label">FILTER:</span>';
+            FILTERS.forEach(function (f) { ctrl += '<button class="pill" data-filter="' + f[0] + '">' + f[1] + "</button>"; });
+            ctrl += "</div>";
+            ctrl += '<div class="filters__group"><span class="mono mono--sm filters__label">YEAR:</span>';
+            ctrl += '<button class="pill" data-year="all">All</button>';
+            allYears.forEach(function (y) { ctrl += '<button class="pill" data-year="' + y + '">' + y + "</button>"; });
+            ctrl += "</div></div>";
+            ctrl += '<div class="pubcount mono mono--sm" id="pubcount"></div>';
+            ctrl += '<div id="pubs-list"></div>';
+            mount.innerHTML = ctrl;
+
+            var listEl = document.getElementById("pubs-list");
+            var countEl = document.getElementById("pubcount");
+            var searchEl = document.getElementById("pubsearch");
+
             function applyFilter() {
+                var q = state.search.trim().toLowerCase();
                 return PUBS.filter(function (p) {
                     var tagOK = state.filter === "all" ||
                         (state.filter === "first" && p.tags.indexOf("first") !== -1) ||
                         p.tags.indexOf(state.filter) !== -1;
                     var yearOK = state.year === "all" || p.year === state.year;
-                    return tagOK && yearOK;
+                    var searchOK = !q || (p.title + " " + p.authors + " " + p.venue).toLowerCase().indexOf(q) !== -1;
+                    return tagOK && yearOK && searchOK;
                 });
             }
-
-            function render() {
+            function syncPills() {
+                mount.querySelectorAll("[data-filter]").forEach(function (b) { b.classList.toggle("pill--on", b.getAttribute("data-filter") === state.filter); });
+                mount.querySelectorAll("[data-year]").forEach(function (b) {
+                    var y = b.getAttribute("data-year");
+                    b.classList.toggle("pill--on", (y === "all" ? "all" : Number(y)) === state.year);
+                });
+            }
+            function renderList() {
                 var filtered = applyFilter();
                 var visible = state.expanded ? filtered : filtered.slice(0, 10);
                 var groups = {};
                 visible.forEach(function (p) { (groups[p.year] = groups[p.year] || []).push(p); });
                 var years = Object.keys(groups).map(Number).sort(function (a, b) { return b - a; });
 
-                var h = '<div class="filters">';
-                h += '<div class="filters__group"><span class="mono mono--sm filters__label">FILTER:</span>';
-                FILTERS.forEach(function (f) { h += '<button class="pill' + (state.filter === f[0] ? " pill--on" : "") + '" data-filter="' + f[0] + '">' + f[1] + "</button>"; });
-                h += "</div>";
-                h += '<div class="filters__group"><span class="mono mono--sm filters__label">YEAR:</span>';
-                h += '<button class="pill' + (state.year === "all" ? " pill--on" : "") + '" data-year="all">All</button>';
-                allYears.forEach(function (y) { h += '<button class="pill' + (state.year === y ? " pill--on" : "") + '" data-year="' + y + '">' + y + "</button>"; });
-                h += "</div></div>";
+                countEl.textContent = "SHOWING " + visible.length + " / " + filtered.length + " " + (filtered.length === 1 ? "PAPER" : "PAPERS");
 
-                h += '<div class="pubcount mono mono--sm">SHOWING ' + visible.length + " / " + filtered.length + " " + (filtered.length === 1 ? "PAPER" : "PAPERS") + "</div>";
-
-                h += '<div class="pubs">';
+                var h = '<div class="pubs">';
+                if (!filtered.length) h += '<p style="color:var(--ink-soft);font-style:italic;padding:10px 0">No papers match.</p>';
                 years.forEach(function (yr) {
                     var papers = groups[yr];
                     h += '<div class="pubs__year-block"><div class="pubs__year-label"><span class="mono pubs__year-num">' + yr + '</span><span class="pubs__year-rule"></span><span class="mono mono--sm pubs__year-count">' + papers.length + " PAPERS</span></div>";
@@ -1504,21 +1567,23 @@
                     h += "</div>";
                 });
                 h += "</div>";
-
                 if (filtered.length > 10) {
                     h += '<button class="expand" data-expand="1"><span class="mono mono--sm">' +
                         (state.expanded ? "↑ COLLAPSE  (showing all " + filtered.length + ")" : "↓ SHOW ALL  (" + (filtered.length - 10) + " more)") +
                         "</span></button>";
                 }
-                mount.innerHTML = h;
-
-                mount.querySelectorAll("[data-filter]").forEach(function (b) { b.addEventListener("click", function () { state.filter = b.getAttribute("data-filter"); state.expanded = false; render(); }); });
-                mount.querySelectorAll("[data-year]").forEach(function (b) { b.addEventListener("click", function () { var y = b.getAttribute("data-year"); state.year = y === "all" ? "all" : Number(y); state.expanded = false; render(); }); });
-                var ex = mount.querySelector("[data-expand]");
-                if (ex) ex.addEventListener("click", function () { state.expanded = !state.expanded; render(); });
-                mount.querySelectorAll('a[data-nolink="1"]').forEach(function (a) { a.addEventListener("click", function (e) { e.preventDefault(); }); });
+                listEl.innerHTML = h;
+                var ex = listEl.querySelector("[data-expand]");
+                if (ex) ex.addEventListener("click", function () { state.expanded = !state.expanded; renderList(); });
+                listEl.querySelectorAll('a[data-nolink="1"]').forEach(function (a) { a.addEventListener("click", function (e) { e.preventDefault(); }); });
             }
-            render();
+
+            mount.querySelectorAll("[data-filter]").forEach(function (b) { b.addEventListener("click", function () { state.filter = b.getAttribute("data-filter"); state.expanded = false; syncPills(); renderList(); }); });
+            mount.querySelectorAll("[data-year]").forEach(function (b) { b.addEventListener("click", function () { var y = b.getAttribute("data-year"); state.year = y === "all" ? "all" : Number(y); state.expanded = false; syncPills(); renderList(); }); });
+            searchEl.addEventListener("input", function () { state.search = searchEl.value; state.expanded = false; renderList(); });
+
+            syncPills();
+            renderList();
         })();
 
         // ===== Reading progress bar =====
@@ -1571,6 +1636,72 @@
                 });
             }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
             targets.forEach(function (t) { io.observe(t); });
+        })();
+
+        // ===== Sticky section nav =====
+        (function () {
+            var secs = Array.prototype.slice.call(document.querySelectorAll(".section")).filter(function (s) { return s.querySelector(".sech__num"); });
+            if (!secs.length) return;
+            var nav = document.createElement("nav");
+            nav.className = "secnav";
+            nav.setAttribute("aria-label", "Section navigation");
+            secs.forEach(function (s, i) {
+                if (!s.id) s.id = "sec-" + (i + 1);
+                var title = s.querySelector(".sech__title");
+                var a = document.createElement("a");
+                a.href = "#" + s.id;
+                a.innerHTML = '<span class="secnav__label">' + (title ? title.textContent : s.id) + '</span><span class="secnav__dot"></span>';
+                a.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    document.getElementById(s.id).scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" });
+                });
+                s._navlink = a;
+                nav.appendChild(a);
+            });
+            document.body.appendChild(nav);
+            if ("IntersectionObserver" in window) {
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (e) {
+                        if (e.isIntersecting) secs.forEach(function (s) { if (s._navlink) s._navlink.classList.toggle("on", s === e.target); });
+                    });
+                }, { rootMargin: "-45% 0px -45% 0px" });
+                secs.forEach(function (s) { io.observe(s); });
+            }
+        })();
+
+        // ===== Animated stat count-up =====
+        (function () {
+            var vals = document.querySelectorAll(".stat__value");
+            if (!vals.length || REDUCED || !("IntersectionObserver" in window)) return;
+            vals.forEach(function (v) {
+                var txt = v.textContent.trim();
+                var target = parseInt(txt.replace(/[^0-9]/g, ""), 10);
+                if (isNaN(target)) return;
+                v.setAttribute("data-suffix", txt.replace(/[0-9,]/g, ""));
+                v.setAttribute("data-target", target);
+                v.textContent = "0" + v.getAttribute("data-suffix");
+            });
+            function animate(el) {
+                var target = parseInt(el.getAttribute("data-target"), 10);
+                var suffix = el.getAttribute("data-suffix") || "";
+                if (isNaN(target)) return;
+                var dur = 1100, start = null;
+                function step(ts) {
+                    if (!start) start = ts;
+                    var p = Math.min(1, (ts - start) / dur);
+                    var eased = 1 - Math.pow(1 - p, 3);
+                    el.textContent = Math.round(eased * target).toLocaleString("en-US") + suffix;
+                    if (p < 1) requestAnimationFrame(step);
+                    else el.textContent = target.toLocaleString("en-US") + suffix;
+                }
+                requestAnimationFrame(step);
+            }
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (e.isIntersecting && e.target.hasAttribute("data-target")) { animate(e.target); io.unobserve(e.target); }
+                });
+            }, { threshold: 0.6 });
+            vals.forEach(function (v) { if (v.hasAttribute("data-target")) io.observe(v); });
         })();
     })();
     </script>
