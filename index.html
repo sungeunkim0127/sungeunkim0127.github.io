@@ -414,7 +414,7 @@
 
             <div class="hero__grid">
                 <div class="hero__copy">
-                    <div class="mono mono--sm hero__role"><span class="dot dot--accent"></span> SURGEON × AI RESEARCHER</div>
+                    <div class="mono mono--sm hero__role"><span class="dot dot--accent"></span> <span id="role-text">SURGEON × AI RESEARCHER</span></div>
                     <h1 class="hero__name">Sung Eun Kim, MD</h1>
                     <div class="hero__titles">
                         <div class="hero__title-line"><span class="mono mono--sm hero__title-num">01</span><span>Postdoctoral Research Fellow · Harvard Medical School</span></div>
@@ -1255,7 +1255,7 @@
             <div class="footer__rule"></div>
             <div class="footer__row">
                 <span class="mono mono--sm">© 2026 SUNG EUN KIM</span>
-                <span class="mono mono--sm">CAMBRIDGE, MA · SEOUL, KR</span>
+                <span class="mono mono--sm" id="footer-clock">CAMBRIDGE, MA · SEOUL, KR</span>
                 <span class="mono mono--sm">PUBLICATIONS SYNCED FROM SCHOLAR</span>
             </div>
         </footer>
@@ -1309,6 +1309,26 @@
         }
         function esc(s) {
             return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+        }
+        // Decode/scramble text into place
+        function scramble(el, finalText, dur) {
+            if (!el) return;
+            if (REDUCED) { el.textContent = finalText; return; }
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789×·/—";
+            var start = null;
+            function step(now) {
+                if (start === null) start = now;
+                var p = Math.min(1, (now - start) / dur);
+                var reveal = Math.floor(p * finalText.length);
+                var out = "";
+                for (var i = 0; i < finalText.length; i++) {
+                    var ch = finalText.charAt(i);
+                    out += (i < reveal || ch === " ") ? ch : chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                el.textContent = out;
+                if (p < 1) requestAnimationFrame(step); else el.textContent = finalText;
+            }
+            requestAnimationFrame(step);
         }
 
         // ===== Neural particle field (animated hero background) =====
@@ -1716,7 +1736,13 @@
             targets.forEach(function (t) { if (!t.classList.contains("hero")) t.classList.add("reveal"); });
             var io = new IntersectionObserver(function (entries) {
                 entries.forEach(function (e) {
-                    if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+                    if (e.isIntersecting) {
+                        e.target.classList.add("in");
+                        e.target.querySelectorAll(".sech__left .mono--sm:not(.sech__num)").forEach(function (s) {
+                            if (!s.getAttribute("data-scrambled")) { s.setAttribute("data-scrambled", "1"); scramble(s, s.textContent.trim(), 480); }
+                        });
+                        io.unobserve(e.target);
+                    }
                 });
             }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
             targets.forEach(function (t) { io.observe(t); });
@@ -1786,6 +1812,38 @@
                 });
             }, { threshold: 0.6 });
             vals.forEach(function (v) { if (v.hasAttribute("data-target")) io.observe(v); });
+        })();
+
+        // ===== Hero tagline decode =====
+        (function () {
+            var r = document.getElementById("role-text");
+            if (r) scramble(r, r.textContent.trim(), 720);
+        })();
+
+        // ===== Live dual-timezone clock (footer) =====
+        (function () {
+            var el = document.getElementById("footer-clock");
+            if (!el) return;
+            function z(tz) {
+                try { return new Intl.DateTimeFormat("en-US", { timeZone: tz, hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date()); }
+                catch (e) { return "--:--"; }
+            }
+            function tick() { el.textContent = "CAMBRIDGE " + z("America/New_York") + " · SEOUL " + z("Asia/Seoul"); }
+            tick();
+            setInterval(tick, 20000);
+        })();
+
+        // ===== 3D tilt on the featured-paper card =====
+        (function () {
+            var card = document.querySelector(".feat");
+            if (!card || REDUCED) return;
+            card.addEventListener("mousemove", function (e) {
+                var r = card.getBoundingClientRect();
+                var rx = (0.5 - (e.clientY - r.top) / r.height) * 6;
+                var ry = ((e.clientX - r.left) / r.width - 0.5) * 6;
+                card.style.transform = "perspective(900px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg) translateY(-2px)";
+            });
+            card.addEventListener("mouseleave", function () { card.style.transform = ""; });
         })();
     })();
     </script>
