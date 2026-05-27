@@ -120,7 +120,7 @@
             -webkit-mask-image: linear-gradient(180deg, black 0%, transparent 70%);
             opacity: 0; transition: opacity 0.6s;
         }
-        [data-attn="on"] .hero__attn { opacity: 0.75; }
+        [data-attn="on"] .hero__attn { opacity: 0.6; }
         .hero__attn .neuralfield { display: block; width: 100%; height: 100%; }
         .hero > * { position: relative; z-index: 1; }
         .hero > .hero__attn { position: absolute; z-index: 0; }
@@ -205,11 +205,6 @@
         .pubviz__hover-venue { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
         .pubviz__hover-title { font-style: italic; }
         .pubviz__hover-empty { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
-
-        /* ----- Attention grid ----- */
-        .attn { position: absolute; inset: 0; overflow: hidden; }
-        .attn__grid { display: grid; width: 100%; height: 100%; gap: 2px; padding: 4px; }
-        .attn__cell { background: var(--accent); mix-blend-mode: multiply; }
 
         /* ----- Research themes ----- */
         .themes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border-top: 1px solid var(--rule-soft); }
@@ -345,7 +340,6 @@
             --rule: #34322B; --rule-soft: #232118;
         }
         [data-theme="dark"] .portrait { filter: contrast(1.02) saturate(0.85) brightness(0.95); }
-        [data-theme="dark"] .attn__cell { mix-blend-mode: screen; }
         [data-theme="dark"] .feat__figure img { background: #f4f1ea; }
 
         /* ----- Reading progress bar ----- */
@@ -363,16 +357,13 @@
         .themebtn__icon { font-size: 13px; line-height: 1; }
 
         /* ----- Scroll reveal ----- */
-        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); will-change: opacity, transform; }
         .reveal.in { opacity: 1; transform: none; }
 
         /* ----- Section-header accent grow ----- */
         .sech { position: relative; }
         .sech::after { content: ""; position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background: var(--accent); transition: width 0.8s cubic-bezier(0.22,1,0.36,1) 0.15s; }
         .section.in .sech::after, .hero.in .sech::after { width: 56px; }
-
-        /* ----- Attention shimmer ----- */
-        @keyframes attnShimmer { 0%, 100% { opacity: var(--o); } 50% { opacity: calc(var(--o) * 0.32); } }
 
         /* ----- Sticky section nav ----- */
         .secnav { position: fixed; right: 16px; top: 50%; transform: translateY(-50%); z-index: 90; display: flex; flex-direction: column; gap: 11px; }
@@ -1367,7 +1358,7 @@
                 var count = Math.max(18, Math.min(60, Math.round(W * H / 14000)));
                 parts = [];
                 for (var i = 0; i < count; i++) {
-                    parts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25, r: 1.2 + Math.random() * 1.5 });
+                    parts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.2, r: 1.2 + Math.random() * 1.5 });
                 }
             }
             var LINK = 124, MR = 155, ox = 0, oy = 0;
@@ -1401,7 +1392,7 @@
                         var d = Math.sqrt(dx * dx + dy * dy);
                         if (d < LINK) {
                             ctx.strokeStyle = colorLink;
-                            ctx.globalAlpha = (1 - d / LINK) * 0.22;
+                            ctx.globalAlpha = (1 - d / LINK) * 0.18;
                             ctx.beginPath(); ctx.moveTo(parts[a].dx, parts[a].dy); ctx.lineTo(parts[b].dx, parts[b].dy); ctx.stroke();
                         }
                     }
@@ -1413,14 +1404,14 @@
                         var cdx = mouse.x - parts[c].dx, cdy = mouse.y - parts[c].dy;
                         var cd = Math.sqrt(cdx * cdx + cdy * cdy);
                         if (cd < MR) {
-                            ctx.globalAlpha = (1 - cd / MR) * 0.34;
+                            ctx.globalAlpha = (1 - cd / MR) * 0.3;
                             ctx.beginPath(); ctx.moveTo(mouse.x, mouse.y); ctx.lineTo(parts[c].dx, parts[c].dy); ctx.stroke();
                         }
                     }
                     ctx.globalAlpha = 0.5; ctx.fillStyle = colorNode;
                     ctx.beginPath(); ctx.arc(mouse.x, mouse.y, 2.5, 0, Math.PI * 2); ctx.fill();
                 }
-                ctx.globalAlpha = 0.55; ctx.fillStyle = colorNode;
+                ctx.globalAlpha = 0.5; ctx.fillStyle = colorNode;
                 for (var k = 0; k < parts.length; k++) {
                     ctx.beginPath(); ctx.arc(parts[k].dx, parts[k].dy, parts[k].r, 0, Math.PI * 2); ctx.fill();
                 }
@@ -1807,7 +1798,7 @@
                 var target = parseInt(el.getAttribute("data-target"), 10);
                 var suffix = el.getAttribute("data-suffix") || "";
                 if (isNaN(target)) return;
-                var dur = 1100, start = null;
+                var dur = 1300, start = null;
                 function step(ts) {
                     if (!start) start = ts;
                     var p = Math.min(1, (ts - start) / dur);
@@ -1851,8 +1842,8 @@
             if (!card || REDUCED) return;
             card.addEventListener("mousemove", function (e) {
                 var r = card.getBoundingClientRect();
-                var rx = (0.5 - (e.clientY - r.top) / r.height) * 6;
-                var ry = ((e.clientX - r.left) / r.width - 0.5) * 6;
+                var rx = (0.5 - (e.clientY - r.top) / r.height) * 4.5;
+                var ry = ((e.clientX - r.left) / r.width - 0.5) * 4.5;
                 card.style.transform = "perspective(900px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg) translateY(-2px)";
             });
             card.addEventListener("mouseleave", function () { card.style.transform = ""; });
