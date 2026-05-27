@@ -1964,8 +1964,11 @@
                 ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
                 var pts = buildPoints();
                 var cx = W / 2, cy = H * 0.45;
+                // sqrt() spreads particles evenly across the area (fills the center, no donut);
+                // scaled so the burst reaches the screen edges
+                var maxV = Math.max(W, H) * 0.034;
                 P = pts.map(function (pt) {
-                    var ang = Math.random() * 6.2832, sp = 2 + Math.random() * 11;
+                    var ang = Math.random() * 6.2832, sp = maxV * Math.sqrt(Math.random());
                     return { x: cx, y: cy, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp, tx: pt[0], ty: pt[1], tw: Math.random() * 6.2832, r: 0.8 + Math.random() * 1.4, crim: Math.random() < 0.2 };
                 });
                 var ns = Math.min(90, Math.round(W * H / 16000));
