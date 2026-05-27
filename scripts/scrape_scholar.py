@@ -27,6 +27,10 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parent
 PUBS_FILE = PROJECT_ROOT / "data" / "publications.json"
 OVERRIDES_FILE = PROJECT_ROOT / "data" / "overrides.json"
+META_FILE = PROJECT_ROOT / "data" / "scholar_meta.json"
+
+# Profile-level metadata captured during scraping (e.g. true total citations)
+PROFILE: dict = {}
 
 # Safety threshold: abort if scraped count < this fraction of existing
 SAFETY_THRESHOLD = 0.70
@@ -96,10 +100,19 @@ def scrape_scholarly() -> list[dict] | None:
 
     try:
         author = scholarly.search_author_id(SCHOLAR_USER_ID)
-        author = scholarly.fill(author, sections=["publications"])
+        author = scholarly.fill(author, sections=["basics", "indices", "publications"])
     except Exception as e:
         print(f"scholarly scrape failed: {e}")
         return None
+
+    # Capture the profile's true total citation count
+    try:
+        total = int(author.get("citedby", 0) or 0)
+        if total:
+            PROFILE["total_citations"] = total
+            print(f"Profile total citations: {total}")
+    except Exception:
+        pass
 
     pubs = []
     for pub in author.get("publications", []):
@@ -218,6 +231,19 @@ def scrape_serpapi() -> list[dict] | None:
         except Exception as e:
             print(f"SerpAPI request failed: {e}")
             break
+
+        # Capture profile total citations from the first page
+        if start == 0:
+            try:
+                for row in data.get("cited_by", {}).get("table", []):
+                    if "citations" in row:
+                        total = int(row["citations"].get("all", 0) or 0)
+                        if total:
+                            PROFILE["total_citations"] = total
+                            print(f"Profile total citations: {total}")
+                        break
+            except Exception:
+                pass
 
         articles = data.get("articles", [])
         if not articles:
@@ -340,6 +366,14 @@ def main() -> int:
     merged.sort(key=lambda p: (-p.get("year", 0), p.get("title", "")))
 
     save_pubs(merged)
+
+    # Persist profile-level metadata (true total citations) for the generator
+    if PROFILE.get("total_citations"):
+        META_FILE.parent.mkdir(parents=True, exist_ok=True)
+        with open(META_FILE, "w", encoding="utf-8") as f:
+            json.dump({"total_citations": PROFILE["total_citations"], "scholar_id": SCHOLAR_USER_ID}, f, indent=2)
+        print(f"Wrote profile metadata to {META_FILE}")
+
     print("Scrape completed successfully.")
     return 0
 

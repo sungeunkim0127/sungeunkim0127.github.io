@@ -438,7 +438,7 @@
 
             <div class="hero__stats">
                 <div class="stat"><div class="stat__value">40+</div><div class="stat__label">Peer-reviewed papers</div><div class="stat__note mono mono--sm">incl. Nature Medicine, JBJS, CVPR</div></div>
-                <div class="stat"><div class="stat__value" id="stat-cites">0</div><div class="stat__label">Citations</div><div class="stat__note mono mono--sm">Google Scholar · indexed</div></div>
+                <div class="stat"><div class="stat__value" id="stat-cites">0</div><div class="stat__label">Citations</div><div class="stat__note mono mono--sm">Google Scholar</div></div>
             </div>
         </header>
 
@@ -454,6 +454,7 @@
 
         <!-- Publication data (auto-generated from publications.json; feeds the constellation + list) -->
         <!-- AUTO-GENERATED-PUBS-START -->
+                <script id="pub-meta" type="application/json">{"citations": 483}</script>
                 <script id="pub-data" type="application/json">
 [
 {
@@ -1352,11 +1353,16 @@
             PUBS = JSON.parse(el.textContent.trim() || "[]");
         } catch (e) { PUBS = []; }
 
-        // Total indexed citations → hero stat (count-up reads this value after)
+        // Total citations → hero stat (prefer scraped profile total; count-up reads this after)
         (function () {
             var cel = document.getElementById("stat-cites");
             if (!cel) return;
-            var total = PUBS.reduce(function (s, p) { return s + (p.cites || 0); }, 0);
+            var total = 0;
+            try {
+                var meta = document.getElementById("pub-meta");
+                if (meta) total = (JSON.parse(meta.textContent) || {}).citations || 0;
+            } catch (e) { total = 0; }
+            if (!total) total = PUBS.reduce(function (s, p) { return s + (p.cites || 0); }, 0);
             cel.textContent = total.toLocaleString("en-US");
         })();
 

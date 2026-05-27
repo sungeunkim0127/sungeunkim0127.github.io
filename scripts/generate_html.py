@@ -19,6 +19,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parent
 PUBS_FILE = PROJECT_ROOT / "data" / "publications.json"
 OVERRIDES_FILE = PROJECT_ROOT / "data" / "overrides.json"
+META_FILE = PROJECT_ROOT / "data" / "scholar_meta.json"
 INDEX_FILE = PROJECT_ROOT / "index.html"
 
 START_MARKER = "<!-- AUTO-GENERATED-PUBS-START -->"
@@ -157,10 +158,26 @@ def build_pub_records(pubs: list[dict], overrides: dict) -> list[dict]:
     return records
 
 
+def compute_total_citations(records: list[dict]) -> int:
+    """Prefer the scraped profile total; fall back to the indexed sum."""
+    if META_FILE.exists():
+        try:
+            meta = load_json(META_FILE)
+            total = int(meta.get("total_citations", 0) or 0)
+            if total:
+                return total
+        except Exception:
+            pass
+    return sum(int(r.get("cites", 0) or 0) for r in records)
+
+
 def generate_data_block(records: list[dict]) -> str:
-    """Render the <script id="pub-data"> JSON block."""
+    """Render the <script id="pub-meta"> + <script id="pub-data"> JSON blocks."""
+    meta = {"citations": compute_total_citations(records)}
     payload = json.dumps(records, ensure_ascii=False, indent=0)
     return (
+        '                <script id="pub-meta" type="application/json">'
+        f"{json.dumps(meta, ensure_ascii=False)}</script>\n"
         '                <script id="pub-data" type="application/json">\n'
         f"{payload}\n"
         "                </script>"

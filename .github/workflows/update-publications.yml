@@ -53,6 +53,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/publications.json index.html
+          [ -f data/scholar_meta.json ] && git add data/scholar_meta.json || true
           git diff --cached --quiet && echo "No changes to commit" && exit 0
           git commit -m "chore: update publications from Google Scholar"
           git push
