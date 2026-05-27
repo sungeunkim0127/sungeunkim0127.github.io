@@ -1936,6 +1936,7 @@
 
             // Phase thresholds (ms)
             var T_BANG = 950, T_SWIRL = 2200, T_NAME = 3400, T_LINKEND = 4300;
+            var T_COMET_START = 3000, T_COMET_END = 4150;
 
             function buildPoints() {
                 var oc = document.createElement("canvas");
@@ -1974,7 +1975,7 @@
                 P = pts.map(function (pt) {
                     var ang = Math.random() * 6.2832, sp = maxV * Math.sqrt(Math.random());
                     var cr = Math.random(), col = cr < 0.09 ? EBLUE : (cr < 0.26 ? CYAN : ICE);
-                    return { x: cx, y: cy, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp, tx: pt[0], ty: pt[1], tw: Math.random() * 6.2832, r: 0.8 + Math.random() * 1.4, col: col };
+                    return { x: cx, y: cy, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp, tx: pt[0], ty: pt[1], tw: Math.random() * 6.2832, r: 0.8 + Math.random() * 1.4, col: col, wx: 0, wy: 0 };
                 });
                 var ns = Math.min(90, Math.round(W * H / 16000));
                 STARS = [];
@@ -2004,6 +2005,18 @@
                     ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
                 }
 
+                // shooting star (comet): bottom-left → top-right, rippling the stars
+                var cometOn = t > T_COMET_START && t < T_COMET_END;
+                var hx = 0, hy = 0, cdx = 0, cdy = 0, cAlpha = 0;
+                if (cometOn) {
+                    var cp = (t - T_COMET_START) / (T_COMET_END - T_COMET_START);
+                    var sx = -80, sy = H + 80, ex = W + 80, ey = -80;
+                    hx = sx + (ex - sx) * cp; hy = sy + (ey - sy) * cp;
+                    var pdx = ex - sx, pdy = ey - sy, pl = Math.sqrt(pdx * pdx + pdy * pdy);
+                    cdx = pdx / pl; cdy = pdy / pl;
+                    cAlpha = Math.max(0, Math.min(1, Math.min(cp / 0.12, (1 - cp) / 0.18)));
+                }
+
                 // particle physics by phase
                 for (var i = 0; i < P.length; i++) {
                     var p = P[i];
@@ -2015,6 +2028,12 @@
                         p.x += p.vx; p.y += p.vy; p.vx *= 0.965; p.vy *= 0.965;
                     } else if (t < T_NAME) { p.vx *= 0.84; p.vy *= 0.84; p.x += p.vx; p.y += p.vy; }
                     else { var k = Math.min(0.16, 0.05 + (t - T_NAME) / 3500); p.x += (p.tx - p.x) * k; p.y += (p.ty - p.y) * k; }
+                    // bow-wave push from the passing comet
+                    if (cometOn) {
+                        var wdx = p.x - hx, wdy = p.y - hy, wd = Math.sqrt(wdx * wdx + wdy * wdy);
+                        if (wd < 105 && wd > 0.01) { var wf = (1 - wd / 105) * 2.6 * cAlpha; p.wx += (wdx / wd) * wf; p.wy += (wdy / wd) * wf; }
+                    }
+                    p.x += p.wx; p.y += p.wy; p.wx *= 0.9; p.wy *= 0.9;
                 }
 
                 // neural links during connect + early name
@@ -2039,6 +2058,24 @@
                     ctx.beginPath(); ctx.arc(q.x, q.y, q.r, 0, 6.2832); ctx.fill();
                 }
                 ctx.globalAlpha = 1;
+
+                // comet head + tail (drawn on top)
+                if (cometOn) {
+                    var tlen = 200;
+                    var ttx = hx - cdx * tlen, tty = hy - cdy * tlen;
+                    var grad = ctx.createLinearGradient(hx, hy, ttx, tty);
+                    grad.addColorStop(0, "rgba(200,238,255," + (0.9 * cAlpha) + ")");
+                    grad.addColorStop(1, "rgba(200,238,255,0)");
+                    ctx.strokeStyle = grad; ctx.lineWidth = 2.4; ctx.lineCap = "round";
+                    ctx.beginPath(); ctx.moveTo(hx, hy); ctx.lineTo(ttx, tty); ctx.stroke();
+                    var hg = ctx.createRadialGradient(hx, hy, 0, hx, hy, 16);
+                    hg.addColorStop(0, "rgba(225,247,255," + cAlpha + ")");
+                    hg.addColorStop(1, "rgba(225,247,255,0)");
+                    ctx.fillStyle = hg; ctx.beginPath(); ctx.arc(hx, hy, 16, 0, 6.2832); ctx.fill();
+                    ctx.globalAlpha = cAlpha; ctx.fillStyle = "#eafaff";
+                    ctx.beginPath(); ctx.arc(hx, hy, 2.2, 0, 6.2832); ctx.fill();
+                    ctx.globalAlpha = 1;
+                }
                 raf = requestAnimationFrame(frame);
             }
 
