@@ -1338,7 +1338,8 @@
                     parts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25, r: 1.2 + Math.random() * 1.5 });
                 }
             }
-            var LINK = 124;
+            var LINK = 124, MR = 155, ox = 0, oy = 0;
+            var mouse = { x: 0, y: 0, active: false };
             function frame() {
                 if (!running) { raf = null; return; }
                 ctx.clearRect(0, 0, W, H);
@@ -1348,21 +1349,48 @@
                     if (p.x < -20) p.x = W + 20; if (p.x > W + 20) p.x = -20;
                     if (p.y < -20) p.y = H + 20; if (p.y > H + 20) p.y = -20;
                 }
+                // Smoothed parallax of the whole field toward the cursor
+                var tx = mouse.active ? (mouse.x - W / 2) * 0.025 : 0;
+                var ty = mouse.active ? (mouse.y - H / 2) * 0.025 : 0;
+                ox += (tx - ox) * 0.06; oy += (ty - oy) * 0.06;
+                // Display positions: parallax + gentle lean toward the cursor
+                for (var j = 0; j < parts.length; j++) {
+                    var q = parts[j];
+                    var qdx = mouse.x - q.x, qdy = mouse.y - q.y;
+                    var qd = Math.sqrt(qdx * qdx + qdy * qdy);
+                    var pull = (mouse.active && qd < MR) ? (1 - qd / MR) * 0.2 : 0;
+                    q.dx = q.x + ox + qdx * pull;
+                    q.dy = q.y + oy + qdy * pull;
+                }
                 ctx.lineWidth = 0.6;
                 for (var a = 0; a < parts.length; a++) {
                     for (var b = a + 1; b < parts.length; b++) {
-                        var dx = parts[a].x - parts[b].x, dy = parts[a].y - parts[b].y;
+                        var dx = parts[a].dx - parts[b].dx, dy = parts[a].dy - parts[b].dy;
                         var d = Math.sqrt(dx * dx + dy * dy);
                         if (d < LINK) {
                             ctx.strokeStyle = colorLink;
                             ctx.globalAlpha = (1 - d / LINK) * 0.22;
-                            ctx.beginPath(); ctx.moveTo(parts[a].x, parts[a].y); ctx.lineTo(parts[b].x, parts[b].y); ctx.stroke();
+                            ctx.beginPath(); ctx.moveTo(parts[a].dx, parts[a].dy); ctx.lineTo(parts[b].dx, parts[b].dy); ctx.stroke();
                         }
                     }
                 }
+                // Links from the cursor to nearby particles
+                if (mouse.active) {
+                    ctx.strokeStyle = colorNode;
+                    for (var c = 0; c < parts.length; c++) {
+                        var cdx = mouse.x - parts[c].dx, cdy = mouse.y - parts[c].dy;
+                        var cd = Math.sqrt(cdx * cdx + cdy * cdy);
+                        if (cd < MR) {
+                            ctx.globalAlpha = (1 - cd / MR) * 0.34;
+                            ctx.beginPath(); ctx.moveTo(mouse.x, mouse.y); ctx.lineTo(parts[c].dx, parts[c].dy); ctx.stroke();
+                        }
+                    }
+                    ctx.globalAlpha = 0.5; ctx.fillStyle = colorNode;
+                    ctx.beginPath(); ctx.arc(mouse.x, mouse.y, 2.5, 0, Math.PI * 2); ctx.fill();
+                }
                 ctx.globalAlpha = 0.55; ctx.fillStyle = colorNode;
                 for (var k = 0; k < parts.length; k++) {
-                    ctx.beginPath(); ctx.arc(parts[k].x, parts[k].y, parts[k].r, 0, Math.PI * 2); ctx.fill();
+                    ctx.beginPath(); ctx.arc(parts[k].dx, parts[k].dy, parts[k].r, 0, Math.PI * 2); ctx.fill();
                 }
                 ctx.globalAlpha = 1;
                 raf = requestAnimationFrame(frame);
@@ -1372,13 +1400,20 @@
             var rt;
             window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(resize, 200); });
             var hero = document.querySelector(".hero");
-            if (hero && "IntersectionObserver" in window) {
-                new IntersectionObserver(function (es) {
-                    es.forEach(function (e) {
-                        running = e.isIntersecting;
-                        if (running && !raf) frame();
-                    });
-                }, { threshold: 0 }).observe(hero);
+            if (hero) {
+                hero.addEventListener("mousemove", function (e) {
+                    var r = host.getBoundingClientRect();
+                    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; mouse.active = true;
+                });
+                hero.addEventListener("mouseleave", function () { mouse.active = false; });
+                if ("IntersectionObserver" in window) {
+                    new IntersectionObserver(function (es) {
+                        es.forEach(function (e) {
+                            running = e.isIntersecting;
+                            if (running && !raf) frame();
+                        });
+                    }, { threshold: 0 }).observe(hero);
+                }
             }
         })();
 
