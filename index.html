@@ -88,8 +88,12 @@
             opacity: 0; transition: opacity 0.9s ease;
         }
         .intro.named .intro__hud { opacity: 1; }
-        .intro__tag { font-family: var(--mono-stack); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
-        .intro__enter { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #9a9286; margin-top: 16px; animation: introBlink 1.8s ease-in-out infinite; }
+        .intro__tag { font-family: var(--mono-stack); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #6fd8ec; }
+        .intro__enter { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #8d96a8; margin-top: 16px; animation: introBlink 1.8s ease-in-out infinite; }
+        @media (max-width: 600px) {
+            .intro__tag { font-size: 10px; letter-spacing: 0.14em; }
+            .intro__hud { bottom: 16%; padding: 0 18px; }
+        }
         @keyframes introBlink { 0%, 100% { opacity: 0.85; } 50% { opacity: 0.35; } }
         .intro.is-out { opacity: 0; transform: scale(1.06); transition: opacity 0.8s ease, transform 0.8s ease; pointer-events: none; }
 
@@ -1928,7 +1932,7 @@
             var dpr = Math.min(window.devicePixelRatio || 1, 2);
             var W = 0, H = 0, P = [], STARS = [], raf = null, running = true;
             var NAME = "Sung Eun Kim, MD";
-            var WHITE = "#ECE7DB", CRIM = "#C8323C", LNK = "#6f7d90";
+            var ICE = "#E8F0FF", CYAN = "#5FD2E8", EBLUE = "#6BA8FF", LNK = "#51607a";
 
             // Phase thresholds (ms)
             var T_BANG = 950, T_SWIRL = 2200, T_NAME = 3400, T_LINKEND = 4300;
@@ -1969,7 +1973,8 @@
                 var maxV = Math.max(W, H) * 0.034;
                 P = pts.map(function (pt) {
                     var ang = Math.random() * 6.2832, sp = maxV * Math.sqrt(Math.random());
-                    return { x: cx, y: cy, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp, tx: pt[0], ty: pt[1], tw: Math.random() * 6.2832, r: 0.8 + Math.random() * 1.4, crim: Math.random() < 0.2 };
+                    var cr = Math.random(), col = cr < 0.09 ? EBLUE : (cr < 0.26 ? CYAN : ICE);
+                    return { x: cx, y: cy, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp, tx: pt[0], ty: pt[1], tw: Math.random() * 6.2832, r: 0.8 + Math.random() * 1.4, col: col };
                 });
                 var ns = Math.min(90, Math.round(W * H / 16000));
                 STARS = [];
@@ -1986,7 +1991,7 @@
                 for (var s = 0; s < STARS.length; s++) {
                     var st = STARS[s];
                     ctx.globalAlpha = (0.25 + 0.55 * Math.abs(Math.sin(st.tw + now * 0.001 * st.sp))) * 0.32;
-                    ctx.fillStyle = WHITE;
+                    ctx.fillStyle = ICE;
                     ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, 6.2832); ctx.fill();
                 }
 
@@ -1994,8 +1999,8 @@
                 if (t < 320) {
                     var fa = 1 - t / 320;
                     var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W, H) * 0.55);
-                    g.addColorStop(0, "rgba(255,238,214," + (fa * 0.9) + ")");
-                    g.addColorStop(1, "rgba(255,238,214,0)");
+                    g.addColorStop(0, "rgba(212,234,255," + (fa * 0.9) + ")");
+                    g.addColorStop(1, "rgba(212,234,255,0)");
                     ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
                 }
 
@@ -2030,7 +2035,7 @@
                 for (var j = 0; j < P.length; j++) {
                     var q = P[j];
                     ctx.globalAlpha = 0.65 + 0.35 * Math.sin(q.tw + now * 0.004);
-                    ctx.fillStyle = q.crim ? CRIM : WHITE;
+                    ctx.fillStyle = q.col;
                     ctx.beginPath(); ctx.arc(q.x, q.y, q.r, 0, 6.2832); ctx.fill();
                 }
                 ctx.globalAlpha = 1;
