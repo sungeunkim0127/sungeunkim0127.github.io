@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script>try{var _t=localStorage.getItem("theme");if(_t)document.documentElement.setAttribute("data-theme",_t);}catch(e){}</script>
+    <script>try{if(!sessionStorage.getItem("introSeen")&&!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)){document.documentElement.classList.add("intro-on");}}catch(e){}</script>
     <title>Sung Eun Kim, MD — Translational Medicine AI Researcher</title>
     <meta name="description" content="Sung Eun Kim, MD — Postdoctoral Research Fellow at Harvard Medical School and Research Professor at Seoul National University Hospital. 40+ publications including Nature Medicine. Bridging orthopedic surgery with AI." />
 
@@ -70,6 +71,27 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* ----- Opening scene ----- */
+        html.intro-on { background: #14130F; }
+        .intro { display: none; }
+        html.intro-on .intro {
+            display: flex; position: fixed; inset: 0; z-index: 1000;
+            background: #14130F; color: #EEEAE0;
+            align-items: center; justify-content: center; flex-direction: column; overflow: hidden;
+            animation: introFailsafe 0s linear 5s forwards;
+        }
+        @keyframes introFailsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+        .intro__canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+        .intro__inner { position: relative; z-index: 1; text-align: center; padding: 24px; }
+        .intro__tag { font-family: var(--mono-stack); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); opacity: 0; transition: opacity 0.6s ease; }
+        .intro__name { font-family: var(--display-stack); font-size: clamp(34px, 6vw, 64px); font-weight: 400; letter-spacing: -0.022em; line-height: 1; margin-top: 14px; min-height: 1em; }
+        .intro__rule { height: 2px; width: 0; background: var(--accent); margin: 20px auto 0; transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+        .intro__enter { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #A8A192; margin-top: 28px; opacity: 0; transition: opacity 0.6s ease; cursor: pointer; }
+        .intro.is-in .intro__tag { opacity: 1; }
+        .intro.is-in .intro__enter { opacity: 0.85; animation: introBlink 1.8s ease-in-out infinite; }
+        @keyframes introBlink { 0%, 100% { opacity: 0.85; } 50% { opacity: 0.4; } }
+        .intro.is-out { opacity: 0; transform: scale(1.04); transition: opacity 0.7s ease, transform 0.7s ease; pointer-events: none; }
 
         html, body {
             background: var(--paper);
@@ -421,6 +443,18 @@
     </style>
 </head>
 <body data-attn="on">
+
+    <!-- Opening scene (shown via html.intro-on; JS drives it, CSS fail-safe reveals if JS is absent) -->
+    <div class="intro" id="intro" aria-hidden="true">
+        <canvas class="intro__canvas" id="intro-canvas"></canvas>
+        <div class="intro__inner">
+            <div class="intro__tag">Surgeon × AI Researcher</div>
+            <div class="intro__name" id="intro-name">Sung Eun Kim, MD</div>
+            <div class="intro__rule" id="intro-rule"></div>
+            <div class="intro__enter" id="intro-enter">Enter ↵</div>
+        </div>
+    </div>
+
     <div class="app">
 
         <!-- ===== Hero ===== -->
@@ -1882,6 +1916,94 @@
                 elm.addEventListener("mouseenter", function () { ring.classList.add("grow"); });
                 elm.addEventListener("mouseleave", function () { ring.classList.remove("grow"); });
             });
+        })();
+
+        // ===== Opening scene (neural network assembles, name decodes, curtain lifts) =====
+        (function () {
+            var root = document.documentElement;
+            var intro = document.getElementById("intro");
+            if (!root.classList.contains("intro-on") || !intro) { if (intro) intro.style.display = "none"; return; }
+            document.body.style.overflow = "hidden";
+
+            var canvas = document.getElementById("intro-canvas");
+            var ctx = canvas.getContext("2d");
+            var dpr = Math.min(window.devicePixelRatio || 1, 2);
+            var W = 0, H = 0, parts = [], raf = null, running = true;
+            var ACC = "#B0202B", LNK = "#8A8275";
+            function resize() {
+                W = intro.clientWidth; H = intro.clientHeight;
+                if (!W || !H) return;
+                canvas.width = W * dpr; canvas.height = H * dpr;
+                canvas.style.width = W + "px"; canvas.style.height = H + "px";
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                var n = Math.max(28, Math.min(80, Math.round(W * H / 16000)));
+                parts = [];
+                for (var i = 0; i < n; i++) {
+                    parts.push({
+                        x: W / 2 + (Math.random() - 0.5) * W * 0.25,
+                        y: H / 2 + (Math.random() - 0.5) * H * 0.25,
+                        tx: Math.random() * W, ty: Math.random() * H,
+                        r: 1.2 + Math.random() * 1.8
+                    });
+                }
+            }
+            var LINKD = 130, t0 = performance.now();
+            function frame(now) {
+                if (!running) { raf = null; return; }
+                ctx.clearRect(0, 0, W, H);
+                var prog = Math.min(1, (now - t0) / 1400);
+                var e = 1 - Math.pow(1 - prog, 3);
+                for (var i = 0; i < parts.length; i++) {
+                    var q = parts[i];
+                    q.x += (q.tx - q.x) * 0.06; q.y += (q.ty - q.y) * 0.06;
+                }
+                ctx.lineWidth = 0.7;
+                for (var a = 0; a < parts.length; a++) {
+                    for (var b = a + 1; b < parts.length; b++) {
+                        var dx = parts[a].x - parts[b].x, dy = parts[a].y - parts[b].y;
+                        var d = Math.sqrt(dx * dx + dy * dy);
+                        if (d < LINKD) {
+                            ctx.strokeStyle = LNK; ctx.globalAlpha = (1 - d / LINKD) * 0.22 * e;
+                            ctx.beginPath(); ctx.moveTo(parts[a].x, parts[a].y); ctx.lineTo(parts[b].x, parts[b].y); ctx.stroke();
+                        }
+                    }
+                }
+                ctx.globalAlpha = 0.7 * e; ctx.fillStyle = ACC;
+                for (var k = 0; k < parts.length; k++) {
+                    ctx.beginPath(); ctx.arc(parts[k].x, parts[k].y, parts[k].r, 0, 6.2832); ctx.fill();
+                }
+                ctx.globalAlpha = 1;
+                raf = requestAnimationFrame(frame);
+            }
+            resize();
+            raf = requestAnimationFrame(frame);
+            window.addEventListener("resize", resize);
+
+            // Choreography
+            var nameEl = document.getElementById("intro-name");
+            if (nameEl) nameEl.textContent = "";
+            requestAnimationFrame(function () { intro.classList.add("is-in"); });
+            setTimeout(function () { if (nameEl) scramble(nameEl, "Sung Eun Kim, MD", 820); }, 450);
+            setTimeout(function () { var r = document.getElementById("intro-rule"); if (r) r.style.width = "120px"; }, 1320);
+
+            var done = false;
+            function dismiss() {
+                if (done) return; done = true;
+                try { sessionStorage.setItem("introSeen", "1"); } catch (e) {}
+                intro.classList.add("is-out");
+                document.body.style.overflow = "";
+                setTimeout(function () {
+                    running = false; if (raf) cancelAnimationFrame(raf);
+                    if (intro.parentNode) intro.parentNode.removeChild(intro);
+                    root.classList.remove("intro-on");
+                }, 760);
+            }
+            var auto = setTimeout(dismiss, 2900);
+            function skip() { clearTimeout(auto); dismiss(); }
+            intro.addEventListener("click", skip);
+            window.addEventListener("keydown", function (e) {
+                if (e.key === "Enter" || e.key === "Escape" || e.key === " ") skip();
+            }, { once: true });
         })();
     })();
     </script>
