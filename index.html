@@ -389,6 +389,18 @@
         .pubsearch::placeholder { color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px; }
         .pubsearch:focus { outline: none; border-color: var(--ink); }
 
+        /* ----- Custom hero cursor ----- */
+        .herocursor {
+            position: fixed; left: 0; top: 0; width: 26px; height: 26px;
+            border: 1.5px solid var(--accent); border-radius: 50%;
+            pointer-events: none; z-index: 150; opacity: 0;
+            mix-blend-mode: multiply;
+            transition: opacity 0.25s ease, width 0.18s ease, height 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+        }
+        .herocursor.show { opacity: 0.7; }
+        .herocursor.grow { width: 46px; height: 46px; background: rgba(176, 32, 43, 0.08); }
+        [data-theme="dark"] .herocursor { mix-blend-mode: screen; }
+
         /* ----- Clickable constellation legend ----- */
         .pubviz__lg { cursor: pointer; transition: color 0.18s ease, opacity 0.18s ease; }
         .pubviz__lg.on { color: var(--ink); }
@@ -1844,6 +1856,29 @@
                 card.style.transform = "perspective(900px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg) translateY(-2px)";
             });
             card.addEventListener("mouseleave", function () { card.style.transform = ""; });
+        })();
+
+        // ===== Custom hero cursor (trailing ring) =====
+        (function () {
+            var hero = document.querySelector(".hero");
+            if (!hero || REDUCED) return;
+            if (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) return;
+            var ring = document.createElement("div");
+            ring.className = "herocursor";
+            document.body.appendChild(ring);
+            var tx = 0, ty = 0, x = 0, y = 0, raf = null, over = false;
+            function loop() {
+                x += (tx - x) * 0.2; y += (ty - y) * 0.2;
+                ring.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) translate(-50%,-50%)";
+                if (over) raf = requestAnimationFrame(loop); else raf = null;
+            }
+            hero.addEventListener("mouseenter", function () { over = true; ring.classList.add("show"); if (!raf) raf = requestAnimationFrame(loop); });
+            hero.addEventListener("mouseleave", function () { over = false; ring.classList.remove("show"); });
+            hero.addEventListener("mousemove", function (e) { tx = e.clientX; ty = e.clientY; });
+            hero.querySelectorAll("a, button").forEach(function (elm) {
+                elm.addEventListener("mouseenter", function () { ring.classList.add("grow"); });
+                elm.addEventListener("mouseleave", function () { ring.classList.remove("grow"); });
+            });
         })();
     })();
     </script>
