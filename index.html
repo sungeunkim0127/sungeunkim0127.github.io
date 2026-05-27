@@ -80,6 +80,7 @@
             text-rendering: geometricPrecision;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
 
         a { color: inherit; text-decoration: none; }
@@ -153,7 +154,7 @@
         }
         .hero__title-line:first-child { border-top: 1px solid var(--rule); }
         .hero__title-num { color: var(--ink-faint); }
-        .hero__bio { font-size: 17px; line-height: 1.6; color: var(--ink); max-width: 64ch; margin: 24px 0 28px; text-wrap: pretty; }
+        .hero__bio { font-size: 17px; line-height: 1.6; color: var(--ink); max-width: min(64ch, 100%); margin: 24px 0 28px; text-wrap: pretty; }
         .hero__links { display: flex; gap: 10px; flex-wrap: wrap; }
         .link {
             font-family: var(--mono-stack); font-size: 11.5px; letter-spacing: 0.08em;
@@ -397,6 +398,22 @@
         .pubviz__lg.on { color: var(--ink); }
         .pubviz__lg.dim { opacity: 0.4; }
 
+        /* ----- Keyboard focus ----- */
+        a:focus-visible, button:focus-visible, input:focus-visible,
+        .pill:focus-visible, .link:focus-visible, .pubviz__lg:focus-visible,
+        .secnav a:focus-visible, .themebtn:focus-visible, .pub:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        /* ----- Small-screen header tidy-up ----- */
+        @media (max-width: 600px) {
+            .hero__top-right { display: none; }
+            .hero__top { font-size: 10px; }
+            .sech { grid-template-columns: 1fr; }
+            .sech__right { grid-column: 1; align-self: start; justify-self: start; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
             .reveal { opacity: 1; transform: none; }
@@ -516,17 +533,6 @@
 },
 {
 "year": 2026,
-"title": "Effects of axial malrotation on posterior tibial slope measurement: a digitally reconstructed radiograph study enabling automated quality assessment",
-"venue": "Knee Surgery & Related Research",
-"authors": "Park J, Persson A, Martin RK, Inderhaug E, Kim SE, Kim S, Kwak D, Ro DH",
-"href": "",
-"tags": [
-"ai"
-],
-"cites": 0
-},
-{
-"year": 2026,
 "title": "ReXInTheWild: A Unified Benchmark for Medical Photograph Understanding",
 "venue": "arXiv preprint arXiv:2603.19517",
 "authors": "Banerjee O, Kim SE, Willauer AN, Kernbach JM, Alomaish AR, Alghamdi RAS, Alomaish HR, Baharoon M, Zhang X, Acosta JN, Zhou C, Rajpurkar P",
@@ -578,17 +584,6 @@
 "tags": [
 "both"
 ],
-"cites": 0
-},
-{
-"year": 2025,
-"title": "Automated posterior tibial slope measurement using lateral knee radiographs: a novel landmark-based approach using deep learning",
-"venue": "Orthopaedic Journal of Sports Medicine",
-"authors": "Ryu B, Nam JW, Ro DH, Martin RK, Inderhaug E, Persson A, Haland S, Kim SE",
-"href": "",
-"tags": [
-"both"
-],
 "cites": 6
 },
 {
@@ -619,17 +614,6 @@
 "venue": "Orthop J Sports Med 2025;13(5)",
 "authors": "Martin RK, Haaland S, Persson A, Kim SE, et al.",
 "href": "https://doi.org/10.1177/23259671251333607",
-"tags": [
-"both"
-],
-"cites": 0
-},
-{
-"year": 2025,
-"title": "External validation of a novel landmark-based deep learning automated tibial slope measurement algorithm applied on short radiographs obtained in patients with ACL injuries",
-"venue": "Orthopaedic Journal of Sports Medicine",
-"authors": "Martin KR, Haaland S, Persson A, Kim SE, Ryu B, Nam JW, Ro DH, Inderhaug E",
-"href": "",
 "tags": [
 "both"
 ],
@@ -677,17 +661,6 @@
 "tags": [
 "ortho",
 "first"
-],
-"cites": 0
-},
-{
-"year": 2025,
-"title": "Posterior tibial slope as a risk factor for anterior cruciate ligament tears: a retrospective study using automated measurement",
-"venue": "Arthroscopy and Orthopedic Sports Medicine",
-"authors": "Kwak D, Kim SE, Park J, Han HS, Choi BS, Ro DH",
-"href": "",
-"tags": [
-"both"
 ],
 "cites": 0
 },
@@ -805,17 +778,6 @@
 },
 {
 "year": 2024,
-"title": "Coronal Plane Alignment of the Knee (CPAK) Type Shifts Toward Constitutional Varus with Increasing Kellgren and Lawrence Grade: A Radiographic Analysis of 17,365 Knees",
-"venue": "JBJS",
-"authors": "Kim SE, MacDessi S, Song D, Kim JI, Choi BS, Han HS, Ro DH",
-"href": "",
-"tags": [
-"ortho"
-],
-"cites": 27
-},
-{
-"year": 2024,
 "title": "Coronal plane alignment of the knee (CPAK) type shifts towards constitutional varus with increasing Kellgren and Lawrence grade: a deep learning radiographic analysis of 17,365 knees",
 "venue": "J Bone Joint Surg Am 2024",
 "authors": "Kim SE, MacDessi S, Song D, Kim JI, Choi BS, Han HS, Ro DH",
@@ -824,7 +786,7 @@
 "both",
 "first"
 ],
-"cites": 0
+"cites": 27
 },
 {
 "year": 2024,
@@ -858,17 +820,6 @@
 "tags": [
 "ortho",
 "first"
-],
-"cites": 0
-},
-{
-"year": 2024,
-"title": "Estimation of patient-reported outcome measures based on features of knee joint muscle co-activation in advanced knee osteoarthritis",
-"venue": "Scientific Reports",
-"authors": "Hussain I*, Kim SE*, Kwon C, Hoon SK, Kim HC, Ku Y, Ro DH",
-"href": "",
-"tags": [
-"ortho"
 ],
 "cites": 16
 },
@@ -928,17 +879,6 @@
 "both",
 "first"
 ],
-"cites": 0
-},
-{
-"year": 2024,
-"title": "Performance of ChatGPT on Solving Orthopedic Board-Style Questions: A Comparative Analysis of ChatGPT 3.5 and ChatGPT 4",
-"venue": "Clinics in Orthopedic Surgery",
-"authors": "Kim SE, Lee JH, Choi BS, Han HS, Lee MC, Ro DH",
-"href": "",
-"tags": [
-"both"
-],
 "cites": 18
 },
 {
@@ -985,17 +925,6 @@
 "tags": [
 "ortho",
 "first"
-],
-"cites": 0
-},
-{
-"year": 2024,
-"title": "Robotic arm-assisted total knee arthroplasty in a patient with osteopetrosis: a case report and review of literature",
-"venue": "Orthopedic Reviews",
-"authors": "Kim SE, Han HS",
-"href": "",
-"tags": [
-"ortho"
 ],
 "cites": 1
 },
@@ -1555,7 +1484,7 @@
 
             var svgNS = "http://www.w3.org/2000/svg";
             var parts = [];
-            parts.push('<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMidYMid meet" class="pubviz__svg">');
+            parts.push('<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMidYMid meet" class="pubviz__svg" role="img" aria-label="Scatter plot of ' + points.length + ' publications across ' + years.length + ' years, colored by research domain">');
             parts.push('<defs><pattern id="microgrid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="' + C.rule + '" stroke-width="0.5"/></pattern></defs>');
             parts.push('<rect x="0" y="0" width="' + W + '" height="' + H + '" fill="url(#microgrid)" opacity="0.5"/>');
             years.forEach(function (y) {
@@ -1587,9 +1516,9 @@
 
             var html = '<div class="pubviz">' + parts.join("") +
                 '<div class="pubviz__caption"><div class="pubviz__legend">' +
-                '<span class="pubviz__lg" data-domain="ai"><span class="pubviz__dot" style="background:' + C.accent + '"></span> AI / ML</span>' +
-                '<span class="pubviz__lg" data-domain="both"><span class="pubviz__dot" style="background:' + C.accentMid + '"></span> Translational</span>' +
-                '<span class="pubviz__lg" data-domain="ortho"><span class="pubviz__dot" style="background:' + C.inkSoft + '"></span> Clinical orthopedics</span>' +
+                '<span class="pubviz__lg" data-domain="ai" role="button" tabindex="0" aria-pressed="false"><span class="pubviz__dot" style="background:' + C.accent + '"></span> AI / ML</span>' +
+                '<span class="pubviz__lg" data-domain="both" role="button" tabindex="0" aria-pressed="false"><span class="pubviz__dot" style="background:' + C.accentMid + '"></span> Translational</span>' +
+                '<span class="pubviz__lg" data-domain="ortho" role="button" tabindex="0" aria-pressed="false"><span class="pubviz__dot" style="background:' + C.inkSoft + '"></span> Clinical orthopedics</span>' +
                 '</div><div class="pubviz__hover" id="pubviz-hover" aria-live="polite">' +
                 '<span class="pubviz__hover-empty">↑ hover any node — ' + points.length + ' papers, ' + years.length + ' years</span>' +
                 "</div></div></div>";
@@ -1620,13 +1549,18 @@
                     var d = l.getAttribute("data-domain");
                     l.classList.toggle("on", dom === d);
                     l.classList.toggle("dim", !!dom && dom !== d);
+                    l.setAttribute("aria-pressed", dom === d ? "true" : "false");
                 });
             }
+            function toggleDom(l) {
+                var d = l.getAttribute("data-domain");
+                activeDom = (activeDom === d) ? null : d;
+                spotlight(activeDom);
+            }
             lgs.forEach(function (l) {
-                l.addEventListener("click", function () {
-                    var d = l.getAttribute("data-domain");
-                    activeDom = (activeDom === d) ? null : d;
-                    spotlight(activeDom);
+                l.addEventListener("click", function () { toggleDom(l); });
+                l.addEventListener("keydown", function (e) {
+                    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleDom(l); }
                 });
             });
 
@@ -1685,13 +1619,13 @@
 
             // ---- Controls (built once so the search field keeps focus) ----
             var ctrl = '<div class="filters">';
-            ctrl += '<input type="search" class="pubsearch" id="pubsearch" placeholder="Search title, author, or venue…" autocomplete="off" />';
-            ctrl += '<div class="filters__group"><span class="mono mono--sm filters__label">FILTER:</span>';
-            FILTERS.forEach(function (f) { ctrl += '<button class="pill" data-filter="' + f[0] + '">' + f[1] + "</button>"; });
+            ctrl += '<input type="search" class="pubsearch" id="pubsearch" placeholder="Search title, author, or venue…" autocomplete="off" aria-label="Search publications by title, author, or venue" />';
+            ctrl += '<div class="filters__group" role="group" aria-label="Filter by domain"><span class="mono mono--sm filters__label">FILTER:</span>';
+            FILTERS.forEach(function (f) { ctrl += '<button class="pill" type="button" data-filter="' + f[0] + '" aria-pressed="false">' + f[1] + "</button>"; });
             ctrl += "</div>";
-            ctrl += '<div class="filters__group"><span class="mono mono--sm filters__label">YEAR:</span>';
-            ctrl += '<button class="pill" data-year="all">All</button>';
-            allYears.forEach(function (y) { ctrl += '<button class="pill" data-year="' + y + '">' + y + "</button>"; });
+            ctrl += '<div class="filters__group" role="group" aria-label="Filter by year"><span class="mono mono--sm filters__label">YEAR:</span>';
+            ctrl += '<button class="pill" type="button" data-year="all" aria-pressed="false">All</button>';
+            allYears.forEach(function (y) { ctrl += '<button class="pill" type="button" data-year="' + y + '" aria-pressed="false">' + y + "</button>"; });
             ctrl += "</div></div>";
             ctrl += '<div class="pubcount mono mono--sm" id="pubcount"></div>';
             ctrl += '<div id="pubs-list"></div>';
@@ -1713,10 +1647,16 @@
                 });
             }
             function syncPills() {
-                mount.querySelectorAll("[data-filter]").forEach(function (b) { b.classList.toggle("pill--on", b.getAttribute("data-filter") === state.filter); });
+                mount.querySelectorAll("[data-filter]").forEach(function (b) {
+                    var on = b.getAttribute("data-filter") === state.filter;
+                    b.classList.toggle("pill--on", on);
+                    b.setAttribute("aria-pressed", on ? "true" : "false");
+                });
                 mount.querySelectorAll("[data-year]").forEach(function (b) {
                     var y = b.getAttribute("data-year");
-                    b.classList.toggle("pill--on", (y === "all" ? "all" : Number(y)) === state.year);
+                    var on = (y === "all" ? "all" : Number(y)) === state.year;
+                    b.classList.toggle("pill--on", on);
+                    b.setAttribute("aria-pressed", on ? "true" : "false");
                 });
             }
             function renderList() {

@@ -12,6 +12,7 @@ the publication constellation and the filterable "All publications" list.
 import json
 import re
 import sys
+import unicodedata
 from html import escape
 from pathlib import Path
 
@@ -115,6 +116,44 @@ def classify_domain(pub: dict) -> str:
     return "ai" if ai_method else "ortho"
 
 
+def _norm_title(title: str) -> str:
+    """Normalize a title for duplicate detection."""
+    t = unicodedata.normalize("NFKD", title or "").lower().strip()
+    t = re.sub(r"[^a-z0-9\s]", "", t)
+    t = re.sub(r"\s+", " ", t)
+    return t[:50]
+
+
+def dedupe_pubs(pubs: list[dict]) -> list[dict]:
+    """Collapse near-duplicate scraped entries that share a title.
+
+    Keeps one record per title (preferring the shorter, curated id), merging in
+    the max citation count and any first-author flag from the duplicates.
+    """
+    groups: dict[str, list[dict]] = {}
+    order: list[str] = []
+    for p in pubs:
+        k = _norm_title(p.get("title", ""))
+        if k not in groups:
+            groups[k] = []
+            order.append(k)
+        groups[k].append(p)
+
+    out = []
+    for k in order:
+        grp = groups[k]
+        if len(grp) == 1:
+            out.append(grp[0])
+            continue
+        # Prefer the shorter id (hand-curated entries use short slugs)
+        grp_sorted = sorted(grp, key=lambda x: len(x.get("id", "")))
+        keep = dict(grp_sorted[0])
+        keep["citation_count"] = max(int(x.get("citation_count", 0) or 0) for x in grp)
+        keep["is_first_author"] = any(x.get("is_first_author") for x in grp)
+        out.append(keep)
+    return out
+
+
 def apply_overrides(pubs: list[dict], overrides: dict) -> list[dict]:
     """Apply per-publication field overrides from overrides.json."""
     pub_overrides = overrides.get("publication_overrides", {})
@@ -134,6 +173,7 @@ def build_pub_records(pubs: list[dict], overrides: dict) -> list[dict]:
     if exclude_ids:
         pubs = [p for p in pubs if p.get("id", "") not in exclude_ids]
 
+    pubs = dedupe_pubs(pubs)
     pubs = apply_overrides(pubs, overrides)
 
     records = []
