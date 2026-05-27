@@ -72,26 +72,26 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* ----- Opening scene ----- */
-        html.intro-on { background: #14130F; }
+        /* ----- Opening scene (cosmic big-bang → neural net → name) ----- */
+        html.intro-on { background: #07070b; }
         .intro { display: none; }
         html.intro-on .intro {
-            display: flex; position: fixed; inset: 0; z-index: 1000;
-            background: #14130F; color: #EEEAE0;
-            align-items: center; justify-content: center; flex-direction: column; overflow: hidden;
-            animation: introFailsafe 0s linear 5s forwards;
+            display: block; position: fixed; inset: 0; z-index: 1000;
+            background: radial-gradient(120% 120% at 50% 44%, #14131c 0%, #07070b 70%);
+            overflow: hidden;
+            animation: introFailsafe 0s linear 9s forwards;
         }
         @keyframes introFailsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }
         .intro__canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-        .intro__inner { position: relative; z-index: 1; text-align: center; padding: 24px; }
-        .intro__tag { font-family: var(--mono-stack); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); opacity: 0; transition: opacity 0.6s ease; }
-        .intro__name { font-family: var(--display-stack); font-size: clamp(34px, 6vw, 64px); font-weight: 400; letter-spacing: -0.022em; line-height: 1; margin-top: 14px; min-height: 1em; }
-        .intro__rule { height: 2px; width: 0; background: var(--accent); margin: 20px auto 0; transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
-        .intro__enter { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #A8A192; margin-top: 28px; opacity: 0; transition: opacity 0.6s ease; cursor: pointer; }
-        .intro.is-in .intro__tag { opacity: 1; }
-        .intro.is-in .intro__enter { opacity: 0.85; animation: introBlink 1.8s ease-in-out infinite; }
-        @keyframes introBlink { 0%, 100% { opacity: 0.85; } 50% { opacity: 0.4; } }
-        .intro.is-out { opacity: 0; transform: scale(1.04); transition: opacity 0.7s ease, transform 0.7s ease; pointer-events: none; }
+        .intro__hud {
+            position: absolute; left: 0; right: 0; bottom: 13%; z-index: 1; text-align: center;
+            opacity: 0; transition: opacity 0.9s ease;
+        }
+        .intro.named .intro__hud { opacity: 1; }
+        .intro__tag { font-family: var(--mono-stack); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+        .intro__enter { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #9a9286; margin-top: 16px; animation: introBlink 1.8s ease-in-out infinite; }
+        @keyframes introBlink { 0%, 100% { opacity: 0.85; } 50% { opacity: 0.35; } }
+        .intro.is-out { opacity: 0; transform: scale(1.06); transition: opacity 0.8s ease, transform 0.8s ease; pointer-events: none; }
 
         html, body {
             background: var(--paper);
@@ -447,11 +447,9 @@
     <!-- Opening scene (shown via html.intro-on; JS drives it, CSS fail-safe reveals if JS is absent) -->
     <div class="intro" id="intro" aria-hidden="true">
         <canvas class="intro__canvas" id="intro-canvas"></canvas>
-        <div class="intro__inner">
+        <div class="intro__hud">
             <div class="intro__tag">Surgeon × AI Researcher</div>
-            <div class="intro__name" id="intro-name">Sung Eun Kim, MD</div>
-            <div class="intro__rule" id="intro-rule"></div>
-            <div class="intro__enter" id="intro-enter">Enter ↵</div>
+            <div class="intro__enter">Click to enter ↵</div>
         </div>
     </div>
 
@@ -1918,7 +1916,7 @@
             });
         })();
 
-        // ===== Opening scene (neural network assembles, name decodes, curtain lifts) =====
+        // ===== Opening scene: big-bang → swirl → neural net → name from stars =====
         (function () {
             var root = document.documentElement;
             var intro = document.getElementById("intro");
@@ -1928,63 +1926,119 @@
             var canvas = document.getElementById("intro-canvas");
             var ctx = canvas.getContext("2d");
             var dpr = Math.min(window.devicePixelRatio || 1, 2);
-            var W = 0, H = 0, parts = [], raf = null, running = true;
-            var ACC = "#B0202B", LNK = "#8A8275";
-            function resize() {
+            var W = 0, H = 0, P = [], STARS = [], raf = null, running = true;
+            var NAME = "Sung Eun Kim, MD";
+            var WHITE = "#ECE7DB", CRIM = "#C8323C", LNK = "#6f7d90";
+
+            // Phase thresholds (ms)
+            var T_BANG = 950, T_SWIRL = 2200, T_NAME = 3400, T_LINKEND = 4300;
+
+            function buildPoints() {
+                var oc = document.createElement("canvas");
+                oc.width = W; oc.height = H;
+                var o = oc.getContext("2d");
+                var fs = Math.min(W * 0.11, 132);
+                o.textAlign = "center"; o.textBaseline = "middle"; o.fillStyle = "#fff";
+                o.font = "600 " + fs + "px Georgia, 'Times New Roman', serif";
+                var measured = o.measureText(NAME).width;
+                if (measured > W * 0.86) { fs *= (W * 0.86) / measured; o.font = "600 " + fs + "px Georgia, serif"; }
+                o.fillText(NAME, W / 2, H * 0.45);
+                var data = o.getImageData(0, 0, W, H).data;
+                var step = Math.max(2, Math.round(fs / 34));
+                var pts = [];
+                for (var y = 0; y < H; y += step) {
+                    for (var x = 0; x < W; x += step) {
+                        if (data[(y * W + x) * 4 + 3] > 128) pts.push([x + (Math.random() - 0.5) * step * 0.5, y + (Math.random() - 0.5) * step * 0.5]);
+                    }
+                }
+                for (var i = pts.length - 1; i > 0; i--) { var j = (Math.random() * (i + 1)) | 0; var tmp = pts[i]; pts[i] = pts[j]; pts[j] = tmp; }
+                if (pts.length > 3000) pts = pts.slice(0, 3000);
+                return pts;
+            }
+
+            function init() {
                 W = intro.clientWidth; H = intro.clientHeight;
                 if (!W || !H) return;
                 canvas.width = W * dpr; canvas.height = H * dpr;
                 canvas.style.width = W + "px"; canvas.style.height = H + "px";
                 ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-                var n = Math.max(28, Math.min(80, Math.round(W * H / 16000)));
-                parts = [];
-                for (var i = 0; i < n; i++) {
-                    parts.push({
-                        x: W / 2 + (Math.random() - 0.5) * W * 0.25,
-                        y: H / 2 + (Math.random() - 0.5) * H * 0.25,
-                        tx: Math.random() * W, ty: Math.random() * H,
-                        r: 1.2 + Math.random() * 1.8
-                    });
-                }
+                var pts = buildPoints();
+                var cx = W / 2, cy = H * 0.45;
+                P = pts.map(function (pt) {
+                    var ang = Math.random() * 6.2832, sp = 2 + Math.random() * 11;
+                    return { x: cx, y: cy, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp, tx: pt[0], ty: pt[1], tw: Math.random() * 6.2832, r: 0.8 + Math.random() * 1.4, crim: Math.random() < 0.2 };
+                });
+                var ns = Math.min(90, Math.round(W * H / 16000));
+                STARS = [];
+                for (var s = 0; s < ns; s++) STARS.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 0.9, tw: Math.random() * 6.2832, sp: 0.5 + Math.random() });
             }
-            var LINKD = 130, t0 = performance.now();
+
+            var t0 = performance.now();
             function frame(now) {
                 if (!running) { raf = null; return; }
+                var t = now - t0, cx = W / 2, cy = H * 0.45;
                 ctx.clearRect(0, 0, W, H);
-                var prog = Math.min(1, (now - t0) / 1400);
-                var e = 1 - Math.pow(1 - prog, 3);
-                for (var i = 0; i < parts.length; i++) {
-                    var q = parts[i];
-                    q.x += (q.tx - q.x) * 0.06; q.y += (q.ty - q.y) * 0.06;
+
+                // ambient twinkling starfield
+                for (var s = 0; s < STARS.length; s++) {
+                    var st = STARS[s];
+                    ctx.globalAlpha = (0.25 + 0.55 * Math.abs(Math.sin(st.tw + now * 0.001 * st.sp))) * 0.32;
+                    ctx.fillStyle = WHITE;
+                    ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, 6.2832); ctx.fill();
                 }
-                ctx.lineWidth = 0.7;
-                for (var a = 0; a < parts.length; a++) {
-                    for (var b = a + 1; b < parts.length; b++) {
-                        var dx = parts[a].x - parts[b].x, dy = parts[a].y - parts[b].y;
-                        var d = Math.sqrt(dx * dx + dy * dy);
-                        if (d < LINKD) {
-                            ctx.strokeStyle = LNK; ctx.globalAlpha = (1 - d / LINKD) * 0.22 * e;
-                            ctx.beginPath(); ctx.moveTo(parts[a].x, parts[a].y); ctx.lineTo(parts[b].x, parts[b].y); ctx.stroke();
+
+                // big-bang flash
+                if (t < 320) {
+                    var fa = 1 - t / 320;
+                    var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(W, H) * 0.55);
+                    g.addColorStop(0, "rgba(255,238,214," + (fa * 0.9) + ")");
+                    g.addColorStop(1, "rgba(255,238,214,0)");
+                    ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+                }
+
+                // particle physics by phase
+                for (var i = 0; i < P.length; i++) {
+                    var p = P[i];
+                    if (t < T_BANG) { p.x += p.vx; p.y += p.vy; p.vx *= 0.95; p.vy *= 0.95; }
+                    else if (t < T_SWIRL) {
+                        var dx = p.x - cx, dy = p.y - cy;
+                        p.vx += -dy * 0.0007 - dx * 0.00035;
+                        p.vy += dx * 0.0007 - dy * 0.00035;
+                        p.x += p.vx; p.y += p.vy; p.vx *= 0.965; p.vy *= 0.965;
+                    } else if (t < T_NAME) { p.vx *= 0.84; p.vy *= 0.84; p.x += p.vx; p.y += p.vy; }
+                    else { var k = Math.min(0.16, 0.05 + (t - T_NAME) / 3500); p.x += (p.tx - p.x) * k; p.y += (p.ty - p.y) * k; }
+                }
+
+                // neural links during connect + early name
+                if (t > T_SWIRL - 350 && t < T_LINKEND) {
+                    var fade = t < T_NAME ? 1 : Math.max(0, 1 - (t - T_NAME) / (T_LINKEND - T_NAME));
+                    var maxd = 42, md2 = maxd * maxd;
+                    var nlink = Math.min(P.length, 300);
+                    ctx.strokeStyle = LNK; ctx.lineWidth = 0.6;
+                    for (var a = 0; a < nlink; a++) {
+                        for (var b = a + 1; b < nlink; b++) {
+                            var lx = P[a].x - P[b].x, ly = P[a].y - P[b].y, d2 = lx * lx + ly * ly;
+                            if (d2 < md2) { ctx.globalAlpha = (1 - Math.sqrt(d2) / maxd) * 0.16 * fade; ctx.beginPath(); ctx.moveTo(P[a].x, P[a].y); ctx.lineTo(P[b].x, P[b].y); ctx.stroke(); }
                         }
                     }
                 }
-                ctx.globalAlpha = 0.7 * e; ctx.fillStyle = ACC;
-                for (var k = 0; k < parts.length; k++) {
-                    ctx.beginPath(); ctx.arc(parts[k].x, parts[k].y, parts[k].r, 0, 6.2832); ctx.fill();
+
+                // stars
+                for (var j = 0; j < P.length; j++) {
+                    var q = P[j];
+                    ctx.globalAlpha = 0.65 + 0.35 * Math.sin(q.tw + now * 0.004);
+                    ctx.fillStyle = q.crim ? CRIM : WHITE;
+                    ctx.beginPath(); ctx.arc(q.x, q.y, q.r, 0, 6.2832); ctx.fill();
                 }
                 ctx.globalAlpha = 1;
                 raf = requestAnimationFrame(frame);
             }
-            resize();
-            raf = requestAnimationFrame(frame);
-            window.addEventListener("resize", resize);
 
-            // Choreography
-            var nameEl = document.getElementById("intro-name");
-            if (nameEl) nameEl.textContent = "";
-            requestAnimationFrame(function () { intro.classList.add("is-in"); });
-            setTimeout(function () { if (nameEl) scramble(nameEl, "Sung Eun Kim, MD", 820); }, 450);
-            setTimeout(function () { var r = document.getElementById("intro-rule"); if (r) r.style.width = "120px"; }, 1320);
+            init();
+            raf = requestAnimationFrame(frame);
+            var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(init, 250); });
+
+            setTimeout(function () { intro.classList.add("named"); }, 4200);
 
             var done = false;
             function dismiss() {
@@ -1996,9 +2050,9 @@
                     running = false; if (raf) cancelAnimationFrame(raf);
                     if (intro.parentNode) intro.parentNode.removeChild(intro);
                     root.classList.remove("intro-on");
-                }, 760);
+                }, 820);
             }
-            var auto = setTimeout(dismiss, 2900);
+            var auto = setTimeout(dismiss, 5800);
             function skip() { clearTimeout(auto); dismiss(); }
             intro.addEventListener("click", skip);
             window.addEventListener("keydown", function (e) {
