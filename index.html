@@ -120,8 +120,10 @@
             -webkit-mask-image: linear-gradient(180deg, black 0%, transparent 70%);
             opacity: 0; transition: opacity 0.6s;
         }
-        [data-attn="on"] .hero__attn { opacity: 0.16; }
+        [data-attn="on"] .hero__attn { opacity: 0.75; }
+        .hero__attn .neuralfield { display: block; width: 100%; height: 100%; }
         .hero > * { position: relative; z-index: 1; }
+        .hero > .hero__attn { position: absolute; z-index: 0; }
         .hero__top {
             display: flex; justify-content: space-between; align-items: center;
             padding-bottom: 28px; border-bottom: 1px solid var(--rule);
@@ -1309,29 +1311,75 @@
             return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
         }
 
-        // ===== Attention grid (decorative hero texture) =====
-        (function renderAttn() {
-            var mount = document.getElementById("hero-attn");
-            if (!mount) return;
-            var cols = 28, rows = 14, seed = 11, s = seed;
-            function rand() { s = (s * 9301 + 49297) % 233280; return s / 233280; }
-            var cells = [];
-            for (var r = 0; r < rows; r++) {
-                for (var c = 0; c < cols; c++) {
-                    var diag = 1 - Math.abs((c / cols) - (r / rows)) * 1.4;
-                    var blob = Math.exp(-((Math.pow(c - cols * 0.7, 2) + Math.pow(r - rows * 0.3, 2)) / 30));
-                    var v = Math.max(0, Math.min(1, diag * 0.6 + blob * 0.9 + rand() * 0.15 - 0.1));
-                    cells.push(v);
+        // ===== Neural particle field (animated hero background) =====
+        var recolorField = function () {};
+        (function initNeuralField() {
+            var host = document.getElementById("hero-attn");
+            if (!host || REDUCED) return; // reduced-motion: no animated background
+            var canvas = document.createElement("canvas");
+            canvas.className = "neuralfield";
+            host.innerHTML = "";
+            host.appendChild(canvas);
+            var ctx = canvas.getContext("2d");
+            var dpr = Math.min(window.devicePixelRatio || 1, 2);
+            var W = 0, H = 0, parts = [], running = true, raf = null;
+            var colorNode = C.accent, colorLink = C.inkSoft;
+            recolorField = function () { refreshPalette(); colorNode = C.accent; colorLink = C.inkSoft; };
+            function resize() {
+                var r = host.getBoundingClientRect();
+                W = r.width; H = r.height;
+                if (!W || !H) return;
+                canvas.width = W * dpr; canvas.height = H * dpr;
+                canvas.style.width = W + "px"; canvas.style.height = H + "px";
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                var count = Math.max(18, Math.min(60, Math.round(W * H / 14000)));
+                parts = [];
+                for (var i = 0; i < count; i++) {
+                    parts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25, r: 1.2 + Math.random() * 1.5 });
                 }
             }
-            var html = '<div class="attn"><div class="attn__grid" style="grid-template-columns:repeat(' + cols + ',1fr)">';
-            for (var i = 0; i < cells.length; i++) {
-                var op = (cells[i] * 0.9).toFixed(3);
-                var anim = REDUCED ? "" : ";animation:attnShimmer " + (3 + (i % 5) * 0.7).toFixed(1) + "s ease-in-out " + ((i % 11) * 0.18).toFixed(2) + "s infinite";
-                html += '<div class="attn__cell" style="--o:' + op + ";opacity:" + op + anim + '"></div>';
+            var LINK = 124;
+            function frame() {
+                if (!running) { raf = null; return; }
+                ctx.clearRect(0, 0, W, H);
+                for (var i = 0; i < parts.length; i++) {
+                    var p = parts[i];
+                    p.x += p.vx; p.y += p.vy;
+                    if (p.x < -20) p.x = W + 20; if (p.x > W + 20) p.x = -20;
+                    if (p.y < -20) p.y = H + 20; if (p.y > H + 20) p.y = -20;
+                }
+                ctx.lineWidth = 0.6;
+                for (var a = 0; a < parts.length; a++) {
+                    for (var b = a + 1; b < parts.length; b++) {
+                        var dx = parts[a].x - parts[b].x, dy = parts[a].y - parts[b].y;
+                        var d = Math.sqrt(dx * dx + dy * dy);
+                        if (d < LINK) {
+                            ctx.strokeStyle = colorLink;
+                            ctx.globalAlpha = (1 - d / LINK) * 0.22;
+                            ctx.beginPath(); ctx.moveTo(parts[a].x, parts[a].y); ctx.lineTo(parts[b].x, parts[b].y); ctx.stroke();
+                        }
+                    }
+                }
+                ctx.globalAlpha = 0.55; ctx.fillStyle = colorNode;
+                for (var k = 0; k < parts.length; k++) {
+                    ctx.beginPath(); ctx.arc(parts[k].x, parts[k].y, parts[k].r, 0, Math.PI * 2); ctx.fill();
+                }
+                ctx.globalAlpha = 1;
+                raf = requestAnimationFrame(frame);
             }
-            html += "</div></div>";
-            mount.innerHTML = html;
+            resize();
+            frame();
+            var rt;
+            window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(resize, 200); });
+            var hero = document.querySelector(".hero");
+            if (hero && "IntersectionObserver" in window) {
+                new IntersectionObserver(function (es) {
+                    es.forEach(function (e) {
+                        running = e.isIntersecting;
+                        if (running && !raf) frame();
+                    });
+                }, { threshold: 0 }).observe(hero);
+            }
         })();
 
         // ===== Publication constellation =====
@@ -1617,6 +1665,7 @@
                 try { localStorage.setItem("theme", next); } catch (e) {}
                 paint();
                 renderConstellation();
+                recolorField();
             });
             paint();
             document.body.appendChild(btn);
