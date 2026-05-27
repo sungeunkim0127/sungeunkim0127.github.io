@@ -1930,7 +1930,7 @@
             var canvas = document.getElementById("intro-canvas");
             var ctx = canvas.getContext("2d");
             var dpr = Math.min(window.devicePixelRatio || 1, 2);
-            var W = 0, H = 0, P = [], STARS = [], NEB = [], raf = null, running = true, mx = 0, my = 0;
+            var W = 0, H = 0, P = [], STARS = [], NEB = [], METEORS = [], nextMeteor = 700, raf = null, running = true, mx = 0, my = 0;
             var NAME = "Sung Eun Kim, MD";
             var ICE = "#E8F0FF", CYAN = "#5FD2E8", EBLUE = "#6BA8FF", LNK = "#51607a";
             var NEB_COLS = ["46,58,150", "70,46,140", "26,96,140", "40,130,128"];
@@ -2024,6 +2024,31 @@
                     ctx.globalAlpha = (0.25 + 0.55 * Math.abs(Math.sin(st.tw + now * 0.001 * st.sp))) * 0.34 * st.z;
                     ctx.fillStyle = ICE;
                     ctx.beginPath(); ctx.arc(st.x + mx * 46 * st.z, st.y + my * 46 * st.z, st.r, 0, 6.2832); ctx.fill();
+                }
+
+                // faint background shooting-star streaks
+                if (t > nextMeteor) {
+                    nextMeteor = t + 520 + Math.random() * 1200;
+                    if (METEORS.length < 3) {
+                        var msp = 7 + Math.random() * 7, mang = (0.16 + Math.random() * 0.5) * Math.PI;
+                        METEORS.push({ x: Math.random() * W, y: Math.random() * H * 0.55, vx: Math.cos(mang) * msp * (Math.random() < 0.5 ? -1 : 1), vy: Math.sin(mang) * msp, life: 0, max: 26 + Math.random() * 26 });
+                    }
+                }
+                for (var m = METEORS.length - 1; m >= 0; m--) {
+                    var mt = METEORS[m];
+                    mt.x += mt.vx; mt.y += mt.vy; mt.life++;
+                    var lp = mt.life / mt.max;
+                    if (lp >= 1 || mt.x < -60 || mt.x > W + 60 || mt.y > H + 60) { METEORS.splice(m, 1); continue; }
+                    var ma = Math.sin(lp * Math.PI) * 0.7;
+                    var mtlx = mt.x - mt.vx * 5, mtly = mt.y - mt.vy * 5;
+                    var mg = ctx.createLinearGradient(mt.x, mt.y, mtlx, mtly);
+                    mg.addColorStop(0, "rgba(210,238,255," + ma.toFixed(3) + ")");
+                    mg.addColorStop(1, "rgba(210,238,255,0)");
+                    ctx.strokeStyle = mg; ctx.lineWidth = 1.4; ctx.lineCap = "round";
+                    ctx.beginPath(); ctx.moveTo(mt.x, mt.y); ctx.lineTo(mtlx, mtly); ctx.stroke();
+                    ctx.globalAlpha = ma; ctx.fillStyle = "#dff4ff";
+                    ctx.beginPath(); ctx.arc(mt.x, mt.y, 1.3, 0, 6.2832); ctx.fill();
+                    ctx.globalAlpha = 1;
                 }
 
                 // big-bang flash
