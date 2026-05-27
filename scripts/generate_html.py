@@ -149,6 +149,7 @@ def build_pub_records(pubs: list[dict], overrides: dict) -> list[dict]:
             "authors": condense_authors(pub.get("authors", "")),
             "href": pub.get("url", ""),
             "tags": tags,
+            "cites": pub.get("citation_count", 0) or 0,
         })
 
     # Sort by year desc, then title
