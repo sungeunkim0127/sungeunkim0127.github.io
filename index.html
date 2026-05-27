@@ -95,7 +95,7 @@
             .intro__hud { bottom: 16%; padding: 0 18px; }
         }
         @keyframes introBlink { 0%, 100% { opacity: 0.85; } 50% { opacity: 0.35; } }
-        .intro.is-out { opacity: 0; transform: scale(1.06); transition: opacity 0.8s ease, transform 0.8s ease; pointer-events: none; }
+        .intro.is-out { opacity: 0; transform: scale(1.16); filter: blur(7px); transition: opacity 0.9s cubic-bezier(0.5, 0, 0.9, 0.3), transform 0.9s cubic-bezier(0.5, 0, 0.9, 0.3), filter 0.9s ease; pointer-events: none; }
 
         html, body {
             background: var(--paper);
@@ -135,7 +135,11 @@
         }
 
         /* ----- Layout shell ----- */
-        .app { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad-x); }
+        .app { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad-x); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+        /* Hidden under the opening scene, then settles in as the curtain warps away.
+           The delayed animation reveals it even if JS never removes intro-on (no-JS failsafe). */
+        html.intro-on .app { opacity: 0; transform: scale(0.985); animation: appArrive 0.01s linear 9s forwards; }
+        @keyframes appArrive { to { opacity: 1; transform: none; } }
         .section { padding-block: clamp(48px, 7vw, 96px); border-top: 1px solid var(--rule-soft); }
         .section:first-of-type { border-top: 0; }
 
@@ -2149,13 +2153,13 @@
             function dismiss() {
                 if (done) return; done = true;
                 try { sessionStorage.setItem("introSeen", "1"); } catch (e) {}
-                intro.classList.add("is-out");
+                intro.classList.add("is-out");      // cosmos warps away (zoom + blur + fade)
+                root.classList.remove("intro-on");  // site crossfades/settles in at the same time
                 document.body.style.overflow = "";
                 setTimeout(function () {
                     running = false; if (raf) cancelAnimationFrame(raf);
                     if (intro.parentNode) intro.parentNode.removeChild(intro);
-                    root.classList.remove("intro-on");
-                }, 820);
+                }, 950);
             }
             var auto = setTimeout(dismiss, 5800);
             function skip() { clearTimeout(auto); dismiss(); }
