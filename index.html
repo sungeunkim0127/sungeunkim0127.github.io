@@ -98,7 +98,10 @@
         .intro.is-out { opacity: 0; transform: scale(1.16); filter: blur(7px); transition: opacity 0.9s cubic-bezier(0.5, 0, 0.9, 0.3), transform 0.9s cubic-bezier(0.5, 0, 0.9, 0.3), filter 0.9s ease; pointer-events: none; }
 
         html, body {
-            background: var(--paper);
+            background-color: var(--paper);
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.07 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+            background-repeat: repeat;
+            background-blend-mode: multiply;
             color: var(--ink);
             font-family: var(--serif-stack);
             font-size: 17px;
@@ -185,6 +188,10 @@
         .hero__title-line:first-child { border-top: 1px solid var(--rule); }
         .hero__title-num { color: var(--ink-faint); }
         .hero__bio { font-size: 17px; line-height: 1.6; color: var(--ink); max-width: min(64ch, 100%); margin: 24px 0 28px; text-wrap: pretty; }
+        .hero__bio::first-letter {
+            float: left; font-family: var(--display-stack); font-weight: 400;
+            font-size: 3.6em; line-height: 0.92; padding: 6px 10px 0 0; color: var(--ink);
+        }
         .hero__links { display: flex; gap: 10px; flex-wrap: wrap; }
         .link {
             font-family: var(--mono-stack); font-size: 11.5px; letter-spacing: 0.08em;
@@ -1532,7 +1539,7 @@
             years.forEach(function (y) {
                 var x = PAD_L + ((y - minYear) / Math.max(1, maxYear - minYear)) * (W - PAD_L - PAD_R);
                 parts.push('<line x1="' + x + '" y1="' + PAD_T + '" x2="' + x + '" y2="' + (H - PAD_B + 4) + '" stroke="' + C.rule + '" stroke-dasharray="2 4"/>');
-                parts.push('<text x="' + x + '" y="' + (H - PAD_B + 20) + '" text-anchor="middle" class="pubviz__year">' + y + "</text>");
+                parts.push('<text x="' + x + '" y="' + (H - PAD_B + 20) + '" text-anchor="middle" class="pubviz__year" data-year="' + y + '" style="cursor:pointer">' + y + "</text>");
             });
             edges.forEach(function (e) {
                 parts.push('<line x1="' + e[0].x + '" y1="' + e[0].y + '" x2="' + e[1].x + '" y2="' + e[1].y + '" stroke="' + C.inkSoft + '" stroke-opacity="0.18" stroke-width="0.7"/>');
@@ -1605,6 +1612,25 @@
                     if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleDom(l); }
                 });
             });
+
+            // Click a year on the constellation axis -> filter the All-Publications list
+            mount.querySelectorAll(".pubviz__year").forEach(function (yt) {
+                yt.addEventListener("click", function () {
+                    var y = yt.getAttribute("data-year");
+                    var pill = document.querySelector('[data-year="' + y + '"]');
+                    if (pill) pill.click();
+                    var ap = document.getElementById("allpubs-mount");
+                    if (ap) ap.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" });
+                });
+            });
+
+            // Hover any year pill in the list to spotlight that year on the constellation
+            window._highlightConstYear = function (y) {
+                if (y === null) { points.forEach(function (p) { if (p.el) p.el.style.opacity = "1"; }); return; }
+                var hasMatch = points.some(function (p) { return p.p.year === y; });
+                if (!hasMatch) return;
+                points.forEach(function (p) { if (p.el) p.el.style.opacity = (p.p.year === y) ? "1" : "0.18"; });
+            };
 
             // Stagger nodes in on load
             if (!REDUCED) {
@@ -1739,7 +1765,11 @@
             }
 
             mount.querySelectorAll("[data-filter]").forEach(function (b) { b.addEventListener("click", function () { state.filter = b.getAttribute("data-filter"); state.expanded = false; syncPills(); renderList(); }); });
-            mount.querySelectorAll("[data-year]").forEach(function (b) { b.addEventListener("click", function () { var y = b.getAttribute("data-year"); state.year = y === "all" ? "all" : Number(y); state.expanded = false; syncPills(); renderList(); }); });
+            mount.querySelectorAll("[data-year]").forEach(function (b) {
+                b.addEventListener("click", function () { var y = b.getAttribute("data-year"); state.year = y === "all" ? "all" : Number(y); state.expanded = false; syncPills(); renderList(); });
+                b.addEventListener("mouseenter", function () { if (window._highlightConstYear) { var y = b.getAttribute("data-year"); window._highlightConstYear(y === "all" ? null : Number(y)); } });
+                b.addEventListener("mouseleave", function () { if (window._highlightConstYear) window._highlightConstYear(null); });
+            });
             searchEl.addEventListener("input", function () { state.search = searchEl.value; state.expanded = false; renderList(); });
 
             syncPills();
