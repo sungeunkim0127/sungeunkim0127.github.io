@@ -1520,7 +1520,7 @@
                     var yJitter = ((j % 40) - 20) * 0.3;
                     var xJitter = (((j >> 2) % 30) - 15) * 0.6;
                     var ring = p.tags.indexOf("first") !== -1;
-                    points.push({ p: p, x: xBase + xJitter, y: PAD_T + yFrac * (H - PAD_T - PAD_B) + yJitter, r: ring ? 6.5 : 4.5, ring: ring, domain: domainKey(p.tags) });
+                    points.push({ p: p, x: xBase + xJitter, y: PAD_T + yFrac * (H - PAD_T - PAD_B) + yJitter, r: 5, ring: false, domain: domainKey(p.tags) });
                 });
             });
 
