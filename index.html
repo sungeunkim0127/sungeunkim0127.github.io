@@ -266,6 +266,7 @@
 
         /* ----- Featured paper ----- */
         .feat { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(20px, 3vw, 36px); align-items: stretch; background: var(--paper-deep); color: var(--ink); padding: clamp(20px, 2.4vw, 28px); position: relative; transition: transform 0.2s ease, box-shadow 0.2s ease; border: 1px solid var(--rule); }
+        .feat + .feat { margin-top: clamp(20px, 3vw, 36px); }
         @media (max-width: 820px) { .feat { grid-template-columns: 1fr; } }
         .feat:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -20px rgba(0, 0, 0, 0.22); }
         .feat__figure { display: flex; flex-direction: column; gap: 10px; }
@@ -1174,6 +1175,19 @@
                     <span class="feat__cta mono">READ PAPER ↗</span>
                 </div>
             </a>
+            <a href="https://doi.org/10.2106/JBJS.24.00316" class="feat" target="_blank" rel="noopener">
+                <div class="feat__figure">
+                    <img src="https://cdn.ncbi.nlm.nih.gov/pmc/blobs/9dc4/11781555/80aba1114c07/jbjsam-107-297-g005.jpg" alt="Figure 5: aHKA vs JLO contours by Kellgren–Lawrence grade" />
+                    <div class="feat__figure-caption mono mono--sm">Fig. 5 · aHKA vs JLO contours by Kellgren–Lawrence grade. J Bone Joint Surg Am (2024).</div>
+                </div>
+                <div class="feat__body">
+                    <div class="feat__meta"><span class="mono mono--sm feat__venue">JBJS</span><span class="mono mono--sm feat__year">2024</span></div>
+                    <h3 class="feat__title">CPAK type shifts toward constitutional varus with increasing K&amp;L grade</h3>
+                    <p class="feat__authors"><strong>Kim SE</strong>, MacDessi S, Song D, Kim JI, Choi BS, Han HS, Ro DH.</p>
+                    <p class="feat__abstract">A deep-learning radiographic analysis of <strong>17,365 knees</strong> showing that population alignment drifts toward constitutional varus as osteoarthritis severity (K&amp;L grade) rises — challenging assumptions about "normal" alignment in arthritic knees.</p>
+                    <span class="feat__cta mono">READ PAPER ↗</span>
+                </div>
+            </a>
         </section>
 
         <!-- ===== § IV  Selected papers ===== -->
@@ -1920,17 +1934,18 @@
             setInterval(tick, 20000);
         })();
 
-        // ===== 3D tilt on the featured-paper card =====
+        // ===== 3D tilt on each featured-paper card =====
         (function () {
-            var card = document.querySelector(".feat");
-            if (!card || REDUCED) return;
-            card.addEventListener("mousemove", function (e) {
-                var r = card.getBoundingClientRect();
-                var rx = (0.5 - (e.clientY - r.top) / r.height) * 4.5;
-                var ry = ((e.clientX - r.left) / r.width - 0.5) * 4.5;
-                card.style.transform = "perspective(900px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg) translateY(-2px)";
+            if (REDUCED) return;
+            document.querySelectorAll(".feat").forEach(function (card) {
+                card.addEventListener("mousemove", function (e) {
+                    var r = card.getBoundingClientRect();
+                    var rx = (0.5 - (e.clientY - r.top) / r.height) * 4.5;
+                    var ry = ((e.clientX - r.left) / r.width - 0.5) * 4.5;
+                    card.style.transform = "perspective(900px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg) translateY(-2px)";
+                });
+                card.addEventListener("mouseleave", function () { card.style.transform = ""; });
             });
-            card.addEventListener("mouseleave", function () { card.style.transform = ""; });
         })();
 
         // ===== Custom hero cursor (trailing ring) =====
