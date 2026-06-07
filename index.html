@@ -1528,7 +1528,7 @@
             }
         })();
 
-        // ===== Publications bar chart (papers / citations per year, stacked by domain) =====
+        // ===== Publications bar chart (papers per year, stacked by domain) =====
         function renderBarChart() {
             var mount = document.getElementById("pubviz-mount");
             if (!mount) return;
@@ -1542,28 +1542,13 @@
             for (var yv = minY; yv <= maxY; yv++) years.push(yv);
             var DOMS = ["ai", "both", "ortho"];
 
-            var papersBy = {}, citesBy = {};
-            years.forEach(function (yy) { papersBy[yy] = { ai: 0, both: 0, ortho: 0 }; citesBy[yy] = { ai: 0, both: 0, ortho: 0 }; });
-            pubs.forEach(function (p) {
-                var d = domainKey(p.tags);
-                papersBy[p.year][d] += 1;
-                citesBy[p.year][d] += (p.cites || 0);
-            });
+            var by = {};
+            years.forEach(function (yy) { by[yy] = { ai: 0, both: 0, ortho: 0 }; });
+            pubs.forEach(function (p) { by[p.year][domainKey(p.tags)] += 1; });
 
-            // Cumulative: each year's bar is the running total through that year — a rising
-            // staircase. Domain stacking is preserved so the evolving AI/clinical mix shows.
-            function cumulate(by) {
-                var run = { ai: 0, both: 0, ortho: 0 };
-                years.forEach(function (yy) {
-                    run.ai += by[yy].ai; run.both += by[yy].both; run.ortho += by[yy].ortho;
-                    by[yy] = { ai: run.ai, both: run.both, ortho: run.ortho };
-                });
-            }
-            cumulate(papersBy);
-            cumulate(citesBy);
-
-            var state = { metric: "papers" };
-            function totalsFor(by) { return years.map(function (yy) { return by[yy].ai + by[yy].both + by[yy].ortho; }); }
+            var totals = years.map(function (yy) { return by[yy].ai + by[yy].both + by[yy].ortho; });
+            var maxTotal = Math.max(1, Math.max.apply(null, totals));
+            var grand = totals.reduce(function (a, b) { return a + b; }, 0);
 
             function growBars() {
                 var bars = mount.querySelectorAll(".bar");
@@ -1579,70 +1564,44 @@
                 });
             }
 
-            function render(animateNow) {
-                var by = state.metric === "papers" ? papersBy : citesBy;
-                var totals = totalsFor(by);
-                var maxTotal = Math.max(1, Math.max.apply(null, totals));
-                var grand = totals.length ? totals[totals.length - 1] : 0;
-                var unit = state.metric === "papers" ? "papers" : "citations";
-
-                var h = '<div class="barchart">';
-                h += '<div class="barchart__head"><div class="barchart__toggle">';
-                h += '<button class="barchart__pill' + (state.metric === "papers" ? " on" : "") + '" data-metric="papers" type="button">Papers</button>';
-                h += '<button class="barchart__pill' + (state.metric === "cites" ? " on" : "") + '" data-metric="cites" type="button">Citations</button>';
-                h += '</div><span class="barchart__ymax">' + grand + ' ' + unit + ' cumulative · since ' + minY + '</span></div>';
-                h += '<div class="barchart__plot">';
-                years.forEach(function (yy, i) {
-                    var rec = by[yy], total = totals[i];
-                    var barPct = (total / maxTotal) * 92;
-                    h += '<div class="bar-col" data-year="' + yy + '" tabindex="0" role="button" aria-label="' + yy + ': ' + total + ' ' + unit + '">';
-                    h += '<div class="bar__value">' + (total || "") + '</div>';
-                    h += '<div class="bar" data-h="' + barPct.toFixed(2) + '" style="height:0%">';
-                    DOMS.forEach(function (d) {
-                        var segPct = total > 0 ? (rec[d] / total) * 100 : 0;
-                        h += '<div class="bar__seg seg--' + d + '" style="height:' + segPct.toFixed(2) + '%"></div>';
-                    });
-                    h += '</div><div class="bar__label">' + yy + '</div></div>';
+            var emptyHTML = '<span class="pubviz__hover-empty">↑ hover a year — ' + grand + ' papers across ' + years.length + ' years</span>';
+            var h = '<div class="barchart"><div class="barchart__plot">';
+            years.forEach(function (yy, i) {
+                var rec = by[yy], total = totals[i];
+                var barPct = (total / maxTotal) * 92;
+                h += '<div class="bar-col" data-year="' + yy + '" tabindex="0" role="button" aria-label="' + yy + ': ' + total + ' papers">';
+                h += '<div class="bar__value">' + (total || "") + '</div>';
+                h += '<div class="bar" data-h="' + barPct.toFixed(2) + '" style="height:0%">';
+                DOMS.forEach(function (d) {
+                    var segPct = total > 0 ? (rec[d] / total) * 100 : 0;
+                    h += '<div class="bar__seg seg--' + d + '" style="height:' + segPct.toFixed(2) + '%"></div>';
                 });
-                h += '</div>';
-                h += '<div class="pubviz__caption"><div class="pubviz__legend">' +
-                    '<span class="pubviz__lg"><span class="pubviz__dot ld--ai"></span> AI / ML</span>' +
-                    '<span class="pubviz__lg"><span class="pubviz__dot ld--both"></span> Translational</span>' +
-                    '<span class="pubviz__lg"><span class="pubviz__dot ld--ortho"></span> Clinical orthopedics</span>' +
-                    '</div><div class="pubviz__hover" id="pubviz-hover" aria-live="polite">' +
-                    '<span class="pubviz__hover-empty">↑ hover a year — ' + grand + ' ' + unit + ' cumulative</span>' +
-                    '</div></div></div>';
-                mount.innerHTML = h;
+                h += '</div><div class="bar__label">' + yy + '</div></div>';
+            });
+            h += '</div>';
+            h += '<div class="pubviz__caption"><div class="pubviz__legend">' +
+                '<span class="pubviz__lg"><span class="pubviz__dot ld--ai"></span> AI / ML</span>' +
+                '<span class="pubviz__lg"><span class="pubviz__dot ld--both"></span> Translational</span>' +
+                '<span class="pubviz__lg"><span class="pubviz__dot ld--ortho"></span> Clinical orthopedics</span>' +
+                '</div><div class="pubviz__hover" id="pubviz-hover" aria-live="polite">' + emptyHTML + '</div></div></div>';
+            mount.innerHTML = h;
 
-                var hover = document.getElementById("pubviz-hover");
-                var emptyHTML = '<span class="pubviz__hover-empty">↑ hover a year — ' + grand + ' ' + unit + ' cumulative</span>';
-                var cols = mount.querySelectorAll(".bar-col");
-                cols.forEach(function (col, i) {
-                    var yy = years[i], rec = by[yy], total = totals[i];
-                    col.addEventListener("mouseenter", function () {
-                        hover.innerHTML = '<span class="pubviz__hover-venue">by ' + yy + '</span><span class="pubviz__hover-title">' + total + ' ' + unit + ' — ' + rec.ai + ' AI · ' + rec.both + ' transl. · ' + rec.ortho + ' clinical</span>';
-                    });
-                    col.addEventListener("mouseleave", function () { hover.innerHTML = emptyHTML; });
-                    col.addEventListener("click", function () {
-                        var apPill = document.querySelector('#allpubs-mount [data-year="' + yy + '"]');
-                        if (apPill) apPill.click();
-                        var ap = document.getElementById("allpubs-mount");
-                        if (ap) ap.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" });
-                    });
-                    col.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); col.click(); } });
+            var hover = document.getElementById("pubviz-hover");
+            var cols = mount.querySelectorAll(".bar-col");
+            cols.forEach(function (col, i) {
+                var yy = years[i], rec = by[yy], total = totals[i];
+                col.addEventListener("mouseenter", function () {
+                    hover.innerHTML = '<span class="pubviz__hover-venue">' + yy + '</span><span class="pubviz__hover-title">' + total + ' papers — ' + rec.ai + ' AI · ' + rec.both + ' transl. · ' + rec.ortho + ' clinical</span>';
                 });
-                mount.querySelectorAll("[data-metric]").forEach(function (btn) {
-                    btn.addEventListener("click", function () {
-                        var m = btn.getAttribute("data-metric");
-                        if (m === state.metric) return;
-                        state.metric = m;
-                        render(true);
-                    });
+                col.addEventListener("mouseleave", function () { hover.innerHTML = emptyHTML; });
+                col.addEventListener("click", function () {
+                    var apPill = document.querySelector('#allpubs-mount [data-year="' + yy + '"]');
+                    if (apPill) apPill.click();
+                    var ap = document.getElementById("allpubs-mount");
+                    if (ap) ap.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" });
                 });
-                if (animateNow) growBars();
-            }
-
-            render(false);
+                col.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); col.click(); } });
+            });
 
             if (REDUCED || !("IntersectionObserver" in window)) {
                 growBars();
@@ -1654,12 +1613,12 @@
             }
 
             window._highlightConstYear = function (yy) {
-                var cols = mount.querySelectorAll(".bar-col");
-                if (yy === null) { cols.forEach(function (c) { c.style.opacity = "1"; }); return; }
+                var cols2 = mount.querySelectorAll(".bar-col");
+                if (yy === null) { cols2.forEach(function (c) { c.style.opacity = "1"; }); return; }
                 var has = false;
-                cols.forEach(function (c) { if (Number(c.getAttribute("data-year")) === yy) has = true; });
+                cols2.forEach(function (c) { if (Number(c.getAttribute("data-year")) === yy) has = true; });
                 if (!has) return;
-                cols.forEach(function (c) { c.style.opacity = (Number(c.getAttribute("data-year")) === yy) ? "1" : "0.3"; });
+                cols2.forEach(function (c) { c.style.opacity = (Number(c.getAttribute("data-year")) === yy) ? "1" : "0.3"; });
             };
         }
         renderBarChart();
