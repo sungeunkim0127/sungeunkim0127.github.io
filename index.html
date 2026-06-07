@@ -229,9 +229,28 @@
         .sech__right { grid-column: 2; align-self: end; }
         .sech--sm .sech__title { font-size: clamp(24px, 3vw, 36px); }
 
-        /* ----- Publication constellation ----- */
+        /* ----- Publication bar chart ----- */
         .vizsection { padding-block: clamp(48px, 6vw, 72px); }
         .vizsection__hint { color: var(--ink-soft); }
+        .barchart { background: var(--paper-deep); border: 1px solid var(--rule); padding: 18px 18px 10px; }
+        .barchart__head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+        .barchart__toggle { display: inline-flex; gap: 6px; }
+        .barchart__ymax { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
+        .barchart__plot { display: flex; align-items: flex-end; gap: clamp(6px, 1.6vw, 20px); height: 240px; padding-top: 6px; }
+        .bar-col { flex: 1 1 0; min-width: 0; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; cursor: pointer; transition: opacity 0.2s ease; }
+        .bar__value { font-family: var(--mono-stack); font-size: 12px; color: var(--ink); margin-bottom: 7px; font-variant-numeric: tabular-nums; opacity: 0; transition: opacity 0.4s ease 0.5s; }
+        .bar-col.shown .bar__value { opacity: 0.85; }
+        .bar { width: clamp(14px, 62%, 52px); display: flex; flex-direction: column; justify-content: flex-start; border-radius: 3px 3px 0 0; overflow: hidden; height: 0; transition: height 0.85s cubic-bezier(0.22, 1, 0.36, 1); }
+        .bar__seg { width: 100%; transition: height 0.85s cubic-bezier(0.22, 1, 0.36, 1); }
+        .bar__seg.seg--ai { background: var(--accent); }
+        .bar__seg.seg--both { background: var(--accent-mid); }
+        .bar__seg.seg--ortho { background: var(--ink-soft); }
+        .bar-col:hover .bar { filter: brightness(1.1) saturate(1.05); }
+        .bar__label { font-family: var(--mono-stack); font-size: 11px; letter-spacing: 0.06em; color: var(--ink-soft); margin-top: 9px; font-variant-numeric: tabular-nums; }
+        .bar-col:hover .bar__label, .bar-col.on .bar__label { color: var(--accent); }
+        .barchart__pill { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 12px; background: transparent; border: 1px solid var(--rule); color: var(--ink); cursor: pointer; transition: all 0.15s ease; }
+        .barchart__pill:hover { border-color: var(--ink); }
+        .barchart__pill.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
         .pubviz { background: var(--paper-deep); border: 1px solid var(--rule); padding: 8px; }
         .pubviz__svg { width: 100%; display: block; background: var(--paper); }
         .pubviz__year { fill: var(--ink-soft); font-family: var(--mono-stack); font-size: 10px; letter-spacing: 0.08em; }
@@ -241,6 +260,9 @@
         .pubviz__legend { display: flex; gap: 16px; flex-wrap: wrap; }
         .pubviz__lg { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
         .pubviz__dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+        .pubviz__dot.ld--ai { background: var(--accent); }
+        .pubviz__dot.ld--both { background: var(--accent-mid); }
+        .pubviz__dot.ld--ortho { background: var(--ink-soft); }
         .pubviz__hover { min-height: 24px; display: flex; gap: 12px; align-items: baseline; justify-content: flex-end; font-size: 13px; color: var(--ink); }
         @media (max-width: 720px) { .pubviz__hover { justify-content: flex-start; } }
         .pubviz__hover-venue { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
@@ -514,9 +536,9 @@
         <!-- ===== § I  Publications, plotted ===== -->
         <section class="section vizsection">
             <div class="sech">
-                <div class="sech__left"><span class="mono mono--sm sech__num">§ I</span><span class="mono mono--sm">A MAP OF THE WORK</span></div>
-                <h2 class="sech__title">Publications, plotted</h2>
-                <div class="sech__right"><span class="mono mono--sm vizsection__hint">↗ HOVER ANY NODE</span></div>
+                <div class="sech__left"><span class="mono mono--sm sech__num">§ I</span><span class="mono mono--sm">OUTPUT &amp; IMPACT</span></div>
+                <h2 class="sech__title">Publications by year</h2>
+                <div class="sech__right"><span class="mono mono--sm vizsection__hint">↗ HOVER ANY BAR</span></div>
             </div>
             <div id="pubviz-mount"></div>
         </section>
@@ -1506,189 +1528,129 @@
             }
         })();
 
-        // ===== Publication constellation =====
-        function renderConstellation() {
+        // ===== Publications bar chart (papers / citations per year, stacked by domain) =====
+        function renderBarChart() {
             var mount = document.getElementById("pubviz-mount");
             if (!mount) return;
-            refreshPalette();
-            mount.innerHTML = "";
-            var W = 920, H = 280, PAD_L = 56, PAD_R = 24, PAD_T = 28, PAD_B = 36, MIN_YEAR = 2022;
+            var MIN_YEAR = 2022;
             var pubs = PUBS.filter(function (p) { return p.year >= MIN_YEAR; });
             if (!pubs.length) { mount.style.display = "none"; return; }
 
-            var yearsSet = {};
-            pubs.forEach(function (p) { yearsSet[p.year] = true; });
-            var years = Object.keys(yearsSet).map(Number).sort(function (a, b) { return a - b; });
-            var minYear = Math.min.apply(null, years), maxYear = Math.max.apply(null, years);
+            var yrs = pubs.map(function (p) { return p.year; });
+            var minY = Math.min.apply(null, yrs), maxY = Math.max.apply(null, yrs);
+            var years = [];
+            for (var yv = minY; yv <= maxY; yv++) years.push(yv);
+            var DOMS = ["ai", "both", "ortho"];
 
-            function hash(str) { var h = 0; for (var i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) | 0; return ((h % 1000) + 1000) % 1000; }
-
-            var byYear = {};
-            pubs.forEach(function (p) { (byYear[p.year] = byYear[p.year] || []).push(p); });
-            var points = [];
-            Object.keys(byYear).forEach(function (yr) {
-                var arr = byYear[yr], year = Number(yr);
-                var xBase = PAD_L + ((year - minYear) / Math.max(1, maxYear - minYear)) * (W - PAD_L - PAD_R);
-                arr.forEach(function (p, i) {
-                    var j = hash(p.title);
-                    var colCount = arr.length;
-                    var yFrac = colCount === 1 ? 0.5 : i / (colCount - 1);
-                    var yJitter = ((j % 40) - 20) * 0.3;
-                    var xJitter = (((j >> 2) % 30) - 15) * 0.6;
-                    var ring = p.tags.indexOf("first") !== -1;
-                    points.push({ p: p, x: xBase + xJitter, y: PAD_T + yFrac * (H - PAD_T - PAD_B) + yJitter, r: 5, ring: false, domain: domainKey(p.tags) });
-                });
+            var papersBy = {}, citesBy = {};
+            years.forEach(function (yy) { papersBy[yy] = { ai: 0, both: 0, ortho: 0 }; citesBy[yy] = { ai: 0, both: 0, ortho: 0 }; });
+            pubs.forEach(function (p) {
+                var d = domainKey(p.tags);
+                papersBy[p.year][d] += 1;
+                citesBy[p.year][d] += (p.cites || 0);
             });
 
-            // edges within year
-            var edges = [];
-            Object.keys(byYear).forEach(function (yr) {
-                var pts = points.filter(function (pt) { return pt.p.year === Number(yr); });
-                for (var i = 0; i < pts.length - 1; i++) edges.push([pts[i], pts[i + 1]]);
-            });
+            var state = { metric: "papers" };
+            function totalsFor(by) { return years.map(function (yy) { return by[yy].ai + by[yy].both + by[yy].ortho; }); }
 
-            var svgNS = "http://www.w3.org/2000/svg";
-            var parts = [];
-            parts.push('<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMidYMid meet" class="pubviz__svg" role="img" aria-label="Scatter plot of ' + points.length + ' publications across ' + years.length + ' years, colored by research domain">');
-            parts.push('<defs><pattern id="microgrid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="' + C.rule + '" stroke-width="0.5"/></pattern></defs>');
-            parts.push('<rect x="0" y="0" width="' + W + '" height="' + H + '" fill="url(#microgrid)" opacity="0.5"/>');
-            years.forEach(function (y) {
-                var x = PAD_L + ((y - minYear) / Math.max(1, maxYear - minYear)) * (W - PAD_L - PAD_R);
-                parts.push('<line x1="' + x + '" y1="' + PAD_T + '" x2="' + x + '" y2="' + (H - PAD_B + 4) + '" stroke="' + C.rule + '" stroke-dasharray="2 4"/>');
-                parts.push('<text x="' + x + '" y="' + (H - PAD_B + 20) + '" text-anchor="middle" class="pubviz__year" data-year="' + y + '" style="cursor:pointer">' + y + "</text>");
-            });
-            edges.forEach(function (e) {
-                parts.push('<line x1="' + e[0].x + '" y1="' + e[0].y + '" x2="' + e[1].x + '" y2="' + e[1].y + '" stroke="' + C.inkSoft + '" stroke-opacity="0.18" stroke-width="0.7"/>');
-            });
-            parts.push('<g id="cursor-edges"></g>');
-            points.forEach(function (pt, idx) {
-                var col = domainColor(pt.p.tags);
-                var cur = pt.p.href ? "pointer" : "default";
-                var st = "cursor:" + cur + (REDUCED ? "" : ";opacity:0;transition:opacity .5s ease;transition-delay:" + (idx * 14) + "ms");
-                parts.push('<g class="pubnode" data-idx="' + idx + '" style="' + st + '">');
-                parts.push('<circle class="halo" cx="' + pt.x + '" cy="' + pt.y + '" r="' + (pt.r + 2) + '" fill="' + col + '" opacity="0"/>');
-                if (pt.ring && !REDUCED) {
-                    var b = (idx * 0.13).toFixed(2);
-                    parts.push('<circle cx="' + pt.x + '" cy="' + pt.y + '" r="' + pt.r + '" fill="none" stroke="' + col + '" stroke-width="1.2" opacity="0.5">' +
-                        '<animate attributeName="r" values="' + pt.r + ';' + (pt.r + 11) + '" dur="2.6s" begin="' + b + 's" repeatCount="indefinite"/>' +
-                        '<animate attributeName="opacity" values="0.5;0" dur="2.6s" begin="' + b + 's" repeatCount="indefinite"/></circle>');
+            function growBars() {
+                var bars = mount.querySelectorAll(".bar");
+                var cols = mount.querySelectorAll(".bar-col");
+                if (REDUCED) {
+                    bars.forEach(function (b) { b.style.transition = "none"; b.style.height = b.getAttribute("data-h") + "%"; });
+                    cols.forEach(function (c) { c.classList.add("shown"); });
+                    return;
                 }
-                parts.push('<circle class="core" cx="' + pt.x + '" cy="' + pt.y + '" r="' + pt.r + '" fill="' + (pt.ring ? C.paper : col) + '" stroke="' + col + '" stroke-width="' + (pt.ring ? 1.8 : 0) + '"/>');
-                parts.push("</g>");
-            });
-            parts.push('<text x="' + (PAD_L - 12) + '" y="' + (PAD_T - 8) + '" class="pubviz__axis" text-anchor="start">↑ PAPERS</text>');
-            parts.push("</svg>");
-
-            var html = '<div class="pubviz">' + parts.join("") +
-                '<div class="pubviz__caption"><div class="pubviz__legend">' +
-                '<span class="pubviz__lg" data-domain="ai" role="button" tabindex="0" aria-pressed="false"><span class="pubviz__dot" style="background:' + C.accent + '"></span> AI / ML</span>' +
-                '<span class="pubviz__lg" data-domain="both" role="button" tabindex="0" aria-pressed="false"><span class="pubviz__dot" style="background:' + C.accentMid + '"></span> Translational</span>' +
-                '<span class="pubviz__lg" data-domain="ortho" role="button" tabindex="0" aria-pressed="false"><span class="pubviz__dot" style="background:' + C.inkSoft + '"></span> Clinical orthopedics</span>' +
-                '</div><div class="pubviz__hover" id="pubviz-hover" aria-live="polite">' +
-                '<span class="pubviz__hover-empty">↑ hover any node — ' + points.length + ' papers, ' + years.length + ' years</span>' +
-                "</div></div></div>";
-            mount.innerHTML = html;
-
-            var hover = document.getElementById("pubviz-hover");
-            var emptyHTML = '<span class="pubviz__hover-empty">↑ hover any node — ' + points.length + ' papers, ' + years.length + ' years</span>';
-            var svgEl = mount.querySelector("svg");
-            mount.querySelectorAll(".pubnode").forEach(function (g) {
-                var pt = points[Number(g.getAttribute("data-idx"))];
-                pt.el = g;
-                pt.core = g.querySelector(".core");
-                var halo = g.querySelector(".halo");
-                g.addEventListener("mouseenter", function () {
-                    halo.setAttribute("opacity", "0.3");
-                    hover.innerHTML = '<span class="pubviz__hover-venue">' + esc(pt.p.venue) + '</span><span class="pubviz__hover-title">' + esc(pt.p.title) + "</span>";
-                });
-                g.addEventListener("mouseleave", function () { halo.setAttribute("opacity", "0"); hover.innerHTML = emptyHTML; });
-                g.addEventListener("click", function () { if (pt.p.href) window.open(pt.p.href, "_blank", "noopener"); });
-            });
-
-            // Clickable legend → spotlight a domain
-            var activeDom = null;
-            var lgs = mount.querySelectorAll(".pubviz__lg");
-            function spotlight(dom) {
-                points.forEach(function (p) { if (p.el) p.el.style.opacity = (!dom || p.domain === dom) ? "1" : "0.12"; });
-                lgs.forEach(function (l) {
-                    var d = l.getAttribute("data-domain");
-                    l.classList.toggle("on", dom === d);
-                    l.classList.toggle("dim", !!dom && dom !== d);
-                    l.setAttribute("aria-pressed", dom === d ? "true" : "false");
-                });
-            }
-            function toggleDom(l) {
-                var d = l.getAttribute("data-domain");
-                activeDom = (activeDom === d) ? null : d;
-                spotlight(activeDom);
-            }
-            lgs.forEach(function (l) {
-                l.addEventListener("click", function () { toggleDom(l); });
-                l.addEventListener("keydown", function (e) {
-                    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleDom(l); }
-                });
-            });
-
-            // Click a year on the constellation axis -> filter the All-Publications list
-            mount.querySelectorAll(".pubviz__year").forEach(function (yt) {
-                yt.addEventListener("click", function () {
-                    var y = yt.getAttribute("data-year");
-                    var pill = document.querySelector('[data-year="' + y + '"]');
-                    if (pill) pill.click();
-                    var ap = document.getElementById("allpubs-mount");
-                    if (ap) ap.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" });
-                });
-            });
-
-            // Hover any year pill in the list to spotlight that year on the constellation
-            window._highlightConstYear = function (y) {
-                if (y === null) { points.forEach(function (p) { if (p.el) p.el.style.opacity = "1"; }); return; }
-                var hasMatch = points.some(function (p) { return p.p.year === y; });
-                if (!hasMatch) return;
-                points.forEach(function (p) { if (p.el) p.el.style.opacity = (p.p.year === y) ? "1" : "0.18"; });
-            };
-
-            // Stagger nodes in on load
-            if (!REDUCED) {
                 requestAnimationFrame(function () {
-                    mount.querySelectorAll(".pubnode").forEach(function (g) { g.style.opacity = "1"; });
+                    bars.forEach(function (b, idx) { b.style.transitionDelay = (idx * 55) + "ms"; b.style.height = b.getAttribute("data-h") + "%"; });
+                    cols.forEach(function (c, idx) { setTimeout(function () { c.classList.add("shown"); }, 280 + idx * 55); });
                 });
             }
 
-            // Cursor-reactive: enlarge nearby nodes + draw faint links from the cursor
-            if (svgEl && !REDUCED) {
-                var NS = "http://www.w3.org/2000/svg";
-                var edgeLayer = svgEl.querySelector("#cursor-edges");
-                var sp = svgEl.createSVGPoint();
-                var R = 120;
-                var clearReact = function () {
-                    while (edgeLayer.firstChild) edgeLayer.removeChild(edgeLayer.firstChild);
-                    points.forEach(function (p) { if (p.core) p.core.setAttribute("r", p.r); });
-                };
-                svgEl.addEventListener("mousemove", function (ev) {
-                    var ctm = svgEl.getScreenCTM();
-                    if (!ctm) return;
-                    sp.x = ev.clientX; sp.y = ev.clientY;
-                    var loc = sp.matrixTransform(ctm.inverse());
-                    while (edgeLayer.firstChild) edgeLayer.removeChild(edgeLayer.firstChild);
-                    points.forEach(function (p) {
-                        var d = Math.hypot(loc.x - p.x, loc.y - p.y);
-                        if (d < R) {
-                            var f = 1 - d / R;
-                            if (p.core) p.core.setAttribute("r", (p.r + f * 4).toFixed(2));
-                            var ln = document.createElementNS(NS, "line");
-                            ln.setAttribute("x1", loc.x.toFixed(1)); ln.setAttribute("y1", loc.y.toFixed(1));
-                            ln.setAttribute("x2", p.x.toFixed(1)); ln.setAttribute("y2", p.y.toFixed(1));
-                            ln.setAttribute("stroke", C.accent); ln.setAttribute("stroke-width", "0.6");
-                            ln.setAttribute("stroke-opacity", (f * 0.5).toFixed(2));
-                            edgeLayer.appendChild(ln);
-                        } else if (p.core) { p.core.setAttribute("r", p.r); }
+            function render(animateNow) {
+                var by = state.metric === "papers" ? papersBy : citesBy;
+                var totals = totalsFor(by);
+                var maxTotal = Math.max(1, Math.max.apply(null, totals));
+                var sumAll = totals.reduce(function (a, b) { return a + b; }, 0);
+                var unit = state.metric === "papers" ? "papers" : "citations";
+
+                var h = '<div class="barchart">';
+                h += '<div class="barchart__head"><div class="barchart__toggle">';
+                h += '<button class="barchart__pill' + (state.metric === "papers" ? " on" : "") + '" data-metric="papers" type="button">Papers</button>';
+                h += '<button class="barchart__pill' + (state.metric === "cites" ? " on" : "") + '" data-metric="cites" type="button">Citations</button>';
+                h += '</div><span class="barchart__ymax">' + sumAll + ' ' + unit + ' · ' + years.length + ' yrs</span></div>';
+                h += '<div class="barchart__plot">';
+                years.forEach(function (yy, i) {
+                    var rec = by[yy], total = totals[i];
+                    var barPct = (total / maxTotal) * 92;
+                    h += '<div class="bar-col" data-year="' + yy + '" tabindex="0" role="button" aria-label="' + yy + ': ' + total + ' ' + unit + '">';
+                    h += '<div class="bar__value">' + (total || "") + '</div>';
+                    h += '<div class="bar" data-h="' + barPct.toFixed(2) + '" style="height:0%">';
+                    DOMS.forEach(function (d) {
+                        var segPct = total > 0 ? (rec[d] / total) * 100 : 0;
+                        h += '<div class="bar__seg seg--' + d + '" style="height:' + segPct.toFixed(2) + '%"></div>';
+                    });
+                    h += '</div><div class="bar__label">' + yy + '</div></div>';
+                });
+                h += '</div>';
+                h += '<div class="pubviz__caption"><div class="pubviz__legend">' +
+                    '<span class="pubviz__lg"><span class="pubviz__dot ld--ai"></span> AI / ML</span>' +
+                    '<span class="pubviz__lg"><span class="pubviz__dot ld--both"></span> Translational</span>' +
+                    '<span class="pubviz__lg"><span class="pubviz__dot ld--ortho"></span> Clinical orthopedics</span>' +
+                    '</div><div class="pubviz__hover" id="pubviz-hover" aria-live="polite">' +
+                    '<span class="pubviz__hover-empty">↑ hover a year — ' + sumAll + ' ' + unit + ' total</span>' +
+                    '</div></div></div>';
+                mount.innerHTML = h;
+
+                var hover = document.getElementById("pubviz-hover");
+                var emptyHTML = '<span class="pubviz__hover-empty">↑ hover a year — ' + sumAll + ' ' + unit + ' total</span>';
+                var cols = mount.querySelectorAll(".bar-col");
+                cols.forEach(function (col, i) {
+                    var yy = years[i], rec = by[yy], total = totals[i];
+                    col.addEventListener("mouseenter", function () {
+                        hover.innerHTML = '<span class="pubviz__hover-venue">' + yy + '</span><span class="pubviz__hover-title">' + total + ' ' + unit + ' — ' + rec.ai + ' AI · ' + rec.both + ' transl. · ' + rec.ortho + ' clinical</span>';
+                    });
+                    col.addEventListener("mouseleave", function () { hover.innerHTML = emptyHTML; });
+                    col.addEventListener("click", function () {
+                        var apPill = document.querySelector('#allpubs-mount [data-year="' + yy + '"]');
+                        if (apPill) apPill.click();
+                        var ap = document.getElementById("allpubs-mount");
+                        if (ap) ap.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" });
+                    });
+                    col.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); col.click(); } });
+                });
+                mount.querySelectorAll("[data-metric]").forEach(function (btn) {
+                    btn.addEventListener("click", function () {
+                        var m = btn.getAttribute("data-metric");
+                        if (m === state.metric) return;
+                        state.metric = m;
+                        render(true);
                     });
                 });
-                svgEl.addEventListener("mouseleave", clearReact);
+                if (animateNow) growBars();
             }
+
+            render(false);
+
+            if (REDUCED || !("IntersectionObserver" in window)) {
+                growBars();
+            } else {
+                var io = new IntersectionObserver(function (es) {
+                    es.forEach(function (e) { if (e.isIntersecting) { growBars(); io.disconnect(); } });
+                }, { threshold: 0.2 });
+                io.observe(mount);
+            }
+
+            window._highlightConstYear = function (yy) {
+                var cols = mount.querySelectorAll(".bar-col");
+                if (yy === null) { cols.forEach(function (c) { c.style.opacity = "1"; }); return; }
+                var has = false;
+                cols.forEach(function (c) { if (Number(c.getAttribute("data-year")) === yy) has = true; });
+                if (!has) return;
+                cols.forEach(function (c) { c.style.opacity = (Number(c.getAttribute("data-year")) === yy) ? "1" : "0.3"; });
+            };
         }
-        renderConstellation();
+        renderBarChart();
 
         // ===== All publications (filterable + searchable list) =====
         (function renderAllPubs() {
@@ -1822,7 +1784,6 @@
                 else document.documentElement.removeAttribute("data-theme");
                 try { localStorage.setItem("theme", next); } catch (e) {}
                 paint();
-                renderConstellation();
                 recolorField();
             });
             paint();
