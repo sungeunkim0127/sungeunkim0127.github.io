@@ -85,7 +85,7 @@
         .intro__canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
         .intro__hud {
             position: absolute; left: 0; right: 0; bottom: 13%; z-index: 1; text-align: center;
-            opacity: 0; transition: opacity 0.9s ease;
+            opacity: 0; transition: opacity 0.6s ease;
         }
         .intro.named .intro__hud { opacity: 1; }
         .intro__tag { font-family: var(--mono-stack); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #6fd8ec; }
@@ -95,7 +95,7 @@
             .intro__hud { bottom: 16%; padding: 0 18px; }
         }
         @keyframes introBlink { 0%, 100% { opacity: 0.85; } 50% { opacity: 0.35; } }
-        .intro.is-out { opacity: 0; transform: scale(1.16); filter: blur(7px); transition: opacity 0.9s cubic-bezier(0.5, 0, 0.9, 0.3), transform 0.9s cubic-bezier(0.5, 0, 0.9, 0.3), filter 0.9s ease; pointer-events: none; }
+        .intro.is-out { opacity: 0; transform: scale(1.16); filter: blur(7px); transition: opacity 0.6s cubic-bezier(0.5, 0, 0.9, 0.3), transform 0.6s cubic-bezier(0.5, 0, 0.9, 0.3), filter 0.6s ease; pointer-events: none; }
 
         html, body {
             background-color: var(--paper);
@@ -138,7 +138,7 @@
         }
 
         /* ----- Layout shell ----- */
-        .app { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad-x); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+        .app { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad-x); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
         /* Hidden under the opening scene, then settles in as the curtain warps away.
            The delayed animation reveals it even if JS never removes intro-on (no-JS failsafe). */
         html.intro-on .app { opacity: 0; transform: scale(0.985); animation: appArrive 0.01s linear 9s forwards; }
@@ -521,7 +521,7 @@
 
         <!-- Publication data (auto-generated from publications.json; feeds the constellation + list) -->
         <!-- AUTO-GENERATED-PUBS-START -->
-                <script id="pub-meta" type="application/json">{"citations": 483}</script>
+                <script id="pub-meta" type="application/json">{"citations": 507}</script>
                 <script id="pub-data" type="application/json">
 [
 {
@@ -2050,7 +2050,7 @@
             var t0 = performance.now();
             function frame(now) {
                 if (!running) { raf = null; return; }
-                var t = now - t0, cx = W / 2, cy = H * 0.45;
+                var t = (now - t0) * 1.5, cx = W / 2, cy = H * 0.45;
                 ctx.globalCompositeOperation = "source-over";
                 ctx.clearRect(0, 0, W, H);
 
@@ -2194,7 +2194,7 @@
                 mx = (e.clientX - r.left) / W - 0.5; my = (e.clientY - r.top) / H - 0.5;
             });
 
-            setTimeout(function () { intro.classList.add("named"); }, 4200);
+            setTimeout(function () { intro.classList.add("named"); }, 2800);
 
             var done = false;
             function dismiss() {
@@ -2206,9 +2206,9 @@
                 setTimeout(function () {
                     running = false; if (raf) cancelAnimationFrame(raf);
                     if (intro.parentNode) intro.parentNode.removeChild(intro);
-                }, 950);
+                }, 640);
             }
-            var auto = setTimeout(dismiss, 5800);
+            var auto = setTimeout(dismiss, 3867);
             function skip() { clearTimeout(auto); dismiss(); }
             intro.addEventListener("click", skip);
             window.addEventListener("keydown", function (e) {
