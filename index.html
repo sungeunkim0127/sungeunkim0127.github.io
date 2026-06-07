@@ -1550,6 +1550,18 @@
                 citesBy[p.year][d] += (p.cites || 0);
             });
 
+            // Cumulative: each year's bar is the running total through that year — a rising
+            // staircase. Domain stacking is preserved so the evolving AI/clinical mix shows.
+            function cumulate(by) {
+                var run = { ai: 0, both: 0, ortho: 0 };
+                years.forEach(function (yy) {
+                    run.ai += by[yy].ai; run.both += by[yy].both; run.ortho += by[yy].ortho;
+                    by[yy] = { ai: run.ai, both: run.both, ortho: run.ortho };
+                });
+            }
+            cumulate(papersBy);
+            cumulate(citesBy);
+
             var state = { metric: "papers" };
             function totalsFor(by) { return years.map(function (yy) { return by[yy].ai + by[yy].both + by[yy].ortho; }); }
 
@@ -1571,14 +1583,14 @@
                 var by = state.metric === "papers" ? papersBy : citesBy;
                 var totals = totalsFor(by);
                 var maxTotal = Math.max(1, Math.max.apply(null, totals));
-                var sumAll = totals.reduce(function (a, b) { return a + b; }, 0);
+                var grand = totals.length ? totals[totals.length - 1] : 0;
                 var unit = state.metric === "papers" ? "papers" : "citations";
 
                 var h = '<div class="barchart">';
                 h += '<div class="barchart__head"><div class="barchart__toggle">';
                 h += '<button class="barchart__pill' + (state.metric === "papers" ? " on" : "") + '" data-metric="papers" type="button">Papers</button>';
                 h += '<button class="barchart__pill' + (state.metric === "cites" ? " on" : "") + '" data-metric="cites" type="button">Citations</button>';
-                h += '</div><span class="barchart__ymax">' + sumAll + ' ' + unit + ' · ' + years.length + ' yrs</span></div>';
+                h += '</div><span class="barchart__ymax">' + grand + ' ' + unit + ' cumulative · since ' + minY + '</span></div>';
                 h += '<div class="barchart__plot">';
                 years.forEach(function (yy, i) {
                     var rec = by[yy], total = totals[i];
@@ -1598,17 +1610,17 @@
                     '<span class="pubviz__lg"><span class="pubviz__dot ld--both"></span> Translational</span>' +
                     '<span class="pubviz__lg"><span class="pubviz__dot ld--ortho"></span> Clinical orthopedics</span>' +
                     '</div><div class="pubviz__hover" id="pubviz-hover" aria-live="polite">' +
-                    '<span class="pubviz__hover-empty">↑ hover a year — ' + sumAll + ' ' + unit + ' total</span>' +
+                    '<span class="pubviz__hover-empty">↑ hover a year — ' + grand + ' ' + unit + ' cumulative</span>' +
                     '</div></div></div>';
                 mount.innerHTML = h;
 
                 var hover = document.getElementById("pubviz-hover");
-                var emptyHTML = '<span class="pubviz__hover-empty">↑ hover a year — ' + sumAll + ' ' + unit + ' total</span>';
+                var emptyHTML = '<span class="pubviz__hover-empty">↑ hover a year — ' + grand + ' ' + unit + ' cumulative</span>';
                 var cols = mount.querySelectorAll(".bar-col");
                 cols.forEach(function (col, i) {
                     var yy = years[i], rec = by[yy], total = totals[i];
                     col.addEventListener("mouseenter", function () {
-                        hover.innerHTML = '<span class="pubviz__hover-venue">' + yy + '</span><span class="pubviz__hover-title">' + total + ' ' + unit + ' — ' + rec.ai + ' AI · ' + rec.both + ' transl. · ' + rec.ortho + ' clinical</span>';
+                        hover.innerHTML = '<span class="pubviz__hover-venue">by ' + yy + '</span><span class="pubviz__hover-title">' + total + ' ' + unit + ' — ' + rec.ai + ' AI · ' + rec.both + ' transl. · ' + rec.ortho + ' clinical</span>';
                     });
                     col.addEventListener("mouseleave", function () { hover.innerHTML = emptyHTML; });
                     col.addEventListener("click", function () {
