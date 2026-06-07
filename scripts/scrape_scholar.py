@@ -105,12 +105,15 @@ def scrape_scholarly() -> list[dict] | None:
         print(f"scholarly scrape failed: {e}")
         return None
 
-    # Capture the profile's true total citation count
+    # Capture the profile's true total citation count and persist it IMMEDIATELY,
+    # before the slow/blockable per-paper loop below — so a mid-loop failure or
+    # timeout can never discard a freshly-scraped headline number.
     try:
         total = int(author.get("citedby", 0) or 0)
         if total:
             PROFILE["total_citations"] = total
             print(f"Profile total citations: {total}")
+            write_meta()
     except Exception:
         pass
 
@@ -330,6 +333,33 @@ def merge_pubs(existing: list[dict], scraped: list[dict]) -> list[dict]:
     return existing
 
 
+def write_meta() -> bool:
+    """Persist the profile-level total citation count, preserving the prior value
+    if this run didn't capture one. Returns True if a non-zero total is on disk.
+
+    This is decoupled from the per-paper crawl on purpose: the headline number is
+    cheap to fetch (one request for the author profile), while the per-paper crawl
+    is slow and frequently blocked. Persisting here, the moment a total is captured,
+    means a blocked crawl can never discard a freshly-scraped total.
+    """
+    total = int(PROFILE.get("total_citations", 0) or 0)
+    if not total:
+        # Fall back to whatever was last persisted, so we never zero it out.
+        if META_FILE.exists():
+            try:
+                prev = json.load(open(META_FILE, "r", encoding="utf-8"))
+                total = int(prev.get("total_citations", 0) or 0)
+            except Exception:
+                total = 0
+    if not total:
+        return False
+    META_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with open(META_FILE, "w", encoding="utf-8") as f:
+        json.dump({"total_citations": total, "scholar_id": SCHOLAR_USER_ID}, f, indent=2)
+    print(f"Wrote profile metadata: total_citations={total}")
+    return True
+
+
 def main() -> int:
     print("=" * 60)
     print("Scholar Scraper for Sung Eun Kim")
@@ -339,43 +369,45 @@ def main() -> int:
     existing_count = len(existing)
     print(f"Existing publications: {existing_count}")
 
-    # Try scrapers in order
+    # Try scrapers in order. Persist the profile total the moment any tier
+    # captures it — independent of whether the per-paper crawl succeeds.
     scraped = None
     for scraper_fn in [scrape_scholarly, scrape_semantic_scholar, scrape_serpapi]:
         scraped = scraper_fn()
+        if PROFILE.get("total_citations"):
+            write_meta()
         if scraped:
             break
 
-    if not scraped:
-        print("WARNING: All scrapers failed. No changes made.")
-        return 1
+    got_total = bool(PROFILE.get("total_citations"))
 
-    # Safety check: abort if scraped count is suspiciously low
-    if existing_count > 0 and len(scraped) < existing_count * SAFETY_THRESHOLD:
+    # Publications crawl is best-effort; the headline total is the priority.
+    if scraped and not (existing_count > 0 and len(scraped) < existing_count * SAFETY_THRESHOLD):
+        merged = merge_pubs(existing, scraped)
+        merged.sort(key=lambda p: (-p.get("year", 0), p.get("title", "")))
+        save_pubs(merged)
+    elif scraped:
         print(
-            f"SAFETY ABORT: Scraped only {len(scraped)} pubs, "
-            f"but expected at least {int(existing_count * SAFETY_THRESHOLD)} "
-            f"(70% of {existing_count}). Likely a partial scrape."
+            f"SAFETY ABORT (pubs): scraped only {len(scraped)}, expected >= "
+            f"{int(existing_count * SAFETY_THRESHOLD)}. Keeping existing publications."
         )
-        return 1
+    else:
+        print("Note: per-paper crawl returned nothing this run.")
 
-    # Merge and save
-    merged = merge_pubs(existing, scraped)
+    # Outcome: success if we refreshed the headline total OR the pub list.
+    if got_total:
+        print("Scrape completed: profile total refreshed.")
+        return 0
+    if scraped:
+        print("Scrape completed: publications refreshed (no profile total this run).")
+        # Make sure index.html can still render a citation number from existing data.
+        write_meta()
+        return 0
 
-    # Sort by year descending, then title
-    merged.sort(key=lambda p: (-p.get("year", 0), p.get("title", "")))
-
-    save_pubs(merged)
-
-    # Persist profile-level metadata (true total citations) for the generator
-    if PROFILE.get("total_citations"):
-        META_FILE.parent.mkdir(parents=True, exist_ok=True)
-        with open(META_FILE, "w", encoding="utf-8") as f:
-            json.dump({"total_citations": PROFILE["total_citations"], "scholar_id": SCHOLAR_USER_ID}, f, indent=2)
-        print(f"Wrote profile metadata to {META_FILE}")
-
-    print("Scrape completed successfully.")
-    return 0
+    # Nothing captured. Make the failure loud in CI, but don't wipe anything.
+    print("::warning::Scholar scrape captured neither profile total nor publications this run; citation number left unchanged.")
+    print("WARNING: All scrapers failed. No changes made.")
+    return 1
 
 
 if __name__ == "__main__":
