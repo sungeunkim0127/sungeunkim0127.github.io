@@ -393,7 +393,7 @@
         /* ----- Footer ----- */
         .footer { padding: 48px 0 64px; position: relative; }
         .footer__rule { height: 1px; background: var(--rule); margin-bottom: 24px; }
-        .footer__row { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--ink-soft); }
+        .footer__row { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; color: var(--ink-soft); }
 
         ::selection { background: var(--accent); color: var(--paper); }
 
@@ -1333,8 +1333,6 @@
             <div class="footer__rule"></div>
             <div class="footer__row">
                 <span class="mono mono--sm">© 2026 SUNG EUN KIM</span>
-                <span class="mono mono--sm" id="footer-clock">CAMBRIDGE, MA · SEOUL, KR</span>
-                <span class="mono mono--sm">PUBLICATIONS SYNCED FROM SCHOLAR</span>
             </div>
         </footer>
 
@@ -1853,19 +1851,6 @@
         (function () {
             var r = document.getElementById("role-text");
             if (r) scramble(r, r.textContent.trim(), 720);
-        })();
-
-        // ===== Live dual-timezone clock (footer) =====
-        (function () {
-            var el = document.getElementById("footer-clock");
-            if (!el) return;
-            function z(tz) {
-                try { return new Intl.DateTimeFormat("en-US", { timeZone: tz, hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date()); }
-                catch (e) { return "--:--"; }
-            }
-            function tick() { el.textContent = "CAMBRIDGE " + z("America/New_York") + " · SEOUL " + z("Asia/Seoul"); }
-            tick();
-            setInterval(tick, 20000);
         })();
 
         // ===== 3D tilt on each featured-paper card =====
