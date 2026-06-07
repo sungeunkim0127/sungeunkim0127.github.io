@@ -106,7 +106,9 @@
             font-family: var(--serif-stack);
             font-size: 17px;
             line-height: 1.55;
-            text-rendering: geometricPrecision;
+            text-rendering: optimizeLegibility;
+            font-kerning: normal;
+            font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
@@ -215,7 +217,7 @@
         .stat__value.stat__value--focus { font-size: clamp(17px, 1.6vw, 21px); line-height: 1.25; letter-spacing: -0.01em; }
         .stat { padding: 22px 18px 22px 0; border-left: 1px solid var(--rule-soft); padding-left: 16px; }
         .stat:first-child { border-left: 0; padding-left: 0; }
-        .stat__value { font-family: var(--display-stack); font-size: clamp(36px, 4vw, 52px); line-height: 1; letter-spacing: -0.02em; font-weight: 400; margin-bottom: 6px; }
+        .stat__value { font-family: var(--display-stack); font-size: clamp(36px, 4vw, 52px); line-height: 1; letter-spacing: -0.02em; font-weight: 400; margin-bottom: 6px; font-variant-numeric: tabular-nums lining; }
         .stat__label { font-size: 14px; color: var(--ink); margin-bottom: 4px; }
         .stat__note { color: var(--ink-soft); }
 
@@ -285,7 +287,7 @@
         .hl { display: grid; grid-template-columns: 80px 1fr 24px; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--rule-soft); transition: all 0.18s ease; align-items: start; }
         .hl:hover { padding-left: 8px; }
         .hl:last-child { border-bottom: 0; }
-        .hl__year { font-size: 22px; color: var(--accent); letter-spacing: 0; font-family: var(--display-stack); text-transform: none; }
+        .hl__year { font-size: 22px; color: var(--accent); letter-spacing: 0; font-family: var(--display-stack); text-transform: none; font-variant-numeric: tabular-nums lining; }
         .hl__title { font-family: var(--display-stack); font-size: 22px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 400; margin-bottom: 6px; text-wrap: pretty; }
         .hl__authors { font-size: 13.5px; color: var(--ink-soft); font-style: italic; margin-bottom: 8px; }
         .hl__meta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
@@ -312,7 +314,7 @@
         /* ----- Publications list ----- */
         .pubs__year-block { margin-bottom: 28px; }
         .pubs__year-label { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
-        .pubs__year-num { font-family: var(--display-stack); font-size: 28px; letter-spacing: -0.01em; text-transform: none; color: var(--accent); }
+        .pubs__year-num { font-family: var(--display-stack); font-size: 28px; letter-spacing: -0.01em; text-transform: none; color: var(--accent); font-variant-numeric: tabular-nums lining; }
         .pubs__year-rule { flex: 1; height: 1px; background: var(--rule-soft); }
         .pubs__year-count { color: var(--ink-soft); }
         .pub { display: block; padding: 14px 0; border-bottom: 1px dashed var(--rule-soft); transition: all 0.15s ease; position: relative; }
