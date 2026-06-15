@@ -7,7 +7,7 @@
     "year": 2026,
     "is_first_author": true,
     "author_role": "co-first",
-    "citation_count": 3,
+    "citation_count": 5,
     "scholar_cid": "KriQPeEAAAAJ:aqlVkmm33-oC",
     "url": "https://psb.stanford.edu/psb-online/proceedings/psb26/sambara.pdf"
   },
@@ -19,7 +19,7 @@
     "year": 2026,
     "is_first_author": true,
     "author_role": "co-first",
-    "citation_count": 5,
+    "citation_count": 7,
     "scholar_cid": "KriQPeEAAAAJ:7PzlFSSx8tAC",
     "url": "https://doi.org/10.1038/s41591-026-04252-6"
   },
@@ -42,7 +42,7 @@
     "year": 2026,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 0,
+    "citation_count": 1,
     "scholar_cid": "KriQPeEAAAAJ:L8Ckcad2t8MC"
   },
   {
@@ -53,8 +53,8 @@
     "year": 2026,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 0,
-    "scholar_cid": "",
+    "citation_count": 3,
+    "scholar_cid": "KriQPeEAAAAJ:hC7cP41nSMkC",
     "url": "https://arxiv.org/abs/2603.04421"
   },
   {
@@ -79,6 +79,17 @@
     "author_role": "",
     "citation_count": 0,
     "scholar_cid": "KriQPeEAAAAJ:mVmsd5A6BfQC"
+  },
+  {
+    "id": "imitation-learning-for-robot-assistance-in-open-surgery-a-mu-2026",
+    "title": "Imitation Learning for Robot Assistance in Open Surgery: A Multi-Policy Evaluation on Suture Following",
+    "authors": "Xucheng Wang and Zhizhou Yang and Xiaoman Zhang and Sung Eun Kim and Romain Hardy and Pranav Rajpurkar",
+    "venue": "arXiv preprint arXiv:2605.28736",
+    "year": 2026,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 0,
+    "scholar_cid": "KriQPeEAAAAJ:hFOr9nPyWt4C"
   },
   {
     "id": "rexinthewild-a-unified-benchmark-for-medical-photograph-unde-2026",
@@ -110,8 +121,8 @@
     "year": 2026,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 0,
-    "scholar_cid": "",
+    "citation_count": 4,
+    "scholar_cid": "KriQPeEAAAAJ:-f6ydRqryjwC",
     "url": ""
   },
   {
@@ -204,7 +215,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 11,
+    "citation_count": 14,
     "scholar_cid": "KriQPeEAAAAJ:3fE2CSJIrl8C",
     "url": "https://doi.org/10.48550/arXiv.2411.18672"
   },
@@ -274,7 +285,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 2,
+    "citation_count": 3,
     "scholar_cid": "KriQPeEAAAAJ:_kc_bZDykSQC",
     "url": "https://doi.org/10.48550/arXiv.2509.13270"
   },
@@ -286,7 +297,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 14,
+    "citation_count": 15,
     "scholar_cid": "KriQPeEAAAAJ:MXK_kJrjxJIC",
     "url": "https://doi.org/10.48550/arXiv.2412.15264"
   },
@@ -298,7 +309,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 13,
+    "citation_count": 17,
     "scholar_cid": "KriQPeEAAAAJ:4TOpqqG69KYC"
   },
   {
@@ -309,7 +320,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 2,
+    "citation_count": 3,
     "scholar_cid": "KriQPeEAAAAJ:M3ejUd6NZC8C",
     "url": "https://proceedings.mlr.press/v298/baharoon25a.html"
   },
@@ -356,7 +367,7 @@
     "year": 2024,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 6,
+    "citation_count": 8,
     "scholar_cid": "KriQPeEAAAAJ:UebtZRa9Y70C",
     "url": "https://doi.org/10.1186/s43019-024-00240-7"
   },
@@ -380,7 +391,7 @@
     "year": 2024,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 27,
+    "citation_count": 28,
     "scholar_cid": "KriQPeEAAAAJ:5nxA0vEk-isC"
   },
   {
@@ -415,7 +426,7 @@
     "year": 2024,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 23,
+    "citation_count": 24,
     "scholar_cid": "KriQPeEAAAAJ:Tyk-4Ss8FVUC",
     "url": "https://doi.org/10.1186/s43019-023-00209-y"
   },
@@ -439,7 +450,7 @@
     "year": 2024,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 16,
+    "citation_count": 17,
     "scholar_cid": "KriQPeEAAAAJ:YsMSGLbcyi4C"
   },
   {
@@ -519,7 +530,7 @@
     "year": 2024,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 24,
+    "citation_count": 25,
     "scholar_cid": "KriQPeEAAAAJ:Y0pCki6q_DkC",
     "url": "https://doi.org/10.1186/s43019-023-00204-3"
   },
@@ -589,7 +600,7 @@
     "year": 2024,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 6,
+    "citation_count": 7,
     "scholar_cid": "KriQPeEAAAAJ:W7OEmFMy1HYC",
     "url": "https://doi.org/10.1302/0301-620X.106B3.BJJ-2023-0337.R3"
   },
@@ -648,7 +659,7 @@
     "year": 2023,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 87,
+    "citation_count": 88,
     "scholar_cid": "KriQPeEAAAAJ:9yKSN-GCB0IC",
     "url": "https://doi.org/10.1007/s00167-022-07227-5"
   },
@@ -672,7 +683,7 @@
     "year": 2023,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 5,
+    "citation_count": 6,
     "scholar_cid": "KriQPeEAAAAJ:UeHWp8X0CEIC",
     "url": "https://doi.org/10.1007/s13534-023-00323-6"
   },
