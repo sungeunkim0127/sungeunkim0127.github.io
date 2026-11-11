@@ -25,6 +25,8 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # full history, so the staleness check below can date the data
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -40,6 +42,19 @@ jobs:
         run: python scripts/scrape_scholar.py
         env:
           SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+
+      # Scholar often blocks GitHub's servers, so one missed week is normal.
+      # Three weeks without fresh data fails the run so it gets noticed.
+      - name: Flag stale data
+        if: steps.scrape.outcome != 'success'
+        run: |
+          last=$(git log -1 --format=%ct -- data/scholar_meta.json data/publications.json)
+          age=$(( ( $(date +%s) - last ) / 86400 ))
+          echo "Scholar data last refreshed $age days ago"
+          if [ "$age" -gt 21 ]; then
+            echo "::error::Google Scholar has been unreachable for $age days; the site's citation count and paper list are stale. Run scripts/scrape_scholar.py and scripts/generate_html.py locally, then push."
+            exit 1
+          fi
 
       - name: Generate HTML
         if: steps.scrape.outcome == 'success'
