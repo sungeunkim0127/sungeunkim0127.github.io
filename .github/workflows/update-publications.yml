@@ -43,8 +43,9 @@ jobs:
         env:
           SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
 
-      # Scholar often blocks GitHub's servers, so one missed week is normal.
-      # Three weeks without fresh data fails the run so it gets noticed.
+      # Scholar blocks GitHub's servers, so the real refresh is done by a weekly
+      # scheduled task on the owner's PC (scripts/update_local.ps1). This job is
+      # the backstop: three weeks without fresh data fails the run so it gets noticed.
       - name: Flag stale data
         if: steps.scrape.outcome != 'success'
         run: |
@@ -52,7 +53,7 @@ jobs:
           age=$(( ( $(date +%s) - last ) / 86400 ))
           echo "Scholar data last refreshed $age days ago"
           if [ "$age" -gt 21 ]; then
-            echo "::error::Google Scholar has been unreachable for $age days; the site's citation count and paper list are stale. Run scripts/scrape_scholar.py and scripts/generate_html.py locally, then push."
+            echo "::error::Google Scholar has been unreachable for $age days; the site's citation count and paper list are stale. The weekly task on the PC (scripts/update_local.ps1) has not pushed; check its log in %LOCALAPPDATA%\\scholar-site-update, or run the script by hand."
             exit 1
           fi
 

@@ -516,20 +516,35 @@ def write_meta() -> bool:
     is slow and frequently blocked. Persisting here, the moment a total is captured,
     means a blocked crawl can never discard a freshly-scraped total.
     """
+    from datetime import date
+
+    prev = {}
+    if META_FILE.exists():
+        try:
+            with open(META_FILE, "r", encoding="utf-8") as f:
+                prev = json.load(f)
+        except Exception:
+            prev = {}
+
     total = int(PROFILE.get("total_citations", 0) or 0)
+    fresh = bool(total)
     if not total:
         # Fall back to whatever was last persisted, so we never zero it out.
-        if META_FILE.exists():
-            try:
-                prev = json.load(open(META_FILE, "r", encoding="utf-8"))
-                total = int(prev.get("total_citations", 0) or 0)
-            except Exception:
-                total = 0
+        total = int(prev.get("total_citations", 0) or 0)
     if not total:
         return False
+
+    # last_checked moves only when Scholar actually answered, so the data file
+    # changes on every successful run and its git history dates the last refresh
+    # (the workflow's stale-data check relies on that).
+    meta = {"total_citations": total, "scholar_id": SCHOLAR_USER_ID}
+    checked = date.today().isoformat() if fresh else prev.get("last_checked")
+    if checked:
+        meta["last_checked"] = checked
+
     META_FILE.parent.mkdir(parents=True, exist_ok=True)
     with open(META_FILE, "w", encoding="utf-8") as f:
-        json.dump({"total_citations": total, "scholar_id": SCHOLAR_USER_ID}, f, indent=2)
+        json.dump(meta, f, indent=2)
     print(f"Wrote profile metadata: total_citations={total}")
     return True
 
