@@ -7,7 +7,7 @@
     "year": 2026,
     "is_first_author": true,
     "author_role": "co-first",
-    "citation_count": 6,
+    "citation_count": 10,
     "scholar_cid": "KriQPeEAAAAJ:aqlVkmm33-oC",
     "url": "https://psb.stanford.edu/psb-online/proceedings/psb26/sambara.pdf"
   },
@@ -19,9 +19,20 @@
     "year": 2026,
     "is_first_author": true,
     "author_role": "co-first",
-    "citation_count": 12,
+    "citation_count": 31,
     "scholar_cid": "KriQPeEAAAAJ:7PzlFSSx8tAC",
     "url": "https://doi.org/10.1038/s41591-026-04252-6"
+  },
+  {
+    "id": "asclepius-an-adaptive-harness-for-longhorizon-clinical-agent-2026",
+    "title": "Asclepius: An Adaptive Harness for Long-Horizon Clinical Agents",
+    "authors": "GC Yuan, X Zhang, SE Kim, L Luo, P Rajpurkar",
+    "venue": "Findings of the Association for Computational Linguistics: EMNLP 2026",
+    "year": 2026,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 1,
+    "scholar_cid": "KriQPeEAAAAJ:HDshCWvjkbEC"
   },
   {
     "id": "beyond-the-scanner-a-benchmark-for-medical-photograph-unders-2026",
@@ -38,11 +49,11 @@
     "id": "crimson-a-clinicallygrounded-llmbased-metric-for-generative-2026",
     "title": "CRIMSON: A Clinically-Grounded LLM-Based Metric for Generative Radiology Report Evaluation",
     "authors": "Mohammed Baharoon and Thibault Heintz and Siavash Raissi and Mahmoud Alabbad and Mona Alhammad and Hassan AlOmaish and Sung Eun Kim and Oishi Banerjee and Pranav Rajpurkar",
-    "venue": "arXiv preprint arXiv:2603.06183",
+    "venue": "International Conference on Medical Image Computing and …",
     "year": 2026,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 4,
+    "citation_count": 11,
     "scholar_cid": "KriQPeEAAAAJ:L8Ckcad2t8MC"
   },
   {
@@ -53,7 +64,7 @@
     "year": 2026,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 4,
+    "citation_count": 8,
     "scholar_cid": "KriQPeEAAAAJ:hC7cP41nSMkC",
     "url": "https://arxiv.org/abs/2603.04421"
   },
@@ -77,7 +88,7 @@
     "year": 2026,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 0,
+    "citation_count": 1,
     "scholar_cid": "KriQPeEAAAAJ:mVmsd5A6BfQC"
   },
   {
@@ -88,8 +99,19 @@
     "year": 2026,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 0,
+    "citation_count": 2,
     "scholar_cid": "KriQPeEAAAAJ:hFOr9nPyWt4C"
+  },
+  {
+    "id": "openended-clinical-text-generation-for-acute-care-applying-r-2026",
+    "title": "Open-Ended Clinical Text Generation for Acute Care: Applying Reinforcement Learning with Clinically Grounded Rewards",
+    "authors": "M Wang, L Luo, SE Kim, F Cao, DA Kim, P Rajpurkar",
+    "venue": "Conference on Health, Inference, and Learning",
+    "year": 2026,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 0,
+    "scholar_cid": "KriQPeEAAAAJ:mB3voiENLucC"
   },
   {
     "id": "rexinthewild-a-unified-benchmark-for-medical-photograph-unde-2026",
@@ -99,7 +121,7 @@
     "year": 2026,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 1,
+    "citation_count": 2,
     "scholar_cid": "KriQPeEAAAAJ:ZeXyd9-uunAC"
   },
   {
@@ -114,6 +136,28 @@
     "scholar_cid": "KriQPeEAAAAJ:qUcmZB5y_30C"
   },
   {
+    "id": "repurposing-adult-ai-radiograph-models-for-neonatal-care-thr-2026",
+    "title": "Repurposing adult AI radiograph models for neonatal care through continual learning: an international multicentre study",
+    "authors": "VM Rao, E Chen, A Saenz, O Banerjee, H Marklund, L Bijnens, SE Kim, ...",
+    "venue": "Nature Biomedical Engineering",
+    "year": 2026,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 0,
+    "scholar_cid": "KriQPeEAAAAJ:R3hNpaxXUhUC"
+  },
+  {
+    "id": "rexgroundingct-a-3d-chest-ct-dataset-for-segmentation-of-fin-2025",
+    "title": "Rexgroundingct: A 3d chest ct dataset for segmentation of findings from free-text reports",
+    "authors": "Mohammed Baharoon and Luyang Luo and Michael Moritz and Abhinav Kumar and Sung Eun Kim and Xiaoman Zhang and Miao Zhu and Mahmoud Hussain Alabbad and Maha Sbayel Alhazmi and Neel P Mistry and Lucas Bijnens and Kent Ryan Kleinschmidt and Brady Chrisler and Sathvik Suryadevara and Sri Sai Dinesh Jaliparthi and Noah Michael Prudlo and Mark David Marino and Jeremy Palacio and Rithvik Akula and Di Zhou and Hong-Yu Zhou and Ibrahim Ethem Hamamci and Scott J Adams and Hassan Rayhan AlOmaish and Pranav Rajpurkar",
+    "venue": "NEJM AI 3 (7), AIdbp2501220",
+    "year": 2026,
+    "is_first_author": false,
+    "author_role": "",
+    "citation_count": 27,
+    "scholar_cid": "KriQPeEAAAAJ:4TOpqqG69KYC"
+  },
+  {
     "id": "sycophancy-llm-eacl-2026",
     "title": "The Doctor Will Agree With You Now: Sycophancy of Large Language Models in Multi-Turn Medical Conversations",
     "authors": "Kim TM, Luo L, Kim SE, Manrai AK, Topol E, Rajpurkar P",
@@ -121,7 +165,7 @@
     "year": 2026,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 6,
+    "citation_count": 19,
     "scholar_cid": "KriQPeEAAAAJ:-f6ydRqryjwC",
     "url": ""
   },
@@ -133,7 +177,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 1,
+    "citation_count": 9,
     "scholar_cid": "KriQPeEAAAAJ:YOwf2qJgpHMC",
     "url": "https://doi.org/10.1186/s13018-025-06206-z"
   },
@@ -157,7 +201,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 6,
+    "citation_count": 9,
     "scholar_cid": "KriQPeEAAAAJ:Zph67rFs4hoC"
   },
   {
@@ -168,7 +212,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 27,
+    "citation_count": 35,
     "scholar_cid": "KriQPeEAAAAJ:kNdYIx-mwKoC",
     "url": "https://doi.org/10.1302/0301-620X.107B2.BJJ-2024-0791.R1"
   },
@@ -215,7 +259,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 16,
+    "citation_count": 25,
     "scholar_cid": "KriQPeEAAAAJ:3fE2CSJIrl8C",
     "url": "https://doi.org/10.48550/arXiv.2411.18672"
   },
@@ -238,7 +282,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 5,
+    "citation_count": 6,
     "scholar_cid": "KriQPeEAAAAJ:hqOjcs7Dif8C",
     "url": "https://doi.org/10.1002/jor.26018"
   },
@@ -285,7 +329,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 3,
+    "citation_count": 4,
     "scholar_cid": "KriQPeEAAAAJ:_kc_bZDykSQC",
     "url": "https://doi.org/10.48550/arXiv.2509.13270"
   },
@@ -297,20 +341,9 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 17,
+    "citation_count": 26,
     "scholar_cid": "KriQPeEAAAAJ:MXK_kJrjxJIC",
     "url": "https://doi.org/10.48550/arXiv.2412.15264"
-  },
-  {
-    "id": "rexgroundingct-a-3d-chest-ct-dataset-for-segmentation-of-fin-2025",
-    "title": "Rexgroundingct: A 3d chest ct dataset for segmentation of findings from free-text reports",
-    "authors": "Mohammed Baharoon and Luyang Luo and Michael Moritz and Abhinav Kumar and Sung Eun Kim and Xiaoman Zhang and Miao Zhu and Mahmoud Hussain Alabbad and Maha Sbayel Alhazmi and Neel P Mistry and Lucas Bijnens and Kent Ryan Kleinschmidt and Brady Chrisler and Sathvik Suryadevara and Sri Sai Dinesh Jaliparthi and Noah Michael Prudlo and Mark David Marino and Jeremy Palacio and Rithvik Akula and Di Zhou and Hong-Yu Zhou and Ibrahim Ethem Hamamci and Scott J Adams and Hassan Rayhan AlOmaish and Pranav Rajpurkar",
-    "venue": "arXiv preprint arXiv:2507.22030",
-    "year": 2025,
-    "is_first_author": false,
-    "author_role": "",
-    "citation_count": 18,
-    "scholar_cid": "KriQPeEAAAAJ:4TOpqqG69KYC"
   },
   {
     "id": "text-prompted-segmentation-mlhc-2025",
@@ -355,7 +388,7 @@
     "year": 2025,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 2,
+    "citation_count": 4,
     "scholar_cid": "KriQPeEAAAAJ:qxL8FJ1GzNcC",
     "url": "https://arxiv.org/abs/2507.22898"
   },
@@ -367,7 +400,7 @@
     "year": 2024,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 9,
+    "citation_count": 13,
     "scholar_cid": "KriQPeEAAAAJ:UebtZRa9Y70C",
     "url": "https://doi.org/10.1186/s43019-024-00240-7"
   },
@@ -379,7 +412,7 @@
     "year": 2024,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 9,
+    "citation_count": 12,
     "scholar_cid": "KriQPeEAAAAJ:roLk4NBRz8UC",
     "url": "https://doi.org/10.1186/s43019-024-00238-1"
   },
@@ -391,7 +424,7 @@
     "year": 2024,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 30,
+    "citation_count": 35,
     "scholar_cid": "KriQPeEAAAAJ:5nxA0vEk-isC"
   },
   {
@@ -414,7 +447,7 @@
     "year": 2024,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 3,
+    "citation_count": 6,
     "scholar_cid": "KriQPeEAAAAJ:Se3iqnhoufwC",
     "url": "https://doi.org/10.1186/s12885-024-13021-y"
   },
@@ -426,7 +459,7 @@
     "year": 2024,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 24,
+    "citation_count": 30,
     "scholar_cid": "KriQPeEAAAAJ:Tyk-4Ss8FVUC",
     "url": "https://doi.org/10.1186/s43019-023-00209-y"
   },
@@ -450,7 +483,7 @@
     "year": 2024,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 20,
+    "citation_count": 22,
     "scholar_cid": "KriQPeEAAAAJ:YsMSGLbcyi4C"
   },
   {
@@ -461,8 +494,8 @@
     "year": 2024,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 0,
-    "scholar_cid": "",
+    "citation_count": 6,
+    "scholar_cid": "KriQPeEAAAAJ:WF5omc3nYNoC",
     "url": "https://doi.org/10.4055/cios23166"
   },
   {
@@ -480,7 +513,7 @@
     "id": "method-and-apparatus-for-calculating-indicators-related-to-k-2024",
     "title": "Method and apparatus for calculating indicators related to knee osteoarthritis by using electromyography data",
     "authors": "HC Kim and DH Ro and SE Kim",
-    "venue": "",
+    "venue": "KR Patent Publication No. 10-2024-0,114,724",
     "year": 2024,
     "is_first_author": false,
     "author_role": "",
@@ -495,7 +528,7 @@
     "year": 2024,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 0,
+    "citation_count": 1,
     "scholar_cid": "KriQPeEAAAAJ:ufrVoPGSRksC",
     "url": "https://doi.org/10.1007/s00256-024-04619-1"
   },
@@ -519,7 +552,7 @@
     "year": 2024,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 19,
+    "citation_count": 24,
     "scholar_cid": "KriQPeEAAAAJ:LkGwnXOMwfcC"
   },
   {
@@ -530,7 +563,7 @@
     "year": 2024,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 26,
+    "citation_count": 31,
     "scholar_cid": "KriQPeEAAAAJ:Y0pCki6q_DkC",
     "url": "https://doi.org/10.1186/s43019-023-00204-3"
   },
@@ -542,7 +575,7 @@
     "year": 2024,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 1,
+    "citation_count": 2,
     "scholar_cid": "KriQPeEAAAAJ:8k81kl-MbHgC"
   },
   {
@@ -577,7 +610,7 @@
     "year": 2024,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 2,
+    "citation_count": 5,
     "scholar_cid": "KriQPeEAAAAJ:_FxGoFyzp5QC"
   },
   {
@@ -588,7 +621,7 @@
     "year": 2024,
     "is_first_author": true,
     "author_role": "co-first",
-    "citation_count": 4,
+    "citation_count": 6,
     "scholar_cid": "KriQPeEAAAAJ:eQOLeE2rZwMC",
     "url": "https://doi.org/10.1002/ksa.12166"
   },
@@ -600,7 +633,7 @@
     "year": 2024,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 7,
+    "citation_count": 8,
     "scholar_cid": "KriQPeEAAAAJ:W7OEmFMy1HYC",
     "url": "https://doi.org/10.1302/0301-620X.106B3.BJJ-2023-0337.R3"
   },
@@ -612,7 +645,7 @@
     "year": 2023,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 2,
+    "citation_count": 3,
     "scholar_cid": "KriQPeEAAAAJ:zYLM7Y9cAGgC",
     "url": "https://doi.org/10.1016/j.knee.2023.09.006"
   },
@@ -624,7 +657,7 @@
     "year": 2023,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 5,
+    "citation_count": 6,
     "scholar_cid": "KriQPeEAAAAJ:2osOgNQ5qMEC",
     "url": "https://doi.org/10.1016/j.arth.2023.03.056"
   },
@@ -636,8 +669,8 @@
     "year": 2023,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 0,
-    "scholar_cid": "",
+    "citation_count": 7,
+    "scholar_cid": "KriQPeEAAAAJ:IjCSPb-OGe4C",
     "url": "https://doi.org/10.3390/medicina59122105"
   },
   {
@@ -659,7 +692,7 @@
     "year": 2023,
     "is_first_author": false,
     "author_role": "",
-    "citation_count": 88,
+    "citation_count": 99,
     "scholar_cid": "KriQPeEAAAAJ:9yKSN-GCB0IC",
     "url": "https://doi.org/10.1007/s00167-022-07227-5"
   },
@@ -683,7 +716,7 @@
     "year": 2023,
     "is_first_author": true,
     "author_role": "first",
-    "citation_count": 7,
+    "citation_count": 8,
     "scholar_cid": "KriQPeEAAAAJ:UeHWp8X0CEIC",
     "url": "https://doi.org/10.1007/s13534-023-00323-6"
   },

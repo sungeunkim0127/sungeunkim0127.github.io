@@ -31,7 +31,9 @@ AI_VENUE_KEYWORDS = [
     "arxiv", "cvpr", "chil", "midl", "ml4h", "psb", "eacl", "mlhc", "aaai",
     "ieee", "pmlr", "neurips", "iclr", "icml", "acl arr", "workshop",
     "nejm ai", "nature medicine", "npj digit", "machine learning for health",
-    "pacific symposium", "corl", "miccai",
+    "pacific symposium", "corl", "miccai", "medical image computing",
+    "health, inference, and learning", "computational linguistics", "emnlp",
+    "nature biomedical engineering",
 ]
 AI_TITLE_KEYWORDS = [
     "deep learning", "machine learning", "llm", "large language model",
@@ -40,7 +42,8 @@ AI_TITLE_KEYWORDS = [
     "voice ai", "agent", "vision language", "vision model", "simulator",
     "automated", "prediction", "predict", "metric for", "radiology education",
     "multi-agent", "sycophancy", "report generation", "question answering",
-    "neural", "transformer", "foundation model",
+    "neural", "transformer", "foundation model", "reinforcement learning",
+    "continual learning", "text generation", "imitation learning",
 ]
 ORTHO_VENUE_KEYWORDS = [
     "jbjs", "j bone joint", "bone joint j", "bone & joint", "kssta",
@@ -118,10 +121,10 @@ def classify_domain(pub: dict) -> str:
 
 def _norm_title(title: str) -> str:
     """Normalize a title for duplicate detection."""
-    t = unicodedata.normalize("NFKD", title or "").lower().strip()
-    t = re.sub(r"[^a-z0-9\s]", "", t)
-    t = re.sub(r"\s+", " ", t)
-    return t[:50]
+    # Alphanumerics only: "Fixed bearing" / "Fixed-bearing" and "Early- to" /
+    # "Early-to" are the same paper. Same key as merge_pubs in scrape_scholar.py.
+    t = unicodedata.normalize("NFKD", title or "").lower()
+    return re.sub(r"[^a-z0-9]", "", t)[:45]
 
 
 def dedupe_pubs(pubs: list[dict]) -> list[dict]:
