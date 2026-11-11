@@ -1,7 +1,7 @@
 {
   "author_highlight_name": "Kim SE",
   "show_more_cutoff_year": 2025,
-  "pub_count_display": "40+ Publications",
+  "pub_count_display": "50+ Publications",
   "exclude_ids": [
     "superior-oneyear-forgotten-joint-scores-with-cruciateretaini-2025",
     "beyond-the-scanner-a-benchmark-for-medical-photograph-unders-2026"
@@ -22,7 +22,19 @@
       "title": "ReXGroundingCT: A 3D Chest CT Dataset for Segmentation of Findings from Free-Text Reports",
       "venue": "NEJM AI 2026;3(7)"
     },
-    "ces-framework-nature-medicine-2026": {
+    "imitation-learning-for-robot-assistance-in-open-surgery-a-mu-2026": {
+   "venue": "MLHC 2026",
+   "url": "https://arxiv.org/abs/2605.28736"
+  },
+  "rexinthewild-a-unified-benchmark-for-medical-photograph-unde-2026": {
+   "venue": "ML4H 2026",
+   "url": "https://arxiv.org/abs/2603.19517"
+  },
+  "rexsonovqa-a-video-qa-benchmark-for-procedurecentric-ultraso-2026": {
+   "venue": "CHIL 2026",
+   "url": "https://arxiv.org/abs/2604.10916"
+  },
+  "ces-framework-nature-medicine-2026": {
       "authors": "Luo L*, Kim SE*, Zhang X, Kernbach JM, Kenia R, Acosta JN, ..., Topol E, Rajpurkar P",
       "venue": "Nature Medicine"
     },
