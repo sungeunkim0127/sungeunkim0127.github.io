@@ -3,8 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script>try{var _t=localStorage.getItem("theme");if(_t)document.documentElement.setAttribute("data-theme",_t);}catch(e){}</script>
-    <script>try{if(!sessionStorage.getItem("introSeen")&&!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)){document.documentElement.classList.add("intro-on");}}catch(e){}</script>
+    <meta name="theme-color" content="#071A1F" />
     <title>Sung Eun Kim, MD — Surgeon × AI Researcher, Harvard Medical School</title>
     <meta name="description" content="Sung Eun Kim, MD — surgeon × AI researcher. Research Scientist at Harvard Medical School and Director of Clinical AI and Robotics in the Rajpurkar Lab. A board-certified orthopedic surgeon building AI for medicine, with 50+ publications including Nature Medicine." />
 
@@ -45,505 +44,361 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400..500&display=swap" />
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔬</text></svg>" />
 
+    <!-- The operating-room scene is drawn with three.js; the page works without it. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+
     <style>
         :root {
-            --paper:        #F2EEE3;
-            --paper-deep:   #E9E3D3;
-            --paper-edge:   #D9D2BE;
-            --ink:          #161513;
-            --ink-soft:     #6A6258;
-            --ink-faint:    #9A9080;
-            --rule:         #C6BFAE;
-            --rule-soft:    #DCD5C2;
-            --accent:       #B0202B;
-            --accent-mid:   #7A4A3A;
-            --display-stack: 'Newsreader', Georgia, serif;
-            --serif-stack:   'Newsreader', Georgia, serif;
-            --mono-stack:    'JetBrains Mono', ui-monospace, Menlo, monospace;
-            --max:          1200px;
-            --gap:          clamp(20px, 2.5vw, 32px);
-            --pad-x:        clamp(20px, 4vw, 56px);
+            --theatre: #071A1F;          /* the room, lights down */
+            --theatre-rgb: 7, 26, 31;
+            --lamp:    #EEF7F6;          /* surgical-light white: primary text */
+            --steel:   #A3B9BD;          /* secondary text */
+            --dim:     #7A959B;          /* dates, counts */
+            --line:    rgba(163, 185, 189, .17);
+            --ai:      #62C9F2;          /* monitor channels double as the three research domains */
+            --both:    #FFB35C;
+            --ortho:   #62E0A6;
+            --accent:  #FFB35C;
+            --sans: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+            --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+            --gutter: clamp(20px, 7vw, 128px);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        /* ----- Opening scene (planned incision → neural net → name, sutured closed) ----- */
-        html.intro-on { background: #070a16; }
-        .intro { display: none; }
-        html.intro-on .intro {
-            display: block; position: fixed; inset: 0; z-index: 1000;
-            background: radial-gradient(125% 125% at 50% 42%, #1c2550 0%, #0d1430 46%, #070a16 80%);
-            overflow: hidden;
-            animation: introFailsafe 0s linear 9s forwards;
-        }
-        @keyframes introFailsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }
-        .intro__canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-        .intro__hud {
-            position: absolute; left: 0; right: 0; bottom: 13%; z-index: 1; text-align: center;
-            opacity: 0; transition: opacity 0.6s ease;
-        }
-        .intro.named .intro__hud { opacity: 1; }
-        .intro__tag { font-family: var(--mono-stack); font-size: 13px; font-weight: 500; letter-spacing: 0.26em; text-indent: 0.26em; text-transform: uppercase; color: #6fd8ec; }
-        .intro__enter { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #8d96a8; margin-top: 16px; animation: introBlink 1.8s ease-in-out infinite; }
-        @media (max-width: 600px) {
-            .intro__tag { font-size: 11px; letter-spacing: 0.18em; text-indent: 0.18em; }
-            .intro__hud { bottom: 16%; padding: 0 18px; }
-        }
-        @keyframes introBlink { 0%, 100% { opacity: 0.85; } 50% { opacity: 0.35; } }
-        .intro.is-out { opacity: 0; transform: scale(1.16); filter: blur(7px); transition: opacity 0.6s cubic-bezier(0.5, 0, 0.9, 0.3), transform 0.6s cubic-bezier(0.5, 0, 0.9, 0.3), filter 0.6s ease; pointer-events: none; }
-
-        html, body {
-            background-color: var(--paper);
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.07 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-            background-repeat: repeat;
-            background-blend-mode: multiply;
-            color: var(--ink);
-            font-family: var(--serif-stack);
-            font-size: 17px;
-            line-height: 1.55;
-            text-rendering: optimizeLegibility;
-            font-kerning: normal;
-            font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        body {
+            margin: 0;
+            color: var(--lamp);
+            font: 400 16px/1.6 var(--sans);
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
+            /* Stand-in for the scene when WebGL is unavailable: two pools of lamp light. */
+            background:
+                radial-gradient(46vw 40vh at 72% 34%, rgba(98, 224, 214, .16), transparent 70%),
+                radial-gradient(30vw 26vh at 84% 58%, rgba(238, 247, 246, .07), transparent 70%),
+                var(--theatre);
+            background-attachment: fixed;
+        }
+        a { color: inherit; }
+        :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+        ::selection { background: var(--accent); color: var(--theatre); }
+
+        /* ----- Scene + scrim ----- */
+        #or { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; }
+        .no-gl #or { display: none; }
+        .scrim {
+            position: fixed; inset: 0; z-index: 1; pointer-events: none;
+            background: linear-gradient(90deg,
+                rgba(var(--theatre-rgb), .96) 0%,
+                rgba(var(--theatre-rgb), .92) 38%,
+                rgba(var(--theatre-rgb), .4) 60%,
+                rgba(var(--theatre-rgb), 0) 78%);
         }
 
-        a { color: inherit; text-decoration: none; }
-
-        .mono {
-            font-family: var(--mono-stack);
-            font-feature-settings: "ss01", "ss02";
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            font-weight: 500;
+        /* ----- Top bar ----- */
+        .bar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 5;
+            display: flex; justify-content: space-between; align-items: center; gap: 24px;
+            padding: 16px var(--gutter) 28px;
+            background: linear-gradient(rgba(var(--theatre-rgb), .97) 0%, rgba(var(--theatre-rgb), .9) 55%, rgba(var(--theatre-rgb), 0) 100%);
+            font-size: 14px;
         }
-        .mono--sm { font-size: 11px; letter-spacing: 0.08em; }
+        .bar a { text-decoration: none; color: var(--steel); }
+        .bar a:hover { color: var(--lamp); }
+        .bar .bar__name { color: var(--lamp); font-weight: 500; }
+        .bar__nav { display: flex; gap: 26px; }
 
-        .dot {
-            display: inline-block;
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            margin-right: 0.5em;
-            vertical-align: middle;
-            background: var(--ink-soft);
+        /* ----- Page column ----- */
+        .page {
+            position: relative; z-index: 2;
+            width: min(700px, 54vw);
+            margin-left: var(--gutter);
+            padding-bottom: 72px;
         }
-        .dot--accent { background: var(--accent); animation: pulse 2.4s ease-in-out infinite; }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50%      { opacity: 0.5; transform: scale(0.78); }
-        }
-
-        /* ----- Layout shell ----- */
-        .app { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad-x); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
-        /* Hidden under the opening scene, then settles in as the curtain warps away.
-           The delayed animation reveals it even if JS never removes intro-on (no-JS failsafe). */
-        html.intro-on .app { opacity: 0; transform: scale(0.985); animation: appArrive 0.01s linear 9s forwards; }
-        @keyframes appArrive { to { opacity: 1; transform: none; } }
-        .section { padding-block: clamp(48px, 7vw, 96px); border-top: 1px solid var(--rule-soft); }
-        .section:first-of-type { border-top: 0; }
+        .page > section { padding-top: clamp(72px, 11vh, 120px); }
+        section[id] { scroll-margin-top: 8px; }
+        h2 { margin: 0 0 24px; font: 500 clamp(24px, 2.3vw, 30px)/1.2 var(--sans); letter-spacing: -.015em; }
+        h3 { margin: 0; font: 500 17px/1.35 var(--sans); }
 
         /* ----- Hero ----- */
-        .hero { position: relative; padding: 28px 0 56px; }
-        .hero__attn {
-            position: absolute; inset: 0; z-index: 0; pointer-events: none;
-            mask-image: linear-gradient(180deg, black 0%, transparent 70%);
-            -webkit-mask-image: linear-gradient(180deg, black 0%, transparent 70%);
-            opacity: 0; transition: opacity 0.6s;
+        .page > .hero { min-height: 100svh; padding-top: 108px; padding-bottom: 40px; display: flex; flex-direction: column; justify-content: center; }
+        .hero__portrait { width: 104px; height: 104px; border-radius: 22px; object-fit: cover; object-position: 50% 18%; display: block; box-shadow: 0 0 0 1px rgba(238, 247, 246, .28); }
+        .hero__name { margin: 28px 0 0; font: 300 clamp(60px, 5.4vw, 88px)/1 var(--sans); letter-spacing: -.04em; white-space: nowrap; }
+        .hero__tag { margin: 16px 0 0; font: 400 clamp(19px, 2vw, 24px)/1.3 var(--sans); color: var(--steel); letter-spacing: -.01em; }
+        .hero__titles { margin: 26px 0 0; padding: 0; list-style: none; font-weight: 500; }
+        .hero__titles span { color: var(--steel); font-weight: 400; }
+        .hero__bio { margin: 18px 0 0; max-width: 60ch; color: var(--steel); }
+        .hero__bio a { color: var(--lamp); text-decoration-color: var(--line); text-underline-offset: 4px; }
+        .hero__bio a:hover { text-decoration-color: var(--accent); }
+        .hero__figs { margin: 22px 0 0; display: flex; flex-wrap: wrap; gap: 6px 30px; color: var(--steel); }
+        .hero__figs b { font: 500 20px/1 var(--mono); color: var(--lamp); margin-right: 6px; }
+        .hero__links { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; }
+        .btn {
+            display: inline-block; padding: 9px 18px; border-radius: 999px; text-decoration: none;
+            font: 500 14px/1.3 var(--sans); color: var(--lamp); border: 1px solid rgba(238, 247, 246, .3);
+            background: rgba(var(--theatre-rgb), .45);
+            transition: border-color .15s, background-color .15s, color .15s;
         }
-        [data-attn="on"] .hero__attn { opacity: 0.6; }
-        .hero__attn .neuralfield { display: block; width: 100%; height: 100%; }
-        .hero > * { position: relative; z-index: 1; }
-        .hero > .hero__attn { position: absolute; z-index: 0; }
-        .hero__top {
-            display: flex; justify-content: space-between; align-items: center;
-            padding-bottom: 28px; border-bottom: 1px solid var(--rule);
-            color: var(--ink-soft); gap: 16px; flex-wrap: wrap;
+        .btn:hover { border-color: var(--lamp); }
+        .btn--solid { background: var(--lamp); color: var(--theatre); border-color: var(--lamp); }
+        .btn--solid:hover { background: #fff; }
+
+        /* One orchestrated moment: the copy arrives as the theatre lights come up. */
+        @keyframes arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+        .hero > * { animation: arrive .8s cubic-bezier(.2, .7, .2, 1) both; }
+        .hero > :nth-child(1) { animation-delay: .35s; }
+        .hero > :nth-child(2) { animation-delay: .45s; }
+        .hero > :nth-child(3) { animation-delay: .55s; }
+        .hero > :nth-child(4) { animation-delay: .7s; }
+        .hero > :nth-child(5) { animation-delay: .8s; }
+        .hero > :nth-child(6) { animation-delay: .9s; }
+        .hero > :nth-child(7) { animation-delay: 1s; }
+
+        /* ----- Research ----- */
+        .themes { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 40px; }
+        .theme p { margin: 6px 0 0; color: var(--steel); font-size: 15px; }
+        .theme .theme__refs { margin-top: 8px; color: var(--dim); font-size: 13.5px; }
+
+        /* ----- Selected work ----- */
+        .feat { display: grid; grid-template-columns: minmax(0, 230px) 1fr; gap: 24px; align-items: start; text-decoration: none; margin-bottom: 30px; }
+        .feat img { width: 100%; display: block; border-radius: 6px; background: #fff; }
+        .feat h3 { font-size: 21px; letter-spacing: -.01em; }
+        .feat:hover h3 { color: var(--accent); }
+        .feat p { margin: 8px 0 0; color: var(--steel); font-size: 15px; }
+        .feat .feat__venue { margin: 0 0 6px; font: 500 13px/1.4 var(--mono); color: var(--accent); }
+
+        /* ----- Row lists (selected papers, news, experience, awards) ----- */
+        .rows { list-style: none; margin: 0; padding: 0; }
+        .rows > li { display: grid; grid-template-columns: 112px 1fr; gap: 0 20px; padding: 12px 0; border-top: 1px solid var(--line); }
+        .rows .when { font: 400 13px/1.85 var(--mono); color: var(--dim); }
+        .rows .what { display: block; font-weight: 500; text-decoration: none; }
+        .rows a.what:hover { color: var(--accent); }
+        .rows .sub { display: block; color: var(--steel); font-size: 14.5px; }
+        .rows--plain .what { font-weight: 400; }
+
+        /* ----- Publications ----- */
+        .pubhead { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; }
+        .pubhead a { font-size: 14px; color: var(--steel); text-underline-offset: 4px; }
+        .pubhead a:hover { color: var(--accent); }
+        .search {
+            width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid var(--line);
+            background: rgba(var(--theatre-rgb), .55); color: var(--lamp); font: 400 15px/1.3 var(--sans);
         }
-        .hero__top-right { text-align: right; }
-        .hero__grid {
-            display: grid; grid-template-columns: 1fr minmax(200px, 280px);
-            gap: clamp(28px, 3.5vw, 44px); padding-top: 56px; align-items: start;
+        .search::placeholder { color: var(--dim); }
+        .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .pill {
+            display: inline-flex; align-items: center; gap: 7px; padding: 5px 13px; border-radius: 999px; cursor: pointer;
+            font: 500 13px/1.4 var(--sans); color: var(--steel); background: transparent; border: 1px solid var(--line);
         }
-        .hero__portrait { max-width: 280px; justify-self: end; width: 100%; overflow: hidden; }
-        @media (max-width: 900px) {
-            .hero__grid { grid-template-columns: 1fr; }
-            .hero__portrait { max-width: 230px; justify-self: start; }
+        .pill:hover { color: var(--lamp); border-color: rgba(238, 247, 246, .4); }
+        .pill[aria-pressed="true"] { color: var(--theatre); background: var(--lamp); border-color: var(--lamp); }
+        .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; display: inline-block; }
+        .dot--ai, .seg--ai { background: var(--ai); }
+        .dot--both, .seg--both { background: var(--both); }
+        .dot--ortho, .seg--ortho { background: var(--ortho); }
+
+        /* Papers per year: the chart is the year filter. */
+        .years { display: flex; align-items: flex-end; gap: 8px; margin-top: 22px; }
+        .yr { flex: 1; display: flex; flex-direction: column; align-items: stretch; gap: 6px; padding: 0; border: 0; background: none; cursor: pointer; color: var(--dim); font: 400 12.5px/1 var(--mono); text-align: center; }
+        .yr__n { color: var(--steel); }
+        .yr__bar { display: flex; flex-direction: column; border-radius: 3px; overflow: hidden; opacity: .8; transition: opacity .15s; }
+        .yr__label { padding-top: 2px; }
+        .yr:hover .yr__bar, .yr[aria-pressed="true"] .yr__bar { opacity: 1; }
+        .yr[aria-pressed="true"], .yr[aria-pressed="true"] .yr__n { color: var(--lamp); }
+        .years.is-filtered .yr[aria-pressed="false"] .yr__bar { opacity: .3; }
+
+        .pubstatus { margin: 22px 0 0; font: 400 13px/1.4 var(--mono); color: var(--dim); }
+        .yearhead { margin: 22px 0 2px; font: 500 13px/1.4 var(--mono); color: var(--dim); }
+        .publist { list-style: none; margin: 0; padding: 0; }
+        .pub { display: grid; grid-template-columns: 8px 1fr; gap: 0 14px; padding: 11px 0; border-top: 1px solid var(--line); text-decoration: none; }
+        .pub .dot { margin-top: 9px; }
+        .pub__t { font-weight: 500; }
+        a.pub:hover .pub__t { color: var(--accent); }
+        .pub__first { margin-left: 8px; font: 500 11.5px/1 var(--mono); color: var(--accent); white-space: nowrap; }
+        .pub__m { grid-column: 2; color: var(--steel); font-size: 14.5px; overflow-wrap: anywhere; }
+        .more { margin-top: 18px; }
+        button.btn { cursor: pointer; }
+
+        .foot { margin-top: 96px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13px; color: var(--dim); }
+
+        /* ----- Narrow screens: the scene sits above the copy, then dims as you read ----- */
+        @media (max-width: 999px) {
+            .scrim {
+                background: linear-gradient(180deg,
+                    rgba(var(--theatre-rgb), 0) 0%,
+                    rgba(var(--theatre-rgb), .2) 24%,
+                    rgba(var(--theatre-rgb), .9) 44%,
+                    rgba(var(--theatre-rgb), .95) 100%);
+            }
+            .scrim::after { content: ""; position: absolute; inset: 0; background: rgba(var(--theatre-rgb), .88); opacity: var(--scrolled, 0); }
+            .page { width: auto; margin: 0 var(--gutter); }
+            .page > .hero { justify-content: flex-start; padding-top: 38svh; min-height: 0; }
+            .hero__portrait { width: 84px; height: 84px; border-radius: 18px; }
+            .hero__name { font-size: clamp(34px, 10.2vw, 72px); }
         }
-        .hero__role { color: var(--ink-soft); margin-bottom: 24px; display: inline-flex; align-items: center; }
-        .hero__name {
-            font-family: var(--display-stack);
-            font-size: clamp(34px, 4.8vw, 54px);
-            line-height: 1.0; letter-spacing: -0.022em; font-weight: 400;
-            margin-bottom: 28px; text-wrap: pretty;
+        @media (max-width: 719px) {
+            .bar__nav { display: none; }
+            .themes { grid-template-columns: 1fr; }
+            .feat { grid-template-columns: 1fr; }
+            .feat img { max-width: 320px; }
+            .rows > li { grid-template-columns: 1fr; }
+            .rows .when { line-height: 1.5; }
         }
-        .hero__titles { display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; font-size: 17px; color: var(--ink); }
-        .hero__title-line {
-            display: grid; grid-template-columns: 36px 1fr; gap: 8px; align-items: baseline;
-            border-top: 1px dashed var(--rule); padding-top: 6px;
-        }
-        .hero__title-line:first-child { border-top: 1px solid var(--rule); }
-        .hero__title-num { color: var(--ink-faint); }
-        .hero__bio { font-size: 17px; line-height: 1.6; color: var(--ink); max-width: min(64ch, 100%); margin: 24px 0 28px; text-wrap: pretty; }
-        .hero__bio::first-letter {
-            float: left; font-family: var(--display-stack); font-weight: 400;
-            font-size: 3.6em; line-height: 0.92; padding: 6px 10px 0 0; color: var(--ink);
-        }
-        .hero__links { display: flex; gap: 10px; flex-wrap: wrap; }
-        .link {
-            font-family: var(--mono-stack); font-size: 11.5px; letter-spacing: 0.08em;
-            text-transform: uppercase; font-weight: 500; padding: 9px 14px 9px 12px;
-            border: 1px solid var(--ink); background: transparent; color: var(--ink);
-            display: inline-flex; align-items: center; gap: 6px; transition: all 0.18s ease; cursor: pointer;
-        }
-        .link:hover { background: var(--ink); color: var(--paper); }
-        .link__arrow { display: inline-block; transition: transform 0.18s ease; font-size: 14px; line-height: 1; }
-        .link:hover .link__arrow { transform: translate(2px, -2px); }
-
-        /* ----- Portrait ----- */
-        .portrait { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 14%; transform: scale(1.12); transform-origin: center 24%; display: block; filter: contrast(1.02) saturate(0.92); }
-
-        /* ----- Stats ----- */
-        .hero__stats {
-            display: grid; grid-template-columns: repeat(3, minmax(150px, 240px)); justify-content: start; gap: 0; margin-top: 64px;
-            border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
-        }
-        @media (max-width: 740px) { .hero__stats { grid-template-columns: repeat(2, 1fr); } }
-        .stat__value.stat__value--focus { font-size: clamp(17px, 1.6vw, 21px); line-height: 1.25; letter-spacing: -0.01em; }
-        .stat { padding: 22px 18px 22px 0; border-left: 1px solid var(--rule-soft); padding-left: 16px; }
-        .stat:first-child { border-left: 0; padding-left: 0; }
-        .stat__value { font-family: var(--display-stack); font-size: clamp(36px, 4vw, 52px); line-height: 1; letter-spacing: -0.02em; font-weight: 400; margin-bottom: 6px; font-variant-numeric: tabular-nums lining; }
-        .stat__label { font-size: 14px; color: var(--ink); margin-bottom: 4px; }
-        .stat__note { color: var(--ink-soft); }
-
-        /* ----- Section headers ----- */
-        .sech { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 16px 24px; margin-bottom: 36px; padding-bottom: 16px; border-bottom: 1px solid var(--rule); }
-        .sech__left { display: flex; align-items: center; gap: 12px; color: var(--ink-soft); grid-column: 1 / -1; }
-        .sech__num { color: var(--accent); white-space: nowrap; }
-        .sech__title { font-family: var(--display-stack); font-size: clamp(32px, 4.5vw, 56px); line-height: 1; letter-spacing: -0.02em; font-weight: 400; grid-column: 1; }
-        .sech__right { grid-column: 2; align-self: end; }
-        .sech--sm .sech__title { font-size: clamp(24px, 3vw, 36px); }
-
-        /* ----- Publication bar chart ----- */
-        .vizsection { padding-block: clamp(48px, 6vw, 72px); }
-        .vizsection__hint { color: var(--ink-soft); }
-        .barchart { background: var(--paper-deep); border: 1px solid var(--rule); padding: 18px 18px 10px; }
-        .barchart__head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
-        .barchart__toggle { display: inline-flex; gap: 6px; }
-        .barchart__ymax { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
-        .barchart__plot { display: flex; align-items: flex-end; gap: clamp(6px, 1.6vw, 20px); height: 240px; padding-top: 6px; }
-        .bar-col { flex: 1 1 0; min-width: 0; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; cursor: pointer; transition: opacity 0.2s ease; }
-        .bar__value { font-family: var(--mono-stack); font-size: 12px; color: var(--ink); margin-bottom: 7px; font-variant-numeric: tabular-nums; opacity: 0; transition: opacity 0.4s ease 0.5s; }
-        .bar-col.shown .bar__value { opacity: 0.85; }
-        .bar { width: clamp(14px, 62%, 52px); display: flex; flex-direction: column; justify-content: flex-start; border-radius: 3px 3px 0 0; overflow: hidden; height: 0; transition: height 0.85s cubic-bezier(0.22, 1, 0.36, 1); }
-        .bar__seg { width: 100%; transition: height 0.85s cubic-bezier(0.22, 1, 0.36, 1); }
-        .bar__seg.seg--ai { background: var(--accent); }
-        .bar__seg.seg--both { background: var(--accent-mid); }
-        .bar__seg.seg--ortho { background: var(--ink-soft); }
-        .bar-col:hover .bar { filter: brightness(1.1) saturate(1.05); }
-        .bar__label { font-family: var(--mono-stack); font-size: 11px; letter-spacing: 0.06em; color: var(--ink-soft); margin-top: 9px; font-variant-numeric: tabular-nums; }
-        .bar-col:hover .bar__label, .bar-col.on .bar__label { color: var(--accent); }
-        .barchart__pill { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 12px; background: transparent; border: 1px solid var(--rule); color: var(--ink); cursor: pointer; transition: all 0.15s ease; }
-        .barchart__pill:hover { border-color: var(--ink); }
-        .barchart__pill.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-        .pubviz { background: var(--paper-deep); border: 1px solid var(--rule); padding: 8px; }
-        .pubviz__svg { width: 100%; display: block; background: var(--paper); }
-        .pubviz__year { fill: var(--ink-soft); font-family: var(--mono-stack); font-size: 10px; letter-spacing: 0.08em; }
-        .pubviz__axis { fill: var(--ink-soft); font-family: var(--mono-stack); font-size: 9px; letter-spacing: 0.08em; }
-        .pubviz__caption { display: grid; grid-template-columns: 1fr auto; gap: 16px; padding: 14px 12px 8px; border-top: 1px solid var(--rule-soft); margin-top: 8px; align-items: center; }
-        @media (max-width: 720px) { .pubviz__caption { grid-template-columns: 1fr; } }
-        .pubviz__legend { display: flex; gap: 16px; flex-wrap: wrap; }
-        .pubviz__lg { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
-        .pubviz__dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
-        .pubviz__dot.ld--ai { background: var(--accent); }
-        .pubviz__dot.ld--both { background: var(--accent-mid); }
-        .pubviz__dot.ld--ortho { background: var(--ink-soft); }
-        .pubviz__hover { min-height: 24px; display: flex; gap: 12px; align-items: baseline; justify-content: flex-end; font-size: 13px; color: var(--ink); }
-        @media (max-width: 720px) { .pubviz__hover { justify-content: flex-start; } }
-        .pubviz__hover-venue { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
-        .pubviz__hover-title { font-style: italic; }
-        .pubviz__hover-empty { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
-
-        /* ----- Research themes ----- */
-        .themes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border-top: 1px solid var(--rule-soft); }
-        @media (max-width: 760px) { .themes { grid-template-columns: 1fr; } }
-        .theme { padding: 32px 24px 32px 0; border-bottom: 1px solid var(--rule-soft); border-right: 1px solid var(--rule-soft); padding-left: 24px; position: relative; }
-        .theme:nth-child(2n) { border-right: 0; }
-        .theme:nth-child(odd) { padding-left: 0; }
-        .theme:nth-child(even) { padding-left: 24px; }
-        .theme:nth-last-child(-n+2) { border-bottom: 0; }
-        @media (max-width: 760px) {
-            .theme { border-right: 0; padding-left: 0 !important; }
-            .theme:nth-last-child(-n+2) { border-bottom: 1px solid var(--rule-soft); }
-            .theme:last-child { border-bottom: 0; }
-        }
-        .theme__num { color: var(--ink-faint); font-size: 12px; margin-bottom: 12px; }
-        .theme__label { font-family: var(--display-stack); font-size: 28px; line-height: 1.05; letter-spacing: -0.015em; font-weight: 400; margin-bottom: 12px; }
-        .theme__blurb { font-size: 16px; color: var(--ink); margin-bottom: 18px; max-width: 48ch; text-wrap: pretty; }
-        .theme__papers { list-style: none; display: flex; flex-direction: column; gap: 4px; color: var(--ink-soft); }
-        .theme__papers li { font-size: 11px; }
-
-        /* ----- Featured paper ----- */
-        .feat { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(20px, 3vw, 36px); align-items: stretch; background: var(--paper-deep); color: var(--ink); padding: clamp(20px, 2.4vw, 28px); position: relative; transition: transform 0.2s ease, box-shadow 0.2s ease; border: 1px solid var(--rule); }
-        .feat + .feat { margin-top: clamp(20px, 3vw, 36px); }
-        @media (max-width: 820px) { .feat { grid-template-columns: 1fr; } }
-        .feat:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -20px rgba(0, 0, 0, 0.22); }
-        .feat__figure { display: flex; flex-direction: column; gap: 10px; }
-        .feat__figure img { width: 100%; height: auto; display: block; background: #fff; border: 1px solid var(--rule-soft); padding: 16px; box-sizing: border-box; }
-        .feat__figure-caption { color: var(--ink-soft); font-size: 10px !important; line-height: 1.5; text-transform: none; letter-spacing: 0.02em; font-style: italic; }
-        .feat__body { display: flex; flex-direction: column; justify-content: center; padding: 6px 4px 6px 0; }
-        .feat__meta { display: flex; gap: 14px; margin-bottom: 18px; flex-wrap: wrap; color: var(--ink-soft); }
-        .feat__venue { color: var(--accent) !important; }
-        .feat__title { font-family: var(--display-stack); font-size: clamp(22px, 2.4vw, 30px); line-height: 1.15; letter-spacing: -0.015em; font-weight: 400; margin-bottom: 14px; text-wrap: pretty; }
-        .feat__authors { font-size: 13.5px; font-style: italic; color: var(--ink-soft); margin-bottom: 14px; }
-        .feat__abstract { font-size: 15px; line-height: 1.55; margin-bottom: 18px; text-wrap: pretty; }
-        .feat__cta { font-size: 11px; letter-spacing: 0.1em; color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 2px; align-self: flex-start; }
-
-        /* ----- Highlights ----- */
-        .highlights { display: flex; flex-direction: column; }
-        .hl { display: grid; grid-template-columns: 80px 1fr 24px; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--rule-soft); transition: all 0.18s ease; align-items: start; }
-        .hl:hover { padding-left: 8px; }
-        .hl:last-child { border-bottom: 0; }
-        .hl__year { font-size: 22px; color: var(--accent); letter-spacing: 0; font-family: var(--display-stack); text-transform: none; font-variant-numeric: tabular-nums lining; }
-        .hl__title { font-family: var(--display-stack); font-size: 22px; line-height: 1.2; letter-spacing: -0.015em; font-weight: 400; margin-bottom: 6px; text-wrap: pretty; }
-        .hl__authors { font-size: 13.5px; color: var(--ink-soft); font-style: italic; margin-bottom: 8px; }
-        .hl__meta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-        .hl__tags { display: inline-flex; gap: 6px; flex-wrap: wrap; }
-        .hl__arrow { font-size: 18px; color: var(--ink-faint); transition: all 0.18s ease; align-self: center; }
-        .hl:hover .hl__arrow { color: var(--accent); transform: translate(3px, -3px); }
-
-        /* ----- Chips ----- */
-        .chip { font-family: var(--mono-stack); font-size: 9.5px; letter-spacing: 0.08em; font-weight: 500; padding: 3px 8px; border: 1px solid var(--rule); color: var(--ink-soft); white-space: nowrap; }
-        .chip--ai     { color: var(--accent); border-color: var(--accent); }
-        .chip--both   { color: var(--accent-mid); border-color: var(--accent-mid); }
-        .chip--ortho  { color: var(--ink-soft); }
-        .chip--sm     { font-size: 9px; padding: 2px 6px; }
-
-        /* ----- Filters / pills ----- */
-        .filters { display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px; padding: 18px; background: var(--paper-deep); border: 1px solid var(--rule-soft); }
-        .filters__group { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-        .filters__label { color: var(--ink-soft); margin-right: 6px; }
-        .pill { font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 10px; background: transparent; border: 1px solid var(--rule); color: var(--ink); cursor: pointer; transition: all 0.15s ease; }
-        .pill:hover { border-color: var(--ink); }
-        .pill--on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-        .pubcount { color: var(--ink-faint); margin-bottom: 16px; padding-left: 4px; }
-
-        /* ----- Publications list ----- */
-        .pubs__year-block { margin-bottom: 28px; }
-        .pubs__year-label { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
-        .pubs__year-num { font-family: var(--display-stack); font-size: 28px; letter-spacing: -0.01em; text-transform: none; color: var(--accent); font-variant-numeric: tabular-nums lining; }
-        .pubs__year-rule { flex: 1; height: 1px; background: var(--rule-soft); }
-        .pubs__year-count { color: var(--ink-soft); }
-        .pub { display: block; padding: 14px 0; border-bottom: 1px dashed var(--rule-soft); transition: all 0.15s ease; position: relative; }
-        .pub:last-child { border-bottom: 0; }
-        .pub:hover { padding-left: 12px; background: linear-gradient(90deg, var(--paper-deep) 0%, transparent 60%); }
-        .pub--no-link { cursor: default; }
-        .pub--no-link:hover { padding-left: 0; background: none; }
-        .pub__title-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
-        .pub__title { font-family: var(--display-stack); font-size: 18px; line-height: 1.3; letter-spacing: -0.005em; text-wrap: pretty; }
-        .pub__star { color: var(--accent); font-size: 14px; }
-        .pub__authors { display: block; font-size: 13px; font-style: italic; color: var(--ink-soft); margin-bottom: 6px; }
-        .pub__meta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-        .pub__tags { display: inline-flex; gap: 4px; flex-wrap: wrap; }
-        .expand { margin-top: 18px; padding: 14px 20px; width: 100%; background: transparent; border: 1px solid var(--rule); color: var(--ink); cursor: pointer; transition: all 0.18s ease; }
-        .expand:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-
-        /* ----- News / under review ----- */
-        .twocol { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(32px, 5vw, 64px); }
-        @media (max-width: 800px) { .twocol { grid-template-columns: 1fr; } }
-        .news { list-style: none; display: flex; flex-direction: column; gap: 0; }
-        .news__item { display: grid; grid-template-columns: 80px 1fr; gap: 16px; align-items: baseline; padding: 12px 0; border-bottom: 1px dashed var(--rule-soft); }
-        .news__item:last-child { border-bottom: 0; }
-        .news__date { color: var(--accent); }
-        .news__text { font-size: 15.5px; transition: color 0.15s ease; }
-        a.news__text:hover { color: var(--accent); }
-        .ur { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-        .ur__item { display: grid; grid-template-columns: 20px 1fr; gap: 10px; font-size: 15.5px; font-style: italic; color: var(--ink); padding: 8px 0; border-bottom: 1px dashed var(--rule-soft); }
-        .ur__item:last-child { border-bottom: 0; }
-        .ur__item .mono { color: var(--accent); font-style: normal; }
-
-        /* ----- Timeline ----- */
-        .timeline { list-style: none; display: flex; flex-direction: column; position: relative; }
-        .tl { display: grid; grid-template-columns: 180px 32px 1fr; gap: 18px; padding: 18px 0; position: relative; }
-        @media (max-width: 760px) { .tl { grid-template-columns: 1fr; gap: 4px; padding: 14px 0; } .tl__marker { display: none; } }
-        .tl__dates { display: flex; gap: 6px; flex-wrap: wrap; align-items: baseline; color: var(--ink-soft); padding-top: 4px; }
-        .tl__dash { color: var(--ink-faint); }
-        .tl__marker { position: relative; display: flex; justify-content: center; }
-        .tl__marker::before { content: ""; position: absolute; top: 0; bottom: -36px; left: 50%; width: 1px; background: var(--rule); }
-        .tl:last-child .tl__marker::before { bottom: 0; }
-        .tl__dot { width: 9px; height: 9px; border-radius: 50%; background: var(--paper); border: 1.6px solid var(--accent); position: relative; margin-top: 8px; z-index: 1; }
-        .tl:first-child .tl__dot { background: var(--accent); }
-        .tl__role { font-family: var(--display-stack); font-size: 22px; line-height: 1.2; letter-spacing: -0.01em; font-weight: 400; margin-bottom: 2px; }
-        .tl__org { font-size: 14px; color: var(--ink); margin-bottom: 4px; }
-        .tl__detail { font-size: 14px; color: var(--ink-soft); font-style: italic; max-width: 70ch; text-wrap: pretty; }
-
-        /* ----- Awards ----- */
-        .awards { list-style: none; display: flex; flex-direction: column; }
-        .award { display: grid; grid-template-columns: 120px 1fr; gap: 18px; padding: 14px 0; border-bottom: 1px dashed var(--rule-soft); align-items: baseline; }
-        .award:last-child { border-bottom: 0; }
-        .award__year { color: var(--accent); padding-top: 2px; }
-        .award__title { font-family: var(--display-stack); font-size: 20px; line-height: 1.2; letter-spacing: -0.005em; }
-        .award__note { font-size: 14px; color: var(--ink-soft); font-style: italic; }
-
-        /* ----- Footer ----- */
-        .footer { padding: 48px 0 64px; position: relative; }
-        .footer__rule { height: 1px; background: var(--rule); margin-bottom: 24px; }
-        .footer__row { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; color: var(--ink-soft); }
-
-        ::selection { background: var(--accent); color: var(--paper); }
-
-        /* ----- Dark theme ----- */
-        [data-theme="dark"] {
-            --paper: #14130F; --paper-deep: #1B1A15; --paper-edge: #26241D;
-            --ink: #EEEAE0; --ink-soft: #A8A192; --ink-faint: #6A6258;
-            --rule: #34322B; --rule-soft: #232118;
-        }
-        [data-theme="dark"] .portrait { filter: contrast(1.02) saturate(0.85) brightness(0.95); }
-        [data-theme="dark"] .feat__figure img { background: #f4f1ea; }
-
-        /* ----- Reading progress bar ----- */
-        .progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--accent); z-index: 200; transition: width 0.08s linear; }
-
-        /* ----- Theme toggle ----- */
-        .themebtn {
-            position: fixed; right: 18px; bottom: 18px; z-index: 200;
-            font-family: var(--mono-stack); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase;
-            padding: 8px 12px; border: 1px solid var(--rule); background: var(--paper-deep); color: var(--ink-soft);
-            cursor: pointer; display: inline-flex; align-items: center; gap: 7px; transition: all 0.18s ease;
-            box-shadow: 0 4px 16px -10px rgba(0,0,0,0.4);
-        }
-        .themebtn:hover { color: var(--ink); border-color: var(--ink); }
-        .themebtn__icon { font-size: 13px; line-height: 1; }
-
-        /* ----- Scroll reveal ----- */
-        .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); will-change: opacity, transform; }
-        .reveal.in { opacity: 1; transform: none; }
-
-        /* ----- Section-header accent grow ----- */
-        .sech { position: relative; }
-        .sech::after { content: ""; position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background: var(--accent); transition: width 0.8s cubic-bezier(0.22,1,0.36,1) 0.15s; }
-        .section.in .sech::after, .hero.in .sech::after { width: 56px; }
-
-        /* ----- Sticky section nav ----- */
-        .secnav { position: fixed; right: 16px; top: 50%; transform: translateY(-50%); z-index: 90; display: flex; flex-direction: column; gap: 11px; }
-        @media (max-width: 1180px) { .secnav { display: none; } }
-        .secnav a { display: flex; align-items: center; justify-content: flex-end; gap: 8px; color: var(--ink-faint); font-family: var(--mono-stack); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; }
-        .secnav__label { opacity: 0; transform: translateX(4px); transition: opacity 0.2s ease, transform 0.2s ease; white-space: nowrap; }
-        .secnav a:hover .secnav__label { opacity: 1; transform: none; }
-        .secnav__dot { width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--ink-faint); background: transparent; transition: all 0.2s ease; flex: none; }
-        .secnav a.on .secnav__dot { background: var(--accent); border-color: var(--accent); transform: scale(1.25); }
-        .secnav a.on .secnav__label { opacity: 1; transform: none; color: var(--ink-soft); }
-
-        /* ----- Publication search ----- */
-        .pubsearch { width: 100%; font-family: var(--mono-stack); font-size: 12px; letter-spacing: 0.03em; padding: 10px 12px; background: var(--paper); border: 1px solid var(--rule); color: var(--ink); }
-        .pubsearch::placeholder { color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px; }
-        .pubsearch:focus { outline: none; border-color: var(--ink); }
-
-        /* ----- Custom hero cursor ----- */
-        .herocursor {
-            position: fixed; left: 0; top: 0; width: 26px; height: 26px;
-            border: 1.5px solid var(--accent); border-radius: 50%;
-            pointer-events: none; z-index: 150; opacity: 0;
-            mix-blend-mode: multiply;
-            transition: opacity 0.25s ease, width 0.18s ease, height 0.18s ease, background 0.18s ease, border-color 0.18s ease;
-        }
-        .herocursor.show { opacity: 0.7; }
-        .herocursor.grow { width: 46px; height: 46px; background: rgba(176, 32, 43, 0.08); }
-        [data-theme="dark"] .herocursor { mix-blend-mode: screen; }
-
-        /* ----- Clickable constellation legend ----- */
-        .pubviz__lg { cursor: pointer; transition: color 0.18s ease, opacity 0.18s ease; }
-        .pubviz__lg.on { color: var(--ink); }
-        .pubviz__lg.dim { opacity: 0.4; }
-
-        /* ----- Keyboard focus ----- */
-        a:focus-visible, button:focus-visible, input:focus-visible,
-        .pill:focus-visible, .link:focus-visible, .pubviz__lg:focus-visible,
-        .secnav a:focus-visible, .themebtn:focus-visible, .pub:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 2px;
-        }
-
-        /* ----- Small-screen header tidy-up ----- */
-        @media (max-width: 600px) {
-            .hero__top-right { display: none; }
-            .hero__top { font-size: 10px; }
-            .sech { grid-template-columns: 1fr; }
-            .sech__right { grid-column: 1; align-self: start; justify-self: start; }
-        }
-
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
-            .reveal { opacity: 1; transform: none; }
+            html { scroll-behavior: auto; }
+            .hero > * { animation: none; }
         }
     </style>
 </head>
-<body data-attn="on">
+<body>
 
-    <!-- Opening scene (shown via html.intro-on; JS drives it, CSS fail-safe reveals if JS is absent) -->
-    <div class="intro" id="intro" aria-hidden="true">
-        <canvas class="intro__canvas" id="intro-canvas"></canvas>
-        <div class="intro__hud">
-            <div class="intro__tag">Surgeon × AI Researcher</div>
-            <div class="intro__enter">Click to enter ↵</div>
-        </div>
-    </div>
+    <canvas id="or" aria-hidden="true"></canvas>
+    <div class="scrim" aria-hidden="true"></div>
 
-    <div class="app">
+    <header class="bar">
+        <a class="bar__name" href="#top">Sung Eun Kim</a>
+        <nav class="bar__nav" aria-label="Sections">
+            <a href="#research">Research</a>
+            <a href="#work">Selected work</a>
+            <a href="#publications">Publications</a>
+            <a href="#news">News</a>
+            <a href="#experience">Experience</a>
+        </nav>
+    </header>
+
+    <main class="page" id="top">
 
         <!-- ===== Hero ===== -->
-        <header class="hero">
-            <div class="hero__attn" id="hero-attn" aria-hidden="true"></div>
-
-            <div class="hero__top">
-                <span class="mono mono--sm">SUNGEUNKIM0127.GITHUB.IO &nbsp;·&nbsp; <span id="updated-stamp"></span></span>
-                <span class="mono mono--sm hero__top-right">↳ HARVARD MEDICAL SCHOOL &nbsp;×&nbsp; SEOUL NATIONAL UNIVERSITY</span>
+        <section class="hero">
+            <img class="hero__portrait" src="headshot-2026.jpg" alt="Portrait of Sung Eun Kim" width="104" height="104" />
+            <h1 class="hero__name">Sung Eun Kim, MD</h1>
+            <p class="hero__tag">Surgeon × AI Researcher</p>
+            <ul class="hero__titles">
+                <li>Research Scientist<span>, Harvard Medical School</span></li>
+                <li>Director of Clinical AI and Robotics<span>, Rajpurkar Lab</span></li>
+            </ul>
+            <p class="hero__bio">I am an orthopedic surgeon building AI for medicine. At Harvard's Department of Biomedical Informatics I work with <a href="https://www.rajpurkarlab.hms.harvard.edu/" target="_blank" rel="noopener">Dr. Pranav Rajpurkar</a> on clinical simulation, medical robotics and multimodal medical AI. Seven years and over a thousand knee surgeries keep that work grounded in clinical practice.</p>
+            <p class="hero__figs"><span><b data-pubcount>50+</b>peer-reviewed papers</span><span><b id="stat-cites">709</b>citations</span></p>
+            <div class="hero__links">
+                <a class="btn btn--solid" href="mailto:sungeun_kim2@hms.harvard.edu">Email</a>
+                <a class="btn" href="CV_SungEunKim.pdf" target="_blank" rel="noopener">CV</a>
+                <a class="btn" href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+                <a class="btn" href="https://www.linkedin.com/in/sung-eun-kim-19267a2a4/" target="_blank" rel="noopener">LinkedIn</a>
             </div>
-
-            <div class="hero__grid">
-                <div class="hero__copy">
-                    <div class="mono mono--sm hero__role"><span class="dot dot--accent"></span> <span id="role-text">SURGEON × AI RESEARCHER</span></div>
-                    <h1 class="hero__name">Sung Eun Kim, MD</h1>
-                    <div class="hero__titles">
-                        <div class="hero__title-line"><span class="mono mono--sm hero__title-num">01</span><span>Research Scientist · Harvard Medical School</span></div>
-                        <div class="hero__title-line"><span class="mono mono--sm hero__title-num">02</span><span>Director of Clinical AI and Robotics · Rajpurkar Lab</span></div>
-                    </div>
-                    <p class="hero__bio">I am an orthopedic surgeon and AI researcher working at the intersection of medicine and machine learning. As a Research Scientist at Harvard Medical School's Department of Biomedical Informatics and Director of Clinical AI and Robotics in the Rajpurkar Lab, I work with <a href="https://www.rajpurkarlab.hms.harvard.edu/" target="_blank" rel="noopener" style="border-bottom:1px solid var(--rule);">Dr. Pranav Rajpurkar</a> on AI for medical imaging, clinical decision support, and healthcare evaluation. Seven years and over a thousand knee surgeries keep that work grounded in the realities of clinical practice — across <span data-pubcount>50+</span> publications, including Nature Medicine.</p>
-                    <div class="hero__links">
-                        <a href="mailto:sungeun_kim2@hms.harvard.edu" class="link"><span class="link__arrow">↗</span>Email</a>
-                        <a href="CV_SungEunKim.pdf" target="_blank" rel="noopener" class="link"><span class="link__arrow">↗</span>CV</a>
-                        <a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" rel="noopener" class="link"><span class="link__arrow">↗</span>Google Scholar</a>
-                        <a href="https://www.linkedin.com/in/sung-eun-kim-19267a2a4/" target="_blank" rel="noopener" class="link"><span class="link__arrow">↗</span>LinkedIn</a>
-                    </div>
-                </div>
-                <div class="hero__portrait">
-                    <img class="portrait" src="headshot-2026.jpg" alt="Sung Eun Kim, MD" />
-                </div>
-            </div>
-
-            <div class="hero__stats">
-                <div class="stat"><div class="stat__value" data-pubcount>50+</div><div class="stat__label">Peer-reviewed papers</div><div class="stat__note mono mono--sm">incl. Nature Medicine, JBJS, CVPR</div></div>
-                <div class="stat"><div class="stat__value" id="stat-cites">0</div><div class="stat__label">Citations</div><div class="stat__note mono mono--sm">Google Scholar</div></div>
-                <div class="stat"><div class="stat__value stat__value--focus">Clinical Simulation<br>Medical Robotics<br>Multimodal Medical AI</div><div class="stat__label">Current focus</div><div class="stat__note mono mono--sm">active research directions</div></div>
-            </div>
-        </header>
-
-        <!-- ===== § I  Publications, plotted ===== -->
-        <section class="section vizsection">
-            <div class="sech">
-                <div class="sech__left"><span class="mono mono--sm sech__num">§ I</span><span class="mono mono--sm">OUTPUT &amp; IMPACT</span></div>
-                <h2 class="sech__title">Publications by year</h2>
-                <div class="sech__right"><span class="mono mono--sm vizsection__hint">↗ HOVER ANY BAR</span></div>
-            </div>
-            <div id="pubviz-mount"></div>
         </section>
 
-        <!-- Publication data (auto-generated from publications.json; feeds the constellation + list) -->
-        <!-- AUTO-GENERATED-PUBS-START -->
+        <!-- ===== Research ===== -->
+        <section id="research">
+            <h2>Research</h2>
+            <div class="themes">
+                <article class="theme">
+                    <h3>Medical vision models</h3>
+                    <p>Grounded reasoning, segmentation and report generation across X-ray, CT, ultrasound and MRI.</p>
+                    <p class="theme__refs">3DReasonKnee, ReXGroundingCT, FactCheXcker, ReXSonoVQA</p>
+                </article>
+                <article class="theme">
+                    <h3>Dynamic AI evaluation</h3>
+                    <p>Simulators and clinically grounded metrics that test models the way they are deployed.</p>
+                    <p class="theme__refs">Clinical Environment Simulator, CRIMSON, ReXTrust</p>
+                </article>
+                <article class="theme">
+                    <h3>LLMs in the clinic</h3>
+                    <p>Multi-agent diagnosis, voice agents for prehospital care, and failure modes such as sycophancy and hallucination.</p>
+                    <p class="theme__refs">VOICE, Sycophancy in medical LLMs, Mixed-vendor diagnosis</p>
+                </article>
+                <article class="theme">
+                    <h3>Translational orthopedic AI</h3>
+                    <p>Deep-learning pipelines for alignment measurement, fracture detection and outcome prediction, validated across institutions.</p>
+                    <p class="theme__refs">Hip fracture detection, Automated tibial slope, CPAK analysis</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- ===== Selected work ===== -->
+        <section id="work">
+            <h2>Selected work</h2>
+            <a class="feat" href="https://doi.org/10.1038/s41591-026-04252-6" target="_blank" rel="noopener">
+                <img src="https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41591-026-04252-6/MediaObjects/41591_2026_4252_Fig1_HTML.png" alt="Figure 1 of the paper: the paradigm of a Clinical Environment Simulator" loading="lazy" />
+                <div>
+                    <p class="feat__venue">Nature Medicine, 2026</p>
+                    <h3>A clinical environment simulator for dynamic AI evaluation</h3>
+                    <p>Luo L*, Kim SE*, Zhang X, Kernbach JM, Kenia R, Acosta JN, …, Topol E, Rajpurkar P.</p>
+                    <p>A simulation framework that evaluates medical AI the way it is used: dynamic, multi-turn and grounded in clinical decision pathways.</p>
+                </div>
+            </a>
+            <ul class="rows">
+                <li><span class="when">2026</span><div><a class="what" href="https://psb.stanford.edu/psb-online/proceedings/psb26/sambara.pdf" target="_blank" rel="noopener">3DReasonKnee: Advancing Grounded Reasoning in Medical Vision Language Models</a><span class="sub">Sambara S*, Kim SE*, Zhang X, et al. PSB 2026</span></div></li>
+                <li><span class="when">2026</span><div><a class="what" href="https://doi.org/10.1056/AIdbp2501220" target="_blank" rel="noopener">ReXGroundingCT: Free-Text Finding Segmentation in Chest CT</a><span class="sub">Baharoon M, Luo L, …, Kim SE, …, Rajpurkar P. NEJM AI</span></div></li>
+                <li><span class="when">2025</span><div><a class="what" href="https://doi.org/10.48550/arXiv.2411.18672" target="_blank" rel="noopener">FactCheXcker: Mitigating Measurement Hallucinations in CXR Report Generation</a><span class="sub">Heiman A, Zhang X, Chen E, Kim SE, Rajpurkar P. CVPR 2025</span></div></li>
+                <li><span class="when">2025</span><div><a class="what" href="https://doi.org/10.1302/0301-620X.107B2.BJJ-2024-0791.R1" target="_blank" rel="noopener">Deep learning for automated hip fracture detection and classification</a><span class="sub">Zheng Z, Ryu B, Kim SE, et al. Bone &amp; Joint Journal</span></div></li>
+                <li><span class="when">2024</span><div><a class="what" href="https://doi.org/10.2106/JBJS.24.00316" target="_blank" rel="noopener">CPAK type shifts toward constitutional varus with increasing K&amp;L grade (17,365 knees)</a><span class="sub">Kim SE, MacDessi S, Song D, …, Ro DH. JBJS</span></div></li>
+                <li><span class="when">2024</span><div><a class="what" href="https://doi.org/10.4055/cios23179" target="_blank" rel="noopener">Performance of ChatGPT on Orthopedic Board-Style Questions</a><span class="sub">Kim SE, Lee JH, Choi BS, et al. Clinics in Orthopedic Surgery</span></div></li>
+            </ul>
+        </section>
+
+        <!-- ===== Publications (rendered from pub-data) ===== -->
+        <section id="publications">
+            <div class="pubhead">
+                <h2>Publications</h2>
+                <a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+            </div>
+            <div id="pubs-mount"></div>
+        </section>
+
+        <!-- ===== News ===== -->
+        <section id="news">
+            <h2>News</h2>
+            <ul class="rows rows--plain">
+                <li><span class="when">Oct 2026</span><a class="what" href="https://arxiv.org/abs/2603.19517" target="_blank" rel="noopener">4 papers accepted by Machine Learning for Health (ML4H) 2026.</a></li>
+                <li><span class="when">Oct 2026</span><span class="what">1 paper published in Nature Biomedical Engineering.</span></li>
+                <li><span class="when">Oct 2026</span><span class="what">Started as Research Scientist at Harvard Medical School.</span></li>
+                <li><span class="when">Sep 2026</span><span class="what">1 paper accepted by Pacific Symposium on Biocomputing (PSB) 2027.</span></li>
+                <li><span class="when">Aug 2026</span><span class="what">1 paper accepted by Findings of EMNLP 2026.</span></li>
+                <li><span class="when">Jul 2026</span><a class="what" href="https://arxiv.org/abs/2605.28736" target="_blank" rel="noopener">1 paper accepted by Machine Learning for Healthcare (MLHC) 2026.</a></li>
+                <li><span class="when">May 2026</span><span class="what">1 paper accepted early by MICCAI 2026.</span></li>
+                <li><span class="when">Apr 2026</span><a class="what" href="https://arxiv.org/abs/2604.10916" target="_blank" rel="noopener">2 papers accepted by CHIL 2026.</a></li>
+                <li><span class="when">Mar 2026</span><a class="what" href="https://doi.org/10.1038/s41591-026-04252-6" target="_blank" rel="noopener">1 paper accepted by Nature Medicine.</a></li>
+            </ul>
+        </section>
+
+        <!-- ===== Experience ===== -->
+        <section id="experience">
+            <h2>Experience and training</h2>
+            <ul class="rows">
+                <li><span class="when">2026 – now</span><div><span class="what">Research Scientist</span><span class="sub">Harvard Medical School, Department of Biomedical Informatics. Director of Clinical AI and Robotics, Rajpurkar Lab.</span></div></li>
+                <li><span class="when">2024 – 2026</span><div><span class="what">Postdoctoral Research Fellow</span><span class="sub">Harvard Medical School, Department of Biomedical Informatics</span></div></li>
+                <li><span class="when">2024 – 2026</span><div><span class="what">Associate Research Professor</span><span class="sub">Seoul National University Hospital, Biomedical Research Institute</span></div></li>
+                <li><span class="when">2022 – 2024</span><div><span class="what">Clinical and Research Fellow, Knee Surgery</span><span class="sub">Seoul National University Hospital</span></div></li>
+                <li><span class="when">2023</span><div><span class="what">M.S. in Orthopedic Surgery</span><span class="sub">Seoul National University Graduate School of Medicine</span></div></li>
+                <li><span class="when">2018 – 2022</span><div><span class="what">Orthopedic Surgery Resident</span><span class="sub">Seoul National University Hospital</span></div></li>
+                <li><span class="when">2017 – 2018</span><div><span class="what">Intern</span><span class="sub">Seoul National University Hospital</span></div></li>
+                <li><span class="when">2014 – 2017</span><div><span class="what">Epidemic Intelligence Service Officer</span><span class="sub">Korea Disease Control and Prevention Agency, through the MERS outbreak</span></div></li>
+                <li><span class="when">2014</span><div><span class="what">Doctor of Medicine (M.D.)</span><span class="sub">Seoul National University College of Medicine</span></div></li>
+            </ul>
+        </section>
+
+        <!-- ===== Awards ===== -->
+        <section id="awards">
+            <h2>Awards</h2>
+            <ul class="rows">
+                <li><span class="when">2017</span><div><span class="what">Highest Commendation from the Minister of Health, Republic of Korea</span><span class="sub">MERS crisis response</span></div></li>
+                <li><span class="when">2025</span><div><span class="what">Citation Award, KSRR</span><span class="sub">Two highly cited 2024 articles</span></div></li>
+                <li><span class="when">2024</span><div><span class="what">Harvard–SNU Trainee Position</span><span class="sub">AI development for knee MRI</span></div></li>
+                <li><span class="when">2024</span><div><span class="what">Best Paper Award, KSRR</span><span class="sub">Deep-learning alignment measurement across protocols</span></div></li>
+                <li><span class="when">2023</span><div><span class="what">Best Oral Presentation</span><span class="sub">Korean Society of Computer-Assisted Orthopaedic Surgery</span></div></li>
+                <li><span class="when">2020</span><div><span class="what">Best Resident Award</span><span class="sub">SNUH Department of Orthopedic Surgery</span></div></li>
+                <li><span class="when">2010 – 2013</span><div><span class="what">Academic Scholarships</span><span class="sub">Seoul National University</span></div></li>
+            </ul>
+        </section>
+
+        <footer class="foot">© 2026 Sung Eun Kim</footer>
+    </main>
+
+    <!-- Publication data (auto-generated from data/publications.json by scripts/generate_html.py) -->
+    <!-- AUTO-GENERATED-PUBS-START -->
                 <script id="pub-meta" type="application/json">{"citations": 709}</script>
                 <script id="pub-data" type="application/json">
 [
@@ -1156,1064 +1011,493 @@
                 </script>
                 <!-- AUTO-GENERATED-PUBS-END -->
 
-        <!-- ===== § II  Research themes ===== -->
-        <section class="section">
-            <div class="sech">
-                <div class="sech__left"><span class="mono mono--sm sech__num">§ II</span><span class="mono mono--sm">WHAT I WORK ON</span></div>
-                <h2 class="sech__title">Research themes</h2>
-            </div>
-            <div class="themes">
-                <article class="theme">
-                    <div class="theme__num mono">01</div>
-                    <h3 class="theme__label">Medical Vision Models</h3>
-                    <p class="theme__blurb">Grounded reasoning, segmentation, and report generation across X-ray, CT, ultrasound, and MRI. Building datasets and benchmarks that hold models accountable to clinical truth.</p>
-                    <ul class="theme__papers"><li class="mono mono--sm">→ 3DReasonKnee</li><li class="mono mono--sm">→ ReXGroundingCT</li><li class="mono mono--sm">→ FactCheXcker</li><li class="mono mono--sm">→ ReXSonoVQA</li></ul>
-                </article>
-                <article class="theme">
-                    <div class="theme__num mono">02</div>
-                    <h3 class="theme__label">Dynamic AI Evaluation</h3>
-                    <p class="theme__blurb">Static benchmarks miss how AI behaves in the wild. We build simulators and clinically grounded metrics so models are evaluated the way they are deployed.</p>
-                    <ul class="theme__papers"><li class="mono mono--sm">→ Clinical Environment Simulator (Nature Medicine)</li><li class="mono mono--sm">→ CRIMSON</li><li class="mono mono--sm">→ ReXTrust</li></ul>
-                </article>
-                <article class="theme">
-                    <div class="theme__num mono">03</div>
-                    <h3 class="theme__label">LLMs in the Clinic</h3>
-                    <p class="theme__blurb">Multi-agent diagnosis, voice agents for prehospital care, and the under-studied failure modes of chatty models — sycophancy, hallucination, premature closure.</p>
-                    <ul class="theme__papers"><li class="mono mono--sm">→ VOICE (IEEE AIxMHC)</li><li class="mono mono--sm">→ Sycophancy in Medical LLMs</li><li class="mono mono--sm">→ Mixed-Vendor Diagnosis</li></ul>
-                </article>
-                <article class="theme">
-                    <div class="theme__num mono">04</div>
-                    <h3 class="theme__label">Translational Orthopedic AI</h3>
-                    <p class="theme__blurb">Deployed deep-learning pipelines for alignment measurement, fracture detection, and outcome prediction — validated across institutions and now used in real clinical workflows.</p>
-                    <ul class="theme__papers"><li class="mono mono--sm">→ Hip Fracture DL</li><li class="mono mono--sm">→ Automated Tibial Slope</li><li class="mono mono--sm">→ CPAK Analysis (JBJS)</li></ul>
-                </article>
-            </div>
-        </section>
-
-        <!-- ===== § III  Featured publication ===== -->
-        <section class="section featured">
-            <div class="sech">
-                <div class="sech__left"><span class="mono mono--sm sech__num">§ III</span><span class="mono mono--sm">SPOTLIGHT</span></div>
-                <h2 class="sech__title">Featured publication</h2>
-            </div>
-            <a href="https://doi.org/10.1038/s41591-026-04252-6" class="feat" target="_blank" rel="noopener">
-                <div class="feat__figure">
-                    <img src="https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41591-026-04252-6/MediaObjects/41591_2026_4252_Fig1_HTML.png" alt="Figure 1: Paradigm of a Clinical Environment Simulator" />
-                    <div class="feat__figure-caption mono mono--sm">Fig. 1 · Paradigm of a Clinical Environment Simulator (CES). Nat Med 32, 820–827 (2026).</div>
-                </div>
-                <div class="feat__body">
-                    <div class="feat__meta"><span class="mono mono--sm feat__venue">NATURE MEDICINE</span><span class="mono mono--sm feat__year">2026</span></div>
-                    <h3 class="feat__title">A clinical environment simulator for dynamic AI evaluation</h3>
-                    <p class="feat__authors">Luo L*, Kim SE*, Zhang X, Kernbach JM, Kenia R, Acosta JN, …, Topol E, Rajpurkar P.</p>
-                    <p class="feat__abstract">A simulation framework for evaluating medical AI the way it will actually be used — dynamic, multi-turn, and grounded in clinical decision pathways. Co-first authored with Dr. Luyang Luo.</p>
-                    <span class="feat__cta mono">READ PAPER ↗</span>
-                </div>
-            </a>
-            <a href="https://doi.org/10.2106/JBJS.24.00316" class="feat" target="_blank" rel="noopener">
-                <div class="feat__figure">
-                    <img src="https://cdn.ncbi.nlm.nih.gov/pmc/blobs/9dc4/11781555/80aba1114c07/jbjsam-107-297-g005.jpg" alt="Figure 5: aHKA vs JLO contours by Kellgren–Lawrence grade" />
-                    <div class="feat__figure-caption mono mono--sm">Fig. 5 · aHKA vs JLO contours by Kellgren–Lawrence grade. J Bone Joint Surg Am (2024).</div>
-                </div>
-                <div class="feat__body">
-                    <div class="feat__meta"><span class="mono mono--sm feat__venue">JBJS</span><span class="mono mono--sm feat__year">2024</span></div>
-                    <h3 class="feat__title">CPAK type shifts toward constitutional varus with increasing K&amp;L grade</h3>
-                    <p class="feat__authors"><strong>Kim SE</strong>, MacDessi S, Song D, Kim JI, Choi BS, Han HS, Ro DH.</p>
-                    <p class="feat__abstract">A deep-learning radiographic analysis of <strong>17,365 knees</strong> showing that population alignment drifts toward constitutional varus as osteoarthritis severity (K&amp;L grade) rises — challenging assumptions about "normal" alignment in arthritic knees.</p>
-                    <span class="feat__cta mono">READ PAPER ↗</span>
-                </div>
-            </a>
-        </section>
-
-        <!-- ===== § IV  Selected papers ===== -->
-        <section class="section">
-            <div class="sech">
-                <div class="sech__left"><span class="mono mono--sm sech__num">§ IV</span><span class="mono mono--sm">HAND-PICKED</span></div>
-                <h2 class="sech__title">Selected papers</h2>
-            </div>
-            <div class="highlights">
-                <a href="https://psb.stanford.edu/psb-online/proceedings/psb26/sambara.pdf" target="_blank" rel="noopener" class="hl">
-                    <div class="hl__year mono">2026</div>
-                    <div class="hl__body"><h4 class="hl__title">3DReasonKnee: Advancing Grounded Reasoning in Medical Vision Language Models</h4><p class="hl__authors">Sambara S*, Kim SE*, Zhang X, et al.</p><div class="hl__meta"><span class="mono mono--sm">PSB 2026</span><span class="hl__tags"><span class="chip chip--ai">AI/ML</span></span></div></div>
-                    <span class="hl__arrow">↗</span>
-                </a>
-                <a href="https://doi.org/10.1056/AIdbp2501220" target="_blank" rel="noopener" class="hl">
-                    <div class="hl__year mono">2026</div>
-                    <div class="hl__body"><h4 class="hl__title">ReXGroundingCT: Free-Text Finding Segmentation in Chest CT</h4><p class="hl__authors">Baharoon M, Luo L, …, Kim SE, …, Rajpurkar P.</p><div class="hl__meta"><span class="mono mono--sm">NEJM AI</span><span class="hl__tags"><span class="chip chip--ai">AI/ML</span></span></div></div>
-                    <span class="hl__arrow">↗</span>
-                </a>
-                <a href="https://doi.org/10.1302/0301-620X.107B2.BJJ-2024-0791.R1" target="_blank" rel="noopener" class="hl">
-                    <div class="hl__year mono">2025</div>
-                    <div class="hl__body"><h4 class="hl__title">Deep learning for automated hip fracture detection and classification</h4><p class="hl__authors">Zheng Z, Ryu B, Kim SE, et al.</p><div class="hl__meta"><span class="mono mono--sm">Bone &amp; Joint Journal</span><span class="hl__tags"><span class="chip chip--both">TRANSLATIONAL</span></span></div></div>
-                    <span class="hl__arrow">↗</span>
-                </a>
-                <a href="https://doi.org/10.2106/JBJS.24.00316" target="_blank" rel="noopener" class="hl">
-                    <div class="hl__year mono">2024</div>
-                    <div class="hl__body"><h4 class="hl__title">CPAK shifts toward constitutional varus with increasing K&amp;L grade (17,365 knees)</h4><p class="hl__authors">Kim SE, MacDessi S, Song D, …, Ro DH.</p><div class="hl__meta"><span class="mono mono--sm">JBJS</span><span class="hl__tags"><span class="chip chip--both">TRANSLATIONAL</span></span></div></div>
-                    <span class="hl__arrow">↗</span>
-                </a>
-                <a href="https://doi.org/10.48550/arXiv.2411.18672" target="_blank" rel="noopener" class="hl">
-                    <div class="hl__year mono">2025</div>
-                    <div class="hl__body"><h4 class="hl__title">FactCheXcker: Mitigating Measurement Hallucinations in CXR Report Generation</h4><p class="hl__authors">Heiman A, Zhang X, Chen E, Kim SE, Rajpurkar P.</p><div class="hl__meta"><span class="mono mono--sm">CVPR 2025</span><span class="hl__tags"><span class="chip chip--ai">AI/ML</span></span></div></div>
-                    <span class="hl__arrow">↗</span>
-                </a>
-                <a href="https://doi.org/10.4055/cios23179" target="_blank" rel="noopener" class="hl">
-                    <div class="hl__year mono">2024</div>
-                    <div class="hl__body"><h4 class="hl__title">Performance of ChatGPT on Orthopedic Board-Style Questions</h4><p class="hl__authors">Kim SE, Lee JH, Choi BS, et al.</p><div class="hl__meta"><span class="mono mono--sm">Clinics in Orthopedic Surgery</span><span class="hl__tags"><span class="chip chip--both">TRANSLATIONAL</span></span></div></div>
-                    <span class="hl__arrow">↗</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- ===== § V  All publications (rendered from pub-data) ===== -->
-        <section class="section">
-            <div class="sech">
-                <div class="sech__left"><span class="mono mono--sm sech__num">§ V</span><span class="mono mono--sm">THE FULL RECORD</span></div>
-                <h2 class="sech__title">All publications</h2>
-                <div class="sech__right"><a href="https://scholar.google.com/citations?hl=en&user=KriQPeEAAAAJ" target="_blank" rel="noopener" class="link mono mono--sm"><span class="link__arrow">↗</span>GOOGLE SCHOLAR</a></div>
-            </div>
-            <div id="allpubs-mount"></div>
-        </section>
-
-        <!-- ===== § VI / VII  News + Under review ===== -->
-        <section class="section twocol">
-            <div>
-                <div class="sech sech--sm">
-                    <div class="sech__left"><span class="mono mono--sm sech__num">§ VI</span><span class="mono mono--sm">RECENT</span></div>
-                    <h2 class="sech__title">News</h2>
-                </div>
-                <ul class="news">
-                    <li class="news__item"><span class="mono mono--sm news__date">10/2026</span><a href="https://arxiv.org/abs/2603.19517" target="_blank" rel="noopener" class="news__text">4 papers accepted by Machine Learning for Health (ML4H) 2026, one as first author.</a></li>
-                    <li class="news__item"><span class="mono mono--sm news__date">10/2026</span><span class="news__text">1 paper published in Nature Biomedical Engineering.</span></li>
-                    <li class="news__item"><span class="mono mono--sm news__date">10/2026</span><span class="news__text">Started as Research Scientist at Harvard Medical School.</span></li>
-                    <li class="news__item"><span class="mono mono--sm news__date">09/2026</span><span class="news__text">1 paper accepted by Pacific Symposium on Biocomputing (PSB) 2027.</span></li>
-                    <li class="news__item"><span class="mono mono--sm news__date">08/2026</span><span class="news__text">1 paper accepted by Findings of EMNLP 2026.</span></li>
-                    <li class="news__item"><span class="mono mono--sm news__date">07/2026</span><a href="https://arxiv.org/abs/2605.28736" target="_blank" rel="noopener" class="news__text">1 paper accepted by Machine Learning for Healthcare (MLHC) 2026.</a></li>
-                    <li class="news__item"><span class="mono mono--sm news__date">05/2026</span><span class="news__text">1 paper accepted early by MICCAI 2026.</span></li>
-                    <li class="news__item"><span class="mono mono--sm news__date">04/2026</span><a href="https://arxiv.org/abs/2604.10916" target="_blank" rel="noopener" class="news__text">2 papers accepted by CHIL 2026.</a></li>
-                    <li class="news__item"><span class="mono mono--sm news__date">03/2026</span><a href="https://doi.org/10.1038/s41591-026-04252-6" target="_blank" rel="noopener" class="news__text">1 paper accepted by Nature Medicine.</a></li>
-                </ul>
-            </div>
-            <div>
-                <div class="sech sech--sm">
-                    <div class="sech__left"><span class="mono mono--sm sech__num">§ VII</span><span class="mono mono--sm">IN THE PIPELINE</span></div>
-                    <h2 class="sech__title">In press &amp; under review</h2>
-                </div>
-                <ul class="ur">
-                    <li class="ur__item"><span class="mono mono--sm">→</span><span>1 first-author manuscript in press at <span class="mono mono--sm">Clinics in Orthopedic Surgery</span></span></li>
-                    <li class="ur__item"><span class="mono mono--sm">→</span><span>1 co-first-author manuscript under review at <span class="mono mono--sm">Biomedical Engineering Letters</span></span></li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- ===== § VIII  Experience ===== -->
-        <section class="section">
-            <div class="sech">
-                <div class="sech__left"><span class="mono mono--sm sech__num">§ VIII</span><span class="mono mono--sm">PATH</span></div>
-                <h2 class="sech__title">Experience &amp; training</h2>
-            </div>
-            <ol class="timeline">
-                <li class="tl"><div class="tl__dates mono mono--sm"><span>Oct 2026</span><span class="tl__dash">—</span><span>Present</span></div><div class="tl__marker"><span class="tl__dot"></span></div><div class="tl__body"><h4 class="tl__role">Research Scientist</h4><div class="tl__org">Harvard Medical School · Department of Biomedical Informatics</div><div class="tl__detail">Director of Clinical AI and Robotics, Rajpurkar Lab. Building and evaluating AI systems for medicine.</div></div></li>
-                <li class="tl"><div class="tl__dates mono mono--sm"><span>Sep 2024</span><span class="tl__dash">—</span><span>Sep 2026</span></div><div class="tl__marker"><span class="tl__dot"></span></div><div class="tl__body"><h4 class="tl__role">Postdoctoral Research Fellow</h4><div class="tl__org">Harvard Medical School · Department of Biomedical Informatics</div><div class="tl__detail">PI: Pranav Rajpurkar. Developing AI systems for medical applications.</div></div></li>
-                <li class="tl"><div class="tl__dates mono mono--sm"><span>Sep 2024</span><span class="tl__dash">—</span><span>Aug 2026</span></div><div class="tl__marker"><span class="tl__dot"></span></div><div class="tl__body"><h4 class="tl__role">Associate Research Professor</h4><div class="tl__org">Seoul National University Hospital · Biomedical Research Institute</div><div class="tl__detail">National Strategic Technology Research Institute. Led AI research across orthopedics and diverse medical fields.</div></div></li>
-                <li class="tl"><div class="tl__dates mono mono--sm"><span>Mar 2022</span><span class="tl__dash">—</span><span>Jul 2024</span></div><div class="tl__marker"><span class="tl__dot"></span></div><div class="tl__body"><h4 class="tl__role">Clinical &amp; Research Fellow (Knee Surgery)</h4><div class="tl__org">Seoul National University Hospital</div><div class="tl__detail">Specialized training in knee arthroplasty, sports medicine, and robotic surgery under Profs. Han and Ro.</div></div></li>
-                <li class="tl"><div class="tl__dates mono mono--sm"><span>Feb 2023</span></div><div class="tl__marker"><span class="tl__dot"></span></div><div class="tl__body"><h4 class="tl__role">M.S. in Orthopedic Surgery</h4><div class="tl__org">Seoul National University Graduate School of Medicine</div></div></li>
-                <li class="tl"><div class="tl__dates mono mono--sm"><span>Mar 2018</span><span class="tl__dash">—</span><span>Feb 2022</span></div><div class="tl__marker"><span class="tl__dot"></span></div><div class="tl__body"><h4 class="tl__role">Orthopedic Surgery Resident</h4><div class="tl__org">Seoul National University Hospital</div><div class="tl__detail">Comprehensive orthopedic training. Best Resident Award (2020).</div></div></li>
-                <li class="tl"><div class="tl__dates mono mono--sm"><span>May 2017</span><span class="tl__dash">—</span><span>Feb 2018</span></div><div class="tl__marker"><span class="tl__dot"></span></div><div class="tl__body"><h4 class="tl__role">Intern</h4><div class="tl__org">Seoul National University Hospital</div></div></li>
-                <li class="tl"><div class="tl__dates mono mono--sm"><span>Apr 2014</span><span class="tl__dash">—</span><span>Apr 2017</span></div><div class="tl__marker"><span class="tl__dot"></span></div><div class="tl__body"><h4 class="tl__role">Epidemic Intelligence Service Officer</h4><div class="tl__org">Korea Disease Control and Prevention Agency</div><div class="tl__detail">Public health service during MERS crisis. Highest Commendation from Minister of Health.</div></div></li>
-                <li class="tl"><div class="tl__dates mono mono--sm"><span>Feb 2014</span></div><div class="tl__marker"><span class="tl__dot"></span></div><div class="tl__body"><h4 class="tl__role">Doctor of Medicine (M.D.)</h4><div class="tl__org">Seoul National University College of Medicine</div></div></li>
-            </ol>
-        </section>
-
-        <!-- ===== § IX  Awards ===== -->
-        <section class="section">
-            <div class="sech">
-                <div class="sech__left"><span class="mono mono--sm sech__num">§ IX</span><span class="mono mono--sm">RECOGNITION</span></div>
-                <h2 class="sech__title">Awards &amp; honors</h2>
-            </div>
-            <ul class="awards">
-                <li class="award"><span class="mono mono--sm award__year">2017</span><div class="award__body"><div class="award__title">Highest Commendation from Minister of Health</div><div class="award__note">ROK — dedication during MERS crisis response</div></div></li>
-                <li class="award"><span class="mono mono--sm award__year">2024</span><div class="award__body"><div class="award__title">Harvard–SNU Trainee Position</div><div class="award__note">AI development for knee MRI</div></div></li>
-                <li class="award"><span class="mono mono--sm award__year">May 2025</span><div class="award__body"><div class="award__title">Citation Award — KSRR</div><div class="award__note">Two highly cited 2024 articles</div></div></li>
-                <li class="award"><span class="mono mono--sm award__year">2024</span><div class="award__body"><div class="award__title">Best Paper Award — KSRR</div><div class="award__note">DL alignment measurement across protocols</div></div></li>
-                <li class="award"><span class="mono mono--sm award__year">2023</span><div class="award__body"><div class="award__title">Best Oral Presentation</div><div class="award__note">Korean Society of Computer-Assisted Orthopaedic Surgery</div></div></li>
-                <li class="award"><span class="mono mono--sm award__year">Dec 2020</span><div class="award__body"><div class="award__title">Best Resident Award</div><div class="award__note">SNUH, Department of Orthopedic Surgery</div></div></li>
-                <li class="award"><span class="mono mono--sm award__year">2010–2013</span><div class="award__body"><div class="award__title">Academic Scholarships</div><div class="award__note">Superior Academic Performance, Merit-Based, College — SNU</div></div></li>
-            </ul>
-        </section>
-
-        <!-- ===== Footer ===== -->
-        <footer class="footer">
-            <div class="footer__rule"></div>
-            <div class="footer__row">
-                <span class="mono mono--sm">© 2026 SUNG EUN KIM</span>
-            </div>
-        </footer>
-
-    </div>
-
     <script>
-    (function () {
+    (() => {
         "use strict";
 
-        var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const $ = (sel, root = document) => root.querySelector(sel);
+        const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-        // ----- Palette (resolved hex for SVG fills; refreshed from CSS vars so it tracks the theme) -----
-        var C = { accent: "#B0202B", accentMid: "#7A4A3A", inkSoft: "#6A6258", paper: "#F2EEE3", ink: "#161513", rule: "#C6BFAE" };
-        function refreshPalette() {
-            var cs = getComputedStyle(document.documentElement);
-            ["accent", "accent-mid", "ink-soft", "paper", "ink", "rule"].forEach(function (n) {
-                var key = n.replace(/-(\w)/g, function (m, c) { return c.toUpperCase(); });
-                var val = cs.getPropertyValue("--" + n).trim();
-                if (val) C[key] = val;
-            });
-        }
-        refreshPalette();
+        // ===== Publication data =====
+        let PUBS = [];
+        try { PUBS = JSON.parse($("#pub-data").textContent.trim() || "[]"); } catch (e) { PUBS = []; }
 
-        // ----- Updated stamp -----
-        var stamp = document.getElementById("updated-stamp");
-        if (stamp) stamp.textContent = "UPDATED " + new Date().toLocaleDateString("en-US", { month: "short", year: "numeric" }).toUpperCase();
-
-        // ----- Load publication data -----
-        var PUBS = [];
-        try {
-            var el = document.getElementById("pub-data");
-            PUBS = JSON.parse(el.textContent.trim() || "[]");
-        } catch (e) { PUBS = []; }
-
-        // Total citations → hero stat (prefer scraped profile total; count-up reads this after)
-        (function () {
-            var cel = document.getElementById("stat-cites");
-            if (!cel) return;
-            var total = 0;
-            try {
-                var meta = document.getElementById("pub-meta");
-                if (meta) total = (JSON.parse(meta.textContent) || {}).citations || 0;
-            } catch (e) { total = 0; }
-            if (!total) total = PUBS.reduce(function (s, p) { return s + (p.cites || 0); }, 0);
-            cel.textContent = total.toLocaleString("en-US");
+        // Citation total: the scraped profile total, else the sum over papers.
+        (() => {
+            let total = 0;
+            try { total = (JSON.parse($("#pub-meta").textContent) || {}).citations || 0; } catch (e) { total = 0; }
+            if (!total) total = PUBS.reduce((s, p) => s + (p.cites || 0), 0);
+            if (total) $("#stat-cites").textContent = total.toLocaleString("en-US");
         })();
 
-        // Peer-reviewed paper count → hero stat + bio, rounded down to the nearest ten (49 → "40+").
-        // Preprints and patents are listed below but not counted here.
-        (function () {
-            var n = PUBS.filter(function (p) {
-                var v = (p.venue || "").toLowerCase();
-                return v && !/arxiv|medrxiv|biorxiv|preprint|patent/.test(v);
-            }).length;
+        // Peer-reviewed count, rounded down to the nearest ten (52 → "50+"). Preprints and patents are listed but not counted.
+        (() => {
+            const n = PUBS.filter((p) => p.venue && !/arxiv|medrxiv|biorxiv|preprint|patent/i.test(p.venue)).length;
             if (n < 10) return;
-            var label = Math.floor(n / 10) * 10 + "+";
-            document.querySelectorAll("[data-pubcount]").forEach(function (el) { el.textContent = label; });
+            document.querySelectorAll("[data-pubcount]").forEach((el) => { el.textContent = Math.floor(n / 10) * 10 + "+"; });
         })();
 
-        function domainColor(tags) {
-            if (tags.indexOf("ai") !== -1 && tags.indexOf("both") === -1) return C.accent;
-            if (tags.indexOf("both") !== -1) return C.accentMid;
-            return C.inkSoft;
-        }
-        function domainKey(tags) {
-            if (tags.indexOf("both") !== -1) return "both";
-            if (tags.indexOf("ai") !== -1) return "ai";
-            return "ortho";
-        }
-        function tagLabel(t) {
-            if (t === "ai") return "AI/ML";
-            if (t === "ortho") return "ORTHO";
-            if (t === "both") return "TRANSLATIONAL";
-            return t.toUpperCase();
-        }
-        function esc(s) {
-            return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-        }
-        // Decode/scramble text into place
-        function scramble(el, finalText, dur) {
-            if (!el) return;
-            if (REDUCED) { el.textContent = finalText; return; }
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789×·/—";
-            var start = null;
-            function step(now) {
-                if (start === null) start = now;
-                var p = Math.min(1, (now - start) / dur);
-                var reveal = Math.floor(p * finalText.length);
-                var out = "";
-                for (var i = 0; i < finalText.length; i++) {
-                    var ch = finalText.charAt(i);
-                    out += (i < reveal || ch === " ") ? ch : chars.charAt(Math.floor(Math.random() * chars.length));
-                }
-                el.textContent = out;
-                if (p < 1) requestAnimationFrame(step); else el.textContent = finalText;
-            }
-            requestAnimationFrame(step);
-        }
-
-        // ===== Neural particle field (animated hero background) =====
-        var recolorField = function () {};
-        (function initNeuralField() {
-            var host = document.getElementById("hero-attn");
-            if (!host || REDUCED) return; // reduced-motion: no animated background
-            var canvas = document.createElement("canvas");
-            canvas.className = "neuralfield";
-            host.innerHTML = "";
-            host.appendChild(canvas);
-            var ctx = canvas.getContext("2d");
-            var dpr = Math.min(window.devicePixelRatio || 1, 2);
-            var W = 0, H = 0, parts = [], running = true, raf = null;
-            var colorNode = C.accent, colorLink = C.inkSoft;
-            recolorField = function () { refreshPalette(); colorNode = C.accent; colorLink = C.inkSoft; };
-            function resize() {
-                var r = host.getBoundingClientRect();
-                W = r.width; H = r.height;
-                if (!W || !H) return;
-                canvas.width = W * dpr; canvas.height = H * dpr;
-                canvas.style.width = W + "px"; canvas.style.height = H + "px";
-                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-                var count = Math.max(18, Math.min(60, Math.round(W * H / 14000)));
-                parts = [];
-                for (var i = 0; i < count; i++) {
-                    parts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.2, r: 1.2 + Math.random() * 1.5 });
-                }
-            }
-            var LINK = 124, MR = 155, ox = 0, oy = 0;
-            var mouse = { x: 0, y: 0, active: false };
-            function frame() {
-                if (!running) { raf = null; return; }
-                ctx.clearRect(0, 0, W, H);
-                for (var i = 0; i < parts.length; i++) {
-                    var p = parts[i];
-                    p.x += p.vx; p.y += p.vy;
-                    if (p.x < -20) p.x = W + 20; if (p.x > W + 20) p.x = -20;
-                    if (p.y < -20) p.y = H + 20; if (p.y > H + 20) p.y = -20;
-                }
-                // Smoothed parallax of the whole field toward the cursor
-                var tx = mouse.active ? (mouse.x - W / 2) * 0.025 : 0;
-                var ty = mouse.active ? (mouse.y - H / 2) * 0.025 : 0;
-                ox += (tx - ox) * 0.06; oy += (ty - oy) * 0.06;
-                // Display positions: parallax + gentle lean toward the cursor
-                for (var j = 0; j < parts.length; j++) {
-                    var q = parts[j];
-                    var qdx = mouse.x - q.x, qdy = mouse.y - q.y;
-                    var qd = Math.sqrt(qdx * qdx + qdy * qdy);
-                    var pull = (mouse.active && qd < MR) ? (1 - qd / MR) * 0.2 : 0;
-                    q.dx = q.x + ox + qdx * pull;
-                    q.dy = q.y + oy + qdy * pull;
-                }
-                ctx.lineWidth = 0.6;
-                for (var a = 0; a < parts.length; a++) {
-                    for (var b = a + 1; b < parts.length; b++) {
-                        var dx = parts[a].dx - parts[b].dx, dy = parts[a].dy - parts[b].dy;
-                        var d = Math.sqrt(dx * dx + dy * dy);
-                        if (d < LINK) {
-                            ctx.strokeStyle = colorLink;
-                            ctx.globalAlpha = (1 - d / LINK) * 0.18;
-                            ctx.beginPath(); ctx.moveTo(parts[a].dx, parts[a].dy); ctx.lineTo(parts[b].dx, parts[b].dy); ctx.stroke();
-                        }
-                    }
-                }
-                // Links from the cursor to nearby particles
-                if (mouse.active) {
-                    ctx.strokeStyle = colorNode;
-                    for (var c = 0; c < parts.length; c++) {
-                        var cdx = mouse.x - parts[c].dx, cdy = mouse.y - parts[c].dy;
-                        var cd = Math.sqrt(cdx * cdx + cdy * cdy);
-                        if (cd < MR) {
-                            ctx.globalAlpha = (1 - cd / MR) * 0.3;
-                            ctx.beginPath(); ctx.moveTo(mouse.x, mouse.y); ctx.lineTo(parts[c].dx, parts[c].dy); ctx.stroke();
-                        }
-                    }
-                    ctx.globalAlpha = 0.5; ctx.fillStyle = colorNode;
-                    ctx.beginPath(); ctx.arc(mouse.x, mouse.y, 2.5, 0, Math.PI * 2); ctx.fill();
-                }
-                ctx.globalAlpha = 0.5; ctx.fillStyle = colorNode;
-                for (var k = 0; k < parts.length; k++) {
-                    ctx.beginPath(); ctx.arc(parts[k].dx, parts[k].dy, parts[k].r, 0, Math.PI * 2); ctx.fill();
-                }
-                ctx.globalAlpha = 1;
-                raf = requestAnimationFrame(frame);
-            }
-            resize();
-            frame();
-            var rt;
-            window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(resize, 200); });
-            var hero = document.querySelector(".hero");
-            if (hero) {
-                hero.addEventListener("mousemove", function (e) {
-                    var r = host.getBoundingClientRect();
-                    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; mouse.active = true;
-                });
-                hero.addEventListener("mouseleave", function () { mouse.active = false; });
-                if ("IntersectionObserver" in window) {
-                    new IntersectionObserver(function (es) {
-                        es.forEach(function (e) {
-                            running = e.isIntersecting;
-                            if (running && !raf) frame();
-                        });
-                    }, { threshold: 0 }).observe(hero);
-                }
-            }
-        })();
-
-        // ===== Publications bar chart (papers per year, stacked by domain) =====
-        function renderBarChart() {
-            var mount = document.getElementById("pubviz-mount");
+        // ===== Publications: search, domain filter, and a papers-per-year chart that filters by year =====
+        (() => {
+            const mount = $("#pubs-mount");
             if (!mount) return;
-            var MIN_YEAR = 2022;
-            var pubs = PUBS.filter(function (p) { return p.year >= MIN_YEAR; });
-            if (!pubs.length) { mount.style.display = "none"; return; }
+            if (!PUBS.length) { mount.innerHTML = '<p class="pubstatus">The full list is on Google Scholar.</p>'; return; }
 
-            var yrs = pubs.map(function (p) { return p.year; });
-            var minY = Math.min.apply(null, yrs), maxY = Math.max.apply(null, yrs);
-            var years = [];
-            for (var yv = minY; yv <= maxY; yv++) years.push(yv);
-            var DOMS = ["ai", "both", "ortho"];
+            const DOMAINS = [["ai", "AI / ML"], ["both", "Translational"], ["ortho", "Clinical"]];
+            const domainOf = (p) => (p.tags.includes("both") ? "both" : p.tags.includes("ai") ? "ai" : "ortho");
+            const PREVIEW = 8;
 
-            var by = {};
-            years.forEach(function (yy) { by[yy] = { ai: 0, both: 0, ortho: 0 }; });
-            pubs.forEach(function (p) { by[p.year][domainKey(p.tags)] += 1; });
-
-            var totals = years.map(function (yy) { return by[yy].ai + by[yy].both + by[yy].ortho; });
-            var maxTotal = Math.max(1, Math.max.apply(null, totals));
-            var grand = totals.reduce(function (a, b) { return a + b; }, 0);
-
-            function growBars() {
-                var bars = mount.querySelectorAll(".bar");
-                var cols = mount.querySelectorAll(".bar-col");
-                if (REDUCED) {
-                    bars.forEach(function (b) { b.style.transition = "none"; b.style.height = b.getAttribute("data-h") + "%"; });
-                    cols.forEach(function (c) { c.classList.add("shown"); });
-                    return;
-                }
-                requestAnimationFrame(function () {
-                    bars.forEach(function (b, idx) { b.style.transitionDelay = (idx * 55) + "ms"; b.style.height = b.getAttribute("data-h") + "%"; });
-                    cols.forEach(function (c, idx) { setTimeout(function () { c.classList.add("shown"); }, 280 + idx * 55); });
-                });
-            }
-
-            var emptyHTML = '<span class="pubviz__hover-empty">↑ hover a year — ' + grand + ' papers across ' + years.length + ' years</span>';
-            var h = '<div class="barchart"><div class="barchart__plot">';
-            years.forEach(function (yy, i) {
-                var rec = by[yy], total = totals[i];
-                var barPct = (total / maxTotal) * 92;
-                h += '<div class="bar-col" data-year="' + yy + '" tabindex="0" role="button" aria-label="' + yy + ': ' + total + ' papers">';
-                h += '<div class="bar__value">' + (total || "") + '</div>';
-                h += '<div class="bar" data-h="' + barPct.toFixed(2) + '" style="height:0%">';
-                DOMS.forEach(function (d) {
-                    var segPct = total > 0 ? (rec[d] / total) * 100 : 0;
-                    h += '<div class="bar__seg seg--' + d + '" style="height:' + segPct.toFixed(2) + '%"></div>';
-                });
-                h += '</div><div class="bar__label">' + yy + '</div></div>';
+            // The last five years get a bar each; anything older shares one.
+            const maxYear = Math.max(...PUBS.map((p) => p.year));
+            const firstYear = maxYear - 4;
+            const bucketOf = (p) => (p.year < firstYear ? "earlier" : String(p.year));
+            const buckets = [];
+            if (PUBS.some((p) => p.year < firstYear)) buckets.push({ key: "earlier", label: "Earlier" });
+            for (let y = firstYear; y <= maxYear; y++) buckets.push({ key: String(y), label: String(y) });
+            buckets.forEach((b) => {
+                b.counts = { ai: 0, both: 0, ortho: 0 };
+                PUBS.forEach((p) => { if (bucketOf(p) === b.key) b.counts[domainOf(p)]++; });
+                b.total = b.counts.ai + b.counts.both + b.counts.ortho;
             });
-            h += '</div>';
-            h += '<div class="pubviz__caption"><div class="pubviz__legend">' +
-                '<span class="pubviz__lg"><span class="pubviz__dot ld--ai"></span> AI / ML</span>' +
-                '<span class="pubviz__lg"><span class="pubviz__dot ld--both"></span> Translational</span>' +
-                '<span class="pubviz__lg"><span class="pubviz__dot ld--ortho"></span> Clinical orthopedics</span>' +
-                '</div><div class="pubviz__hover" id="pubviz-hover" aria-live="polite">' + emptyHTML + '</div></div></div>';
+            const peak = Math.max(1, ...buckets.map((b) => b.total));
+
+            const state = { domain: "all", year: null, query: "", open: false };
+
+            let h = '<input type="search" class="search" id="pub-search" placeholder="Search title, author or venue" autocomplete="off" aria-label="Search publications" />';
+            h += '<div class="pills" role="group" aria-label="Filter by field">';
+            h += '<button class="pill" type="button" data-domain="all">All</button>';
+            DOMAINS.forEach(([k, label]) => { h += `<button class="pill" type="button" data-domain="${k}"><i class="dot dot--${k}"></i>${label}</button>`; });
+            h += '<button class="pill" type="button" data-domain="first">First author</button></div>';
+            h += '<div class="years" role="group" aria-label="Papers per year. Select a year to filter.">';
+            buckets.forEach((b) => {
+                const px = (n) => ((n / peak) * 64).toFixed(1);
+                h += `<button class="yr" type="button" data-year="${b.key}" aria-pressed="false" aria-label="${b.label}: ${b.total} papers">`;
+                h += `<span class="yr__n">${b.total}</span><span class="yr__bar">`;
+                ["ai", "both", "ortho"].forEach((k) => { if (b.counts[k]) h += `<i class="seg--${k}" style="height:${px(b.counts[k])}px"></i>`; });
+                h += `</span><span class="yr__label">${b.label}</span></button>`;
+            });
+            h += '</div><p class="pubstatus" id="pub-status" aria-live="polite"></p><div id="pub-list"></div>';
             mount.innerHTML = h;
 
-            var hover = document.getElementById("pubviz-hover");
-            var cols = mount.querySelectorAll(".bar-col");
-            cols.forEach(function (col, i) {
-                var yy = years[i], rec = by[yy], total = totals[i];
-                col.addEventListener("mouseenter", function () {
-                    hover.innerHTML = '<span class="pubviz__hover-venue">' + yy + '</span><span class="pubviz__hover-title">' + total + ' papers — ' + rec.ai + ' AI · ' + rec.both + ' transl. · ' + rec.ortho + ' clinical</span>';
-                });
-                col.addEventListener("mouseleave", function () { hover.innerHTML = emptyHTML; });
-                col.addEventListener("click", function () {
-                    var apPill = document.querySelector('#allpubs-mount [data-year="' + yy + '"]');
-                    if (apPill) apPill.click();
-                    var ap = document.getElementById("allpubs-mount");
-                    if (ap) ap.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" });
-                });
-                col.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); col.click(); } });
-            });
+            const listEl = $("#pub-list"), statusEl = $("#pub-status"), yearsEl = $(".years", mount);
 
-            if (REDUCED || !("IntersectionObserver" in window)) {
-                growBars();
-            } else {
-                var io = new IntersectionObserver(function (es) {
-                    es.forEach(function (e) { if (e.isIntersecting) { growBars(); io.disconnect(); } });
-                }, { threshold: 0.2 });
-                io.observe(mount);
+            function matches() {
+                const q = state.query.trim().toLowerCase();
+                return PUBS.filter((p) =>
+                    (state.domain === "all" || (state.domain === "first" ? p.tags.includes("first") : domainOf(p) === state.domain)) &&
+                    (state.year === null || bucketOf(p) === state.year) &&
+                    (!q || `${p.title} ${p.authors} ${p.venue}`.toLowerCase().includes(q))
+                ).sort((a, b) => b.year - a.year);
             }
 
-            window._highlightConstYear = function (yy) {
-                var cols2 = mount.querySelectorAll(".bar-col");
-                if (yy === null) { cols2.forEach(function (c) { c.style.opacity = "1"; }); return; }
-                var has = false;
-                cols2.forEach(function (c) { if (Number(c.getAttribute("data-year")) === yy) has = true; });
-                if (!has) return;
-                cols2.forEach(function (c) { c.style.opacity = (Number(c.getAttribute("data-year")) === yy) ? "1" : "0.3"; });
-            };
+            function render() {
+                mount.querySelectorAll("[data-domain]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.domain === state.domain)));
+                mount.querySelectorAll("[data-year]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.year === state.year)));
+                yearsEl.classList.toggle("is-filtered", state.year !== null);
+
+                const found = matches();
+                const shown = state.open ? found : found.slice(0, PREVIEW);
+                statusEl.textContent = !found.length ? "No papers match. Clear the search or pick another filter."
+                    : found.length === PUBS.length ? `${found.length} papers` : `${found.length} of ${PUBS.length} papers`;
+
+                let out = "", year = null;
+                shown.forEach((p) => {
+                    if (p.year !== year) {
+                        if (year !== null) out += "</ul>";
+                        year = p.year;
+                        out += `<h3 class="yearhead">${year}</h3><ul class="publist">`;
+                    }
+                    const tag = p.href ? `a href="${esc(p.href)}" target="_blank" rel="noopener"` : "div";
+                    out += `<li><${tag} class="pub"><i class="dot dot--${domainOf(p)}"></i>`;
+                    out += `<span class="pub__t">${esc(p.title)}${p.tags.includes("first") ? '<span class="pub__first">first author</span>' : ""}</span>`;
+                    out += `<span class="pub__m">${esc(p.authors)}. ${esc(p.venue)}</span></${p.href ? "a" : "div"}></li>`;
+                });
+                if (year !== null) out += "</ul>";
+                if (found.length > PREVIEW) {
+                    out += `<button class="btn more" type="button" id="pub-more">${state.open ? "Show fewer" : `Show all ${found.length} papers`}</button>`;
+                }
+                listEl.innerHTML = out;
+                const more = $("#pub-more");
+                if (more) more.addEventListener("click", () => { state.open = !state.open; render(); });
+            }
+
+            mount.querySelectorAll("[data-domain]").forEach((b) => b.addEventListener("click", () => { state.domain = b.dataset.domain; state.open = false; render(); }));
+            mount.querySelectorAll("[data-year]").forEach((b) => b.addEventListener("click", () => { state.year = state.year === b.dataset.year ? null : b.dataset.year; state.open = false; render(); }));
+            $("#pub-search").addEventListener("input", (e) => { state.query = e.target.value; state.open = false; render(); });
+            render();
+        })();
+
+        // ===== Scroll position: drives the camera, and dims the scene behind the copy on narrow screens =====
+        let scrollT = 0;
+        function readScroll() {
+            const max = document.documentElement.scrollHeight - innerHeight;
+            scrollT = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+            document.documentElement.style.setProperty("--scrolled", Math.min(1, scrollY / (innerHeight * 0.3)).toFixed(3));
         }
-        renderBarChart();
+        addEventListener("scroll", readScroll, { passive: true });
+        addEventListener("resize", readScroll);
+        readScroll();
 
-        // ===== All publications (filterable + searchable list) =====
-        (function renderAllPubs() {
-            var mount = document.getElementById("allpubs-mount");
-            if (!mount) return;
-            var state = { filter: "all", year: "all", expanded: false, search: "" };
-            var allYears = (function () {
-                var s = {}; PUBS.forEach(function (p) { s[p.year] = true; });
-                return Object.keys(s).map(Number).sort(function (a, b) { return b - a; });
-            })();
-            var FILTERS = [["all", "All"], ["ai", "AI / ML"], ["both", "Translational"], ["ortho", "Clinical"], ["first", "First author"]];
+        // ===== The simulated operating room =====
+        // A digital-twin theatre: table and draped patient, two surgical lights, a robot arm tracking
+        // the knee, a live vitals monitor. The camera orbits the table as the page scrolls.
+        function initTheatre() {
+            const T = window.THREE, canvas = $("#or");
+            if (!T || !canvas) return false;
+            let renderer;
+            try { renderer = new T.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" }); }
+            catch (e) { return false; }
+            renderer.outputEncoding = T.sRGBEncoding;
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = T.PCFSoftShadowMap;
 
-            // ---- Controls (built once so the search field keeps focus) ----
-            var ctrl = '<div class="filters">';
-            ctrl += '<input type="search" class="pubsearch" id="pubsearch" placeholder="Search title, author, or venue…" autocomplete="off" aria-label="Search publications by title, author, or venue" />';
-            ctrl += '<div class="filters__group" role="group" aria-label="Filter by domain"><span class="mono mono--sm filters__label">FILTER:</span>';
-            FILTERS.forEach(function (f) { ctrl += '<button class="pill" type="button" data-filter="' + f[0] + '" aria-pressed="false">' + f[1] + "</button>"; });
-            ctrl += "</div>";
-            ctrl += '<div class="filters__group" role="group" aria-label="Filter by year"><span class="mono mono--sm filters__label">YEAR:</span>';
-            ctrl += '<button class="pill" type="button" data-year="all" aria-pressed="false">All</button>';
-            allYears.forEach(function (y) { ctrl += '<button class="pill" type="button" data-year="' + y + '" aria-pressed="false">' + y + "</button>"; });
-            ctrl += "</div></div>";
-            ctrl += '<div class="pubcount mono mono--sm" id="pubcount"></div>';
-            ctrl += '<div id="pubs-list"></div>';
-            mount.innerHTML = ctrl;
+            const BG = 0x071a1f;
+            const col = (hex) => new T.Color(hex).convertSRGBToLinear();
+            const scene = new T.Scene();
+            scene.background = new T.Color(BG);
+            scene.fog = new T.FogExp2(col(BG).getHex(), 0.062);
+            const camera = new T.PerspectiveCamera(36, 1, 0.1, 60);
 
-            var listEl = document.getElementById("pubs-list");
-            var countEl = document.getElementById("pubcount");
-            var searchEl = document.getElementById("pubsearch");
+            // ----- materials -----
+            const std = (hex, roughness, metalness = 0) => new T.MeshStandardMaterial({ color: col(hex), roughness, metalness });
+            const M = {
+                floor: std(0x12353c, 0.5, 0.15), wall: std(0x0f2c33, 0.95), kit: std(0x1a424b, 0.7, 0.1),
+                pad: std(0x0a1e23, 0.8), steel: std(0xa3b9bd, 0.35, 0.4), drape: std(0x1f8f8c, 0.9),
+                shell: std(0xe4eded, 0.45, 0.05), joint: std(0x23474f, 0.5, 0.3), skin: std(0x9fb9bb, 0.8),
+            };
+            const TEAL = 0x58d6cc, AMBER = 0xffb35c;
+            const lineMats = {};
+            const lineMat = (hex, opacity) => (lineMats[hex + ":" + opacity] ||= new T.LineBasicMaterial({ color: col(hex), transparent: true, opacity }));
 
-            function applyFilter() {
-                var q = state.search.trim().toLowerCase();
-                return PUBS.filter(function (p) {
-                    var tagOK = state.filter === "all" ||
-                        (state.filter === "first" && p.tags.indexOf("first") !== -1) ||
-                        p.tags.indexOf(state.filter) !== -1;
-                    var yearOK = state.year === "all" || p.year === state.year;
-                    var searchOK = !q || (p.title + " " + p.authors + " " + p.venue).toLowerCase().indexOf(q) !== -1;
-                    return tagOK && yearOK && searchOK;
-                });
+            // ----- builders -----
+            const UP = new T.Vector3(0, 1, 0);
+            function add(mesh, parent, edges) {
+                mesh.castShadow = true; mesh.receiveShadow = true;
+                (parent || scene).add(mesh);
+                if (edges) mesh.add(new T.LineSegments(new T.EdgesGeometry(mesh.geometry, 25), lineMat(TEAL, edges)));
+                return mesh;
             }
-            function syncPills() {
-                mount.querySelectorAll("[data-filter]").forEach(function (b) {
-                    var on = b.getAttribute("data-filter") === state.filter;
-                    b.classList.toggle("pill--on", on);
-                    b.setAttribute("aria-pressed", on ? "true" : "false");
-                });
-                mount.querySelectorAll("[data-year]").forEach(function (b) {
-                    var y = b.getAttribute("data-year");
-                    var on = (y === "all" ? "all" : Number(y)) === state.year;
-                    b.classList.toggle("pill--on", on);
-                    b.setAttribute("aria-pressed", on ? "true" : "false");
-                });
+            function box(w, h, d, mat, x, y, z, parent, edges = 0.3) {
+                const m = new T.Mesh(new T.BoxGeometry(w, h, d), mat); m.position.set(x, y, z); return add(m, parent, edges);
             }
-            function renderList() {
-                var filtered = applyFilter();
-                var visible = state.expanded ? filtered : filtered.slice(0, 10);
-                var groups = {};
-                visible.forEach(function (p) { (groups[p.year] = groups[p.year] || []).push(p); });
-                var years = Object.keys(groups).map(Number).sort(function (a, b) { return b - a; });
+            function cyl(rTop, rBottom, h, mat, x, y, z, parent, edges = 0.3) {
+                const m = new T.Mesh(new T.CylinderGeometry(rTop, rBottom, h, 28), mat); m.position.set(x, y, z); return add(m, parent, edges);
+            }
+            function ball(r, mat, x, y, z, sx = 1, sy = 1, sz = 1) {
+                const m = new T.Mesh(new T.SphereGeometry(r, 28, 18), mat); m.position.set(x, y, z); m.scale.set(sx, sy, sz); return add(m);
+            }
+            function tube(a, b, r, mat) {
+                const d = new T.Vector3().subVectors(b, a), len = d.length();
+                const m = new T.Mesh(new T.CylinderGeometry(r, r, len, 12), mat);
+                m.position.copy(a).addScaledVector(d, 0.5);
+                m.quaternion.setFromUnitVectors(UP, d.normalize());
+                return add(m);
+            }
+            function lines(points, hex, opacity) {
+                const l = new T.LineSegments(new T.BufferGeometry().setFromPoints(points), lineMat(hex, opacity));
+                scene.add(l); return l;
+            }
+            const V = (x, y, z) => new T.Vector3(x, y, z);
+            const screens = [];
+            function screen(w, h, tex, x, y, z, ry, parent) {
+                tex.encoding = T.sRGBEncoding;
+                const m = new T.Mesh(new T.PlaneGeometry(w, h), new T.MeshBasicMaterial({ map: tex }));
+                m.position.set(x, y, z); m.rotation.y = ry || 0; (parent || scene).add(m); screens.push(m.material); return m;
+            }
 
-                countEl.textContent = "SHOWING " + visible.length + " / " + filtered.length + " " + (filtered.length === 1 ? "PAPER" : "PAPERS");
+            // ----- room -----
+            const floor = new T.Mesh(new T.PlaneGeometry(20, 20), M.floor);
+            floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+            const grid = new T.GridHelper(20, 40, 0x1d6468, 0x12434a);
+            grid.position.y = 0.004; grid.material.transparent = true; grid.material.opacity = 0.6; scene.add(grid);
+            box(20, 3.5, 0.1, M.wall, 0, 1.75, -4.25, null, 0);
+            box(0.1, 3.5, 12, M.wall, -6.6, 1.75, 0, null, 0);
+            box(0.1, 3.5, 12, M.wall, 6.6, 1.75, 0, null, 0);
+            const seams = [];
+            for (let x = -6; x <= 6; x += 1.5) seams.push(V(x, 0, -4.19), V(x, 3.5, -4.19));
+            seams.push(V(-6.6, 1.15, -4.19), V(6.6, 1.15, -4.19));
+            lines(seams, TEAL, 0.13);
+            // sterile zone on the floor, laminar-flow canopy above it
+            const zone = [], canopy = [];
+            [[-1.9, -1.45, 1.9, -1.45], [1.9, -1.45, 1.9, 1.45], [1.9, 1.45, -1.9, 1.45], [-1.9, 1.45, -1.9, -1.45]]
+                .forEach(([a, b, c, d]) => { zone.push(V(a + 0.2, 0.008, b), V(c + 0.2, 0.008, d)); canopy.push(V(a + 0.2, 3.3, b), V(c + 0.2, 3.3, d)); });
+            for (let x = -1.3; x < 1.9; x += 0.63) canopy.push(V(x + 0.2, 3.3, -1.45), V(x + 0.2, 3.3, 1.45));
+            for (let z = -0.87; z < 1.45; z += 0.58) canopy.push(V(-1.7, 3.3, z), V(2.1, 3.3, z));
+            lines(zone, TEAL, 0.55); lines(canopy, TEAL, 0.22);
 
-                var h = '<div class="pubs">';
-                if (!filtered.length) h += '<p style="color:var(--ink-soft);font-style:italic;padding:10px 0">No papers match.</p>';
-                years.forEach(function (yr) {
-                    var papers = groups[yr];
-                    h += '<div class="pubs__year-block"><div class="pubs__year-label"><span class="mono pubs__year-num">' + yr + '</span><span class="pubs__year-rule"></span><span class="mono mono--sm pubs__year-count">' + papers.length + " PAPERS</span></div>";
-                    papers.forEach(function (p) {
-                        var noLink = !p.href;
-                        h += '<a class="pub' + (noLink ? " pub--no-link" : "") + '" href="' + (p.href ? esc(p.href) : "#") + '"' + (p.href ? ' target="_blank" rel="noopener"' : ' data-nolink="1"') + ">";
-                        h += '<div class="pub__title-row"><span class="pub__title">' + esc(p.title) + "</span>" + (p.tags.indexOf("first") !== -1 ? '<span class="pub__star">★</span>' : "") + "</div>";
-                        h += '<span class="pub__authors">' + esc(p.authors) + "</span>";
-                        h += '<div class="pub__meta"><span class="mono mono--sm">' + esc(p.venue) + '</span><span class="pub__tags">';
-                        p.tags.filter(function (t) { return t !== "first"; }).forEach(function (t) { h += '<span class="chip chip--' + t + ' chip--sm">' + tagLabel(t) + "</span>"; });
-                        h += "</span></div></a>";
+            // ----- operating table, draped patient -----
+            box(0.95, 0.12, 0.56, M.kit, 0.1, 0.06, 0);
+            box(0.3, 0.72, 0.3, M.steel, 0.1, 0.48, 0);
+            box(2.1, 0.06, 0.58, M.steel, 0.1, 0.87, 0);
+            box(0.36, 0.07, 0.5, M.pad, -0.75, 0.935, 0, null, 0.2);
+            box(0.95, 0.07, 0.56, M.pad, -0.07, 0.935, 0, null, 0.2);
+            box(0.7, 0.07, 0.56, M.pad, 0.79, 0.935, 0, null, 0.2);
+            box(1.62, 0.03, 0.76, M.drape, 0.35, 0.985, 0, null, 0.22);
+            box(1.62, 0.44, 0.012, M.drape, 0.35, 0.78, 0.386, null, 0.22);
+            box(1.62, 0.44, 0.012, M.drape, 0.35, 0.78, -0.386, null, 0.22);
+            box(0.012, 0.44, 0.76, M.drape, 1.166, 0.78, 0, null, 0.22);
+            ball(0.105, M.skin, -0.79, 1.07, 0, 1.1, 1, 0.9);
+            ball(0.26, M.drape, -0.12, 1.04, 0, 2.0, 0.5, 0.95);
+            [0.115, -0.115].forEach((z) => {
+                const leg = cyl(0.078, 0.062, 0.86, M.drape, 0.66, 1.05, z, null, 0);
+                leg.rotation.z = Math.PI / 2;
+            });
+            const KNEE = V(0.56, 1.135, 0.115);
+            ball(0.088, M.drape, KNEE.x, 1.065, KNEE.z, 1.15, 1, 1);
+            box(0.2, 0.012, 0.13, std(0xf2dccb, 0.7), KNEE.x, 1.146, KNEE.z, null, 0);   // the operative field
+            // perception overlay: detected target, with corner ticks
+            const bb = new T.LineSegments(new T.EdgesGeometry(new T.BoxGeometry(0.36, 0.2, 0.3)), lineMat(AMBER, 0.95));
+            bb.position.set(KNEE.x, 1.14, KNEE.z); scene.add(bb);
+
+            // ----- surgical lights -----
+            const hub = V(0.1, 3.3, -0.35);
+            cyl(0.09, 0.09, 0.4, M.steel, hub.x, 3.1, hub.z);
+            function lamp(pos, target, r, shadow) {
+                const g = new T.Group(); g.position.copy(pos);
+                const dir = new T.Vector3().subVectors(target, pos), len = dir.length(); dir.normalize();
+                g.quaternion.setFromUnitVectors(V(0, -1, 0), dir);
+                const head = new T.Mesh(new T.CylinderGeometry(r * 0.78, r, 0.09, 40), M.shell);
+                g.add(head); head.add(new T.LineSegments(new T.EdgesGeometry(head.geometry, 25), lineMat(TEAL, 0.35)));
+                const face = new T.Mesh(new T.CircleGeometry(r * 0.9, 40), new T.MeshBasicMaterial({ color: 0x000000 }));
+                face.rotation.x = Math.PI / 2; face.position.y = -0.047; g.add(face);
+                const beamGeo = new T.CylinderGeometry(r * 0.85, r * 0.85 + len * 0.36, len, 40, 1, true);
+                beamGeo.translate(0, -len / 2, 0);
+                const beam = new T.Mesh(beamGeo, new T.MeshBasicMaterial({ color: col(0xbff3f0), transparent: true, opacity: 0, blending: T.AdditiveBlending, side: T.DoubleSide, depthWrite: false }));
+                g.add(beam); scene.add(g);
+                const elbow = V(pos.x * 0.85 + hub.x * 0.15, 2.92, pos.z);
+                tube(V(hub.x, 2.92, hub.z), elbow, 0.035, M.steel);
+                tube(elbow, pos.clone().addScaledVector(dir, -0.06), 0.03, M.steel);
+                const spot = new T.SpotLight(0xf2fbff, 0, 9, 0.56, 0.8, 1.3);
+                spot.position.copy(pos); spot.target.position.copy(target);
+                if (shadow) { spot.castShadow = true; spot.shadow.mapSize.set(1024, 1024); spot.shadow.camera.near = 0.4; spot.shadow.camera.far = 6; spot.shadow.bias = -0.0006; }
+                scene.add(spot, spot.target);
+                return (p, strength) => {
+                    spot.intensity = strength * p;
+                    face.material.color.setScalar(0.06 + 0.94 * p);
+                    beam.material.opacity = 0.04 * p;
+                };
+            }
+            const lampA = lamp(V(-0.4, 2.22, 0.42), V(0.25, 1.0, 0.03), 0.38, true);
+            const lampB = lamp(V(1.12, 2.3, -0.28), V(KNEE.x, 1.1, KNEE.z), 0.3, false);
+            const hemi = new T.HemisphereLight(0xa9e4e6, 0x04090b, 0.1); scene.add(hemi);
+            const fill = new T.DirectionalLight(0xbfe9ee, 0.1); fill.position.set(4, 5, 6); scene.add(fill);
+
+            // ----- robot arm (two-link inverse kinematics; the tool hovers over the knee) -----
+            const SHOULDER = V(0.8, 1.17, -0.98), L1 = 0.74, L2 = 0.68, TOOL = 0.3;
+            box(0.62, 0.8, 0.62, M.shell, SHOULDER.x, 0.4, SHOULDER.z);
+            cyl(0.13, 0.15, 0.37, M.joint, SHOULDER.x, 0.985, SHOULDER.z);
+            const yaw = new T.Group(); yaw.position.copy(SHOULDER); scene.add(yaw);
+            function link(parent, len, r, x) {
+                const g = new T.Group(); g.position.x = x; parent.add(g);
+                const hinge = new T.Mesh(new T.CylinderGeometry(r * 1.55, r * 1.55, r * 3.6, 24), M.joint);
+                hinge.rotation.x = Math.PI / 2; add(hinge, g, 0.4);
+                const geo = new T.CylinderGeometry(r * 0.85, r, len, 20); geo.rotateZ(-Math.PI / 2); geo.translate(len / 2, 0, 0);
+                add(new T.Mesh(geo, M.shell), g, 0.3);
+                return g;
+            }
+            const upper = link(yaw, L1, 0.058, 0), fore = link(upper, L2, 0.048, L1);
+            const wrist = new T.Group(); wrist.position.x = L2; fore.add(wrist);
+            const wristHinge = new T.Mesh(new T.CylinderGeometry(0.06, 0.06, 0.15, 20), M.joint); wristHinge.rotation.x = Math.PI / 2; add(wristHinge, wrist, 0.4);
+            box(0.12, 0.075, 0.075, M.shell, 0.07, 0, 0, wrist);
+            const shaftGeo = new T.CylinderGeometry(0.011, 0.007, TOOL - 0.1, 10); shaftGeo.rotateZ(-Math.PI / 2); shaftGeo.translate(0.1 + (TOOL - 0.1) / 2, 0, 0);
+            add(new T.Mesh(shaftGeo, M.steel), wrist);
+            const pathGeo = new T.BufferGeometry().setFromPoints([V(0, 0, 0), V(0, 0, 0)]);
+            scene.add(new T.Line(pathGeo, lineMat(AMBER, 0.85)));
+            const ring = new T.Mesh(new T.RingGeometry(0.03, 0.036, 32), new T.MeshBasicMaterial({ color: col(AMBER), side: T.DoubleSide }));
+            ring.rotation.x = -Math.PI / 2; ring.position.set(KNEE.x, 1.154, KNEE.z); scene.add(ring);
+            function pose(t) {
+                const tx = KNEE.x + Math.cos(t * 0.5) * 0.07, ty = KNEE.y + 0.2 + Math.sin(t * 0.8) * 0.035, tz = KNEE.z + Math.sin(t * 0.5) * 0.05;
+                const dx = tx - SHOULDER.x, dz = tz - SHOULDER.z, r = Math.hypot(dx, dz), y = ty + TOOL - SHOULDER.y;
+                const d = Math.min(Math.hypot(r, y), L1 + L2 - 0.001);
+                const a1 = Math.atan2(y, r) + Math.acos((L1 * L1 + d * d - L2 * L2) / (2 * L1 * d));
+                const a2 = a1 - (Math.PI - Math.acos((L1 * L1 + L2 * L2 - d * d) / (2 * L1 * L2)));
+                yaw.rotation.y = Math.atan2(-dz, dx);
+                upper.rotation.z = a1; fore.rotation.z = a2 - a1; wrist.rotation.z = -Math.PI / 2 - a2;
+                const p = pathGeo.attributes.position;
+                p.setXYZ(0, tx, ty, tz); p.setXYZ(1, tx, 1.155, tz); p.needsUpdate = true;
+                ring.position.set(tx, 1.154, tz);
+            }
+
+            // ----- vitals monitor (drawn live to a canvas, like a real sweep display) -----
+            const mon = document.createElement("canvas"); mon.width = 512; mon.height = 296;
+            const m2 = mon.getContext("2d");
+            const monTex = new T.CanvasTexture(mon);
+            const gauss = (p, c, w) => Math.exp(-(((p - c) / w) ** 2));
+            const LANES = [
+                { c: "#62E0A6", y: 78, amp: 46, label: "HR", value: "72", f: (p) => 0.12 * gauss(p, 0.2, 0.03) - 0.12 * gauss(p, 0.345, 0.012) + gauss(p, 0.37, 0.012) - 0.22 * gauss(p, 0.395, 0.012) + 0.25 * gauss(p, 0.62, 0.05) },
+                { c: "#62C9F2", y: 172, amp: 30, label: "SpO2", value: "99", f: (p) => 0.9 * gauss(p, 0.5, 0.11) + 0.35 * gauss(p, 0.74, 0.1) - 0.2 },
+                { c: "#FFB35C", y: 258, amp: 30, label: "ABP", value: "118/76", f: (p) => 0.95 * gauss(p, 0.48, 0.09) + 0.4 * gauss(p, 0.7, 0.12) - 0.2 },
+            ];
+            const SWEEP = 368;
+            let sweepX = 0, sweepT = 0, carry = 0;
+            function monitorFrame() {
+                m2.fillStyle = "#03090B"; m2.fillRect(0, 0, 512, 296);
+                m2.textBaseline = "alphabetic";
+                LANES.forEach((l) => {
+                    m2.fillStyle = l.c;
+                    m2.font = "500 15px 'Geist Mono', ui-monospace, Consolas, monospace"; m2.fillText(l.label, 388, l.y - 34);
+                    m2.font = `500 ${l.value.length > 3 ? 30 : 46}px 'Geist Mono', ui-monospace, Consolas, monospace`; m2.fillText(l.value, 388, l.y + 8);
+                    l.prev = null;
+                });
+                sweepX = 0;
+            }
+            function monitorStep(dt) {
+                carry += dt * 92;
+                let n = Math.floor(carry); carry -= n;
+                m2.lineWidth = 2.4; m2.lineJoin = "round";
+                while (n-- > 0) {
+                    sweepT += 1 / 92;
+                    const phase = (sweepT * 1.2) % 1;
+                    m2.fillStyle = "#03090B"; m2.fillRect(sweepX + 1, 0, 16, 296);
+                    m2.fillRect(SWEEP, 0, 12, 296);
+                    LANES.forEach((l) => {
+                        const y = l.y - l.amp * l.f(phase);
+                        if (l.prev !== null) { m2.strokeStyle = l.c; m2.beginPath(); m2.moveTo(sweepX - 1, l.prev); m2.lineTo(sweepX, y); m2.stroke(); }
+                        l.prev = y;
                     });
-                    h += "</div>";
-                });
-                h += "</div>";
-                if (filtered.length > 10) {
-                    h += '<button class="expand" data-expand="1"><span class="mono mono--sm">' +
-                        (state.expanded ? "↑ COLLAPSE  (showing all " + filtered.length + ")" : "↓ SHOW ALL  (" + (filtered.length - 10) + " more)") +
-                        "</span></button>";
-                }
-                listEl.innerHTML = h;
-                var ex = listEl.querySelector("[data-expand]");
-                if (ex) ex.addEventListener("click", function () { state.expanded = !state.expanded; renderList(); });
-                listEl.querySelectorAll('a[data-nolink="1"]').forEach(function (a) { a.addEventListener("click", function (e) { e.preventDefault(); }); });
-            }
-
-            mount.querySelectorAll("[data-filter]").forEach(function (b) { b.addEventListener("click", function () { state.filter = b.getAttribute("data-filter"); state.expanded = false; syncPills(); renderList(); }); });
-            mount.querySelectorAll("[data-year]").forEach(function (b) {
-                b.addEventListener("click", function () { var y = b.getAttribute("data-year"); state.year = y === "all" ? "all" : Number(y); state.expanded = false; syncPills(); renderList(); });
-                b.addEventListener("mouseenter", function () { if (window._highlightConstYear) { var y = b.getAttribute("data-year"); window._highlightConstYear(y === "all" ? null : Number(y)); } });
-                b.addEventListener("mouseleave", function () { if (window._highlightConstYear) window._highlightConstYear(null); });
-            });
-            searchEl.addEventListener("input", function () { state.search = searchEl.value; state.expanded = false; renderList(); });
-
-            syncPills();
-            renderList();
-        })();
-
-        // ===== Reading progress bar =====
-        (function () {
-            var bar = document.createElement("div");
-            bar.className = "progress";
-            document.body.appendChild(bar);
-            function update() {
-                var st = document.documentElement.scrollTop || document.body.scrollTop;
-                var sh = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                bar.style.width = (sh > 0 ? (st / sh) * 100 : 0) + "%";
-            }
-            window.addEventListener("scroll", update, { passive: true });
-            window.addEventListener("resize", update);
-            update();
-        })();
-
-        // ===== Theme toggle (paper / dark) =====
-        (function () {
-            var btn = document.createElement("button");
-            btn.className = "themebtn";
-            btn.setAttribute("aria-label", "Toggle light or dark theme");
-            function isDark() { return document.documentElement.getAttribute("data-theme") === "dark"; }
-            function paint() {
-                btn.innerHTML = '<span class="themebtn__icon">' + (isDark() ? "☀" : "☾") + "</span>" + (isDark() ? "Light" : "Dark");
-            }
-            btn.addEventListener("click", function () {
-                var next = isDark() ? "" : "dark";
-                if (next) document.documentElement.setAttribute("data-theme", next);
-                else document.documentElement.removeAttribute("data-theme");
-                try { localStorage.setItem("theme", next); } catch (e) {}
-                paint();
-                recolorField();
-            });
-            paint();
-            document.body.appendChild(btn);
-        })();
-
-        // ===== Scroll reveal =====
-        (function () {
-            var targets = document.querySelectorAll(".section, .hero");
-            if (REDUCED || !("IntersectionObserver" in window)) {
-                targets.forEach(function (t) { t.classList.add("in"); });
-                return;
-            }
-            targets.forEach(function (t) { if (!t.classList.contains("hero")) t.classList.add("reveal"); });
-            var io = new IntersectionObserver(function (entries) {
-                entries.forEach(function (e) {
-                    if (e.isIntersecting) {
-                        e.target.classList.add("in");
-                        e.target.querySelectorAll(".sech__left .mono--sm:not(.sech__num)").forEach(function (s) {
-                            if (!s.getAttribute("data-scrambled")) { s.setAttribute("data-scrambled", "1"); scramble(s, s.textContent.trim(), 480); }
-                        });
-                        io.unobserve(e.target);
-                    }
-                });
-            }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-            targets.forEach(function (t) { io.observe(t); });
-        })();
-
-        // ===== Sticky section nav =====
-        (function () {
-            var secs = Array.prototype.slice.call(document.querySelectorAll(".section")).filter(function (s) { return s.querySelector(".sech__num"); });
-            if (!secs.length) return;
-            var nav = document.createElement("nav");
-            nav.className = "secnav";
-            nav.setAttribute("aria-label", "Section navigation");
-            secs.forEach(function (s, i) {
-                if (!s.id) s.id = "sec-" + (i + 1);
-                var title = s.querySelector(".sech__title");
-                var a = document.createElement("a");
-                a.href = "#" + s.id;
-                a.innerHTML = '<span class="secnav__label">' + (title ? title.textContent : s.id) + '</span><span class="secnav__dot"></span>';
-                a.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    document.getElementById(s.id).scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "start" });
-                });
-                s._navlink = a;
-                nav.appendChild(a);
-            });
-            document.body.appendChild(nav);
-            if ("IntersectionObserver" in window) {
-                var io = new IntersectionObserver(function (entries) {
-                    entries.forEach(function (e) {
-                        if (e.isIntersecting) secs.forEach(function (s) { if (s._navlink) s._navlink.classList.toggle("on", s === e.target); });
-                    });
-                }, { rootMargin: "-45% 0px -45% 0px" });
-                secs.forEach(function (s) { io.observe(s); });
-            }
-        })();
-
-        // ===== Animated stat count-up =====
-        (function () {
-            var vals = document.querySelectorAll(".stat__value");
-            if (!vals.length || REDUCED || !("IntersectionObserver" in window)) return;
-            vals.forEach(function (v) {
-                var txt = v.textContent.trim();
-                var target = parseInt(txt.replace(/[^0-9]/g, ""), 10);
-                if (isNaN(target)) return;
-                v.setAttribute("data-suffix", txt.replace(/[0-9,]/g, ""));
-                v.setAttribute("data-target", target);
-                v.textContent = "0" + v.getAttribute("data-suffix");
-            });
-            function animate(el) {
-                var target = parseInt(el.getAttribute("data-target"), 10);
-                var suffix = el.getAttribute("data-suffix") || "";
-                if (isNaN(target)) return;
-                var dur = 1300, start = null;
-                function step(ts) {
-                    if (!start) start = ts;
-                    var p = Math.min(1, (ts - start) / dur);
-                    var eased = 1 - Math.pow(1 - p, 3);
-                    el.textContent = Math.round(eased * target).toLocaleString("en-US") + suffix;
-                    if (p < 1) requestAnimationFrame(step);
-                    else el.textContent = target.toLocaleString("en-US") + suffix;
-                }
-                requestAnimationFrame(step);
-            }
-            var io = new IntersectionObserver(function (entries) {
-                entries.forEach(function (e) {
-                    if (e.isIntersecting && e.target.hasAttribute("data-target")) { animate(e.target); io.unobserve(e.target); }
-                });
-            }, { threshold: 0.6 });
-            vals.forEach(function (v) { if (v.hasAttribute("data-target")) io.observe(v); });
-        })();
-
-        // ===== Hero tagline decode =====
-        (function () {
-            var r = document.getElementById("role-text");
-            if (r) scramble(r, r.textContent.trim(), 720);
-        })();
-
-        // ===== 3D tilt on each featured-paper card =====
-        (function () {
-            if (REDUCED) return;
-            document.querySelectorAll(".feat").forEach(function (card) {
-                card.addEventListener("mousemove", function (e) {
-                    var r = card.getBoundingClientRect();
-                    var rx = (0.5 - (e.clientY - r.top) / r.height) * 4.5;
-                    var ry = ((e.clientX - r.left) / r.width - 0.5) * 4.5;
-                    card.style.transform = "perspective(900px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg) translateY(-2px)";
-                });
-                card.addEventListener("mouseleave", function () { card.style.transform = ""; });
-            });
-        })();
-
-        // ===== Custom hero cursor (trailing ring) =====
-        (function () {
-            var hero = document.querySelector(".hero");
-            if (!hero || REDUCED) return;
-            if (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) return;
-            var ring = document.createElement("div");
-            ring.className = "herocursor";
-            document.body.appendChild(ring);
-            var tx = 0, ty = 0, x = 0, y = 0, raf = null, over = false;
-            function loop() {
-                x += (tx - x) * 0.2; y += (ty - y) * 0.2;
-                ring.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) translate(-50%,-50%)";
-                if (over) raf = requestAnimationFrame(loop); else raf = null;
-            }
-            hero.addEventListener("mouseenter", function () { over = true; ring.classList.add("show"); if (!raf) raf = requestAnimationFrame(loop); });
-            hero.addEventListener("mouseleave", function () { over = false; ring.classList.remove("show"); });
-            hero.addEventListener("mousemove", function (e) { tx = e.clientX; ty = e.clientY; });
-            hero.querySelectorAll("a, button").forEach(function (elm) {
-                elm.addEventListener("mouseenter", function () { ring.classList.add("grow"); });
-                elm.addEventListener("mouseleave", function () { ring.classList.remove("grow"); });
-            });
-        })();
-
-        // ===== Opening scene: plan → incision → exposure → neural net → name → sutured closed =====
-        (function () {
-            var root = document.documentElement;
-            var intro = document.getElementById("intro");
-            if (!root.classList.contains("intro-on") || !intro) { if (intro) intro.style.display = "none"; return; }
-            document.body.style.overflow = "hidden";
-
-            var canvas = document.getElementById("intro-canvas");
-            var ctx = canvas.getContext("2d");
-            var dpr = Math.min(window.devicePixelRatio || 1, 2);
-            var W = 0, H = 0, P = [], GLOW = [], raf = null, running = true, mx = 0, my = 0;
-            var FS = 0, X0 = 0, X1 = 0, IY = 0; // name size; incision endpoints and height (just under the name)
-            var NAME = "Sung Eun Kim, MD";
-            var ICE = "#E8F0FF", CYAN = "#5FD2E8", EBLUE = "#6BA8FF", ROSE = "#FF8E98", LNK = "#51607a";
-            var CRIM = "255,72,88";
-            var GLOW_COLS = ["26,96,140", "40,130,128", "46,58,150"];
-
-            // Phase thresholds (ms, on the 1.5x scene clock)
-            var T_PLAN = 300, T_CUT = 1200, T_SPILL = 1400, T_SWIRL = 2400, T_NAME = 3500, T_LINKEND = 4400;
-            var T_SUTURE = 4250, T_SUTURE_END = 5250;
-            var STEPS = [[0, "01  PLAN"], [T_PLAN, "02  INCISION"], [T_CUT, "03  EXPOSURE"], [T_SWIRL - 350, "04  INFERENCE"], [T_NAME, "05  CLOSURE"]];
-
-            function clamp01(v) { return v < 0 ? 0 : (v > 1 ? 1 : v); }
-            function ease(p) { return p * p * (3 - 2 * p); }
-            function line(x1, y1, x2, y2) { ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); }
-
-            function buildPoints() {
-                var oc = document.createElement("canvas");
-                oc.width = W; oc.height = H;
-                var o = oc.getContext("2d");
-                var fs = Math.min(W * 0.11, 132);
-                o.textAlign = "center"; o.textBaseline = "middle"; o.fillStyle = "#fff";
-                o.font = "600 " + fs + "px Georgia, 'Times New Roman', serif";
-                var measured = o.measureText(NAME).width;
-                if (measured > W * 0.86) { fs *= (W * 0.86) / measured; o.font = "600 " + fs + "px Georgia, serif"; measured = W * 0.86; }
-                o.fillText(NAME, W / 2, H * 0.45);
-                // the incision runs the width of the name, just beneath it
-                var L = Math.min(measured * 1.06, W * 0.9);
-                FS = fs; X0 = W / 2 - L / 2; X1 = W / 2 + L / 2; IY = H * 0.45 + fs * 0.68;
-                var data = o.getImageData(0, 0, W, H).data;
-                var step = Math.max(2, Math.round(fs / 34));
-                var pts = [];
-                for (var y = 0; y < H; y += step) {
-                    for (var x = 0; x < W; x += step) {
-                        if (data[(y * W + x) * 4 + 3] > 128) pts.push([x + (Math.random() - 0.5) * step * 0.5, y + (Math.random() - 0.5) * step * 0.5]);
-                    }
-                }
-                for (var i = pts.length - 1; i > 0; i--) { var j = (Math.random() * (i + 1)) | 0; var tmp = pts[i]; pts[i] = pts[j]; pts[j] = tmp; }
-                if (pts.length > 3000) pts = pts.slice(0, 3000);
-                return pts;
-            }
-
-            function init() {
-                W = intro.clientWidth; H = intro.clientHeight;
-                if (!W || !H) return;
-                canvas.width = W * dpr; canvas.height = H * dpr;
-                canvas.style.width = W + "px"; canvas.style.height = H + "px";
-                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-                var pts = buildPoints();
-                var L = X1 - X0;
-                // each particle is released from the incision at the moment the blade passes its spot,
-                // then spills up/down out of the cut
-                P = pts.map(function (pt) {
-                    var u = Math.random(), dir = Math.random() < 0.6 ? -1 : 1;
-                    var cr = Math.random(), col = cr < 0.07 ? ROSE : (cr < 0.15 ? EBLUE : (cr < 0.32 ? CYAN : ICE));
-                    return {
-                        x: X0 + L * ease(u), y: IY,
-                        vx: (Math.random() - 0.5) * W * 0.007,
-                        vy: dir * H * 0.024 * (0.12 + 0.88 * Math.sqrt(Math.random())),
-                        tb: T_PLAN + u * (T_CUT - T_PLAN),
-                        tx: pt[0], ty: pt[1], tw: Math.random() * 6.2832, r: 0.8 + Math.random() * 1.4, col: col
-                    };
-                });
-                GLOW = [];
-                for (var k = 0; k < GLOW_COLS.length; k++) {
-                    GLOW.push({
-                        x: (0.2 + Math.random() * 0.6) * W, y: (0.2 + Math.random() * 0.6) * H,
-                        r: (0.32 + Math.random() * 0.26) * Math.max(W, H),
-                        col: GLOW_COLS[k], a: 0.08 + Math.random() * 0.08,
-                        ph: Math.random() * 6.2832, sp: 0.4 + Math.random() * 0.6
-                    });
+                    if (++sweepX >= SWEEP) { sweepX = 0; LANES.forEach((l) => { l.prev = null; }); }
                 }
             }
+            function monitorStill() { monitorFrame(); for (let i = 0; i < 40; i++) monitorStep(0.1); monTex.needsUpdate = true; }
+            monitorFrame();
+            const MON = V(-1.42, 1.86, -0.8);
+            tube(V(MON.x, 3.3, MON.z - 0.1), V(MON.x, 2.16, MON.z - 0.1), 0.03, M.steel);
+            const monBody = box(0.86, 0.52, 0.06, M.kit, MON.x, MON.y, MON.z, null, 0.45); monBody.rotation.y = 0.4;
+            screen(0.8, 0.46, monTex, 0, 0, 0.032, 0, monBody);
+            const glow = new T.PointLight(0x62e0a6, 0.0, 2.6, 1.6); glow.position.set(MON.x + 0.25, MON.y, MON.z + 0.5); scene.add(glow);
 
-            // line-drawn scalpel; origin is the blade point, +x runs up the handle
-            function drawScalpel(x, y, ang, sc, a) {
-                ctx.save();
-                ctx.translate(x, y); ctx.rotate(ang); ctx.scale(sc, sc);
-                ctx.lineWidth = 1.1 / sc; ctx.lineJoin = "round"; ctx.lineCap = "round";
-                ctx.strokeStyle = ICE; ctx.fillStyle = "rgba(232,240,255,0.09)";
-                ctx.globalAlpha = a;
-                ctx.beginPath(); // blade: straight spine, curved belly
-                ctx.moveTo(0, 0); ctx.quadraticCurveTo(7, -8.5, 21, -9); ctx.lineTo(50, -9); ctx.lineTo(50, 2.5); ctx.quadraticCurveTo(23, 5.5, 0, 0);
-                ctx.closePath(); ctx.fill(); ctx.stroke();
-                ctx.beginPath(); // neck + handle
-                ctx.moveTo(50, -6.5); ctx.lineTo(64, -8.5); ctx.lineTo(176, -8.5);
-                ctx.quadraticCurveTo(184, -8.5, 184, -2.75); ctx.quadraticCurveTo(184, 3, 176, 3);
-                ctx.lineTo(64, 3); ctx.lineTo(50, 1);
-                ctx.closePath(); ctx.fill(); ctx.stroke();
-                ctx.globalAlpha = a * 0.5;
-                ctx.beginPath(); ctx.moveTo(24, -3.4); ctx.lineTo(42, -3.4); // blade slot
-                for (var gx = 74; gx <= 110; gx += 6) { ctx.moveTo(gx, -5.5); ctx.lineTo(gx, 0); } // grip
-                ctx.stroke();
-                ctx.restore();
+            // ----- wall display: knee alignment, a nod to the orthopedic work -----
+            const wall = document.createElement("canvas"); wall.width = 512; wall.height = 300;
+            const w2 = wall.getContext("2d");
+            const wallTex = new T.CanvasTexture(wall);
+            function wallFrame() {
+                w2.fillStyle = "#03090B"; w2.fillRect(0, 0, 512, 300);
+                w2.strokeStyle = "#8FE3DC"; w2.lineWidth = 2.5; w2.lineJoin = "round";
+                w2.beginPath();                                   // femur
+                w2.moveTo(150, 0); w2.bezierCurveTo(156, 70, 150, 96, 124, 122); w2.bezierCurveTo(112, 142, 150, 150, 176, 138);
+                w2.bezierCurveTo(190, 150, 232, 146, 226, 122); w2.bezierCurveTo(206, 96, 200, 70, 204, 0); w2.stroke();
+                w2.beginPath();                                   // tibia
+                w2.moveTo(120, 166); w2.lineTo(232, 162); w2.bezierCurveTo(226, 200, 204, 214, 200, 300);
+                w2.moveTo(120, 166); w2.bezierCurveTo(130, 204, 152, 214, 156, 300); w2.stroke();
+                w2.strokeStyle = "#FFB35C"; w2.lineWidth = 1.6; w2.setLineDash([7, 6]);
+                w2.beginPath(); w2.moveTo(182, 0); w2.lineTo(172, 300); w2.moveTo(96, 156); w2.lineTo(256, 150); w2.stroke();
+                w2.setLineDash([]);
+                w2.fillStyle = "#8FE3DC"; w2.font = "500 17px 'Geist Mono', ui-monospace, Consolas, monospace";
+                w2.fillText("knee_R  AP", 300, 44);
+                w2.fillStyle = "#FFB35C"; w2.font = "500 34px 'Geist Mono', ui-monospace, Consolas, monospace";
+                w2.fillText("178.4°", 300, 132);
+                w2.font = "500 17px 'Geist Mono', ui-monospace, Consolas, monospace";
+                w2.fillText("hip-knee-ankle", 300, 160);
+                w2.fillStyle = "#8FE3DC"; w2.fillText("plan  ready", 300, 250);
             }
+            wallFrame();
+            box(2.2, 1.3, 0.06, M.kit, 0.3, 1.85, -4.17, null, 0.45);
+            screen(2.08, 1.2, wallTex, 0.3, 1.85, -4.135, 0);
 
-            var t0 = performance.now();
+            // ----- anaesthesia machine, instrument stand, IV pole, equipment tower -----
+            box(0.62, 1.05, 0.6, M.kit, -1.85, 0.525, 0.35);
+            box(0.62, 0.42, 0.34, M.kit, -1.85, 1.26, 0.22);
+            box(0.5, 0.03, 0.5, M.steel, -1.85, 1.065, 0.4);
+            cyl(0.07, 0.07, 0.2, M.steel, -2.0, 1.18, 0.5); cyl(0.07, 0.07, 0.2, M.steel, -1.72, 1.18, 0.5);
+            cyl(0.26, 0.28, 0.04, M.steel, 2.0, 0.02, 0.25); cyl(0.022, 0.022, 1.0, M.steel, 2.0, 0.52, 0.25, null, 0);
+            box(0.6, 0.025, 0.4, M.steel, 2.0, 1.03, 0.25);
+            [-0.2, -0.1, 0, 0.1, 0.2].forEach((dx, i) => box(0.022, 0.012, 0.2 + (i % 2) * 0.06, M.shell, 2.0 + dx, 1.05, 0.25, null, 0));
+            cyl(0.016, 0.016, 2.0, M.steel, -1.3, 1.0, -0.62, null, 0); cyl(0.2, 0.22, 0.03, M.steel, -1.3, 0.015, -0.62);
+            box(0.3, 0.012, 0.012, M.steel, -1.3, 2.0, -0.62, null, 0);
+            box(0.11, 0.2, 0.04, std(0xbfe9ee, 0.3), -1.19, 1.84, -0.62, null, 0.5);
+            box(0.6, 1.55, 0.5, M.kit, 3.1, 0.775, -2.9);
+            box(0.6, 1.9, 0.5, M.kit, -3.6, 0.95, -3.4);
+
+            // ----- dust in the beams -----
+            const motes = new Float32Array(160 * 3);
+            for (let i = 0; i < 160; i++) { motes[i * 3] = 0.3 + (Math.random() - 0.5) * 2.2; motes[i * 3 + 1] = 1.1 + Math.random() * 1.2; motes[i * 3 + 2] = (Math.random() - 0.5) * 1.6; }
+            const dustGeo = new T.BufferGeometry(); dustGeo.setAttribute("position", new T.BufferAttribute(motes, 3));
+            const dust = new T.Points(dustGeo, new T.PointsMaterial({ color: col(0xdff7f5), size: 0.012, transparent: true, opacity: 0, blending: T.AdditiveBlending, depthWrite: false }));
+            scene.add(dust);
+
+            // ----- labels (drawn once the webfont is in) -----
+            function label(text, css, x, y, z, width) {
+                const c = document.createElement("canvas"); c.width = 512; c.height = 96;
+                const g = c.getContext("2d");
+                g.font = "500 40px 'Geist Mono', ui-monospace, Consolas, monospace"; g.fillStyle = css; g.textBaseline = "middle"; g.fillText(text, 6, 50);
+                const tex = new T.CanvasTexture(c); tex.encoding = T.sRGBEncoding;
+                const s = new T.Sprite(new T.SpriteMaterial({ map: tex, transparent: true, depthWrite: false }));
+                s.center.set(0, 0.5); s.scale.set(width, width * 96 / 512, 1); s.position.set(x, y, z); scene.add(s);
+            }
+            const whenFontsReady = (document.fonts && document.fonts.ready) || Promise.resolve();
+            whenFontsReady.then(() => {
+                label("knee_R  0.98", "#FFB35C", KNEE.x - 0.18, 1.3, KNEE.z + 0.16, 0.5);
+                label("arm_01  tracking", "#8FE3DC", SHOULDER.x + 0.22, 1.5, SHOULDER.z, 0.56);
+                wallFrame(); wallTex.needsUpdate = true;
+                if (REDUCED) { monitorStill(); still(); } else { monitorFrame(); }
+            });
+
+            // ----- camera, power-up, loop -----
+            const lerp = (a, b, t) => a + (b - a) * t;
+            const look = new T.Vector3();
+            let compact = false, eased = 0, mx = 0, my = 0, mxT = 0, myT = 0;
+            function place(t) {
+                const e = eased * eased * (3 - 2 * eased);
+                const arrive = REDUCED ? 1 : 1 - Math.pow(1 - Math.min(1, t / 3), 3);
+                const theta = lerp(0.62, -0.42, e) + mx * 0.07, phi = lerp(0.17, 0.36, e) - my * 0.03;
+                const R = (lerp(6.3, 4.9, e) + (1 - arrive) * 3) * (compact ? 1.25 : Math.max(1, Math.pow(1.95 / camera.aspect, 0.7)));
+                look.set(lerp(0.2, 0.4, e), lerp(1.0, 1.05, e), 0);
+                camera.position.set(look.x + R * Math.sin(theta) * Math.cos(phi), look.y + R * Math.sin(phi), look.z + R * Math.cos(theta) * Math.cos(phi));
+                camera.lookAt(look);
+            }
+            const flicker = (x) => (x < 0 ? 0 : x < 0.07 ? 0.75 : x < 0.15 ? 0.1 : x < 0.24 ? 0.95 : x < 0.3 ? 0.45 : 1);
+            function power(t) {
+                const a = REDUCED ? 1 : flicker(t - 0.45), b = REDUCED ? 1 : flicker(t - 0.85);
+                const on = Math.min(a, b);
+                lampA(a, 1.7); lampB(b, 1.25);
+                hemi.intensity = 0.1 + 0.3 * on; fill.intensity = 0.08 + 0.3 * a;
+                glow.intensity = 0.35 * a; dust.material.opacity = 0.5 * on;
+                screens.forEach((m) => m.color.setScalar(0.25 + 0.75 * a));
+            }
+            function resize() {
+                const w = innerWidth, h = innerHeight;
+                compact = w < 1000;
+                renderer.setPixelRatio(Math.min(devicePixelRatio || 1, compact ? 1.5 : 1.75));
+                renderer.setSize(w, h, false);
+                camera.aspect = w / h; camera.fov = w / h < 0.8 ? 50 : 36;
+                // shift the room toward the clear part of the page: right of the copy, or above it on narrow screens
+                if (compact) camera.setViewOffset(w, h, 0, h * 0.2, w, h); else camera.setViewOffset(w, h, -w * 0.21, 0, w, h);
+                camera.updateProjectionMatrix();
+            }
+            function still() { place(Infinity); power(Infinity); pose(0); renderer.render(scene, camera); }
+
+            let start = null, last = 0, odd = false;
             function frame(now) {
-                if (!running) { raf = null; return; }
-                var t = (now - t0) * 1.5, cx = W / 2, cy = H * 0.45, L = X1 - X0, i;
-                ctx.globalCompositeOperation = "source-over";
-                ctx.clearRect(0, 0, W, H);
-
-                // soft theatre-light glows (behind everything)
-                for (var n = 0; n < GLOW.length; n++) {
-                    var nb = GLOW[n];
-                    var px = nb.x + Math.sin(now * 0.00007 * nb.sp + nb.ph) * 42 + mx * 55;
-                    var py = nb.y + Math.cos(now * 0.00006 * nb.sp + nb.ph) * 42 + my * 55;
-                    var pa = nb.a * (0.7 + 0.3 * Math.sin(now * 0.0004 * nb.sp + nb.ph));
-                    var ng = ctx.createRadialGradient(px, py, 0, px, py, nb.r);
-                    ng.addColorStop(0, "rgba(" + nb.col + "," + pa.toFixed(3) + ")");
-                    ng.addColorStop(1, "rgba(" + nb.col + ",0)");
-                    ctx.fillStyle = ng; ctx.fillRect(0, 0, W, H);
-                }
-
-                // bright elements glow via additive blending (light accumulates where they overlap)
-                ctx.globalCompositeOperation = "lighter";
-                var fadeIn = Math.min(1, t / 350);
-
-                // navigation grid (slight cursor parallax)
-                var gs = 56, gox = (cx + mx * 14) % gs, goy = (cy + my * 14) % gs;
-                ctx.globalAlpha = 0.05 * fadeIn; ctx.strokeStyle = CYAN; ctx.lineWidth = 1; ctx.setLineDash([]);
-                ctx.beginPath();
-                for (var gx = gox; gx < W; gx += gs) { ctx.moveTo(Math.round(gx) + 0.5, 0); ctx.lineTo(Math.round(gx) + 0.5, H); }
-                for (var gy = goy; gy < H; gy += gs) { ctx.moveTo(0, Math.round(gy) + 0.5); ctx.lineTo(W, Math.round(gy) + 0.5); }
-                ctx.stroke();
-
-                // operative-field brackets + current step
-                var pad = Math.max(6, Math.min(34, X0 - 8));
-                var fx0 = X0 - pad, fx1 = X1 + pad, fy0 = cy - FS * 0.95, fy1 = IY + FS * 0.5, bl = 14;
-                ctx.globalAlpha = 0.38 * fadeIn; ctx.lineCap = "butt";
-                ctx.beginPath();
-                ctx.moveTo(fx0, fy0 + bl); ctx.lineTo(fx0, fy0); ctx.lineTo(fx0 + bl, fy0);
-                ctx.moveTo(fx1 - bl, fy0); ctx.lineTo(fx1, fy0); ctx.lineTo(fx1, fy0 + bl);
-                ctx.moveTo(fx1, fy1 - bl); ctx.lineTo(fx1, fy1); ctx.lineTo(fx1 - bl, fy1);
-                ctx.moveTo(fx0 + bl, fy1); ctx.lineTo(fx0, fy1); ctx.lineTo(fx0, fy1 - bl);
-                ctx.stroke();
-                var label = STEPS[0][1];
-                for (i = 1; i < STEPS.length; i++) { if (t >= STEPS[i][0]) label = STEPS[i][1]; }
-                ctx.globalAlpha = 0.8 * fadeIn; ctx.fillStyle = CYAN;
-                ctx.font = "500 10.5px 'JetBrains Mono', ui-monospace, Menlo, monospace";
-                ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
-                try { ctx.letterSpacing = "1.6px"; } catch (e) {}
-                ctx.fillText(label, fx0, fy0 - 10);
-
-                // blade progress along the planned line
-                var cp = clamp01((t - T_PLAN) / (T_CUT - T_PLAN)), tipX = X0 + L * ease(cp);
-
-                // 01 plan: dashed line drawn ahead of the blade, landmarks at both ends, ruler ticks
-                if (t < T_CUT) {
-                    var pe = X0 + L * ease(clamp01(t / T_PLAN));
-                    if (pe > tipX) {
-                        ctx.globalAlpha = 0.55; ctx.strokeStyle = CYAN; ctx.lineWidth = 1; ctx.setLineDash([5, 6]);
-                        line(tipX, IY, pe, IY); ctx.setLineDash([]);
-                    }
-                }
-                var planA = t < T_CUT ? Math.min(1, t / 200) : Math.max(0, 1 - (t - T_CUT) / 500);
-                if (planA > 0) {
-                    ctx.strokeStyle = CYAN; ctx.lineWidth = 1;
-                    ctx.globalAlpha = 0.55 * planA;
-                    ctx.beginPath(); ctx.arc(X0, IY, 3.5, 0, 6.2832); ctx.moveTo(X1 + 3.5, IY); ctx.arc(X1, IY, 3.5, 0, 6.2832); ctx.stroke();
-                    ctx.globalAlpha = 0.3 * planA;
-                    var nt = Math.max(8, Math.round(L / 28));
-                    ctx.beginPath();
-                    for (i = 1; i < nt; i++) { var rx = X0 + L * i / nt; ctx.moveTo(rx, IY + 8); ctx.lineTo(rx, IY + (i % 4 === 0 ? 15 : 11)); }
-                    ctx.stroke();
-                }
-
-                // 02–03 the incision: cut behind the blade, opens once the cut is complete, then closes to a fine line
-                if (t > T_PLAN) {
-                    var open = t > T_CUT ? Math.sin(Math.PI * clamp01((t - T_CUT) / 1300)) : 0;
-                    var gap = open * Math.max(3, FS * 0.075);
-                    var settle = t < T_SWIRL ? 1 : Math.max(0.5, 1 - (t - T_SWIRL) / 1600);
-                    if (gap > 0.4) {
-                        var lg = ctx.createLinearGradient(0, IY - gap, 0, IY + gap);
-                        lg.addColorStop(0, "rgba(" + CRIM + ",0.10)");
-                        lg.addColorStop(0.5, "rgba(255,214,218,0.85)");
-                        lg.addColorStop(1, "rgba(" + CRIM + ",0.10)");
-                        ctx.globalAlpha = 1; ctx.fillStyle = lg;
-                        ctx.beginPath(); ctx.moveTo(X0, IY);
-                        ctx.quadraticCurveTo(cx, IY - gap * 2, X1, IY); ctx.quadraticCurveTo(cx, IY + gap * 2, X0, IY);
-                        ctx.fill();
-                    }
-                    ctx.lineCap = "round"; ctx.strokeStyle = "rgb(" + CRIM + ")";
-                    ctx.globalAlpha = 0.10 * settle; ctx.lineWidth = 9 + gap; line(X0, IY, tipX, IY);
-                    ctx.globalAlpha = 0.30 * settle; ctx.lineWidth = 3.5; line(X0, IY, tipX, IY);
-                    ctx.strokeStyle = "#FFE3E6"; ctx.globalAlpha = 0.9 * settle; ctx.lineWidth = 1.1; line(X0, IY, tipX, IY);
-                }
-
-                // particle physics by phase (a particle exists only once the blade has passed its spot)
-                for (i = 0; i < P.length; i++) {
-                    var p = P[i];
-                    if (t < p.tb) continue;
-                    if (t < T_SPILL) { p.x += p.vx; p.y += p.vy; p.vx *= 0.95; p.vy *= 0.95; }
-                    else if (t < T_SWIRL) {
-                        var dx = p.x - cx, dy = p.y - cy;
-                        p.vx += -dy * 0.0007 - dx * 0.00035;
-                        p.vy += dx * 0.0007 - dy * 0.00035;
-                        p.x += p.vx; p.y += p.vy; p.vx *= 0.965; p.vy *= 0.965;
-                    } else if (t < T_NAME) { p.vx *= 0.84; p.vy *= 0.84; p.x += p.vx; p.y += p.vy; }
-                    else { var k = Math.min(0.16, 0.05 + (t - T_NAME) / 3500); p.x += (p.tx - p.x) * k; p.y += (p.ty - p.y) * k; }
-                }
-
-                // 04 neural links during connect + early name
-                if (t > T_SWIRL - 350 && t < T_LINKEND) {
-                    var fade = t < T_NAME ? 1 : Math.max(0, 1 - (t - T_NAME) / (T_LINKEND - T_NAME));
-                    var maxd = 42, md2 = maxd * maxd;
-                    var nlink = Math.min(P.length, 300);
-                    ctx.strokeStyle = LNK; ctx.lineWidth = 0.6;
-                    for (var a = 0; a < nlink; a++) {
-                        for (var b = a + 1; b < nlink; b++) {
-                            var lx = P[a].x - P[b].x, ly = P[a].y - P[b].y, d2 = lx * lx + ly * ly;
-                            if (d2 < md2) { ctx.globalAlpha = (1 - Math.sqrt(d2) / maxd) * 0.16 * fade; ctx.beginPath(); ctx.moveTo(P[a].x, P[a].y); ctx.lineTo(P[b].x, P[b].y); ctx.stroke(); }
-                        }
-                    }
-                }
-
-                // particles
-                for (var j = 0; j < P.length; j++) {
-                    var q = P[j];
-                    if (t < q.tb) continue;
-                    ctx.globalAlpha = 0.65 + 0.35 * Math.sin(q.tw + now * 0.004);
-                    ctx.fillStyle = q.col;
-                    ctx.beginPath(); ctx.arc(q.x, q.y, q.r, 0, 6.2832); ctx.fill();
-                }
-                ctx.globalAlpha = 1;
-
-                // 05 closure: interrupted sutures placed left → right across the incision
-                if (t > T_SUTURE) {
-                    var ns = Math.max(6, Math.round(L / 30));
-                    ctx.strokeStyle = ICE; ctx.lineWidth = 1.3; ctx.lineCap = "round";
-                    for (var s = 0; s < ns; s++) {
-                        var ts = T_SUTURE + (s / ns) * (T_SUTURE_END - T_SUTURE);
-                        if (t < ts) break;
-                        var sx = X0 + L * (s + 0.5) / ns;
-                        ctx.globalAlpha = 0.9 * Math.min(1, (t - ts) / 140);
-                        line(sx - 2.5, IY - 5.5, sx + 2.5, IY + 5.5);
-                    }
-                    ctx.globalAlpha = 1;
-                }
-
-                // scalpel (drawn on top): settles onto the line, cuts along it, lifts away
-                if (t > T_PLAN - 220 && t < T_CUT + 420) {
-                    var sa = t < T_PLAN ? clamp01((t - (T_PLAN - 220)) / 220) : (t > T_CUT ? 1 - clamp01((t - T_CUT) / 420) : 1);
-                    var lift = t < T_PLAN ? (1 - sa) * 26 : (t > T_CUT ? (1 - sa) * 60 : 0);
-                    var ang = -0.56, sc = Math.max(0.55, Math.min(1.15, FS / 100));
-                    if (t >= T_PLAN && t <= T_CUT) {
-                        var hg = ctx.createRadialGradient(tipX, IY, 0, tipX, IY, 15);
-                        hg.addColorStop(0, "rgba(255,226,230,0.95)");
-                        hg.addColorStop(0.35, "rgba(" + CRIM + ",0.45)");
-                        hg.addColorStop(1, "rgba(" + CRIM + ",0)");
-                        ctx.globalAlpha = 1; ctx.fillStyle = hg; ctx.beginPath(); ctx.arc(tipX, IY, 15, 0, 6.2832); ctx.fill();
-                    }
-                    drawScalpel(tipX + Math.cos(ang) * lift, IY + Math.sin(ang) * lift, ang, sc, sa);
-                }
-                ctx.globalAlpha = 1;
-                ctx.globalCompositeOperation = "source-over";
-                raf = requestAnimationFrame(frame);
+                if (start === null) { start = now; last = now; }
+                const t = (now - start) / 1000, dt = Math.min(0.05, (now - last) / 1000); last = now;
+                eased += (scrollT - eased) * Math.min(1, dt * 4);
+                mx += (mxT - mx) * Math.min(1, dt * 3); my += (myT - my) * Math.min(1, dt * 3);
+                place(t); power(t); pose(t); monitorStep(dt);
+                if ((odd = !odd)) monTex.needsUpdate = true;
+                dust.rotation.y = t * 0.02;
+                renderer.render(scene, camera);
+                requestAnimationFrame(frame);
             }
 
-            init();
-            raf = requestAnimationFrame(frame);
-            var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(init, 250); });
-            intro.addEventListener("mousemove", function (e) {
-                var r = intro.getBoundingClientRect();
-                mx = (e.clientX - r.left) / W - 0.5; my = (e.clientY - r.top) / H - 0.5;
-            });
-
-            setTimeout(function () { intro.classList.add("named"); }, 2900);
-
-            var done = false;
-            function dismiss() {
-                if (done) return; done = true;
-                try { sessionStorage.setItem("introSeen", "1"); } catch (e) {}
-                intro.classList.add("is-out");      // scene warps away (zoom + blur + fade)
-                root.classList.remove("intro-on");  // site crossfades/settles in at the same time
-                document.body.style.overflow = "";
-                setTimeout(function () {
-                    running = false; if (raf) cancelAnimationFrame(raf);
-                    if (intro.parentNode) intro.parentNode.removeChild(intro);
-                }, 640);
+            resize();
+            if (REDUCED) {
+                monitorStill();
+                still();
+                addEventListener("resize", () => { resize(); still(); });
+            } else {
+                addEventListener("resize", resize);
+                addEventListener("pointermove", (e) => { mxT = e.clientX / innerWidth - 0.5; myT = e.clientY / innerHeight - 0.5; }, { passive: true });
+                requestAnimationFrame(frame);
             }
-            var auto = setTimeout(dismiss, 4100);
-            function skip() { clearTimeout(auto); dismiss(); }
-            intro.addEventListener("click", skip);
-            window.addEventListener("keydown", function (e) {
-                if (e.key === "Enter" || e.key === "Escape" || e.key === " ") skip();
-            }, { once: true });
-        })();
+            return true;
+        }
+
+        addEventListener("DOMContentLoaded", () => {
+            let ok = false;
+            try { ok = initTheatre(); } catch (e) { ok = false; console.error("Scene failed to start:", e); }
+            if (!ok) document.documentElement.classList.add("no-gl");
+        });
     })();
     </script>
 </body>
